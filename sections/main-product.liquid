@@ -1,11 +1,9 @@
 <style>
+  /* ---- Product Page — Wessel-inspired layout ---- */
   .product-page {
-    max-width: var(--page-max-width);
-    margin: 0 auto;
-    padding: var(--space-md) var(--page-padding) var(--space-2xl);
     display: grid;
-    grid-template-columns: 55% 45%;
-    gap: 0;
+    grid-template-columns: 50% 50%;
+    min-height: calc(100vh - var(--header-height) - var(--announcement-height));
   }
 
   @media (max-width: 768px) {
@@ -14,44 +12,64 @@
     }
   }
 
-  /* Gallery */
+  /* Gallery — left half, full bleed, sticky */
   .product-page__gallery {
     position: relative;
+    background-color: var(--color-bg-warm);
   }
 
   @media (min-width: 769px) {
     .product-page__gallery {
       position: sticky;
-      top: calc(var(--header-height) + var(--announcement-height) + 24px);
+      top: calc(var(--header-height) + var(--announcement-height));
+      height: calc(100vh - var(--header-height) - var(--announcement-height));
       align-self: start;
     }
   }
 
   .product-page__main-image {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: 100%;
     object-fit: contain;
-    background-color: var(--color-bg-warm);
-    padding: 5%;
+    padding: 8%;
+  }
+
+  @media (max-width: 768px) {
+    .product-page__main-image {
+      aspect-ratio: 1 / 1;
+      height: auto;
+    }
   }
 
   .product-page__thumbnails {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 6px;
-    margin-top: 12px;
-    overflow-x: auto;
-    scrollbar-width: none;
+    gap: 8px;
   }
 
-  .product-page__thumbnails::-webkit-scrollbar { display: none; }
+  @media (max-width: 768px) {
+    .product-page__thumbnails {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      transform: none;
+      padding: 12px 16px;
+      background: var(--color-bg-warm);
+      gap: 6px;
+      justify-content: center;
+    }
+  }
 
   .product-page__thumb {
-    width: 72px;
-    height: 72px;
+    width: 56px;
+    height: 56px;
     flex-shrink: 0;
-    border: 1px solid var(--color-border);
+    border: 1px solid rgba(0,0,0,0.1);
     cursor: pointer;
-    background-color: var(--color-bg-warm);
+    background-color: var(--color-bg);
     padding: 4px;
     transition: border-color var(--duration-fast) ease;
   }
@@ -66,31 +84,66 @@
     object-fit: contain;
   }
 
-  /* Info */
+  /* Info — right half */
   .product-page__info {
-    padding: 0 0 0 48px;
+    padding: 48px 48px 80px;
+    overflow-y: auto;
+  }
+
+  @media (max-width: 1024px) {
+    .product-page__info {
+      padding: 32px 24px 60px;
+    }
   }
 
   @media (max-width: 768px) {
     .product-page__info {
-      padding: var(--space-md) 0 0;
+      padding: var(--space-md) var(--page-padding) var(--space-2xl);
     }
   }
 
+  /* Product title — monospace uppercase */
   .product-page__title {
-    margin-bottom: 12px;
-  }
-
-  .product-page__price {
-    margin-bottom: 20px;
-  }
-
-  .product-page__description {
-    font-family: var(--font-body);
+    font-family: var(--font-mono);
+    font-weight: 400;
     font-size: 15px;
-    line-height: 1.7;
-    color: var(--color-text-secondary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.3;
     margin-bottom: 24px;
+    color: var(--color-text);
+  }
+
+  /* Description — serif italic editorial */
+  .product-page__description {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--color-text);
+    margin-bottom: 28px;
+  }
+
+  @media (max-width: 768px) {
+    .product-page__description {
+      font-size: 16px;
+    }
+  }
+
+  /* Price — monospace */
+  .product-page__price {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+    margin-bottom: 24px;
+  }
+
+  .product-page__price-strike {
+    text-decoration: line-through;
+    color: var(--color-text-secondary);
+    margin-right: 8px;
   }
 
   /* Variants */
@@ -99,10 +152,13 @@
   }
 
   .product-page__variant-label {
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 14px;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     margin-bottom: 10px;
+    color: var(--color-text);
   }
 
   .product-page__variant-options {
@@ -112,9 +168,10 @@
   }
 
   .product-page__variant-btn {
-    font-family: var(--font-body);
-    font-size: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
     padding: 10px 20px;
     border: 1px solid var(--color-border);
     background: var(--color-bg);
@@ -136,14 +193,13 @@
     cursor: not-allowed;
   }
 
-  /* Size guide link */
   .product-page__size-guide {
-    font-family: var(--font-body);
-    font-size: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
     color: var(--color-text-secondary);
     text-decoration: underline;
     text-underline-offset: 3px;
-    margin-top: 6px;
+    margin-top: 8px;
     display: inline-block;
     transition: opacity var(--duration-fast) ease;
   }
@@ -154,13 +210,27 @@
 
   /* Add to cart */
   .product-page__add-form {
-    margin-top: 8px;
+    margin-top: 4px;
+    margin-bottom: 16px;
   }
 
   .product-page__add-btn {
     width: 100%;
     height: 52px;
-    margin-bottom: 12px;
+    background-color: var(--color-btn-primary-bg);
+    color: var(--color-btn-primary-text);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .product-page__add-btn:hover {
+    background-color: var(--color-btn-primary-hover);
   }
 
   .product-page__add-btn:disabled {
@@ -168,27 +238,74 @@
     cursor: not-allowed;
   }
 
-  /* Trust */
+  /* Trust line */
   .product-page__trust {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
-    font-family: var(--font-body);
-    font-size: 12px;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
     color: var(--color-text-secondary);
-    margin-bottom: 32px;
+    margin-bottom: 40px;
+    letter-spacing: 0.02em;
   }
 
   .product-page__trust-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background-color: var(--color-text-muted);
-    flex-shrink: 0;
+    color: var(--color-text-muted);
   }
 
-  /* Accordions */
+  /* ---- Specs sections ---- */
+  .product-page__specs-section {
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+    margin-bottom: 32px;
+  }
+
+  .product-page__specs-heading {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--color-text);
+  }
+
+  .specs-table {
+    width: 100%;
+  }
+
+  .specs-table__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .specs-table__row:last-child {
+    border-bottom: none;
+  }
+
+  .specs-table__label {
+    color: var(--color-text);
+  }
+
+  .specs-table__value {
+    color: var(--color-text);
+    text-align: right;
+  }
+
+  /* ---- Accordion (for mobile or additional sections) ---- */
+  .product-page__accordions {
+    margin-top: 8px;
+  }
+
   .accordion__item {
     border-top: 1px solid var(--color-border);
   }
@@ -202,12 +319,12 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 14px;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 12px;
     text-transform: uppercase;
     color: var(--color-text);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.06em;
   }
 
   .accordion__icon {
@@ -229,40 +346,26 @@
 
   .accordion__content-inner {
     padding: 0 0 20px;
-    font-family: var(--font-body);
-    font-size: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
     color: var(--color-text-secondary);
-    line-height: 1.7;
+    line-height: 1.8;
   }
 
-  /* Specs table */
-  .specs-table {
-    width: 100%;
-  }
-
-  .specs-table__row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--color-border);
-    font-family: var(--font-body);
-    font-size: 13px;
-  }
-
-  .specs-table__label {
-    color: var(--color-text-secondary);
-  }
-
-  /* Reviews section */
+  /* ---- Reviews section ---- */
   .product-page__reviews {
-    grid-column: 1 / -1;
-    padding: var(--space-2xl) var(--page-padding) 0;
+    padding: var(--space-2xl) var(--page-padding);
     max-width: var(--page-max-width);
     margin: 0 auto;
     width: 100%;
   }
 
   .product-page__reviews-heading {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     margin-bottom: var(--space-lg);
     text-align: center;
   }
@@ -298,8 +401,9 @@
   }
 
   .review-card__text {
-    font-family: var(--font-body);
-    font-size: 14px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--color-text);
     margin-bottom: 16px;
@@ -307,23 +411,23 @@
   }
 
   .review-card__author {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 12px;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
   }
 
   .review-card__location {
-    font-family: var(--font-body);
-    font-size: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
     color: var(--color-text-secondary);
     margin-top: 2px;
   }
 </style>
 
 <div class="product-page">
-  <!-- Gallery -->
+  <!-- Gallery — left half -->
   <div class="product-page__gallery">
     {%- if product.featured_image -%}
       <img class="product-page__main-image" id="main-product-image"
@@ -331,12 +435,12 @@
         alt="{{ product.title | escape }}"
         loading="eager">
     {%- else -%}
-      <div class="product-page__main-image" style="background:var(--color-bg-warm);"></div>
+      <div class="product-page__main-image" style="display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-muted);">Product Image</div>
     {%- endif -%}
 
     {%- if product.images.size > 1 -%}
       <div class="product-page__thumbnails">
-        {%- for image in product.images limit: 8 -%}
+        {%- for image in product.images limit: 6 -%}
           <button class="product-page__thumb{% if forloop.first %} is-active{% endif %}"
             data-image-url="{{ image | image_url: width: 1200 }}"
             aria-label="View image {{ forloop.index }}">
@@ -347,19 +451,31 @@
     {%- endif -%}
   </div>
 
-  <!-- Info -->
+  <!-- Info — right half -->
   <div class="product-page__info">
-    <h1 class="product-name-lg product-page__title">{{ product.title }}</h1>
-
-    <div class="product-price-lg product-page__price" id="product-price">
-      {%- if product.compare_at_price > product.price -%}
-        <span class="product-price-strike">{{ product.compare_at_price | money }}</span>
-      {%- endif -%}
-      {{ product.price | money }}
-    </div>
+    <h1 class="product-page__title">{{ product.title }}</h1>
 
     <div class="product-page__description">
       {{ product.description }}
+    </div>
+
+    {%- if product.images.size > 1 -%}
+      <div class="product-page__thumbnails product-page__thumbnails--inline desktop-only" style="position:relative;bottom:auto;left:auto;transform:none;margin-bottom:24px;justify-content:flex-start;">
+        {%- for image in product.images limit: 6 -%}
+          <button class="product-page__thumb{% if forloop.first %} is-active{% endif %}"
+            data-image-url="{{ image | image_url: width: 1200 }}"
+            aria-label="View image {{ forloop.index }}">
+            <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title | escape }} - Image {{ forloop.index }}" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-page__price" id="product-price">
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-page__price-strike">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+      {{ product.price | money }} AUD
     </div>
 
     {%- for option in product.options_with_values -%}
@@ -381,58 +497,52 @@
 
     <form action="/cart/add" method="post" class="product-page__add-form" id="product-form">
       <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-      <button type="submit" class="btn-primary product-page__add-btn" id="add-to-cart-btn"
+      <button type="submit" class="product-page__add-btn" id="add-to-cart-btn"
         {% unless product.available %}disabled{% endunless %}>
         {%- if product.available -%}
-          Add To Cart — {{ product.price | money }}
+          ADD TO CART
         {%- else -%}
-          Sold Out
+          SOLD OUT
         {%- endif -%}
       </button>
     </form>
 
     <div class="product-page__trust">
       <span>Free shipping</span>
-      <span class="product-page__trust-dot"></span>
+      <span class="product-page__trust-dot">&middot;</span>
       <span>30-day returns</span>
-      <span class="product-page__trust-dot"></span>
+      <span class="product-page__trust-dot">&middot;</span>
       <span>Lifetime warranty</span>
     </div>
 
-    <!-- Accordions -->
+    <!-- Technical Features — open by default like the screenshot -->
+    <div class="product-page__specs-section">
+      <div class="product-page__specs-heading">Technical Features</div>
+      <div class="specs-table">
+        <div class="specs-table__row"><span class="specs-table__label">Stone</span><span class="specs-table__value">VVS Moissanite</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Cut</span><span class="specs-table__value">Round Brilliant</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span class="specs-table__value">9.25 Mohs</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Fire</span><span class="specs-table__value">0.104 (2.4x Diamond)</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Refractive Index</span><span class="specs-table__value">2.65</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Setting</span><span class="specs-table__value">S925 Sterling Silver, 18K Gold Plated</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Closure</span><span class="specs-table__value">Secure Box Clasp</span></div>
+      </div>
+    </div>
+
+    <!-- Dimensions -->
+    <div class="product-page__specs-section">
+      <div class="product-page__specs-heading">Dimensions</div>
+      <div class="specs-table">
+        <div class="specs-table__row"><span class="specs-table__label">Lengths Available</span><span class="specs-table__value">15.5 – 21.5 CM</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Stone Count</span><span class="specs-table__value">40 Stones</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Stone Size</span><span class="specs-table__value">3mm Round</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Width</span><span class="specs-table__value">3mm</span></div>
+        <div class="specs-table__row"><span class="specs-table__label">Weight</span><span class="specs-table__value">~8g</span></div>
+      </div>
+    </div>
+
+    <!-- Accordion sections -->
     <div class="product-page__accordions">
-      <div class="accordion__item">
-        <button class="accordion__trigger">
-          <span>Description</span>
-          <span class="accordion__icon">+</span>
-        </button>
-        <div class="accordion__content">
-          <div class="accordion__content-inner">
-            A statement of quiet luxury. Our Tennis Bracelet features 40 round brilliant-cut VVS moissanite stones, each hand-set in a classic four-prong setting. The stones are mounted on a S925 sterling silver base with a thick 18-karat gold plating for lasting warmth and durability. Secured with a box clasp and double safety catch.
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion__item">
-        <button class="accordion__trigger">
-          <span>Technical Details</span>
-          <span class="accordion__icon">+</span>
-        </button>
-        <div class="accordion__content">
-          <div class="accordion__content-inner">
-            <div class="specs-table">
-              <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>VVS Moissanite</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Cut</span><span>Round Brilliant</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Fire</span><span>0.104 (2.4x Diamond)</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Refractive Index</span><span>2.65</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>S925 Sterling Silver, 18K Gold Plated</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Secure Box Clasp</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="accordion__item">
         <button class="accordion__trigger">
           <span>Shipping & Returns</span>
@@ -440,8 +550,7 @@
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            <p>Free express shipping on all Australian orders via Australia Post. Typical delivery: 2-5 business days with full tracking. International shipping available at checkout.</p>
-            <p style="margin-top:12px;">30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia. Full refund processed within 5-7 business days.</p>
+            Free express shipping on all Australian orders via Australia Post. Typical delivery: 2-5 business days with full tracking. 30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia.
           </div>
         </div>
       </div>
@@ -463,7 +572,7 @@
 
 <!-- Reviews Section -->
 <section class="product-page__reviews reveal">
-  <h2 class="heading-2 product-page__reviews-heading">What Our Customers Say</h2>
+  <div class="product-page__reviews-heading">What Our Customers Say</div>
   <div class="product-page__reviews-grid">
     <div class="review-card">
       <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
@@ -497,11 +606,16 @@
   document.querySelectorAll('.product-page__thumb').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var url = this.getAttribute('data-image-url');
-      document.getElementById('main-product-image').src = url;
+      if (url) {
+        document.getElementById('main-product-image').src = url;
+      }
       document.querySelectorAll('.product-page__thumb').forEach(function(t) {
         t.classList.remove('is-active');
       });
-      this.classList.add('is-active');
+      /* Highlight all thumbs with same url (inline + overlay) */
+      document.querySelectorAll('.product-page__thumb[data-image-url="' + url + '"]').forEach(function(t) {
+        t.classList.add('is-active');
+      });
     });
   });
 </script>
