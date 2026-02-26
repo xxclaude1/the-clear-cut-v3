@@ -1,21 +1,12 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "settings": {
         "image_1": "shopify://shop_images/Screenshot_2026-02-26_at_7.15.20_PM.png",
-        "heading_1": "Start Your Collection",
-        "body_1": "Our Tennis Bracelets are waiting.",
-        "cta_text_1": "Shop Tennis Bracelets",
+        "heading_1": "",
+        "body_1": "",
+        "cta_text_1": "",
         "cta_url_1": "",
         "text_color_1": "#ffffff",
         "image_2": "shopify://shop_images/Screenshot_2026-02-26_at_7.05.26_PM.png",
@@ -25,9 +16,9 @@
         "cta_url_2": "",
         "text_color_2": "#ffffff",
         "image_3": "shopify://shop_images/Screenshot_2026-02-26_at_7.11.53_PM.png",
-        "heading_3": "",
-        "body_3": "",
-        "cta_text_3": "",
+        "heading_3": "Start Your Collection",
+        "body_3": "Our Tennis Bracelets are waiting.",
+        "cta_text_3": "Shop The Collection",
         "cta_url_3": "",
         "text_color_3": "#ffffff",
         "image_4": "shopify://shop_images/Screenshot_2026-02-26_at_7.13.39_PM.png",
