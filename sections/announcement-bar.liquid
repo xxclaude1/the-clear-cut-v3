@@ -1,17 +1,4 @@
 <style>
-  #shopify-section-announcement-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 101;
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  #shopify-section-announcement-bar.is-hidden {
-    transform: translateY(-100%);
-  }
-
   .announcement-bar {
     display: flex;
     align-items: center;
@@ -116,30 +103,6 @@
     </svg>
   </button>
 </div>
-
-<script>
-  (function() {
-    var lastY = 0;
-    var bar = document.getElementById('shopify-section-announcement-bar');
-    var header = document.getElementById('shopify-section-header');
-    var threshold = 10;
-
-    window.addEventListener('scroll', function() {
-      var y = window.scrollY;
-      if (y < 5) {
-        bar.classList.remove('is-hidden');
-        header.classList.remove('bar-hidden');
-      } else if (y > lastY + threshold) {
-        bar.classList.add('is-hidden');
-        header.classList.add('bar-hidden');
-      } else if (y < lastY - threshold) {
-        bar.classList.remove('is-hidden');
-        header.classList.remove('bar-hidden');
-      }
-      lastY = y;
-    }, { passive: true });
-  })();
-</script>
 
 {% schema %}
 {
