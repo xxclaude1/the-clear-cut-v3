@@ -9,6 +9,15 @@
     margin-bottom: var(--space-md);
   }
 
+  .collection-page__description {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    max-width: 600px;
+  }
+
   /* Category image bar */
   .collection-page__categories {
     display: flex;
@@ -26,7 +35,7 @@
     position: relative;
     width: 120px;
     overflow: hidden;
-    border-radius: 0;
+    display: block;
   }
 
   .collection-page__cat-image {
@@ -34,6 +43,12 @@
     aspect-ratio: 3 / 4;
     object-fit: cover;
     background-color: var(--color-bg-warm);
+    display: block;
+    transition: transform 400ms ease;
+  }
+
+  .collection-page__cat-item:hover .collection-page__cat-image {
+    transform: scale(1.05);
   }
 
   .collection-page__cat-label {
@@ -59,6 +74,8 @@
     padding: 12px 0;
     border-bottom: 1px solid var(--color-border);
     margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   .collection-page__filter-left {
@@ -77,6 +94,11 @@
     cursor: pointer;
     color: var(--color-text);
     padding: 0;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .collection-page__filter-btn:hover {
+    opacity: 0.6;
   }
 
   .collection-page__filter-right {
@@ -98,29 +120,74 @@
     text-transform: uppercase;
     letter-spacing: 0.03em;
     background: none;
-    border: none;
+    border: 1px solid var(--color-border);
     cursor: pointer;
     color: var(--color-text);
+    padding: 8px 12px;
+    appearance: none;
   }
 
-  /* Loading */
-  .collection-page__loading {
+  .collection-page__sort:focus {
+    border-color: var(--color-border-dark);
+    outline: none;
+  }
+
+  /* Empty state */
+  .collection-page__empty {
+    grid-column: 1 / -1;
     text-align: center;
-    padding: var(--space-lg) 0;
-    font-family: var(--font-mono);
-    font-size: 13px;
+    padding: 80px 0;
     color: var(--color-text-secondary);
+  }
+
+  /* Pagination */
+  .collection-page__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .collection-page__pagination a,
+  .collection-page__pagination span {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    padding: 8px 14px;
+    border: 1px solid var(--color-border);
+    transition: background-color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  }
+
+  .collection-page__pagination a:hover {
+    border-color: var(--color-text);
+  }
+
+  .collection-page__pagination .is-current {
+    background-color: var(--color-text);
+    color: var(--color-btn-primary-text);
+    border-color: var(--color-text);
   }
 </style>
 
 <div class="collection-page">
   <h1 class="heading-1 collection-page__title">{{ collection.title | default: 'Shop All' }}</h1>
 
+  {%- if collection.description != blank -%}
+    <p class="collection-page__description">{{ collection.description }}</p>
+  {%- endif -%}
+
   <!-- Category image bar -->
   <div class="collection-page__categories">
     <a href="/collections/all" class="collection-page__cat-item">
       <div class="collection-page__cat-image"></div>
       <span class="collection-page__cat-label">Shop All</span>
+    </a>
+    <a href="/collections/bracelets" class="collection-page__cat-item">
+      <div class="collection-page__cat-image"></div>
+      <span class="collection-page__cat-label">Bracelets</span>
     </a>
     <a href="/collections/earrings" class="collection-page__cat-item">
       <div class="collection-page__cat-image"></div>
@@ -130,17 +197,13 @@
       <div class="collection-page__cat-image"></div>
       <span class="collection-page__cat-label">Rings</span>
     </a>
-    <a href="/collections/bracelets" class="collection-page__cat-item">
-      <div class="collection-page__cat-image"></div>
-      <span class="collection-page__cat-label">Bracelets</span>
-    </a>
     <a href="/collections/necklaces" class="collection-page__cat-item">
       <div class="collection-page__cat-image"></div>
       <span class="collection-page__cat-label">Necklaces</span>
     </a>
     <a href="/collections/tennis-jewelry" class="collection-page__cat-item">
       <div class="collection-page__cat-image"></div>
-      <span class="collection-page__cat-label">Tennis Jewelry</span>
+      <span class="collection-page__cat-label">Tennis</span>
     </a>
   </div>
 
@@ -153,23 +216,56 @@
     </div>
     <div class="collection-page__filter-right">
       <span class="collection-page__count">({{ collection.products_count | default: 0 }} Products)</span>
-      <button class="collection-page__sort">Sort</button>
+      <select class="collection-page__sort" id="collection-sort" aria-label="Sort products">
+        <option value="best-selling"{% if collection.sort_by == 'best-selling' %} selected{% endif %}>Best Selling</option>
+        <option value="title-ascending"{% if collection.sort_by == 'title-ascending' %} selected{% endif %}>A to Z</option>
+        <option value="title-descending"{% if collection.sort_by == 'title-descending' %} selected{% endif %}>Z to A</option>
+        <option value="price-ascending"{% if collection.sort_by == 'price-ascending' %} selected{% endif %}>Price: Low to High</option>
+        <option value="price-descending"{% if collection.sort_by == 'price-descending' %} selected{% endif %}>Price: High to Low</option>
+        <option value="created-descending"{% if collection.sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
+      </select>
     </div>
   </div>
 
   <!-- Product grid -->
   <div class="product-grid">
-    {%- for product in collection.products -%}
-      {% render 'product-card', product: product %}
-    {%- else -%}
-      <p class="body-text text-secondary" style="grid-column: 1 / -1; text-align: center; padding: 80px 0;">No products found in this collection.</p>
-    {%- endfor -%}
-  </div>
+    {%- paginate collection.products by 24 -%}
+      {%- for product in collection.products -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        <div class="collection-page__empty">
+          <p class="body-text">No products found in this collection.</p>
+        </div>
+      {%- endfor -%}
 
-  {%- if collection.products.size > 48 -%}
-    <div class="collection-page__loading">Loading more...</div>
-  {%- endif -%}
+      {%- if paginate.pages > 1 -%}
+        <div class="collection-page__pagination" style="grid-column: 1 / -1;">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}">Previous</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}">{{ part.title }}</a>
+            {%- else -%}
+              <span class="is-current">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}">Next</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
 </div>
+
+<script>
+  document.getElementById('collection-sort').addEventListener('change', function() {
+    var url = new URL(window.location.href);
+    url.searchParams.set('sort_by', this.value);
+    window.location.href = url.toString();
+  });
+</script>
 
 {% schema %}
 {

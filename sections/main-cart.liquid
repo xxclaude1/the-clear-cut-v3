@@ -11,7 +11,7 @@
 
   .cart-page__header {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr auto;
     gap: 16px;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--color-border);
@@ -27,17 +27,27 @@
     letter-spacing: 0.03em;
   }
 
-  .cart-page__header span:last-child {
+  .cart-page__header span:nth-child(3) {
     text-align: right;
   }
 
   .cart-page__item {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr auto;
     gap: 16px;
     align-items: center;
     padding: 20px 0;
     border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 768px) {
+    .cart-page__header {
+      display: none;
+    }
+    .cart-page__item {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
   }
 
   .cart-page__item-info {
@@ -72,11 +82,67 @@
     margin-top: 4px;
   }
 
+  .cart-page__item-unit-price {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+  }
+
   .cart-page__item-price {
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 14px;
     text-align: right;
+  }
+
+  /* Quantity controls */
+  .cart-page__qty {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    width: fit-content;
+  }
+
+  .cart-page__qty-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .cart-page__qty-btn:hover {
+    background-color: var(--color-bg-warm);
+  }
+
+  .cart-page__qty-value {
+    width: 40px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    line-height: 36px;
+  }
+
+  /* Remove button */
+  .cart-page__remove {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    transition: opacity var(--duration-fast) ease;
+    padding: 4px;
+  }
+
+  .cart-page__remove:hover {
+    opacity: 0.6;
   }
 
   .cart-page__footer {
@@ -85,6 +151,12 @@
     align-items: flex-end;
     gap: 16px;
     margin-top: var(--space-lg);
+  }
+
+  @media (max-width: 768px) {
+    .cart-page__footer {
+      align-items: stretch;
+    }
   }
 
   .cart-page__subtotal {
@@ -131,10 +203,20 @@
     color: var(--color-text-secondary);
     margin-bottom: var(--space-md);
   }
+
+  .cart-page__continue {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
 </style>
 
 <div class="cart-page">
-  <h1 class="heading-1 cart-page__title">Your Cart</h1>
+  <h1 class="heading-1 cart-page__title">Your Cart ({{ cart.item_count }})</h1>
 
   {%- if cart.item_count == 0 -%}
     <div class="cart-page__empty">
@@ -146,27 +228,39 @@
       <span>Product</span>
       <span>Quantity</span>
       <span>Total</span>
+      <span></span>
     </div>
 
     {%- for item in cart.items -%}
-      <div class="cart-page__item">
+      <div class="cart-page__item" data-line="{{ forloop.index }}">
         <div class="cart-page__item-info">
           <div class="cart-page__item-image">
             {%- if item.image -%}
-              <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}">
+              <a href="{{ item.url }}">
+                <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy">
+              </a>
             {%- endif -%}
           </div>
           <div>
             <a href="{{ item.url }}" class="cart-page__item-name">{{ item.product.title }}</a>
-            <div class="cart-page__item-variant">{{ item.variant.title }}</div>
+            {%- unless item.variant.title == 'Default Title' -%}
+              <div class="cart-page__item-variant">{{ item.variant.title }}</div>
+            {%- endunless -%}
+            <div class="cart-page__item-unit-price">{{ item.price | money }} each</div>
           </div>
         </div>
-        <div class="cart-item__quantity">
-          <button class="cart-item__qty-btn">−</button>
-          <span class="cart-item__qty-value">{{ item.quantity }}</span>
-          <button class="cart-item__qty-btn">+</button>
+
+        <div class="cart-page__qty">
+          <button class="cart-page__qty-btn" data-cart-change data-line="{{ forloop.index }}" data-quantity="{{ item.quantity | minus: 1 }}" aria-label="Decrease quantity">−</button>
+          <span class="cart-page__qty-value">{{ item.quantity }}</span>
+          <button class="cart-page__qty-btn" data-cart-change data-line="{{ forloop.index }}" data-quantity="{{ item.quantity | plus: 1 }}" aria-label="Increase quantity">+</button>
         </div>
+
         <div class="cart-page__item-price">{{ item.final_line_price | money }}</div>
+
+        <button class="cart-page__remove" data-cart-change data-line="{{ forloop.index }}" data-quantity="0" aria-label="Remove {{ item.product.title }}">
+          Remove
+        </button>
       </div>
     {%- endfor -%}
 
@@ -175,11 +269,28 @@
         <span class="cart-page__subtotal-label">Subtotal</span>
         <span class="cart-page__subtotal-price">{{ cart.total_price | money }}</span>
       </div>
-      <a href="/checkout" class="btn-primary cart-page__checkout-btn">Check Out</a>
       <span class="cart-page__shipping-note">Shipping calculated at checkout.</span>
+      <a href="/checkout" class="btn-primary cart-page__checkout-btn">Check Out</a>
+      <a href="/collections/all" class="cart-page__continue">Continue shopping</a>
     </div>
   {%- endif -%}
 </div>
+
+<script>
+  document.querySelectorAll('[data-cart-change]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var line = this.getAttribute('data-line');
+      var quantity = parseInt(this.getAttribute('data-quantity'), 10);
+      fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ line: parseInt(line, 10), quantity: quantity })
+      }).then(function() {
+        window.location.reload();
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {

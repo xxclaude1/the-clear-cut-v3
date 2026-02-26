@@ -1,0 +1,85 @@
+<style>
+  .policy-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--page-padding);
+  }
+
+  .policy-page__title {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .policy-page__content {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+
+  .policy-page__content h2 {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+
+  .policy-page__content h3 {
+    font-size: 16px;
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  .policy-page__content p {
+    margin-bottom: 16px;
+  }
+
+  .policy-page__content ul,
+  .policy-page__content ol {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .policy-page__content li {
+    list-style: disc;
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .policy-page__content ol li {
+    list-style: decimal;
+  }
+
+  .policy-page__content a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .policy-page__content a:hover {
+    opacity: 0.6;
+  }
+
+  .policy-page__updated {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+</style>
+
+<div class="policy-page">
+  <h1 class="heading-1 policy-page__title">{{ page.title }}</h1>
+  <div class="policy-page__content">
+    {{ page.content }}
+  </div>
+  <p class="policy-page__updated">Last updated: {{ page.updated_at | date: '%B %Y' }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Policy Page",
+  "settings": []
+}
+{% endschema %}

@@ -2,7 +2,7 @@
   .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
+    gap: var(--card-gap);
     min-height: 75vh;
   }
 
@@ -23,14 +23,36 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 6s ease;
+  }
+
+  .hero:hover .hero__column:first-child .hero__image {
+    transform: scale(1.02);
+  }
+
+  .hero__placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero__placeholder-text {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
   }
 
   .hero__overlay {
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: 40px;
+    padding: 48px;
     max-width: 500px;
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
@@ -41,37 +63,48 @@
 
   .hero__heading {
     margin-bottom: 12px;
+    color: {{ section.settings.text_color }};
   }
 
   .hero__body {
     font-family: var(--font-mono);
     font-size: 14px;
     line-height: 1.6;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    color: {{ section.settings.text_color }};
+    opacity: 0.9;
+  }
+
+  .hero__cta {
+    color: {{ section.settings.text_color }};
   }
 </style>
 
-<section class="hero reveal">
+<section class="hero">
   <div class="hero__column">
     {%- if section.settings.image_left != blank -%}
-      <img class="hero__image" src="{{ section.settings.image_left | image_url: width: 1200 }}" alt="{{ section.settings.heading | escape }}" loading="eager">
+      <img class="hero__image" src="{{ section.settings.image_left | image_url: width: 1400 }}" alt="{{ section.settings.heading | escape }}" loading="eager" fetchpriority="high">
     {%- else -%}
-      <div style="width:100%;height:100%;background:var(--color-bg-warm);"></div>
+      <div class="hero__placeholder">
+        <span class="hero__placeholder-text">Hero image — 1400 x 900 recommended</span>
+      </div>
     {%- endif -%}
     <div class="hero__overlay">
       <h1 class="heading-display hero__heading">{{ section.settings.heading | default: 'Start Your Collection' }}</h1>
       <p class="hero__body">{{ section.settings.body | default: 'Our Tennis Bracelets are waiting.' }}</p>
       {%- if section.settings.cta_text != blank -%}
-        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="editorial-cta">{{ section.settings.cta_text }}</a>
+        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="editorial-cta hero__cta">{{ section.settings.cta_text }}</a>
       {%- endif -%}
     </div>
   </div>
 
   <div class="hero__column">
     {%- if section.settings.image_right != blank -%}
-      <img class="hero__image" src="{{ section.settings.image_right | image_url: width: 1200 }}" alt="" loading="eager">
+      <img class="hero__image" src="{{ section.settings.image_right | image_url: width: 1400 }}" alt="{{ section.settings.image_right_alt | default: '' }}" loading="eager">
     {%- else -%}
-      <div style="width:100%;height:100%;background:var(--color-bg-warm);"></div>
+      <div class="hero__placeholder">
+        <span class="hero__placeholder-text">Hero image — 1400 x 900 recommended</span>
+      </div>
     {%- endif -%}
   </div>
 </section>
@@ -112,6 +145,17 @@
       "type": "url",
       "id": "cta_url",
       "label": "CTA link"
+    },
+    {
+      "type": "text",
+      "id": "image_right_alt",
+      "label": "Right image alt text"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
     }
   ],
   "presets": [

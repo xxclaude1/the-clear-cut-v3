@@ -19,6 +19,14 @@
     position: relative;
   }
 
+  @media (min-width: 769px) {
+    .product-page__gallery {
+      position: sticky;
+      top: calc(var(--header-height) + var(--announcement-height) + 24px);
+      align-self: start;
+    }
+  }
+
   .product-page__main-image {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -31,11 +39,16 @@
     display: flex;
     gap: 6px;
     margin-top: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
+
+  .product-page__thumbnails::-webkit-scrollbar { display: none; }
 
   .product-page__thumb {
     width: 72px;
     height: 72px;
+    flex-shrink: 0;
     border: 1px solid var(--color-border);
     cursor: pointer;
     background-color: var(--color-bg-warm);
@@ -76,6 +89,7 @@
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.7;
+    color: var(--color-text-secondary);
     margin-bottom: 24px;
   }
 
@@ -117,20 +131,61 @@
     border: 2px solid var(--color-text);
   }
 
+  .product-page__variant-btn.is-unavailable {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* Size guide link */
+  .product-page__size-guide {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-top: 6px;
+    display: inline-block;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .product-page__size-guide:hover {
+    opacity: 0.6;
+  }
+
   /* Add to cart */
+  .product-page__add-form {
+    margin-top: 8px;
+  }
+
   .product-page__add-btn {
     width: 100%;
     height: 52px;
     margin-bottom: 12px;
   }
 
+  .product-page__add-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   /* Trust */
   .product-page__trust {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
     font-family: var(--font-body);
     font-size: 12px;
     color: var(--color-text-secondary);
     margin-bottom: 32px;
+  }
+
+  .product-page__trust-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: var(--color-text-muted);
+    flex-shrink: 0;
   }
 
   /* Accordions */
@@ -197,6 +252,74 @@
   .specs-table__label {
     color: var(--color-text-secondary);
   }
+
+  /* Reviews section */
+  .product-page__reviews {
+    grid-column: 1 / -1;
+    padding: var(--space-2xl) var(--page-padding) 0;
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .product-page__reviews-heading {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  .product-page__reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 1024px) {
+    .product-page__reviews-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-page__reviews-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .review-card {
+    border: 1px solid var(--color-border);
+    padding: 24px;
+  }
+
+  .review-card__stars {
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    color: var(--color-text);
+  }
+
+  .review-card__text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .review-card__author {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .review-card__location {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+  }
 </style>
 
 <div class="product-page">
@@ -205,17 +328,19 @@
     {%- if product.featured_image -%}
       <img class="product-page__main-image" id="main-product-image"
         src="{{ product.featured_image | image_url: width: 1200 }}"
-        alt="{{ product.title | escape }}">
+        alt="{{ product.title | escape }}"
+        loading="eager">
     {%- else -%}
       <div class="product-page__main-image" style="background:var(--color-bg-warm);"></div>
     {%- endif -%}
 
     {%- if product.images.size > 1 -%}
       <div class="product-page__thumbnails">
-        {%- for image in product.images limit: 6 -%}
+        {%- for image in product.images limit: 8 -%}
           <button class="product-page__thumb{% if forloop.first %} is-active{% endif %}"
-            onclick="document.getElementById('main-product-image').src='{{ image | image_url: width: 1200 }}'; document.querySelectorAll('.product-page__thumb').forEach(t=>t.classList.remove('is-active')); this.classList.add('is-active');">
-            <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title | escape }}" loading="lazy">
+            data-image-url="{{ image | image_url: width: 1200 }}"
+            aria-label="View image {{ forloop.index }}">
+            <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title | escape }} - Image {{ forloop.index }}" loading="lazy">
           </button>
         {%- endfor -%}
       </div>
@@ -226,7 +351,7 @@
   <div class="product-page__info">
     <h1 class="product-name-lg product-page__title">{{ product.title }}</h1>
 
-    <div class="product-price-lg product-page__price">
+    <div class="product-price-lg product-page__price" id="product-price">
       {%- if product.compare_at_price > product.price -%}
         <span class="product-price-strike">{{ product.compare_at_price | money }}</span>
       {%- endif -%}
@@ -239,29 +364,40 @@
 
     {%- for option in product.options_with_values -%}
       <div class="product-page__variant-group">
-        <div class="product-page__variant-label">{{ option.name }}</div>
-        <div class="product-page__variant-options">
+        <div class="product-page__variant-label">{{ option.name }}: <span id="selected-{{ option.name | handle }}">{{ option.selected_value }}</span></div>
+        <div class="product-page__variant-options" data-option-index="{{ forloop.index0 }}">
           {%- for value in option.values -%}
-            <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}">
+            <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}"
+              data-value="{{ value }}">
               {{ value }}
             </button>
           {%- endfor -%}
         </div>
+        {%- if option.name == 'Length' or option.name == 'Size' -%}
+          <a href="/pages/size-guides" class="product-page__size-guide">Size guide</a>
+        {%- endif -%}
       </div>
     {%- endfor -%}
 
-    <form action="/cart/add" method="post">
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-      <button type="submit" class="btn-primary product-page__add-btn">
+    <form action="/cart/add" method="post" class="product-page__add-form" id="product-form">
+      <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="btn-primary product-page__add-btn" id="add-to-cart-btn"
+        {% unless product.available %}disabled{% endunless %}>
         {%- if product.available -%}
-          Add To Cart
+          Add To Cart — {{ product.price | money }}
         {%- else -%}
           Sold Out
         {%- endif -%}
       </button>
     </form>
 
-    <p class="product-page__trust">Free shipping · 30-day returns · Lifetime warranty</p>
+    <div class="product-page__trust">
+      <span>Free shipping</span>
+      <span class="product-page__trust-dot"></span>
+      <span>30-day returns</span>
+      <span class="product-page__trust-dot"></span>
+      <span>Lifetime warranty</span>
+    </div>
 
     <!-- Accordions -->
     <div class="product-page__accordions">
@@ -304,12 +440,13 @@
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            Free express shipping on all Australian orders via Australia Post. Typical delivery: 2-5 business days with full tracking. International shipping available at checkout. 30-day return window from date of delivery. Items must be unworn and in original packaging.
+            <p>Free express shipping on all Australian orders via Australia Post. Typical delivery: 2-5 business days with full tracking. International shipping available at checkout.</p>
+            <p style="margin-top:12px;">30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia. Full refund processed within 5-7 business days.</p>
           </div>
         </div>
       </div>
 
-      <div class="accordion__item">
+      <div class="accordion__item" style="border-bottom: 1px solid var(--color-border);">
         <button class="accordion__trigger">
           <span>Care Guide</span>
           <span class="accordion__icon">+</span>
@@ -323,6 +460,51 @@
     </div>
   </div>
 </div>
+
+<!-- Reviews Section -->
+<section class="product-page__reviews reveal">
+  <h2 class="heading-2 product-page__reviews-heading">What Our Customers Say</h2>
+  <div class="product-page__reviews-grid">
+    <div class="review-card">
+      <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-card__text">"I've received more compliments on this bracelet than any piece of jewelry I own. The sparkle is unreal."</p>
+      <div class="review-card__author">Sarah M.</div>
+      <div class="review-card__location">Sydney</div>
+    </div>
+    <div class="review-card">
+      <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-card__text">"My partner thought it was a diamond. The quality exceeded every expectation."</p>
+      <div class="review-card__author">Emma L.</div>
+      <div class="review-card__location">Melbourne</div>
+    </div>
+    <div class="review-card">
+      <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-card__text">"Arrived beautifully packaged with a certificate of authenticity. Truly premium."</p>
+      <div class="review-card__author">Jessica K.</div>
+      <div class="review-card__location">Brisbane</div>
+    </div>
+    <div class="review-card">
+      <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-card__text">"I was skeptical about moissanite but this completely changed my mind. Stunning."</p>
+      <div class="review-card__author">Lauren T.</div>
+      <div class="review-card__location">Perth</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  /* Thumbnail click handler */
+  document.querySelectorAll('.product-page__thumb').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var url = this.getAttribute('data-image-url');
+      document.getElementById('main-product-image').src = url;
+      document.querySelectorAll('.product-page__thumb').forEach(function(t) {
+        t.classList.remove('is-active');
+      });
+      this.classList.add('is-active');
+    });
+  });
+</script>
 
 {% schema %}
 {

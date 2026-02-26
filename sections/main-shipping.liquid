@@ -1,0 +1,112 @@
+<style>
+  .shipping-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--page-padding);
+  }
+
+  .shipping-page__title {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .shipping-page h2 {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+
+  .shipping-page p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .shipping-page ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .shipping-page li {
+    list-style: disc;
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  .shipping-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+  }
+
+  .shipping-table th,
+  .shipping-table td {
+    text-align: left;
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .shipping-table th {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-text-secondary);
+  }
+</style>
+
+<div class="shipping-page">
+  <h1 class="heading-1 shipping-page__title">Shipping & Delivery</h1>
+
+  <h2 class="heading-3">Domestic Shipping</h2>
+  <p>All Australian orders include free express shipping via Australia Post. No minimum order required.</p>
+
+  <table class="shipping-table">
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Delivery Time</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Express Post</td>
+        <td>2-5 business days</td>
+        <td>Free</td>
+      </tr>
+      <tr>
+        <td>Standard Post</td>
+        <td>5-10 business days</td>
+        <td>Free</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="heading-3">Order Tracking</h2>
+  <p>Full tracking is provided for all orders. Once your order is dispatched, you will receive a shipping confirmation email with your tracking number. Track your order at any time via Australia Post.</p>
+
+  <h2 class="heading-3">International Shipping</h2>
+  <p>International shipping is available at checkout. Rates and delivery times vary by destination. International orders may be subject to import duties and taxes, which are the responsibility of the recipient.</p>
+
+  <h2 class="heading-3">Processing Time</h2>
+  <p>Orders are processed within 1-2 business days. Orders placed on weekends or public holidays will be processed on the next business day.</p>
+
+  <h2 class="heading-3">Packaging</h2>
+  <p>Every piece arrives in our signature jewelry box with a Certificate of Authenticity and microfiber polishing cloth. Gift-ready, no additional wrapping needed.</p>
+
+  <h2 class="heading-3">Questions?</h2>
+  <p>Contact our team at <a href="mailto:hello@theclearcut.com.au" style="text-decoration:underline;">hello@theclearcut.com.au</a> for any shipping enquiries.</p>
+</div>
+
+{% schema %}
+{
+  "name": "Shipping Page",
+  "settings": []
+}
+{% endschema %}

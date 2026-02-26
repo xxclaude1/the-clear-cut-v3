@@ -7,12 +7,36 @@
 
   .faq-page__title {
     text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .faq-page__subtitle {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
     margin-bottom: var(--space-xl);
+  }
+
+  .faq-page__contact {
+    text-align: center;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq-page__contact p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
   }
 </style>
 
 <div class="faq-page">
   <h1 class="heading-1 faq-page__title">Frequently Asked Questions</h1>
+  <p class="faq-page__subtitle">Everything you need to know about our moissanite jewelry.</p>
 
   <div class="product-page__accordions">
     {%- for block in section.blocks -%}
@@ -26,6 +50,11 @@
         </div>
       </div>
     {%- endfor -%}
+  </div>
+
+  <div class="faq-page__contact">
+    <p>Can't find what you're looking for?</p>
+    <a href="/pages/contact" class="btn-outline">Contact Us</a>
   </div>
 </div>
 
@@ -50,8 +79,14 @@
         { "type": "question", "settings": { "question": "How does moissanite compare to diamond?", "answer": "<p>Moissanite scores 9.25 on the Mohs hardness scale (diamond is 10), has 2.4 times more fire (rainbow flashes), and a higher refractive index (2.65 vs 2.42). To the naked eye, they are virtually indistinguishable.</p>" } },
         { "type": "question", "settings": { "question": "Will moissanite lose its sparkle over time?", "answer": "<p>No. Moissanite's optical properties are permanent. It will not cloud, fade, or change colour over time. Its brilliance and fire are inherent to the stone's crystalline structure.</p>" } },
         { "type": "question", "settings": { "question": "What does VVS clarity mean?", "answer": "<p>VVS stands for Very Very Slightly Included. Inclusions are invisible to the naked eye and can only be detected under 10x magnification. Our stones are completely eye-clean.</p>" } },
+        { "type": "question", "settings": { "question": "What is 18K gold plated sterling silver?", "answer": "<p>Our pieces feature a thick layer of 18-karat gold electroplated over a S925 sterling silver base. This provides the warmth of solid gold with excellent durability for everyday wear.</p>" } },
+        { "type": "question", "settings": { "question": "How do I choose my bracelet length?", "answer": "<p>Measure your wrist with a flexible tape measure, then add 1-2cm for a comfortable fit. 18.0cm (Standard) fits most wrists. If between sizes, size up.</p>" } },
         { "type": "question", "settings": { "question": "Do you offer free shipping?", "answer": "<p>Yes. All Australian orders include free express shipping via Australia Post. Typical delivery is 2-5 business days with full tracking.</p>" } },
-        { "type": "question", "settings": { "question": "What is your return policy?", "answer": "<p>30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia. Full refunds within 5-7 business days.</p>" } }
+        { "type": "question", "settings": { "question": "What is your return policy?", "answer": "<p>30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia. Full refunds within 5-7 business days.</p>" } },
+        { "type": "question", "settings": { "question": "Do you provide a warranty?", "answer": "<p>Every piece comes with a lifetime manufacturer warranty covering defects in materials and craftsmanship. We guarantee our moissanite stones will maintain their optical properties for life.</p>" } },
+        { "type": "question", "settings": { "question": "How should I care for my jewelry?", "answer": "<p>Clean with warm soapy water and a soft brush. Avoid harsh chemicals, chlorine, and abrasive surfaces. Store in the provided jewelry box when not wearing.</p>" } },
+        { "type": "question", "settings": { "question": "Do you ship internationally?", "answer": "<p>Yes. International shipping is available at checkout. Rates and delivery times vary by destination.</p>" } },
+        { "type": "question", "settings": { "question": "Is my payment secure?", "answer": "<p>We use Shopify's secure checkout with full SSL encryption and 3D Secure authentication. We accept Visa, Mastercard, American Express, and Apple Pay.</p>" } }
       ]
     }
   ]
