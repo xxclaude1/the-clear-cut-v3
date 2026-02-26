@@ -386,22 +386,19 @@
     opacity: 0.6;
   }
 
-  /* Overlay behind mega menu — white/transparent */
+  /* Overlay behind mega menu — invisible, click-only */
   .mega-menu-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.6);
+    background: transparent;
     z-index: 199;
-    opacity: 0;
     pointer-events: none;
-    transition: opacity 500ms ease;
   }
 
   .mega-menu-overlay.is-open {
-    opacity: 1;
     pointer-events: auto;
   }
 </style>
