@@ -32,11 +32,6 @@
     flex: 0 0 25%;
     scroll-snap-align: start;
     min-width: 250px;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
-  }
-
-  .trending-products__card:first-child {
-    border-left: 1px solid rgba(0, 0, 0, 0.15);
   }
 
   @media (max-width: 768px) {
@@ -92,8 +87,10 @@
       {%- for i in (1..8) -%}
         <div class="trending-products__card">
           <div class="product-card">
-            <div class="product-card__image-wrapper"></div>
-            <button class="product-card__quick-add">ADD +</button>
+            <div class="product-card__bordered">
+              <div class="product-card__image-wrapper"></div>
+              <button class="product-card__quick-add">ADD +</button>
+            </div>
             <div class="product-card__info">
               <span class="product-card__name">Product Name</span>
               <div class="product-card__price">$499</div>

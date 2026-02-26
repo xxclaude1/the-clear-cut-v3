@@ -577,6 +577,11 @@ textarea.input {
   background-color: var(--color-bg);
 }
 
+.product-card__bordered {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-right: -1px;
+}
+
 .product-card__image-wrapper {
   position: relative;
   display: block;
@@ -643,7 +648,7 @@ textarea.input {
   color: var(--color-text);
   background-color: var(--color-bg);
   border: none;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: background-color var(--duration-fast) ease;
   line-height: 1;
