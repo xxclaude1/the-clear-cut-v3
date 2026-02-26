@@ -12,6 +12,7 @@
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   }
 
+  /* ---- Desktop header ---- */
   .header__inner {
     display: flex;
     align-items: center;
@@ -177,7 +178,52 @@
     background-color: var(--color-text);
   }
 
-  /* ---- Mega Menu / Slide-in from Left ---- */
+  /* ============================================
+     MOBILE HEADER — hamburger LEFT, logo CENTER, icons RIGHT
+     ============================================ */
+  @media (max-width: 768px) {
+    .header__inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas: "left center right";
+      align-items: center;
+      gap: 0;
+    }
+
+    .header__mobile-left {
+      grid-area: left;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .header__logo {
+      grid-area: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    .header__icons {
+      grid-area: right;
+      justify-content: flex-end;
+      gap: 16px;
+    }
+
+    /* Hide desktop nav on mobile */
+    .header__nav {
+      display: none;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .header__mobile-left {
+      display: none;
+    }
+  }
+
+  /* ============================================
+     MEGA MENU — Slide-in from Left
+     ============================================ */
   .mega-menu {
     position: fixed;
     top: 0;
@@ -188,14 +234,15 @@
     background-color: var(--color-bg);
     z-index: 200;
     transform: translateX(-100%);
-    transition: transform 350ms var(--ease-out);
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
     overflow-y: auto;
     border-right: 1px solid var(--color-border);
   }
 
   @media (max-width: 768px) {
     .mega-menu {
-      width: 85%;
+      width: 88%;
+      max-width: none;
     }
   }
 
@@ -211,6 +258,14 @@
     align-items: flex-start;
   }
 
+  @media (max-width: 768px) {
+    .mega-menu__inner {
+      flex-direction: column;
+      gap: 24px;
+      padding: 64px 24px 40px;
+    }
+  }
+
   .mega-menu__left {
     flex-shrink: 0;
     min-width: 160px;
@@ -224,6 +279,16 @@
     text-transform: uppercase;
     letter-spacing: 0.03em;
     margin-bottom: 0;
+    /* Stagger animation */
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 400ms ease, transform 400ms ease;
+    transition-delay: 150ms;
+  }
+
+  .mega-menu.is-open .mega-menu__heading {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .mega-menu__heading a {
@@ -256,6 +321,7 @@
     gap: 0;
   }
 
+  /* Staggered fade-in for each link */
   .mega-menu__link {
     font-family: var(--font-body);
     font-weight: 400;
@@ -263,15 +329,34 @@
     color: var(--color-text);
     line-height: 2.4;
     transition: opacity var(--duration-fast) ease;
+    /* Stagger animation — start hidden */
+    opacity: 0;
+    transform: translateY(10px);
   }
 
   .mega-menu__link:hover {
     opacity: 0.6;
   }
 
+  /* When menu is open, links animate in with staggered delays */
+  .mega-menu.is-open .mega-menu__link {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 400ms ease, transform 400ms ease;
+  }
+
+  .mega-menu.is-open .mega-menu__link:nth-child(1) { transition-delay: 200ms; }
+  .mega-menu.is-open .mega-menu__link:nth-child(2) { transition-delay: 260ms; }
+  .mega-menu.is-open .mega-menu__link:nth-child(3) { transition-delay: 320ms; }
+  .mega-menu.is-open .mega-menu__link:nth-child(4) { transition-delay: 380ms; }
+  .mega-menu.is-open .mega-menu__link:nth-child(5) { transition-delay: 440ms; }
+  .mega-menu.is-open .mega-menu__link:nth-child(6) { transition-delay: 500ms; }
+  .mega-menu.is-open .mega-menu__link:nth-child(7) { transition-delay: 560ms; }
+
+  /* Close button */
   .mega-menu__close {
     position: absolute;
-    top: 40px;
+    top: 24px;
     right: var(--page-padding);
     width: 32px;
     height: 32px;
@@ -282,6 +367,13 @@
     background: none;
     border: none;
     z-index: 1;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    transition-delay: 300ms;
+  }
+
+  .mega-menu.is-open .mega-menu__close {
+    opacity: 1;
   }
 
   .mega-menu__close svg {
@@ -295,34 +387,42 @@
 
   /* Overlay behind mega menu */
   .mega-menu-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.25);
+    background: rgba(0, 0, 0, 0.35);
     z-index: 199;
     opacity: 0;
-    transition: opacity 350ms ease;
+    pointer-events: none;
+    transition: opacity 500ms ease;
   }
 
   .mega-menu-overlay.is-open {
-    display: block;
     opacity: 1;
+    pointer-events: auto;
   }
 </style>
 
 <header class="header" role="banner">
   <div class="header__inner">
-    <!-- Left: Logo -->
+    <!-- Mobile left: hamburger -->
+    <div class="header__mobile-left">
+      <button class="header__hamburger" data-menu-open aria-label="Open menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Logo (left on desktop, center on mobile) -->
     <div class="header__logo">
       <a href="/" class="brand-wordmark" aria-label="{{ shop.name }}">
         THE CLEAR CUT
       </a>
     </div>
 
-    <!-- Center: Nav (desktop) -->
+    <!-- Center: Nav (desktop only) -->
     <nav class="header__nav desktop-only" role="navigation" aria-label="Main navigation">
       <div class="header__nav-item">
         <button class="header__nav-link" data-mega-trigger="all-jewelry">All Jewelry</button>
@@ -346,7 +446,7 @@
 
     <!-- Right: Icons -->
     <div class="header__icons">
-      <!-- Search (desktop) -->
+      <!-- Search -->
       <button class="header__icon-btn header__search-btn desktop-only" data-search-open aria-label="Search">
         <span class="header__search-input-wrap">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -364,12 +464,6 @@
           <path d="M3 19c0-4 3.5-7 7-7s7 3 7 7"></path>
         </svg>
       </a>
-
-      <!-- Hamburger (mobile) -->
-      <button class="header__hamburger mobile-only" data-menu-open aria-label="Open menu">
-        <span></span>
-        <span></span>
-      </button>
 
       <!-- Cart -->
       <button class="header__icon-btn header__cart-btn" data-cart-open aria-label="Open cart">
@@ -507,11 +601,14 @@
         }
 
         closeAll();
-        menu.classList.add('is-open');
-        overlay.classList.add('is-open');
-        this.classList.add('is-active');
-        document.body.style.overflow = 'hidden';
-        currentOpen = id;
+        /* Small RAF delay so close transitions finish before open starts */
+        requestAnimationFrame(function() {
+          menu.classList.add('is-open');
+          overlay.classList.add('is-open');
+          trigger.classList.add('is-active');
+          document.body.style.overflow = 'hidden';
+          currentOpen = id;
+        });
       });
     });
 
