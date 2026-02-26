@@ -2,9 +2,8 @@
   .product-page {
     max-width: var(--page-max-width);
     margin: 0 auto;
-    padding: var(--space-md) var(--page-padding) var(--space-2xl);
     display: grid;
-    grid-template-columns: 55% 45%;
+    grid-template-columns: 1fr 1fr;
     gap: 0;
   }
 
@@ -14,95 +13,167 @@
     }
   }
 
-  /* Gallery */
+  /* Gallery — full bleed images stacked */
   .product-page__gallery {
     position: relative;
   }
 
-  @media (min-width: 769px) {
-    .product-page__gallery {
-      position: sticky;
-      top: calc(var(--header-height) + var(--announcement-height) + 24px);
-      align-self: start;
-    }
+  .product-page__gallery-images {
+    display: flex;
+    flex-direction: column;
   }
 
-  .product-page__main-image {
+  .product-page__gallery-image {
     width: 100%;
     aspect-ratio: 1 / 1;
-    object-fit: contain;
+    object-fit: cover;
+    display: block;
     background-color: var(--color-bg-warm);
-    padding: 5%;
   }
 
-  .product-page__thumbnails {
-    display: flex;
-    gap: 6px;
-    margin-top: 12px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .product-page__thumbnails::-webkit-scrollbar { display: none; }
-
-  .product-page__thumb {
-    width: 72px;
-    height: 72px;
-    flex-shrink: 0;
-    border: 1px solid var(--color-border);
-    cursor: pointer;
-    background-color: var(--color-bg-warm);
-    padding: 4px;
-    transition: border-color var(--duration-fast) ease;
-  }
-
-  .product-page__thumb.is-active {
-    border: 2px solid var(--color-text);
-  }
-
-  .product-page__thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  /* Info */
+  /* Info panel — sticky on desktop */
   .product-page__info {
-    padding: 0 0 0 48px;
+    padding: 48px 48px 48px 56px;
+  }
+
+  @media (min-width: 769px) {
+    .product-page__info {
+      position: sticky;
+      top: calc(var(--header-height) + var(--announcement-height));
+      align-self: start;
+      max-height: calc(100vh - var(--header-height) - var(--announcement-height));
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .product-page__info::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
     .product-page__info {
-      padding: var(--space-md) 0 0;
+      padding: var(--space-md) var(--page-padding);
     }
   }
 
+  /* Title row */
+  .product-page__title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
   .product-page__title {
-    margin-bottom: 12px;
-  }
-
-  .product-page__price {
-    margin-bottom: 20px;
-  }
-
-  .product-page__description {
     font-family: var(--font-body);
-    font-size: 15px;
-    line-height: 1.7;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.25;
+  }
+
+  @media (max-width: 768px) {
+    .product-page__title {
+      font-size: 18px;
+    }
+  }
+
+  /* Price */
+  .product-page__price {
+    margin-bottom: 28px;
+  }
+
+  .product-page__price-from {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 14px;
     color: var(--color-text-secondary);
+    margin-right: 4px;
+  }
+
+  .product-page__price-amount {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .product-page__price-strike {
+    font-weight: 400;
+    text-decoration: line-through;
+    color: var(--color-text-secondary);
+    margin-right: 8px;
+  }
+
+  /* Material info */
+  .product-page__material {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text);
+    margin-bottom: 10px;
+  }
+
+  /* Color swatches */
+  .product-page__swatches {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+
+  .product-page__swatch {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .product-page__swatch:hover,
+  .product-page__swatch.is-selected {
+    border-color: var(--color-text);
+  }
+
+  .product-page__swatch--silver { background-color: #C0C0C0; }
+  .product-page__swatch--gold { background-color: #D4A853; }
+  .product-page__swatch--rose { background-color: #B76E79; }
+
+  /* Variant selector — Length */
+  .product-page__variant-group {
     margin-bottom: 24px;
   }
 
-  /* Variants */
-  .product-page__variant-group {
-    margin-bottom: 20px;
+  .product-page__variant-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
   }
 
   .product-page__variant-label {
     font-family: var(--font-body);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
-    margin-bottom: 10px;
+    color: var(--color-text);
+  }
+
+  .product-page__size-guide {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .product-page__size-guide:hover {
+    opacity: 0.6;
   }
 
   .product-page__variant-options {
@@ -113,8 +184,7 @@
 
   .product-page__variant-btn {
     font-family: var(--font-body);
-    font-size: 12px;
-    text-transform: uppercase;
+    font-size: 13px;
     padding: 10px 20px;
     border: 1px solid var(--color-border);
     background: var(--color-bg);
@@ -136,31 +206,31 @@
     cursor: not-allowed;
   }
 
-  /* Size guide link */
-  .product-page__size-guide {
-    font-family: var(--font-body);
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    margin-top: 6px;
-    display: inline-block;
-    transition: opacity var(--duration-fast) ease;
-  }
-
-  .product-page__size-guide:hover {
-    opacity: 0.6;
-  }
-
-  /* Add to cart */
-  .product-page__add-form {
-    margin-top: 8px;
+  /* Add to bag row */
+  .product-page__add-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
   }
 
   .product-page__add-btn {
-    width: 100%;
-    height: 52px;
-    margin-bottom: 12px;
+    flex: 1;
+    height: 56px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background-color: var(--color-btn-primary-bg);
+    color: var(--color-btn-primary-text);
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease;
+    line-height: 1;
+  }
+
+  .product-page__add-btn:hover {
+    background-color: var(--color-btn-primary-hover);
   }
 
   .product-page__add-btn:disabled {
@@ -168,29 +238,93 @@
     cursor: not-allowed;
   }
 
-  /* Trust */
-  .product-page__trust {
+  .product-page__wishlist-btn {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    background-color: var(--color-btn-primary-bg);
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .product-page__wishlist-btn:hover {
+    background-color: var(--color-btn-primary-hover);
+  }
+
+  .product-page__wishlist-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: white;
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  /* Afterpay / BNPL */
+  .product-page__bnpl {
     font-family: var(--font-body);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--color-text-secondary);
     margin-bottom: 32px;
   }
 
-  .product-page__trust-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background-color: var(--color-text-muted);
+  /* Description */
+  .product-page__description {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 32px;
+  }
+
+  /* Feature list */
+  .product-page__features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .product-page__feature {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .product-page__feature-icon {
+    width: 28px;
+    height: 28px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-page__feature-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--color-text);
+    fill: none;
+    stroke-width: 1.2;
+  }
+
+  .product-page__feature-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text);
   }
 
   /* Accordions */
-  .accordion__item {
+  .product-page__accordions {
     border-top: 1px solid var(--color-border);
+  }
+
+  .accordion__item {
+    border-bottom: 1px solid var(--color-border);
   }
 
   .accordion__trigger {
@@ -235,10 +369,7 @@
     line-height: 1.7;
   }
 
-  /* Specs table */
-  .specs-table {
-    width: 100%;
-  }
+  .specs-table { width: 100%; }
 
   .specs-table__row {
     display: flex;
@@ -249,9 +380,7 @@
     font-size: 13px;
   }
 
-  .specs-table__label {
-    color: var(--color-text-secondary);
-  }
+  .specs-table__label { color: var(--color-text-secondary); }
 
   /* Reviews section */
   .product-page__reviews {
@@ -323,96 +452,159 @@
 </style>
 
 <div class="product-page">
-  <!-- Gallery -->
+  <!-- Gallery — stacked full-bleed images -->
   <div class="product-page__gallery">
-    {%- if product.featured_image -%}
-      <img class="product-page__main-image" id="main-product-image"
-        src="{{ product.featured_image | image_url: width: 1200 }}"
-        alt="{{ product.title | escape }}"
-        loading="eager">
-    {%- else -%}
-      <div class="product-page__main-image" style="background:var(--color-bg-warm);"></div>
-    {%- endif -%}
-
-    {%- if product.images.size > 1 -%}
-      <div class="product-page__thumbnails">
-        {%- for image in product.images limit: 8 -%}
-          <button class="product-page__thumb{% if forloop.first %} is-active{% endif %}"
-            data-image-url="{{ image | image_url: width: 1200 }}"
-            aria-label="View image {{ forloop.index }}">
-            <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title | escape }} - Image {{ forloop.index }}" loading="lazy">
-          </button>
+    <div class="product-page__gallery-images">
+      {%- if product.images.size > 0 -%}
+        {%- for image in product.images -%}
+          <img class="product-page__gallery-image"
+            src="{{ image | image_url: width: 1200 }}"
+            alt="{{ product.title | escape }}{% if forloop.index > 1 %} - Image {{ forloop.index }}{% endif %}"
+            {% if forloop.first %}loading="eager"{% else %}loading="lazy"{% endif %}>
         {%- endfor -%}
-      </div>
-    {%- endif -%}
+      {%- else -%}
+        <div class="product-page__gallery-image" style="background: var(--color-bg-warm);"></div>
+      {%- endif -%}
+    </div>
   </div>
 
-  <!-- Info -->
+  <!-- Info panel -->
   <div class="product-page__info">
-    <h1 class="product-name-lg product-page__title">{{ product.title }}</h1>
+    <div class="product-page__title-row">
+      <h1 class="product-page__title">{{ product.title }}</h1>
+    </div>
 
-    <div class="product-price-lg product-page__price" id="product-price">
-      {%- if product.compare_at_price > product.price -%}
-        <span class="product-price-strike">{{ product.compare_at_price | money }}</span>
+    <div class="product-page__price" id="product-price">
+      {%- if product.price_varies -%}
+        <span class="product-page__price-from">From</span>
       {%- endif -%}
-      {{ product.price | money }}
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-page__price-strike">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+      <span class="product-page__price-amount">{{ product.price | money }}</span>
     </div>
 
-    <div class="product-page__description">
-      {{ product.description }}
-    </div>
+    {%- comment -%} Material + Color swatches {%- endcomment -%}
+    {%- assign material_text = '' -%}
+    {%- if product.metafields.custom.material != blank -%}
+      {%- assign material_text = product.metafields.custom.material -%}
+    {%- elsif product.type != blank -%}
+      {%- assign material_text = product.type -%}
+    {%- endif -%}
 
+    {%- if material_text != '' -%}
+      <div class="product-page__material">{{ material_text }}</div>
+    {%- endif -%}
+
+    {%- comment -%} Color/finish swatches {%- endcomment -%}
     {%- for option in product.options_with_values -%}
-      <div class="product-page__variant-group">
-        <div class="product-page__variant-label">{{ option.name }}: <span id="selected-{{ option.name | handle }}">{{ option.selected_value }}</span></div>
-        <div class="product-page__variant-options" data-option-index="{{ forloop.index0 }}">
+      {%- assign opt_down = option.name | downcase -%}
+      {%- if opt_down == 'color' or opt_down == 'colour' or opt_down == 'metal' or opt_down == 'finish' -%}
+        <div class="product-page__swatches">
           {%- for value in option.values -%}
-            <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}"
-              data-value="{{ value }}">
-              {{ value }}
-            </button>
+            {%- assign val_down = value | downcase -%}
+            {%- if val_down contains 'silver' or val_down contains 'white' -%}
+              <span class="product-page__swatch product-page__swatch--silver{% if option.selected_value == value %} is-selected{% endif %}" title="{{ value }}" data-value="{{ value }}"></span>
+            {%- elsif val_down contains 'gold' or val_down contains 'yellow' -%}
+              <span class="product-page__swatch product-page__swatch--gold{% if option.selected_value == value %} is-selected{% endif %}" title="{{ value }}" data-value="{{ value }}"></span>
+            {%- elsif val_down contains 'rose' -%}
+              <span class="product-page__swatch product-page__swatch--rose{% if option.selected_value == value %} is-selected{% endif %}" title="{{ value }}" data-value="{{ value }}"></span>
+            {%- else -%}
+              <span class="product-page__swatch{% if option.selected_value == value %} is-selected{% endif %}" title="{{ value }}" data-value="{{ value }}"></span>
+            {%- endif -%}
           {%- endfor -%}
         </div>
-        {%- if option.name == 'Length' or option.name == 'Size' -%}
-          <a href="/pages/size-guides" class="product-page__size-guide">Size guide</a>
-        {%- endif -%}
-      </div>
+      {%- endif -%}
     {%- endfor -%}
 
-    <form action="/cart/add" method="post" class="product-page__add-form" id="product-form">
-      <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-      <button type="submit" class="btn-primary product-page__add-btn" id="add-to-cart-btn"
-        {% unless product.available %}disabled{% endunless %}>
-        {%- if product.available -%}
-          Add To Cart — {{ product.price | money }}
-        {%- else -%}
-          Sold Out
-        {%- endif -%}
-      </button>
-    </form>
-
-    <div class="product-page__trust">
-      <span>Free shipping</span>
-      <span class="product-page__trust-dot"></span>
-      <span>30-day returns</span>
-      <span class="product-page__trust-dot"></span>
-      <span>Lifetime warranty</span>
-    </div>
-
-    <!-- Accordions -->
-    <div class="product-page__accordions">
-      <div class="accordion__item">
-        <button class="accordion__trigger">
-          <span>Description</span>
-          <span class="accordion__icon">+</span>
-        </button>
-        <div class="accordion__content">
-          <div class="accordion__content-inner">
-            A statement of quiet luxury. Our Tennis Bracelet features 40 round brilliant-cut VVS moissanite stones, each hand-set in a classic four-prong setting. The stones are mounted on a S925 sterling silver base with a thick 18-karat gold plating for lasting warmth and durability. Secured with a box clasp and double safety catch.
+    {%- comment -%} Size/Length variants {%- endcomment -%}
+    {%- for option in product.options_with_values -%}
+      {%- assign opt_down = option.name | downcase -%}
+      {%- unless opt_down == 'color' or opt_down == 'colour' or opt_down == 'metal' or opt_down == 'finish' -%}
+        <div class="product-page__variant-group">
+          <div class="product-page__variant-header">
+            <div class="product-page__variant-label">{{ option.name }}</div>
+            {%- if opt_down == 'length' or opt_down == 'size' -%}
+              <a href="/pages/size-guide" class="product-page__size-guide">Size Guide</a>
+            {%- endif -%}
+          </div>
+          <div class="product-page__variant-options" data-option-index="{{ forloop.index0 }}">
+            {%- for value in option.values -%}
+              <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}"
+                data-value="{{ value }}">
+                {{ value }}
+              </button>
+            {%- endfor -%}
           </div>
         </div>
-      </div>
+      {%- endunless -%}
+    {%- endfor -%}
 
+    {%- comment -%} Add to bag + wishlist {%- endcomment -%}
+    <form action="/cart/add" method="post" id="product-form">
+      <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+      <div class="product-page__add-row">
+        <button type="submit" class="product-page__add-btn" id="add-to-cart-btn"
+          {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available -%}
+            Add To Bag
+          {%- else -%}
+            Sold Out
+          {%- endif -%}
+        </button>
+        <button type="button" class="product-page__wishlist-btn" aria-label="Add to wishlist">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </button>
+      </div>
+    </form>
+
+    {%- comment -%} Afterpay / BNPL {%- endcomment -%}
+    {%- assign installment_price = product.price | divided_by: 4 -%}
+    <div class="product-page__bnpl">
+      4 payments of {{ installment_price | money }} at 0% interest with Afterpay
+    </div>
+
+    {%- comment -%} Description {%- endcomment -%}
+    {%- if product.description != blank -%}
+      <div class="product-page__description">
+        {{ product.description }}
+      </div>
+    {%- else -%}
+      <div class="product-page__description">
+        Handcrafted in sterling silver featuring lab grown moissanite. These gemstones have the same chemical and physical properties as natural ones — and sparkle just as beautifully.
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Feature icons {%- endcomment -%}
+    <div class="product-page__features">
+      <div class="product-page__feature">
+        <div class="product-page__feature-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+        </div>
+        <span class="product-page__feature-text">Hypoallergenic</span>
+      </div>
+      <div class="product-page__feature">
+        <div class="product-page__feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <span class="product-page__feature-text">Strong & Highly Durable</span>
+      </div>
+      <div class="product-page__feature">
+        <div class="product-page__feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <span class="product-page__feature-text">Lifetime Warranty Included</span>
+      </div>
+      <div class="product-page__feature">
+        <div class="product-page__feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <span class="product-page__feature-text">Ethically Sourced & Conflict-Free</span>
+      </div>
+    </div>
+
+    {%- comment -%} Accordions {%- endcomment -%}
+    <div class="product-page__accordions">
       <div class="accordion__item">
         <button class="accordion__trigger">
           <span>Technical Details</span>
@@ -426,7 +618,7 @@
               <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
               <div class="specs-table__row"><span class="specs-table__label">Fire</span><span>0.104 (2.4x Diamond)</span></div>
               <div class="specs-table__row"><span class="specs-table__label">Refractive Index</span><span>2.65</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>S925 Sterling Silver, 18K Gold Plated</span></div>
+              <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>S925 Sterling Silver</span></div>
               <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Secure Box Clasp</span></div>
             </div>
           </div>
@@ -440,20 +632,20 @@
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            <p>Free express shipping on all Australian orders via Australia Post. Typical delivery: 2-5 business days with full tracking. International shipping available at checkout.</p>
-            <p style="margin-top:12px;">30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia. Full refund processed within 5-7 business days.</p>
+            <p>Free express shipping on all Australian orders via Australia Post. Typical delivery: 2-5 business days with full tracking.</p>
+            <p style="margin-top:12px;">30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia.</p>
           </div>
         </div>
       </div>
 
-      <div class="accordion__item" style="border-bottom: 1px solid var(--color-border);">
+      <div class="accordion__item">
         <button class="accordion__trigger">
           <span>Care Guide</span>
           <span class="accordion__icon">+</span>
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            Clean with warm soapy water and a soft brush. Avoid harsh chemicals, chlorine, and abrasive surfaces. Store in the provided jewelry box when not wearing. Polish gently with the included microfiber cloth.
+            Clean with warm soapy water and a soft brush. Avoid harsh chemicals, chlorine, and abrasive surfaces. Store in the provided jewelry box when not wearing.
           </div>
         </div>
       </div>
@@ -493,15 +685,31 @@
 </section>
 
 <script>
-  /* Thumbnail click handler */
-  document.querySelectorAll('.product-page__thumb').forEach(function(btn) {
+  /* Accordion toggle */
+  document.querySelectorAll('.accordion__trigger').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var url = this.getAttribute('data-image-url');
-      document.getElementById('main-product-image').src = url;
-      document.querySelectorAll('.product-page__thumb').forEach(function(t) {
-        t.classList.remove('is-active');
+      var item = this.closest('.accordion__item');
+      var content = item.querySelector('.accordion__content');
+      var isOpen = item.classList.contains('is-open');
+
+      if (isOpen) {
+        content.style.maxHeight = '0';
+        item.classList.remove('is-open');
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        item.classList.add('is-open');
+      }
+    });
+  });
+
+  /* Variant selection */
+  document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var group = this.closest('.product-page__variant-options');
+      group.querySelectorAll('.product-page__variant-btn').forEach(function(b) {
+        b.classList.remove('is-selected');
       });
-      this.classList.add('is-active');
+      this.classList.add('is-selected');
     });
   });
 </script>
