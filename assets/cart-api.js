@@ -156,7 +156,7 @@
     },
 
     handleQuickAdd(e) {
-      const btn = e.target.closest('.btn-quick-add');
+      const btn = e.target.closest('.btn-quick-add, .product-card__quick-add');
       if (!btn) return;
 
       e.preventDefault();
@@ -242,7 +242,7 @@
 
       // Quick-add buttons (product cards)
       document.addEventListener('click', (e) => {
-        if (e.target.closest('.btn-quick-add')) {
+        if (e.target.closest('.btn-quick-add, .product-card__quick-add')) {
           this.handleQuickAdd(e);
         }
       });

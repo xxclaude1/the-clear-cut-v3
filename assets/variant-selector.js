@@ -27,7 +27,9 @@
 
     // Initialize from pre-selected buttons
     optionGroups.forEach((group, index) => {
-      const optionName = group.querySelector('.product-page__variant-label').textContent.trim();
+      const labelEl = group.querySelector('.product-page__variant-label');
+      if (!labelEl) return;
+      const optionName = labelEl.textContent.trim();
       const activeBtn = group.querySelector('.product-page__variant-btn.is-selected');
       if (activeBtn) {
         selectedOptions[optionName] = activeBtn.textContent.trim();
@@ -69,9 +71,9 @@
       if (priceEl) {
         let priceHTML = '';
         if (variant.compare_at_price && variant.compare_at_price > variant.price) {
-          priceHTML += '<span class="product-price-strike">' + formatMoney(variant.compare_at_price) + '</span> ';
+          priceHTML += '<span class="product-page__price-strike">' + formatMoney(variant.compare_at_price) + '</span> ';
         }
-        priceHTML += formatMoney(variant.price);
+        priceHTML += '<span class="product-page__price-amount">' + formatMoney(variant.price) + '</span>';
         priceEl.innerHTML = priceHTML;
       }
 
@@ -84,11 +86,18 @@
       if (addBtn) {
         if (variant.available) {
           addBtn.disabled = false;
-          addBtn.textContent = 'Add To Cart';
+          addBtn.textContent = 'Add To Bag';
         } else {
           addBtn.disabled = true;
           addBtn.textContent = 'Sold Out';
         }
+      }
+
+      // Update Afterpay installment price
+      const bnplEl = productPage.querySelector('.product-page__bnpl');
+      if (bnplEl) {
+        const installment = (variant.price / 4 / 100).toFixed(2);
+        bnplEl.textContent = '4 payments of $' + installment + ' at 0% interest with Afterpay';
       }
 
       // Update URL without reload
