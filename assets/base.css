@@ -586,7 +586,7 @@ textarea.input {
 .product-card__image-wrapper {
   position: relative;
   display: block;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4;
   background-color: var(--color-bg-warm);
   overflow: hidden;
 }

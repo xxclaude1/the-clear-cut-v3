@@ -41,7 +41,7 @@
     "trending-products": {
       "type": "trending-products",
       "settings": {
-        "heading": "Top 15 Trending Products",
+        "heading": "Top Trending Products",
         "collection": "best-sellers",
         "limit": 15
       }
