@@ -1,19 +1,20 @@
 <style>
   #shopify-section-header {
     position: fixed;
-    top: var(--announcement-height);
+    top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    transition: top 250ms ease;
+    background-color: var(--color-bg);
+    padding-top: var(--announcement-height);
+    transition: padding-top 250ms ease;
   }
 
   #shopify-section-header.bar-hidden {
-    top: 0;
+    padding-top: 0;
   }
 
   .header {
-    background-color: var(--color-bg);
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   }
 
