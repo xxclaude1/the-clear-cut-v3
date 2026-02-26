@@ -82,6 +82,9 @@
   {% comment %} Cart Drawer {% endcomment %}
   {% section 'cart-drawer' %}
 
+  {% comment %} Search Overlay {% endcomment %}
+  {% section 'search-overlay' %}
+
   <main id="main-content" class="page-content" role="main">
     {{ content_for_layout }}
   </main>
@@ -91,5 +94,14 @@
 
   <!-- Global JS -->
   <script src="{{ 'global.js' | asset_url }}" defer></script>
+  <script src="{{ 'cart-api.js' | asset_url }}" defer></script>
+  <script src="{{ 'search.js' | asset_url }}" defer></script>
+
+  {%- if template.name == 'product' -%}
+    <script>
+      window.__productData = {{ product | json }};
+    </script>
+    <script src="{{ 'variant-selector.js' | asset_url }}" defer></script>
+  {%- endif -%}
 </body>
 </html>

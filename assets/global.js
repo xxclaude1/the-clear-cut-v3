@@ -1,5 +1,6 @@
 /* ============================================
    THE CLEAR CUT V3 — Global JavaScript
+   Core UI behaviors. Cart logic is in cart-api.js.
    ============================================ */
 
 (function () {
@@ -78,47 +79,14 @@
     if (nextBtn) nextBtn.addEventListener('click', next);
     if (prevBtn) prevBtn.addEventListener('click', prev);
 
-    // Auto-rotate every 5 seconds
     let autoRotate = setInterval(next, 5000);
 
-    // Pause on hover
     bar.addEventListener('mouseenter', () => clearInterval(autoRotate));
     bar.addEventListener('mouseleave', () => {
       autoRotate = setInterval(next, 5000);
     });
 
     showMessage(0);
-  }
-
-  /* ---------- Cart Drawer ---------- */
-  function initCartDrawer() {
-    const drawer = document.querySelector('.cart-drawer');
-    const overlay = document.querySelector('.cart-drawer__overlay');
-    const openBtns = document.querySelectorAll('[data-cart-open]');
-    const closeBtns = document.querySelectorAll('[data-cart-close]');
-
-    if (!drawer) return;
-
-    function openCart() {
-      drawer.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeCart() {
-      drawer.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-
-    openBtns.forEach((btn) => btn.addEventListener('click', openCart));
-    closeBtns.forEach((btn) => btn.addEventListener('click', closeCart));
-    if (overlay) overlay.addEventListener('click', closeCart);
-
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
-        closeCart();
-      }
-    });
   }
 
   /* ---------- Mobile Menu ---------- */
@@ -142,59 +110,59 @@
     if (openBtn) openBtn.addEventListener('click', openMenu);
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
-    // Close on Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menu.classList.contains('is-open')) {
         closeMenu();
       }
     });
+
+    // Close menu when clicking nav links
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
   }
 
   /* ---------- Accordion ---------- */
   function initAccordions() {
-    const accordions = document.querySelectorAll('.accordion__trigger');
+    document.addEventListener('click', function (e) {
+      const trigger = e.target.closest('.accordion__trigger');
+      if (!trigger) return;
 
-    accordions.forEach((trigger) => {
-      trigger.addEventListener('click', function () {
-        const item = this.closest('.accordion__item');
-        const content = item.querySelector('.accordion__content');
-        const isOpen = item.classList.contains('is-open');
+      const item = trigger.closest('.accordion__item');
+      const content = item.querySelector('.accordion__content');
+      const isOpen = item.classList.contains('is-open');
 
-        // Close all siblings
-        const parent = item.parentElement;
-        parent.querySelectorAll('.accordion__item.is-open').forEach((openItem) => {
-          if (openItem !== item) {
-            openItem.classList.remove('is-open');
-            openItem.querySelector('.accordion__content').style.maxHeight = null;
-          }
-        });
-
-        // Toggle current
-        if (isOpen) {
-          item.classList.remove('is-open');
-          content.style.maxHeight = null;
-        } else {
-          item.classList.add('is-open');
-          content.style.maxHeight = content.scrollHeight + 'px';
+      // Close all siblings
+      const parent = item.parentElement;
+      parent.querySelectorAll('.accordion__item.is-open').forEach((openItem) => {
+        if (openItem !== item) {
+          openItem.classList.remove('is-open');
+          openItem.querySelector('.accordion__content').style.maxHeight = null;
         }
       });
+
+      // Toggle current
+      if (isOpen) {
+        item.classList.remove('is-open');
+        content.style.maxHeight = null;
+      } else {
+        item.classList.add('is-open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
     });
   }
 
-  /* ---------- Quick Add ---------- */
-  function initQuickAdd() {
+  /* ---------- Smooth Scroll for Anchor Links ---------- */
+  function initSmoothScroll() {
     document.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn-quick-add');
-      if (!btn) return;
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
 
-      const originalText = btn.textContent;
-      btn.textContent = 'ADDED ✓';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.disabled = false;
-      }, 1500);
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   }
 
@@ -203,10 +171,9 @@
     initScrollReveal();
     initHeaderScroll();
     initAnnouncementBar();
-    initCartDrawer();
     initMobileMenu();
     initAccordions();
-    initQuickAdd();
+    initSmoothScroll();
   }
 
   if (document.readyState === 'loading') {

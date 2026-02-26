@@ -1,0 +1,168 @@
+<style>
+  .search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg);
+    z-index: 210;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .search-overlay__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px var(--page-padding);
+    border-bottom: 1px solid var(--color-border);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .search-overlay__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .search-overlay__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color-text);
+    background: none;
+    padding: 8px 0;
+  }
+
+  .search-overlay__input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .search-overlay__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--color-text);
+  }
+
+  .search-overlay__close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .search-overlay__results {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md) var(--page-padding);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .search-overlay__section-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .search-overlay__product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--grid-gap);
+  }
+
+  @media (max-width: 768px) {
+    .search-overlay__product-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .search-overlay__empty {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text-secondary);
+  }
+
+  .search-overlay__suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: var(--space-md);
+  }
+
+  .search-overlay__suggestion {
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .search-overlay__suggestion:hover {
+    border-color: var(--color-text);
+  }
+</style>
+
+<div class="search-overlay" id="search-overlay" role="dialog" aria-label="Search">
+  <div class="search-overlay__header">
+    <svg class="search-overlay__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="9" r="6"></circle>
+      <line x1="13.5" y1="13.5" x2="18" y2="18"></line>
+    </svg>
+    <input
+      class="search-overlay__input"
+      type="text"
+      id="search-input"
+      placeholder="Search"
+      autocomplete="off"
+      autofocus
+    >
+    <button class="search-overlay__close" data-search-close aria-label="Close search">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="4" y1="4" x2="16" y2="16"></line>
+        <line x1="16" y1="4" x2="4" y2="16"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="search-overlay__results" id="search-results">
+    <div class="search-overlay__section-title">Popular Searches</div>
+    <div class="search-overlay__suggestions">
+      <a href="/search?q=tennis+bracelet" class="search-overlay__suggestion">Tennis Bracelet</a>
+      <a href="/search?q=moissanite" class="search-overlay__suggestion">Moissanite</a>
+      <a href="/search?q=gold" class="search-overlay__suggestion">Gold</a>
+      <a href="/search?q=bracelet" class="search-overlay__suggestion">Bracelets</a>
+      <a href="/collections/best-sellers" class="search-overlay__suggestion">Best Sellers</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Search Overlay",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,96 @@
+<style>
+  .search-page {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: var(--space-md) var(--page-padding) var(--space-2xl);
+  }
+
+  .search-page__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .search-page__form {
+    display: flex;
+    gap: 0;
+    margin-bottom: var(--space-lg);
+    max-width: 600px;
+  }
+
+  .search-page__input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid var(--color-border);
+    border-right: none;
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+    border-radius: 0;
+  }
+
+  .search-page__input:focus {
+    border-color: var(--color-border-dark);
+  }
+
+  .search-page__submit {
+    padding: 14px 24px;
+  }
+
+  .search-page__count {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+
+  .search-page__empty {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    color: var(--color-text-secondary);
+  }
+</style>
+
+<div class="search-page">
+  <h1 class="heading-1 search-page__title">
+    {%- if search.performed -%}
+      Search Results
+    {%- else -%}
+      Search
+    {%- endif -%}
+  </h1>
+
+  <form action="/search" method="get" class="search-page__form">
+    <input
+      class="search-page__input"
+      type="text"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="Search for products..."
+    >
+    <button type="submit" class="btn-primary search-page__submit">Search</button>
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results.size > 0 -%}
+      <p class="search-page__count">{{ search.results_count }} result{{ search.results_count | pluralize: '', 's' }} for "{{ search.terms }}"</p>
+      <div class="product-grid">
+        {%- for result in search.results -%}
+          {%- if result.object_type == 'product' -%}
+            {% render 'product-card', product: result %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="search-page__empty">
+        <p>No results found for "{{ search.terms }}".</p>
+        <p style="margin-top:8px;">Try a different search term or browse our <a href="/collections/all" class="link-cta">full collection</a>.</p>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Search Results",
+  "settings": []
+}
+{% endschema %}
