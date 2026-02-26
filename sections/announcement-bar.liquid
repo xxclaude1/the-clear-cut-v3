@@ -86,11 +86,17 @@
   </button>
 
   <div class="announcement-bar__messages">
-    {%- for block in section.blocks -%}
-      <div class="announcement-bar__message{% if forloop.first %} is-active{% endif %}">
-        {{ block.settings.text }}
-      </div>
-    {%- endfor -%}
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        <div class="announcement-bar__message{% if forloop.first %} is-active{% endif %}">
+          {{ block.settings.text }}
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="announcement-bar__message is-active">Free Shipping On All Orders $200+</div>
+      <div class="announcement-bar__message">30-Day Returns On All Orders</div>
+      <div class="announcement-bar__message">Lifetime Warranty Included</div>
+    {%- endif -%}
   </div>
 
   <button class="announcement-bar__nav announcement-bar__next" aria-label="Next announcement">
@@ -113,7 +119,7 @@
           "type": "text",
           "id": "text",
           "label": "Message text",
-          "default": "Free Shipping On All Orders $100+"
+          "default": "Free Shipping On All Orders $200+"
         }
       ]
     }
@@ -122,7 +128,7 @@
     {
       "name": "Announcement Bar",
       "blocks": [
-        { "type": "message", "settings": { "text": "Free Shipping On All Orders $100+" } },
+        { "type": "message", "settings": { "text": "Free Shipping On All Orders $200+" } },
         { "type": "message", "settings": { "text": "30-Day Returns On All Orders" } },
         { "type": "message", "settings": { "text": "Lifetime Warranty Included" } }
       ]

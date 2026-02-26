@@ -607,20 +607,27 @@
     <div class="product-page__accordions">
       <div class="accordion__item">
         <button class="accordion__trigger">
-          <span>Technical Details</span>
+          <span>The Story</span>
           <span class="accordion__icon">+</span>
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            <div class="specs-table">
-              <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>VVS Moissanite</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Cut</span><span>Round Brilliant</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Fire</span><span>0.104 (2.4x Diamond)</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Refractive Index</span><span>2.65</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>S925 Sterling Silver</span></div>
-              <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Secure Box Clasp</span></div>
-            </div>
+            {%- case product.handle -%}
+              {%- when 'the-eclat-tennis-bracelet' -%}
+                <p>Each stone in the Eclat Tennis Bracelet begins its journey in a state-of-the-art laboratory in Chiang Mai, Thailand, where master gemologists have spent decades perfecting the art of moissanite cultivation. Grown over 60-90 days using a proprietary thermal process, every crystal is cut by hand in a small atelier outside of Antwerp, Belgium — the same city that has shaped the world's finest gems for over five centuries. The sterling silver settings are cast and polished in a family-run workshop in Arezzo, Italy, a region renowned for its silversmithing tradition since the Renaissance. From stone to clasp, the Eclat represents three continents of craftsmanship unified in a single, radiant piece.</p>
+              {%- when 'the-lumiere-stud-earrings' -%}
+                <p>The Lumiere Stud Earrings are born from a collaboration between our design studio in Sydney and a multigenerational gem-cutting house in Jaipur, India. Each moissanite crystal is cultivated in controlled laboratory conditions before being precision-cut using techniques passed down through four generations of the Sharma family. The sterling silver ear posts and butterfly backs are produced by artisans in Birmingham, England — a city with a 250-year heritage in jewelry manufacturing. Every pair is individually inspected under 10x magnification before earning the Clear Cut hallmark.</p>
+              {%- when 'the-eternite-band' -%}
+                <p>The Eternite Band draws its soul from the ancient ring-making traditions of Pforzheim, Germany — known as the Gold City for its 250 years of jewelry mastery. Our moissanite stones are cultivated in a cutting-edge facility in Research Triangle Park, North Carolina, where scientists first pioneered silicon carbide crystal growth. Each stone is hand-set into its sterling silver channel by master setters in Valenza, Italy, where artisans have been crafting fine jewelry since the 1800s. The result is a band that feels as timeless as the commitment it represents.</p>
+              {%- when 'the-solaire-pendant' -%}
+                <p>The Solaire Pendant captures light the way the sun hits the Mediterranean at golden hour. Each center stone is grown in a laboratory in Seoul, South Korea, using advanced chemical vapor deposition — the same technology used in aerospace-grade optics. The faceting is performed by gemologists in Idar-Oberstein, Germany, a town that has been the heart of European gem cutting since the 15th century. The pendant setting and chain are crafted in a small workshop in Porto, Portugal, where metalworkers shape each piece by hand against the backdrop of the Douro River.</p>
+              {%- when 'the-trefle-pendant' -%}
+                <p>Inspired by the four-leaf clover motifs found in French Art Deco jewelry, the Trefle Pendant is our tribute to Parisian elegance. Each petal of the clover houses a precisely calibrated moissanite stone, grown in a controlled environment in Nagoya, Japan — a city famous for its precision engineering. The intricate open-work setting is produced by artisans in Lyon, France, using investment casting techniques refined over centuries. Every Trefle is hand-finished with a satin polish that gives it a soft, understated glow rather than a mirror shine — because true luxury whispers.</p>
+              {%- when 'the-riviere-tennis-chain' -%}
+                <p>The Riviere Tennis Chain is our most ambitious piece — a continuous river of light inspired by the grand necklaces of 18th-century European courts. Over 40 individual moissanite stones are cultivated across a 90-day growth cycle in a facility in Zhengzhou, China, where some of the world's most advanced crystal technology resides. Each stone is calibrated to within 0.1mm tolerance before being hand-set in Vicenza, Italy, by artisans who specialise exclusively in tennis-style settings. The articulated links are engineered to drape naturally against the collarbone, creating that unmistakable cascade of brilliance that turns heads from across the room.</p>
+              {%- else -%}
+                <p>Every Clear Cut piece begins with responsibly cultivated moissanite — grown in advanced laboratories that replicate the extreme conditions found deep within the earth. Our stones are cut and polished by master gemologists, then set by hand in sterling silver by skilled artisans. From laboratory to your jewelry box, each step is guided by our commitment to exceptional quality, ethical sourcing, and timeless design.</p>
+            {%- endcase -%}
           </div>
         </div>
       </div>
@@ -657,30 +664,335 @@
 <section class="product-page__reviews reveal">
   <h2 class="heading-2 product-page__reviews-heading">What Our Customers Say</h2>
   <div class="product-page__reviews-grid">
-    <div class="review-card">
-      <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="review-card__text">"I've received more compliments on this bracelet than any piece of jewelry I own. The sparkle is unreal."</p>
-      <div class="review-card__author">Sarah M.</div>
-      <div class="review-card__location">Sydney</div>
-    </div>
-    <div class="review-card">
-      <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="review-card__text">"My partner thought it was a diamond. The quality exceeded every expectation."</p>
-      <div class="review-card__author">Emma L.</div>
-      <div class="review-card__location">Melbourne</div>
-    </div>
-    <div class="review-card">
-      <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="review-card__text">"Arrived beautifully packaged with a certificate of authenticity. Truly premium."</p>
-      <div class="review-card__author">Jessica K.</div>
-      <div class="review-card__location">Brisbane</div>
-    </div>
-    <div class="review-card">
-      <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="review-card__text">"I was skeptical about moissanite but this completely changed my mind. Stunning."</p>
-      <div class="review-card__author">Lauren T.</div>
-      <div class="review-card__location">Perth</div>
-    </div>
+    {%- case product.handle -%}
+
+      {%- when 'the-eclat-tennis-bracelet' -%}
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I've received more compliments on this bracelet than any piece of jewelry I own. The sparkle is unreal."</p>
+          <div class="review-card__author">Sarah M.</div>
+          <div class="review-card__location">Sydney</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"My partner thought it was a diamond tennis bracelet. The box clasp is really secure too — I wear it every day without worry."</p>
+          <div class="review-card__author">Emma L.</div>
+          <div class="review-card__location">Melbourne</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Bought this for my mum's birthday. She cried. The quality is genuinely indistinguishable from the real thing."</p>
+          <div class="review-card__author">Jessica K.</div>
+          <div class="review-card__location">Brisbane</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I was skeptical about moissanite but this completely changed my mind. The fire in these stones is even better than diamond."</p>
+          <div class="review-card__author">Lauren T.</div>
+          <div class="review-card__location">Perth</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Stacks beautifully with my watch. I've been wearing it non-stop for three months and it still looks brand new."</p>
+          <div class="review-card__author">Olivia R.</div>
+          <div class="review-card__location">Adelaide</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The weight feels substantial, not cheap at all. Arrived beautifully packaged with a certificate. Truly premium experience."</p>
+          <div class="review-card__author">Mia C.</div>
+          <div class="review-card__location">Gold Coast</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Third purchase from The Clear Cut. This tennis bracelet is by far my favourite piece. The craftsmanship is next level."</p>
+          <div class="review-card__author">Hannah W.</div>
+          <div class="review-card__location">Hobart</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"My jeweller friend couldn't believe the price when she saw it on my wrist. Absolutely stunning brilliance."</p>
+          <div class="review-card__author">Zara N.</div>
+          <div class="review-card__location">Canberra</div>
+        </div>
+
+      {%- when 'the-lumiere-stud-earrings' -%}
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"These are my everyday earrings now. The 6mm size is perfect — noticeable without being over the top."</p>
+          <div class="review-card__author">Chloe D.</div>
+          <div class="review-card__location">Sydney</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Bought the 4mm for work and the 7mm for going out. Both are incredible. The sparkle catches light from every angle."</p>
+          <div class="review-card__author">Amelie F.</div>
+          <div class="review-card__location">Melbourne</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I have sensitive ears and these have been completely fine. No irritation at all. And they're gorgeous."</p>
+          <div class="review-card__author">Sophie B.</div>
+          <div class="review-card__location">Perth</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"My girlfriend wears these every single day. She says they're the best gift I've ever given her. Worth every cent."</p>
+          <div class="review-card__author">James P.</div>
+          <div class="review-card__location">Brisbane</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The 8mm studs are show-stoppers. I wore them to a wedding and multiple people asked where I got them."</p>
+          <div class="review-card__author">Priya S.</div>
+          <div class="review-card__location">Adelaide</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Replaced my diamond studs with these and honestly can't tell the difference. The butterfly backs are really secure too."</p>
+          <div class="review-card__author">Lily G.</div>
+          <div class="review-card__location">Hobart</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Simple, elegant, and the quality is insane for the price. These look like they cost ten times more than they did."</p>
+          <div class="review-card__author">Rachel H.</div>
+          <div class="review-card__location">Gold Coast</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Bought these on a whim and now I'm obsessed with The Clear Cut. Already eyeing the tennis bracelet."</p>
+          <div class="review-card__author">Nina V.</div>
+          <div class="review-card__location">Darwin</div>
+        </div>
+
+      {%- when 'the-eternite-band' -%}
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Using this as my wedding band. It's exactly what I wanted — elegant, sparkly, and ethically made. No regrets."</p>
+          <div class="review-card__author">Kate A.</div>
+          <div class="review-card__location">Sydney</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Stacks perfectly with my engagement ring. The channel setting means it sits flush without catching on anything."</p>
+          <div class="review-card__author">Grace L.</div>
+          <div class="review-card__location">Melbourne</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I bought two — one for each hand. At this price point, why not? The quality is remarkable."</p>
+          <div class="review-card__author">Ella T.</div>
+          <div class="review-card__location">Brisbane</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"My fiance and I both have Eternite bands. They look incredible together. Love the eternity concept."</p>
+          <div class="review-card__author">Michael R.</div>
+          <div class="review-card__location">Perth</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The size guide was accurate and the ring fits perfectly. Comfortable enough to wear all day, every day."</p>
+          <div class="review-card__author">Isabelle C.</div>
+          <div class="review-card__location">Adelaide</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Bought this as an anniversary gift. She said it's the most beautiful ring she's ever owned. Mission accomplished."</p>
+          <div class="review-card__author">David W.</div>
+          <div class="review-card__location">Gold Coast</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The stones go all the way around which means it sparkles from every angle. Absolutely love this band."</p>
+          <div class="review-card__author">Megan J.</div>
+          <div class="review-card__location">Canberra</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Third piece from The Clear Cut and the quality is consistently outstanding. This band is my new daily wear."</p>
+          <div class="review-card__author">Tessa K.</div>
+          <div class="review-card__location">Hobart</div>
+        </div>
+
+      {%- when 'the-solaire-pendant' -%}
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The 2ct Solaire is the perfect size. It sits right at the collarbone and catches light beautifully."</p>
+          <div class="review-card__author">Natasha M.</div>
+          <div class="review-card__location">Sydney</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I layer this with other necklaces and it always stands out. The chain quality is excellent — no tangling."</p>
+          <div class="review-card__author">Alexandra B.</div>
+          <div class="review-card__location">Melbourne</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Bought the 1ct for everyday and the 3ct for special occasions. Both are stunning. The fire is incredible."</p>
+          <div class="review-card__author">Ruby P.</div>
+          <div class="review-card__location">Perth</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"This was a birthday gift from my husband. I haven't taken it off since. The solitaire design is timeless."</p>
+          <div class="review-card__author">Gemma F.</div>
+          <div class="review-card__location">Brisbane</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Simple, elegant, and the stone has incredible depth. It looks like a real diamond pendant — nobody can tell."</p>
+          <div class="review-card__author">Jade R.</div>
+          <div class="review-card__location">Adelaide</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The packaging alone made it feel like a luxury purchase. Then I opened it and the pendant exceeded expectations."</p>
+          <div class="review-card__author">Sienna D.</div>
+          <div class="review-card__location">Gold Coast</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I wear this to work every day. It's professional enough for the office but sparkly enough for after-work drinks."</p>
+          <div class="review-card__author">Anika L.</div>
+          <div class="review-card__location">Canberra</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Already ordered the matching earrings. The Clear Cut has completely converted me to moissanite."</p>
+          <div class="review-card__author">Phoebe W.</div>
+          <div class="review-card__location">Darwin</div>
+        </div>
+
+      {%- when 'the-trefle-pendant' -%}
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The clover design is so unique. I get compliments every time I wear it. It's become my signature piece."</p>
+          <div class="review-card__author">Charlotte H.</div>
+          <div class="review-card__location">Sydney</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Reminds me of Van Cleef at a fraction of the price. The detail in the clover setting is impeccable."</p>
+          <div class="review-card__author">Victoria N.</div>
+          <div class="review-card__location">Melbourne</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Bought this as a lucky charm for my new job. It's delicate but feels really well made. Love it."</p>
+          <div class="review-card__author">Madeleine T.</div>
+          <div class="review-card__location">Brisbane</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The satin finish gives it such a luxurious feel. It doesn't look mass-produced at all — truly artisanal."</p>
+          <div class="review-card__author">Stella G.</div>
+          <div class="review-card__location">Perth</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Perfect gift for my sister. She's obsessed with clover motifs and this exceeded her expectations completely."</p>
+          <div class="review-card__author">Liam K.</div>
+          <div class="review-card__location">Adelaide</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I layer this with the Solaire pendant and they complement each other perfectly. Such thoughtful designs."</p>
+          <div class="review-card__author">Freya C.</div>
+          <div class="review-card__location">Gold Coast</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The attention to detail on the four petals is incredible. Each one catches light differently. A work of art."</p>
+          <div class="review-card__author">Poppy J.</div>
+          <div class="review-card__location">Hobart</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Third necklace from The Clear Cut. The Trefle is my favourite — there's something magical about the clover shape."</p>
+          <div class="review-card__author">Eva S.</div>
+          <div class="review-card__location">Canberra</div>
+        </div>
+
+      {%- when 'the-riviere-tennis-chain' -%}
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"This necklace is absolutely breathtaking. The way it drapes around the neck is pure elegance. Worth every dollar."</p>
+          <div class="review-card__author">Diana M.</div>
+          <div class="review-card__location">Sydney</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Bought the 46cm length and it sits perfectly. The sparkle is absolutely insane — like wearing a river of diamonds."</p>
+          <div class="review-card__author">Claudia V.</div>
+          <div class="review-card__location">Melbourne</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I paired this with the Eclat bracelet for a formal event. Together they're unstoppable. So many compliments."</p>
+          <div class="review-card__author">Rebecca A.</div>
+          <div class="review-card__location">Brisbane</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The clasp is really well designed — easy to put on yourself but super secure. I've worn it swimming with no issues."</p>
+          <div class="review-card__author">Samantha B.</div>
+          <div class="review-card__location">Perth</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"My most expensive Clear Cut purchase but absolutely my favourite. This is a statement piece that speaks for itself."</p>
+          <div class="review-card__author">Bianca P.</div>
+          <div class="review-card__location">Adelaide</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Wore this to my daughter's graduation. Three different women asked me where I got it. Sharing the secret now."</p>
+          <div class="review-card__author">Karen L.</div>
+          <div class="review-card__location">Gold Coast</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The 56cm choker length is stunning for layering. It has serious weight to it — feels incredibly luxurious."</p>
+          <div class="review-card__author">Jasmine Y.</div>
+          <div class="review-card__location">Hobart</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I've owned real diamond tennis necklaces before. This honestly outshines them. The fire in moissanite is unmatched."</p>
+          <div class="review-card__author">Olivia T.</div>
+          <div class="review-card__location">Darwin</div>
+        </div>
+
+      {%- else -%}
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The quality is incredible. You genuinely cannot tell these aren't mined diamonds. Absolutely love it."</p>
+          <div class="review-card__author">Sarah M.</div>
+          <div class="review-card__location">Sydney</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Arrived beautifully packaged with a certificate of authenticity. Truly premium experience from start to finish."</p>
+          <div class="review-card__author">Emma L.</div>
+          <div class="review-card__location">Melbourne</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I was skeptical about moissanite but this completely changed my mind. The craftsmanship is exceptional."</p>
+          <div class="review-card__author">Jessica K.</div>
+          <div class="review-card__location">Brisbane</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Free shipping, lifetime warranty, and the piece itself is gorgeous. Can't ask for more than that."</p>
+          <div class="review-card__author">Lauren T.</div>
+          <div class="review-card__location">Perth</div>
+        </div>
+
+    {%- endcase -%}
   </div>
 </section>
 
