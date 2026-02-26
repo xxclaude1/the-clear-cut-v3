@@ -1,28 +1,27 @@
 <style>
   .trending-products {
-    padding: var(--space-md) var(--page-padding) var(--space-2xl);
+    padding: var(--space-md) 0 var(--space-2xl);
     max-width: var(--page-max-width);
     margin: 0 auto;
   }
 
   @media (max-width: 768px) {
     .trending-products {
-      padding: var(--space-sm) var(--page-padding) var(--space-xl);
+      padding: var(--space-sm) 0 var(--space-xl);
     }
   }
 
   .trending-products__heading {
     margin-bottom: var(--space-md);
+    padding: 0 var(--page-padding);
   }
 
   .trending-products__carousel {
     display: flex;
-    gap: var(--grid-gap);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-bottom: var(--space-sm);
   }
 
   .trending-products__carousel::-webkit-scrollbar {
@@ -30,9 +29,14 @@
   }
 
   .trending-products__card {
-    flex: 0 0 calc(25% - 1px);
+    flex: 0 0 25%;
     scroll-snap-align: start;
     min-width: 250px;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .trending-products__card:first-child {
+    border-left: 1px solid var(--color-border);
   }
 
   @media (max-width: 768px) {
@@ -47,6 +51,7 @@
     justify-content: flex-end;
     gap: 8px;
     margin-top: var(--space-sm);
+    padding: 0 var(--page-padding);
   }
 
   .trending-products__nav-btn {
@@ -88,11 +93,16 @@
         <div class="trending-products__card">
           <div class="product-card">
             <div class="product-card__image-wrapper"></div>
-            <button class="btn-quick-add">ADD +</button>
+            <button class="product-card__quick-add">ADD +</button>
             <div class="product-card__info">
-              <div class="product-name product-card__name">Product Name</div>
-              <div class="product-price product-card__price">$499</div>
-              <div class="product-material">18k Gold Vermeil</div>
+              <span class="product-card__name">Product Name</span>
+              <div class="product-card__price">$499</div>
+              <div class="product-card__meta">
+                <div class="product-card__swatches">
+                  <span class="product-card__swatch product-card__swatch--silver"></span>
+                </div>
+                <span class="product-card__material">Sterling Silver, Moissanite</span>
+              </div>
             </div>
           </div>
         </div>

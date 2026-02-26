@@ -1,18 +1,30 @@
 {%- comment -%}
   Product card snippet — used in grids and carousels.
   Requires: product (Shopify product object)
+  Mejuri-style: image swap on hover, ADD + overlay, color swatches
 {%- endcomment -%}
 
 <div class="product-card">
   <a href="{{ product.url }}" class="product-card__image-wrapper">
     {%- if product.featured_image -%}
       <img
-        class="product-card__image"
-        src="{{ product.featured_image | image_url: width: 600 }}"
+        class="product-card__image product-card__image--primary"
+        src="{{ product.featured_image | image_url: width: 800 }}"
         alt="{{ product.title | escape }}"
         loading="lazy"
-        width="600"
-        height="600"
+        width="800"
+        height="800"
+      >
+    {%- endif -%}
+
+    {%- if product.images.size > 1 -%}
+      <img
+        class="product-card__image product-card__image--secondary"
+        src="{{ product.images[1] | image_url: width: 800 }}"
+        alt="{{ product.title | escape }} - lifestyle"
+        loading="lazy"
+        width="800"
+        height="800"
       >
     {%- endif -%}
 
@@ -27,34 +39,58 @@
     {%- endif -%}
   </a>
 
-  <button class="btn-quick-add" data-product-id="{{ product.id }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+  <button class="product-card__quick-add" data-product-id="{{ product.id }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
     ADD +
   </button>
 
   <div class="product-card__info">
-    <a href="{{ product.url }}" class="product-name product-card__name">{{ product.title }}</a>
+    <a href="{{ product.url }}" class="product-card__name">{{ product.title }}</a>
 
-    <div class="product-price product-card__price">
-      {%- if product.compare_at_price > product.price -%}
-        <span class="product-price-strike">{{ product.compare_at_price | money }}</span>
+    <div class="product-card__price">
+      {%- if product.price_varies -%}
+        From {{ product.price_min | money }}
+      {%- elsif product.compare_at_price > product.price -%}
+        <span class="product-card__price-strike">{{ product.compare_at_price | money }}</span>
         {{ product.price | money }}
       {%- else -%}
         {{ product.price | money }}
       {%- endif -%}
     </div>
 
-    {%- if product.variants.size > 1 -%}
-      <div class="product-card__swatches">
-        {%- for variant in product.variants limit: 4 -%}
-          <span class="product-card__swatch" title="{{ variant.title }}"></span>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+    <div class="product-card__meta">
+      {%- assign color_option = nil -%}
+      {%- for option in product.options_with_values -%}
+        {%- assign option_name_down = option.name | downcase -%}
+        {%- if option_name_down == 'color' or option_name_down == 'colour' or option_name_down == 'metal' or option_name_down == 'finish' -%}
+          {%- assign color_option = option -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
 
-    {%- if product.metafields.custom.material != blank -%}
-      <div class="product-material">{{ product.metafields.custom.material }}</div>
-    {%- elsif product.type != blank -%}
-      <div class="product-material">{{ product.type }}</div>
-    {%- endif -%}
+      {%- if color_option and color_option.values.size > 0 -%}
+        <div class="product-card__swatches">
+          {%- for value in color_option.values limit: 4 -%}
+            {%- assign value_down = value | downcase -%}
+            {%- if value_down contains 'silver' or value_down contains 'white' -%}
+              <span class="product-card__swatch product-card__swatch--silver" title="{{ value }}"></span>
+            {%- elsif value_down contains 'gold' or value_down contains 'yellow' -%}
+              <span class="product-card__swatch product-card__swatch--gold" title="{{ value }}"></span>
+            {%- elsif value_down contains 'rose' -%}
+              <span class="product-card__swatch product-card__swatch--rose" title="{{ value }}"></span>
+            {%- else -%}
+              <span class="product-card__swatch" title="{{ value }}"></span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <span class="product-card__material">
+        {%- if product.metafields.custom.material != blank -%}
+          {{ product.metafields.custom.material }}
+        {%- elsif product.type != blank -%}
+          {{ product.type }}
+        {%- endif -%}
+      </span>
+    </div>
   </div>
 </div>
