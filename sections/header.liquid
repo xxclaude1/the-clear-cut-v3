@@ -3,12 +3,11 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: transparent;
-    transition: background-color var(--duration-normal) ease, box-shadow var(--duration-fast) ease;
+    background-color: var(--color-bg);
+    transition: box-shadow var(--duration-fast) ease;
   }
 
   .header--scrolled {
-    background-color: var(--color-bg);
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   }
 
@@ -242,7 +241,7 @@
      ============================================ */
   .mega-menu {
     position: fixed;
-    top: calc(var(--announcement-height) + var(--header-height));
+    top: var(--header-height);
     left: 0;
     bottom: 0;
     width: 56%;
