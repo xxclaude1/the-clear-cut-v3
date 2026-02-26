@@ -471,98 +471,96 @@
     </div>
   </div>
 
-  <!-- Mega Menu: All Jewelry -->
-  <div class="mega-menu" id="mega-all-jewelry">
-    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
-    </button>
-    <div class="mega-menu__inner">
-      <div class="mega-menu__left">
-        <div class="mega-menu__heading">
-          <a href="/collections/all-jewelry">ALL JEWELRY <span class="mega-menu__heading-arrow">&rarr;</span></a>
-        </div>
-      </div>
-      <div class="mega-menu__right">
-        <div class="mega-menu__links">
-          <a href="/collections/all-jewelry" class="mega-menu__link">Shop All</a>
-          <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
-          <a href="/collections/rings" class="mega-menu__link">Rings</a>
-          <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
-          <a href="/collections/necklaces" class="mega-menu__link">Necklaces</a>
-          <a href="/collections/tennis-jewelry" class="mega-menu__link">Tennis Jewelry</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mega Menu: New In -->
-  <div class="mega-menu" id="mega-new-in">
-    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
-    </button>
-    <div class="mega-menu__inner">
-      <div class="mega-menu__left">
-        <div class="mega-menu__heading">
-          <a href="/collections/new-in">NEW IN <span class="mega-menu__heading-arrow">&rarr;</span></a>
-        </div>
-      </div>
-      <div class="mega-menu__right">
-        <div class="mega-menu__links">
-          <a href="/collections/new-in" class="mega-menu__link">All New Arrivals</a>
-          <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
-          <a href="/collections/rings" class="mega-menu__link">Rings</a>
-          <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
-          <a href="/collections/necklaces" class="mega-menu__link">Necklaces</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mega Menu: Best Sellers -->
-  <div class="mega-menu" id="mega-best-sellers">
-    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
-    </button>
-    <div class="mega-menu__inner">
-      <div class="mega-menu__left">
-        <div class="mega-menu__heading">
-          <a href="/collections/best-sellers">BEST SELLERS <span class="mega-menu__heading-arrow">&rarr;</span></a>
-        </div>
-      </div>
-      <div class="mega-menu__right">
-        <div class="mega-menu__links">
-          <a href="/collections/best-sellers" class="mega-menu__link">All Best Sellers</a>
-          <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
-          <a href="/collections/rings" class="mega-menu__link">Rings</a>
-          <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
-          <a href="/collections/necklaces" class="mega-menu__link">Necklaces</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mega Menu: Collections -->
-  <div class="mega-menu" id="mega-collections">
-    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
-    </button>
-    <div class="mega-menu__inner">
-      <div class="mega-menu__left">
-        <div class="mega-menu__heading">
-          <a href="/collections">COLLECTIONS <span class="mega-menu__heading-arrow">&rarr;</span></a>
-        </div>
-      </div>
-      <div class="mega-menu__right">
-        <div class="mega-menu__links">
-          <a href="/collections/tennis-jewelry" class="mega-menu__link">Tennis Jewelry</a>
-          <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
-          <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
-          <a href="/collections/best-sellers" class="mega-menu__link">Best Sellers</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </header>
+
+<!-- Mega menus — outside header to avoid stacking context trap (header z-index:100 would block overlay z-index:199) -->
+<div class="mega-menu" id="mega-all-jewelry">
+  <button class="mega-menu__close" data-mega-close aria-label="Close menu">
+    <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
+  </button>
+  <div class="mega-menu__inner">
+    <div class="mega-menu__left">
+      <div class="mega-menu__heading">
+        <a href="/collections/all-jewelry">ALL JEWELRY <span class="mega-menu__heading-arrow">&rarr;</span></a>
+      </div>
+    </div>
+    <div class="mega-menu__right">
+      <div class="mega-menu__links">
+        <a href="/collections/all-jewelry" class="mega-menu__link">Shop All</a>
+        <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
+        <a href="/collections/rings" class="mega-menu__link">Rings</a>
+        <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
+        <a href="/collections/necklaces" class="mega-menu__link">Necklaces</a>
+        <a href="/collections/tennis-jewelry" class="mega-menu__link">Tennis Jewelry</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mega-menu" id="mega-new-in">
+  <button class="mega-menu__close" data-mega-close aria-label="Close menu">
+    <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
+  </button>
+  <div class="mega-menu__inner">
+    <div class="mega-menu__left">
+      <div class="mega-menu__heading">
+        <a href="/collections/new-in">NEW IN <span class="mega-menu__heading-arrow">&rarr;</span></a>
+      </div>
+    </div>
+    <div class="mega-menu__right">
+      <div class="mega-menu__links">
+        <a href="/collections/new-in" class="mega-menu__link">All New Arrivals</a>
+        <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
+        <a href="/collections/rings" class="mega-menu__link">Rings</a>
+        <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
+        <a href="/collections/necklaces" class="mega-menu__link">Necklaces</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mega-menu" id="mega-best-sellers">
+  <button class="mega-menu__close" data-mega-close aria-label="Close menu">
+    <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
+  </button>
+  <div class="mega-menu__inner">
+    <div class="mega-menu__left">
+      <div class="mega-menu__heading">
+        <a href="/collections/best-sellers">BEST SELLERS <span class="mega-menu__heading-arrow">&rarr;</span></a>
+      </div>
+    </div>
+    <div class="mega-menu__right">
+      <div class="mega-menu__links">
+        <a href="/collections/best-sellers" class="mega-menu__link">All Best Sellers</a>
+        <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
+        <a href="/collections/rings" class="mega-menu__link">Rings</a>
+        <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
+        <a href="/collections/necklaces" class="mega-menu__link">Necklaces</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mega-menu" id="mega-collections">
+  <button class="mega-menu__close" data-mega-close aria-label="Close menu">
+    <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
+  </button>
+  <div class="mega-menu__inner">
+    <div class="mega-menu__left">
+      <div class="mega-menu__heading">
+        <a href="/collections">COLLECTIONS <span class="mega-menu__heading-arrow">&rarr;</span></a>
+      </div>
+    </div>
+    <div class="mega-menu__right">
+      <div class="mega-menu__links">
+        <a href="/collections/tennis-jewelry" class="mega-menu__link">Tennis Jewelry</a>
+        <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
+        <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
+        <a href="/collections/best-sellers" class="mega-menu__link">Best Sellers</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Mega menu overlay -->
 <div class="mega-menu-overlay" id="mega-overlay"></div>
