@@ -3,20 +3,24 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--card-gap);
-    min-height: 75vh;
   }
 
   @media (max-width: 768px) {
     .hero {
       grid-template-columns: 1fr;
-      min-height: auto;
     }
   }
 
   .hero__column {
     position: relative;
     overflow: hidden;
-    min-height: 50vh;
+    aspect-ratio: 4 / 3;
+  }
+
+  @media (max-width: 768px) {
+    .hero__column {
+      aspect-ratio: 3 / 2;
+    }
   }
 
   .hero__image {
@@ -26,7 +30,7 @@
     transition: transform 6s ease;
   }
 
-  .hero:hover .hero__column:first-child .hero__image {
+  .hero__column:hover .hero__image {
     transform: scale(1.02);
   }
 
@@ -50,60 +54,115 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: 48px;
-    max-width: 500px;
+    padding: 40px;
+    max-width: 480px;
     z-index: 1;
   }
 
   @media (max-width: 768px) {
     .hero__overlay {
-      padding: 24px;
+      padding: 20px;
     }
   }
 
   .hero__heading {
-    margin-bottom: 12px;
-    color: {{ section.settings.text_color }};
+    margin-bottom: 10px;
   }
 
   .hero__body {
     font-family: var(--font-mono);
     font-size: 14px;
     line-height: 1.6;
-    margin-bottom: 20px;
-    color: {{ section.settings.text_color }};
+    margin-bottom: 16px;
     opacity: 0.9;
-  }
-
-  .hero__cta {
-    color: {{ section.settings.text_color }};
   }
 </style>
 
 <section class="hero">
+  <!-- Top left -->
   <div class="hero__column">
-    {%- if section.settings.image_left != blank -%}
-      <img class="hero__image" src="{{ section.settings.image_left | image_url: width: 1400 }}" alt="{{ section.settings.heading | escape }}" loading="eager" fetchpriority="high">
+    {%- if section.settings.image_1 != blank -%}
+      <img class="hero__image" src="{{ section.settings.image_1 | image_url: width: 1400 }}" alt="{{ section.settings.heading_1 | escape }}" loading="eager" fetchpriority="high">
     {%- else -%}
       <div class="hero__placeholder">
         <span class="hero__placeholder-text">Hero image — 1400 x 900 recommended</span>
       </div>
     {%- endif -%}
-    <div class="hero__overlay">
-      <h1 class="heading-display hero__heading">{{ section.settings.heading | default: 'Start Your Collection' }}</h1>
-      <p class="hero__body">{{ section.settings.body | default: 'Our Tennis Bracelets are waiting.' }}</p>
-      {%- if section.settings.cta_text != blank -%}
-        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="editorial-cta hero__cta">{{ section.settings.cta_text }}</a>
-      {%- endif -%}
-    </div>
+    {%- if section.settings.heading_1 != blank -%}
+      <div class="hero__overlay">
+        <h2 class="heading-display hero__heading" style="color:{{ section.settings.text_color_1 }}">{{ section.settings.heading_1 }}</h2>
+        {%- if section.settings.body_1 != blank -%}
+          <p class="hero__body" style="color:{{ section.settings.text_color_1 }}">{{ section.settings.body_1 }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_text_1 != blank -%}
+          <a href="{{ section.settings.cta_url_1 | default: '/collections/all' }}" class="editorial-cta" style="color:{{ section.settings.text_color_1 }}">{{ section.settings.cta_text_1 }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 
+  <!-- Top right -->
   <div class="hero__column">
-    {%- if section.settings.image_right != blank -%}
-      <img class="hero__image" src="{{ section.settings.image_right | image_url: width: 1400 }}" alt="{{ section.settings.image_right_alt | default: '' }}" loading="eager">
+    {%- if section.settings.image_2 != blank -%}
+      <img class="hero__image" src="{{ section.settings.image_2 | image_url: width: 1400 }}" alt="{{ section.settings.heading_2 | default: '' | escape }}" loading="eager">
     {%- else -%}
       <div class="hero__placeholder">
         <span class="hero__placeholder-text">Hero image — 1400 x 900 recommended</span>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.heading_2 != blank -%}
+      <div class="hero__overlay">
+        <h2 class="heading-display hero__heading" style="color:{{ section.settings.text_color_2 }}">{{ section.settings.heading_2 }}</h2>
+        {%- if section.settings.body_2 != blank -%}
+          <p class="hero__body" style="color:{{ section.settings.text_color_2 }}">{{ section.settings.body_2 }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_text_2 != blank -%}
+          <a href="{{ section.settings.cta_url_2 }}" class="editorial-cta" style="color:{{ section.settings.text_color_2 }}">{{ section.settings.cta_text_2 }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Bottom left -->
+  <div class="hero__column">
+    {%- if section.settings.image_3 != blank -%}
+      <img class="hero__image" src="{{ section.settings.image_3 | image_url: width: 1400 }}" alt="{{ section.settings.heading_3 | default: '' | escape }}" loading="lazy">
+    {%- else -%}
+      <div class="hero__placeholder">
+        <span class="hero__placeholder-text">Hero image — 1400 x 900 recommended</span>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.heading_3 != blank -%}
+      <div class="hero__overlay">
+        <h2 class="heading-display hero__heading" style="color:{{ section.settings.text_color_3 }}">{{ section.settings.heading_3 }}</h2>
+        {%- if section.settings.body_3 != blank -%}
+          <p class="hero__body" style="color:{{ section.settings.text_color_3 }}">{{ section.settings.body_3 }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_text_3 != blank -%}
+          <a href="{{ section.settings.cta_url_3 }}" class="editorial-cta" style="color:{{ section.settings.text_color_3 }}">{{ section.settings.cta_text_3 }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Bottom right -->
+  <div class="hero__column">
+    {%- if section.settings.image_4 != blank -%}
+      <img class="hero__image" src="{{ section.settings.image_4 | image_url: width: 1400 }}" alt="{{ section.settings.heading_4 | default: '' | escape }}" loading="lazy">
+    {%- else -%}
+      <div class="hero__placeholder">
+        <span class="hero__placeholder-text">Hero image — 1400 x 900 recommended</span>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.heading_4 != blank -%}
+      <div class="hero__overlay">
+        <h2 class="heading-display hero__heading" style="color:{{ section.settings.text_color_4 }}">{{ section.settings.heading_4 }}</h2>
+        {%- if section.settings.body_4 != blank -%}
+          <p class="hero__body" style="color:{{ section.settings.text_color_4 }}">{{ section.settings.body_4 }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_text_4 != blank -%}
+          <a href="{{ section.settings.cta_url_4 }}" class="editorial-cta" style="color:{{ section.settings.text_color_4 }}">{{ section.settings.cta_text_4 }}</a>
+        {%- endif -%}
       </div>
     {%- endif -%}
   </div>
@@ -113,50 +172,37 @@
 {
   "name": "Hero",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "image_left",
-      "label": "Left image"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_right",
-      "label": "Right image"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Start Your Collection"
-    },
-    {
-      "type": "text",
-      "id": "body",
-      "label": "Body text",
-      "default": "Our Tennis Bracelets are waiting."
-    },
-    {
-      "type": "text",
-      "id": "cta_text",
-      "label": "CTA text",
-      "default": "Shop Tennis Bracelets"
-    },
-    {
-      "type": "url",
-      "id": "cta_url",
-      "label": "CTA link"
-    },
-    {
-      "type": "text",
-      "id": "image_right_alt",
-      "label": "Right image alt text"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#FFFFFF"
-    }
+    { "type": "header", "content": "Top Left" },
+    { "type": "image_picker", "id": "image_1", "label": "Image" },
+    { "type": "text", "id": "heading_1", "label": "Heading", "default": "Start Your Collection" },
+    { "type": "text", "id": "body_1", "label": "Body text", "default": "Our Tennis Bracelets are waiting." },
+    { "type": "text", "id": "cta_text_1", "label": "CTA text", "default": "Shop Tennis Bracelets" },
+    { "type": "url", "id": "cta_url_1", "label": "CTA link" },
+    { "type": "color", "id": "text_color_1", "label": "Text color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Top Right" },
+    { "type": "image_picker", "id": "image_2", "label": "Image" },
+    { "type": "text", "id": "heading_2", "label": "Heading" },
+    { "type": "text", "id": "body_2", "label": "Body text" },
+    { "type": "text", "id": "cta_text_2", "label": "CTA text" },
+    { "type": "url", "id": "cta_url_2", "label": "CTA link" },
+    { "type": "color", "id": "text_color_2", "label": "Text color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Bottom Left" },
+    { "type": "image_picker", "id": "image_3", "label": "Image" },
+    { "type": "text", "id": "heading_3", "label": "Heading" },
+    { "type": "text", "id": "body_3", "label": "Body text" },
+    { "type": "text", "id": "cta_text_3", "label": "CTA text" },
+    { "type": "url", "id": "cta_url_3", "label": "CTA link" },
+    { "type": "color", "id": "text_color_3", "label": "Text color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Bottom Right" },
+    { "type": "image_picker", "id": "image_4", "label": "Image" },
+    { "type": "text", "id": "heading_4", "label": "Heading" },
+    { "type": "text", "id": "body_4", "label": "Body text" },
+    { "type": "text", "id": "cta_text_4", "label": "CTA text" },
+    { "type": "url", "id": "cta_url_4", "label": "CTA link" },
+    { "type": "color", "id": "text_color_4", "label": "Text color", "default": "#FFFFFF" }
   ],
   "presets": [
     {
