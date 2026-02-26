@@ -627,6 +627,8 @@
                 <p>The Riviere Tennis Chain is our most ambitious piece — a continuous river of light inspired by the grand necklaces of 18th-century European courts. Over 40 individual moissanite stones are cultivated across a 90-day growth cycle in a facility in Zhengzhou, China, where some of the world's most advanced crystal technology resides. Each stone is calibrated to within 0.1mm tolerance before being hand-set in Vicenza, Italy, by artisans who specialise exclusively in tennis-style settings. The articulated links are engineered to drape naturally against the collarbone, creating that unmistakable cascade of brilliance that turns heads from across the room.</p>
               {%- when 'the-picasso-hoop-earrings' -%}
                 <p>The Picasso Hoop Earrings are our tribute to bold, artistic expression — because great jewelry, like great art, should make you feel something the moment you see it. Each hoop is set with 2.6 carats of D-colour VVS moissanite, hand-placed by artisans in a family workshop in Arezzo, Italy, where the tradition of circular jewelry design dates back to Etruscan goldsmiths over 2,500 years ago. The stones themselves are cultivated in a precision laboratory in Busan, South Korea, grown slowly over 75 days to achieve flawless clarity. The sterling silver hoops are cast and plated in a small atelier in Taxco, Mexico — a town synonymous with silver craftsmanship since the 1500s.</p>
+              {%- when 'the-quatre-stud-earrings' -%}
+                <p>The Quatré Stud Earrings take their name from the French word for four — a nod to the perfectly symmetrical quartet of stones at their centre. Each moissanite crystal is grown over 60 days in a precision laboratory in Wuxi, China, where engineers have pioneered some of the world's most advanced crystal growth technology. The stones are then sent to a third-generation gem-cutting workshop in Surat, India — a city responsible for shaping over 90% of the world's diamonds — where each is faceted to exacting round-brilliant specifications. The sterling silver cluster settings are cast and hand-finished in a small workshop in Córdoba, Spain, a city whose silversmiths have been practising their craft since the Moorish era. Four stones, three continents, one unmistakable sparkle.</p>
               {%- else -%}
                 <p>Every Clear Cut piece begins with responsibly cultivated moissanite — grown in advanced laboratories that replicate the extreme conditions found deep within the earth. Our stones are cut and polished by master gemologists, then set by hand in sterling silver by skilled artisans. From laboratory to your jewelry box, each step is guided by our commitment to exceptional quality, ethical sourcing, and timeless design.</p>
             {%- endcase -%}
@@ -1029,6 +1031,56 @@
           <div class="review-card__location">Canberra</div>
         </div>
 
+      {%- when 'the-quatre-stud-earrings' -%}
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Four stones per earring means four times the sparkle. These catch light from every angle. Obsessed."</p>
+          <div class="review-card__author">Mia C.</div>
+          <div class="review-card__location">Sydney</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I wanted something more interesting than a single solitaire stud. These are the perfect upgrade — elegant but with character."</p>
+          <div class="review-card__author">Olivia T.</div>
+          <div class="review-card__location">Melbourne</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"My go-to everyday earrings now. They're surprisingly lightweight and the cluster design gets so many compliments at work."</p>
+          <div class="review-card__author">Sophie R.</div>
+          <div class="review-card__location">Brisbane</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"Bought these as a gift for my sister's birthday. She hasn't taken them off since. The packaging was beautiful too."</p>
+          <div class="review-card__author">Grace H.</div>
+          <div class="review-card__location">Perth</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"At this price point, the quality is genuinely shocking. Each stone is perfectly set. You'd think these cost ten times more."</p>
+          <div class="review-card__author">Chloe W.</div>
+          <div class="review-card__location">Adelaide</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"I own the Lumiere studs and now the Quatré. The cluster design gives them a completely different vibe — more modern, bolder."</p>
+          <div class="review-card__author">Ella M.</div>
+          <div class="review-card__location">Gold Coast</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"The butterfly backs are secure and comfortable. I can sleep in them without any issues. Absolute daily staple."</p>
+          <div class="review-card__author">Ruby J.</div>
+          <div class="review-card__location">Hobart</div>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-card__text">"These studs punch way above their weight. The four-stone cluster makes them look much larger than a single stone would. Clever design."</p>
+          <div class="review-card__author">Lily F.</div>
+          <div class="review-card__location">Canberra</div>
+        </div>
+
       {%- else -%}
         <div class="review-card">
           <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
@@ -1060,23 +1112,6 @@
 </section>
 
 <script>
-  /* Accordion toggle */
-  document.querySelectorAll('.accordion__trigger').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var item = this.closest('.accordion__item');
-      var content = item.querySelector('.accordion__content');
-      var isOpen = item.classList.contains('is-open');
-
-      if (isOpen) {
-        content.style.maxHeight = '0';
-        item.classList.remove('is-open');
-      } else {
-        content.style.maxHeight = content.scrollHeight + 'px';
-        item.classList.add('is-open');
-      }
-    });
-  });
-
   /* Variant selection */
   document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
