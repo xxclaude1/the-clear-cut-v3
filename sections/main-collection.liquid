@@ -414,32 +414,20 @@
 
   <h1 class="collection-page__title">{{ collection.title | default: 'Shop All' }}</h1>
 
-  <!-- Category image bar -->
+  <!-- Category image bar (editable via theme customizer) -->
   <div class="collection-page__categories">
-    <a href="/collections/all-jewelry" class="collection-page__cat-item">
-      <div class="collection-page__cat-placeholder"></div>
-      <span class="collection-page__cat-label">Shop All</span>
-    </a>
-    <a href="/collections/earrings" class="collection-page__cat-item">
-      <div class="collection-page__cat-placeholder"></div>
-      <span class="collection-page__cat-label">Earrings</span>
-    </a>
-    <a href="/collections/rings" class="collection-page__cat-item">
-      <div class="collection-page__cat-placeholder"></div>
-      <span class="collection-page__cat-label">Rings</span>
-    </a>
-    <a href="/collections/bracelets" class="collection-page__cat-item">
-      <div class="collection-page__cat-placeholder"></div>
-      <span class="collection-page__cat-label">Bracelets</span>
-    </a>
-    <a href="/collections/necklaces" class="collection-page__cat-item">
-      <div class="collection-page__cat-placeholder"></div>
-      <span class="collection-page__cat-label">Necklaces</span>
-    </a>
-    <a href="/collections/tennis-jewelry" class="collection-page__cat-item">
-      <div class="collection-page__cat-placeholder"></div>
-      <span class="collection-page__cat-label">Tennis Jewelry</span>
-    </a>
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'category' -%}
+        <a href="{{ block.settings.url | default: '/collections/all-jewelry' }}" class="collection-page__cat-item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img class="collection-page__cat-img" src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+          {%- else -%}
+            <div class="collection-page__cat-placeholder"></div>
+          {%- endif -%}
+          <span class="collection-page__cat-label">{{ block.settings.label }}</span>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
   </div>
 
   <!-- Filter bar -->
@@ -571,6 +559,43 @@
 {% schema %}
 {
   "name": "Main Collection",
-  "settings": []
+  "settings": [],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shop All"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Collection",
+      "blocks": [
+        { "type": "category", "settings": { "label": "Shop All", "url": "/collections/all-jewelry" } },
+        { "type": "category", "settings": { "label": "Earrings", "url": "/collections/earrings" } },
+        { "type": "category", "settings": { "label": "Rings", "url": "/collections/rings" } },
+        { "type": "category", "settings": { "label": "Bracelets", "url": "/collections/bracelets" } },
+        { "type": "category", "settings": { "label": "Necklaces", "url": "/collections/necklaces" } },
+        { "type": "category", "settings": { "label": "Tennis Jewelry", "url": "/collections/tennis-jewelry" } }
+      ]
+    }
+  ]
 }
 {% endschema %}
