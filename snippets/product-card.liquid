@@ -70,7 +70,7 @@
       {%- endfor -%}
 
       {%- if color_option and color_option.values.size > 0 -%}
-        <span class="product-card__finish">{{ color_option.values | join: ' · ' }}</span>
+        <span class="product-card__finish">{{ color_option.values.first }}</span>
       {%- endif -%}
 
       <span class="product-card__material">
