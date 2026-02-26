@@ -15,7 +15,7 @@
   .hero__column {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 5 / 6;
   }
 
   @media (max-width: 768px) {
@@ -153,7 +153,7 @@
       </div>
     {%- endif -%}
     {%- if section.settings.heading_3 != blank -%}
-      <div class="hero__overlay hero__overlay--hide-mobile">
+      <div class="hero__overlay">
         <h2 class="heading-display hero__heading" style="color:{{ section.settings.text_color_3 }}">{{ section.settings.heading_3 }}</h2>
         {%- if section.settings.body_3 != blank -%}
           <p class="hero__body" style="color:{{ section.settings.text_color_3 }}">{{ section.settings.body_3 }}</p>
