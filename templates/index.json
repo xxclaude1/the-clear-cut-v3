@@ -12,10 +12,6 @@
       "type": "trending-products",
       "settings": {}
     },
-    "stores-services": {
-      "type": "stores-services",
-      "settings": {}
-    },
     "sustainability": {
       "type": "sustainability",
       "settings": {}
@@ -29,7 +25,6 @@
     "hero",
     "editorial-banner",
     "trending-products",
-    "stores-services",
     "sustainability",
     "newsletter"
   ]

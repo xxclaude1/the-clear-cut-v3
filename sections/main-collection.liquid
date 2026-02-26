@@ -1,31 +1,49 @@
 <style>
   .collection-page {
-    padding: var(--space-md) var(--page-padding) var(--space-2xl);
     max-width: var(--page-max-width);
     margin: 0 auto;
   }
 
-  .collection-page__title {
-    margin-bottom: var(--space-md);
+  /* Breadcrumb */
+  .collection-page__breadcrumb {
+    padding: var(--space-sm) var(--page-padding) 0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-text-secondary);
   }
 
-  .collection-page__description {
+  .collection-page__breadcrumb a {
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .collection-page__breadcrumb a:hover {
+    opacity: 0.6;
+  }
+
+  /* Title */
+  .collection-page__title {
+    padding: var(--space-sm) var(--page-padding) 0;
     font-family: var(--font-body);
-    font-size: 15px;
-    color: var(--color-text-secondary);
-    line-height: 1.7;
-    margin-bottom: var(--space-md);
-    max-width: 600px;
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 768px) {
+    .collection-page__title {
+      font-size: 24px;
+    }
   }
 
   /* Category image bar */
   .collection-page__categories {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     overflow-x: auto;
     scrollbar-width: none;
-    margin-bottom: var(--space-md);
-    padding-bottom: 4px;
+    padding: var(--space-sm) var(--page-padding) 0;
   }
 
   .collection-page__categories::-webkit-scrollbar { display: none; }
@@ -38,16 +56,28 @@
     display: block;
   }
 
-  .collection-page__cat-image {
+  @media (max-width: 768px) {
+    .collection-page__cat-item {
+      width: 100px;
+    }
+  }
+
+  .collection-page__cat-img {
     width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: cover;
-    background-color: var(--color-bg-warm);
     display: block;
     transition: transform 400ms ease;
   }
 
-  .collection-page__cat-item:hover .collection-page__cat-image {
+  .collection-page__cat-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background-color: var(--color-bg-warm);
+    display: block;
+  }
+
+  .collection-page__cat-item:hover .collection-page__cat-img {
     transform: scale(1.05);
   }
 
@@ -56,14 +86,15 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 8px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.5));
+    padding: 8px 10px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.45));
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
     color: white;
+    line-height: 1.2;
   }
 
   /* Filter bar */
@@ -71,16 +102,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 0;
+    padding: 10px var(--page-padding);
     border-bottom: 1px solid var(--color-border);
-    margin-bottom: var(--space-md);
+    margin-top: var(--space-sm);
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
   }
 
   .collection-page__filter-left {
     display: flex;
-    gap: 16px;
+    gap: 20px;
   }
 
   .collection-page__filter-btn {
@@ -93,7 +124,7 @@
     border: none;
     cursor: pointer;
     color: var(--color-text);
-    padding: 0;
+    padding: 4px 0;
     transition: opacity var(--duration-fast) ease;
   }
 
@@ -104,7 +135,7 @@
   .collection-page__filter-right {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
   }
 
   .collection-page__count {
@@ -113,31 +144,230 @@
     color: var(--color-text-secondary);
   }
 
-  .collection-page__sort {
+  .collection-page__sort-btn {
     font-family: var(--font-body);
     font-weight: 500;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
     background: none;
-    border: 1px solid var(--color-border);
+    border: none;
     cursor: pointer;
     color: var(--color-text);
-    padding: 8px 12px;
-    appearance: none;
+    padding: 4px 0;
+    transition: opacity var(--duration-fast) ease;
   }
 
-  .collection-page__sort:focus {
-    border-color: var(--color-border-dark);
-    outline: none;
+  .collection-page__sort-btn:hover {
+    opacity: 0.6;
   }
 
-  /* Empty state */
-  .collection-page__empty {
-    grid-column: 1 / -1;
+  /* Sort dropdown */
+  .collection-page__sort-dropdown {
+    display: none;
+    position: absolute;
+    right: var(--page-padding);
+    top: 100%;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    z-index: 50;
+    min-width: 200px;
+    padding: 8px 0;
+  }
+
+  .collection-page__sort-dropdown.is-open {
+    display: block;
+  }
+
+  .collection-page__sort-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .collection-page__sort-option:hover {
+    background-color: var(--color-bg-warm);
+  }
+
+  .collection-page__sort-option.is-active {
+    font-weight: 600;
+  }
+
+  /* Product grid — full width, edge to edge with tiny gaps */
+  .collection-page__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: var(--color-border);
+    padding: 0;
+  }
+
+  .collection-page__grid > * {
+    background-color: var(--color-bg);
+  }
+
+  @media (max-width: 1024px) {
+    .collection-page__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .collection-page__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Loading / infinite scroll indicator */
+  .collection-page__viewed {
     text-align: center;
-    padding: 80px 0;
+    padding: var(--space-lg) var(--page-padding);
+    font-family: var(--font-mono);
+    font-size: 13px;
     color: var(--color-text-secondary);
+  }
+
+  /* Bottom: collection promo cards */
+  .collection-page__promos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 0 var(--page-padding);
+    margin-top: var(--space-lg);
+  }
+
+  @media (max-width: 768px) {
+    .collection-page__promos {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .collection-page__promo-card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .collection-page__promo-image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+  }
+
+  .collection-page__promo-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    background-color: var(--color-bg-warm);
+  }
+
+  .collection-page__promo-label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-top: 8px;
+  }
+
+  /* Bottom: category pill links */
+  .collection-page__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: var(--space-lg) var(--page-padding) 0;
+  }
+
+  .collection-page__pill {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    transition: background-color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  }
+
+  .collection-page__pill:hover {
+    border-color: var(--color-text);
+  }
+
+  /* Bottom: collection description */
+  .collection-page__description {
+    padding: var(--space-lg) var(--page-padding) 0;
+    max-width: 900px;
+  }
+
+  .collection-page__description-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .collection-page__description-text {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  /* Bottom: sustainability bar */
+  .collection-page__sustainability {
+    background-color: var(--color-bg-warm);
+    padding: 28px var(--page-padding);
+    margin-top: var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .collection-page__sustainability-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .collection-page__sustainability-heading {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .collection-page__sustainability-cta {
+    font-family: var(--font-body);
+    font-size: 12px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    letter-spacing: 0.03em;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .collection-page__sustainability-cta:hover {
+    opacity: 0.6;
+  }
+
+  .collection-page__sustainability-body {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    max-width: 500px;
   }
 
   /* Pagination */
@@ -146,9 +376,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: var(--space-xl);
-    padding-top: var(--space-md);
-    border-top: 1px solid var(--color-border);
+    padding: var(--space-md) var(--page-padding);
   }
 
   .collection-page__pagination a,
@@ -170,40 +398,47 @@
     color: var(--color-btn-primary-text);
     border-color: var(--color-text);
   }
+
+  /* Sort wrapper for position context */
+  .collection-page__sort-wrap {
+    position: relative;
+  }
 </style>
 
 <div class="collection-page">
-  <h1 class="heading-1 collection-page__title">{{ collection.title | default: 'Shop All' }}</h1>
-
-  {%- if collection.description != blank -%}
-    <p class="collection-page__description">{{ collection.description }}</p>
+  {%- if collection.handle != 'all' and collection.handle != blank -%}
+    <div class="collection-page__breadcrumb">
+      <a href="/collections/all">Shop All</a>
+    </div>
   {%- endif -%}
+
+  <h1 class="collection-page__title">{{ collection.title | default: 'Shop All' }}</h1>
 
   <!-- Category image bar -->
   <div class="collection-page__categories">
     <a href="/collections/all" class="collection-page__cat-item">
-      <div class="collection-page__cat-image"></div>
+      <div class="collection-page__cat-placeholder"></div>
       <span class="collection-page__cat-label">Shop All</span>
     </a>
-    <a href="/collections/bracelets" class="collection-page__cat-item">
-      <div class="collection-page__cat-image"></div>
-      <span class="collection-page__cat-label">Bracelets</span>
-    </a>
     <a href="/collections/earrings" class="collection-page__cat-item">
-      <div class="collection-page__cat-image"></div>
+      <div class="collection-page__cat-placeholder"></div>
       <span class="collection-page__cat-label">Earrings</span>
     </a>
     <a href="/collections/rings" class="collection-page__cat-item">
-      <div class="collection-page__cat-image"></div>
+      <div class="collection-page__cat-placeholder"></div>
       <span class="collection-page__cat-label">Rings</span>
     </a>
+    <a href="/collections/bracelets" class="collection-page__cat-item">
+      <div class="collection-page__cat-placeholder"></div>
+      <span class="collection-page__cat-label">Bracelets</span>
+    </a>
     <a href="/collections/necklaces" class="collection-page__cat-item">
-      <div class="collection-page__cat-image"></div>
+      <div class="collection-page__cat-placeholder"></div>
       <span class="collection-page__cat-label">Necklaces</span>
     </a>
     <a href="/collections/tennis-jewelry" class="collection-page__cat-item">
-      <div class="collection-page__cat-image"></div>
-      <span class="collection-page__cat-label">Tennis</span>
+      <div class="collection-page__cat-placeholder"></div>
+      <span class="collection-page__cat-label">Tennis Jewelry</span>
     </a>
   </div>
 
@@ -216,55 +451,121 @@
     </div>
     <div class="collection-page__filter-right">
       <span class="collection-page__count">({{ collection.products_count | default: 0 }} Products)</span>
-      <select class="collection-page__sort" id="collection-sort" aria-label="Sort products">
-        <option value="best-selling"{% if collection.sort_by == 'best-selling' %} selected{% endif %}>Best Selling</option>
-        <option value="title-ascending"{% if collection.sort_by == 'title-ascending' %} selected{% endif %}>A to Z</option>
-        <option value="title-descending"{% if collection.sort_by == 'title-descending' %} selected{% endif %}>Z to A</option>
-        <option value="price-ascending"{% if collection.sort_by == 'price-ascending' %} selected{% endif %}>Price: Low to High</option>
-        <option value="price-descending"{% if collection.sort_by == 'price-descending' %} selected{% endif %}>Price: High to Low</option>
-        <option value="created-descending"{% if collection.sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
-      </select>
+      <div class="collection-page__sort-wrap">
+        <button class="collection-page__sort-btn" id="sort-toggle">Sort</button>
+        <div class="collection-page__sort-dropdown" id="sort-dropdown">
+          <button class="collection-page__sort-option{% if collection.sort_by == 'best-selling' or collection.sort_by == blank %} is-active{% endif %}" data-sort="best-selling">Best Selling</button>
+          <button class="collection-page__sort-option{% if collection.sort_by == 'price-ascending' %} is-active{% endif %}" data-sort="price-ascending">Price: Low to High</button>
+          <button class="collection-page__sort-option{% if collection.sort_by == 'price-descending' %} is-active{% endif %}" data-sort="price-descending">Price: High to Low</button>
+          <button class="collection-page__sort-option{% if collection.sort_by == 'title-ascending' %} is-active{% endif %}" data-sort="title-ascending">Alphabetically: A to Z</button>
+          <button class="collection-page__sort-option{% if collection.sort_by == 'created-descending' %} is-active{% endif %}" data-sort="created-descending">Newest</button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Product grid -->
-  <div class="product-grid">
-    {%- paginate collection.products by 24 -%}
+  {%- paginate collection.products by 48 -%}
+    <div class="collection-page__grid">
       {%- for product in collection.products -%}
         {% render 'product-card', product: product %}
       {%- else -%}
-        <div class="collection-page__empty">
-          <p class="body-text">No products found in this collection.</p>
-        </div>
+        <p style="grid-column:1/-1;text-align:center;padding:80px var(--page-padding);color:var(--color-text-secondary);background:var(--color-bg);">No products found in this collection.</p>
       {%- endfor -%}
+    </div>
 
-      {%- if paginate.pages > 1 -%}
-        <div class="collection-page__pagination" style="grid-column: 1 / -1;">
-          {%- if paginate.previous -%}
-            <a href="{{ paginate.previous.url }}">Previous</a>
+    {%- if paginate.pages > 1 -%}
+      <div class="collection-page__pagination">
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}">Previous</a>
+        {%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}">{{ part.title }}</a>
+          {%- else -%}
+            <span class="is-current">{{ part.title }}</span>
           {%- endif -%}
-          {%- for part in paginate.parts -%}
-            {%- if part.is_link -%}
-              <a href="{{ part.url }}">{{ part.title }}</a>
-            {%- else -%}
-              <span class="is-current">{{ part.title }}</span>
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if paginate.next -%}
-            <a href="{{ paginate.next.url }}">Next</a>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    {%- endpaginate -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}">Next</a>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <p class="collection-page__viewed">You've viewed {{ collection.products_count }} of {{ collection.products_count }} products.</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+
+  <!-- Bottom: collection promo cards -->
+  <div class="collection-page__promos">
+    <a href="/collections/best-sellers" class="collection-page__promo-card">
+      <div class="collection-page__promo-placeholder"></div>
+      <div class="collection-page__promo-label">Best Sellers</div>
+    </a>
+    <a href="/collections/new-in" class="collection-page__promo-card">
+      <div class="collection-page__promo-placeholder"></div>
+      <div class="collection-page__promo-label">New In</div>
+    </a>
+    <a href="/collections/tennis-jewelry" class="collection-page__promo-card">
+      <div class="collection-page__promo-placeholder"></div>
+      <div class="collection-page__promo-label">Tennis Jewelry</div>
+    </a>
+    <a href="/collections/gifts" class="collection-page__promo-card desktop-only">
+      <div class="collection-page__promo-placeholder"></div>
+      <div class="collection-page__promo-label">Gifts</div>
+    </a>
+  </div>
+
+  <!-- Bottom: category pill links -->
+  <div class="collection-page__pills">
+    <a href="/collections/earrings" class="collection-page__pill">Earrings</a>
+    <a href="/collections/rings" class="collection-page__pill">Rings</a>
+    <a href="/collections/necklaces" class="collection-page__pill">Necklaces</a>
+    <a href="/collections/bracelets" class="collection-page__pill">Bracelets</a>
+    <a href="/collections/tennis-jewelry" class="collection-page__pill">Tennis Jewelry</a>
+  </div>
+
+  <!-- Bottom: collection description -->
+  {%- if collection.description != blank -%}
+    <div class="collection-page__description">
+      <h2 class="collection-page__description-title">{{ collection.title }}</h2>
+      <div class="collection-page__description-text">{{ collection.description }}</div>
+    </div>
+  {%- endif -%}
+
+  <!-- Bottom: sustainability bar -->
+  <div class="collection-page__sustainability">
+    <div class="collection-page__sustainability-left">
+      <span class="collection-page__sustainability-heading">Our Sustainability Progress</span>
+      <a href="/pages/sustainability" class="collection-page__sustainability-cta">View Sustainability Report</a>
+    </div>
+    <p class="collection-page__sustainability-body">Our journey mirrors that of the jewelry we create — crafted through collaboration and constant evolution. We're here to transform fine jewelry into everyday moments, empower our community, and drive meaningful change.</p>
   </div>
 </div>
 
 <script>
-  document.getElementById('collection-sort').addEventListener('change', function() {
-    var url = new URL(window.location.href);
-    url.searchParams.set('sort_by', this.value);
-    window.location.href = url.toString();
-  });
+  (function() {
+    var sortToggle = document.getElementById('sort-toggle');
+    var sortDropdown = document.getElementById('sort-dropdown');
+    if (!sortToggle || !sortDropdown) return;
+
+    sortToggle.addEventListener('click', function() {
+      sortDropdown.classList.toggle('is-open');
+    });
+
+    sortDropdown.querySelectorAll('[data-sort]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort_by', this.getAttribute('data-sort'));
+        window.location.href = url.toString();
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.collection-page__sort-wrap')) {
+        sortDropdown.classList.remove('is-open');
+      }
+    });
+  })();
 </script>
 
 {% schema %}
