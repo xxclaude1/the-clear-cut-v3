@@ -1,7 +1,7 @@
 <style>
   #shopify-section-header {
     position: fixed;
-    top: 0;
+    top: var(--announcement-height);
     left: 0;
     right: 0;
     z-index: 100;
@@ -242,7 +242,7 @@
      ============================================ */
   .mega-menu {
     position: fixed;
-    top: var(--header-height);
+    top: calc(var(--announcement-height) + var(--header-height));
     left: 0;
     bottom: 0;
     width: 56%;
