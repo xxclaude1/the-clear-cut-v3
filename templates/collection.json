@@ -11,16 +11,65 @@
   "sections": {
     "main": {
       "type": "main-collection",
-      "settings": {},
       "blocks": {
-        "cat_1": { "type": "category", "settings": { "label": "Shop All", "url": "/collections/all-jewelry" } },
-        "cat_2": { "type": "category", "settings": { "label": "Earrings", "url": "/collections/earrings" } },
-        "cat_3": { "type": "category", "settings": { "label": "Rings", "url": "/collections/rings" } },
-        "cat_4": { "type": "category", "settings": { "label": "Bracelets", "url": "/collections/bracelets" } },
-        "cat_5": { "type": "category", "settings": { "label": "Necklaces", "url": "/collections/necklaces" } },
-        "cat_6": { "type": "category", "settings": { "label": "Tennis Jewelry", "url": "/collections/tennis-jewelry" } }
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260226_115220_d79cc43b-58ba-4032-89c9-515be3d581f7.jpg",
+            "label": "Shop All",
+            "url": "/collections/all-jewelry"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260226_123045_903344e4-750f-42ce-9153-b1aeed8a576a.jpg",
+            "label": "Earrings",
+            "url": "/collections/earrings"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-02-26_at_7.13.39_PM.png",
+            "label": "Rings",
+            "url": "/collections/rings"
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260226_104013_2a34b306-7658-424a-9f98-75a8b7c3b301.jpg",
+            "label": "Bracelets",
+            "url": "/collections/bracelets"
+          }
+        },
+        "cat_5": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260226_115357_acbb2a02-d3b8-4108-95b8-d9a5592aef08.jpg",
+            "label": "Necklaces",
+            "url": "/collections/necklaces"
+          }
+        },
+        "cat_6": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260226_115754_5965fa96-d2b1-464e-b3ea-25007d78992b.jpg",
+            "label": "Tennis Jewelry",
+            "url": "/collections/tennis-jewelry"
+          }
+        }
       },
-      "block_order": ["cat_1", "cat_2", "cat_3", "cat_4", "cat_5", "cat_6"]
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4",
+        "cat_5",
+        "cat_6"
+      ],
+      "settings": {}
     }
   },
   "order": [
