@@ -27,7 +27,8 @@
       "header": {
         "type": "header",
         "settings": {
-          "logo_width": 240
+          "logo": "shopify://shop_images/Screenshot_2026-02-27_at_1.31.52_AM.png",
+          "logo_width": 300
         }
       },
       "mobile-menu": {
