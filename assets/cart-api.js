@@ -174,9 +174,11 @@
           });
         }
 
+        /* Always add upsell container back before setting innerHTML */
+        html += '<div id="cart-upsell"></div>';
         body.innerHTML = html;
 
-        /* Render upsells into dedicated container */
+        /* Render upsells into the container we just created */
         self.renderUpsells(cart);
 
         /* Update footer — show when items in cart, hide when empty */
