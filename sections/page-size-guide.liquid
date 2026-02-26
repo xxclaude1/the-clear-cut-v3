@@ -1,0 +1,295 @@
+<style>
+  .sg-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 var(--page-padding);
+  }
+
+  .sg-page__hero {
+    text-align: center;
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .sg-page__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .sg-page__heading {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+  }
+
+  .sg-page__sub {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Category blocks */
+  .sg-page__category {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-xl) 0;
+  }
+
+  .sg-page__category:last-of-type {
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .sg-page__cat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .sg-page__cat-heading {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: var(--space-xs);
+  }
+
+  .sg-page__cat-intro {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  /* Tables */
+  .sg-page__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--space-sm);
+  }
+
+  .sg-page__table thead {
+    border-bottom: 2px solid var(--color-text);
+  }
+
+  .sg-page__table th {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    padding: 10px 12px;
+    text-align: left;
+  }
+
+  .sg-page__table td {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    padding: 12px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sg-page__table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .sg-page__table .sg-highlight {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .sg-page__tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background-color: var(--color-bg-warm);
+    margin-top: var(--space-sm);
+  }
+
+  .sg-page__tip-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    flex-shrink: 0;
+  }
+
+  .sg-page__tip-text {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Contact CTA */
+  .sg-page__cta {
+    text-align: center;
+    padding: var(--space-xl);
+    background-color: var(--color-bg-warm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .sg-page__cta-heading {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .sg-page__cta-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .sg-page__cta-text a {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+</style>
+
+<div class="sg-page">
+  <div class="sg-page__hero reveal">
+    <div class="sg-page__label">Fit & Sizing</div>
+    <h1 class="sg-page__heading">Size Guide</h1>
+    <p class="sg-page__sub">Find the perfect fit for every piece. If you need help, we are just an email away.</p>
+  </div>
+
+  <!-- Rings -->
+  <div class="sg-page__category reveal">
+    <div class="sg-page__cat-label">Rings</div>
+    <h2 class="sg-page__cat-heading">Ring Sizing</h2>
+    <p class="sg-page__cat-intro">We use Australian/British ring sizes. Measure the inside diameter of a ring that fits well and match it to the chart below.</p>
+    <table class="sg-page__table">
+      <thead>
+        <tr>
+          <th>AU / UK Size</th>
+          <th>US Size</th>
+          <th>Inner Diameter</th>
+          <th>Inner Circumference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>H</td><td>4</td><td>15.0 mm</td><td>47.1 mm</td></tr>
+        <tr><td>J</td><td>5</td><td>15.7 mm</td><td>49.3 mm</td></tr>
+        <tr><td>L</td><td>6</td><td>16.5 mm</td><td>51.8 mm</td></tr>
+        <tr><td class="sg-highlight">N</td><td class="sg-highlight">7</td><td class="sg-highlight">17.3 mm</td><td class="sg-highlight">54.4 mm</td></tr>
+        <tr><td>P</td><td>8</td><td>18.1 mm</td><td>56.9 mm</td></tr>
+        <tr><td>R</td><td>9</td><td>18.9 mm</td><td>59.5 mm</td></tr>
+      </tbody>
+    </table>
+    <div class="sg-page__tip">
+      <span class="sg-page__tip-label">Tip</span>
+      <span class="sg-page__tip-text">If you are between sizes, size up. Fingers swell slightly in warm weather and throughout the day. Measure in the evening for the most accurate reading.</span>
+    </div>
+  </div>
+
+  <!-- Bracelets -->
+  <div class="sg-page__category reveal">
+    <div class="sg-page__cat-label">Bracelets</div>
+    <h2 class="sg-page__cat-heading">Bracelet Sizing</h2>
+    <p class="sg-page__cat-intro">Measure your wrist with a flexible tape measure just above the wrist bone. Add 1–1.5cm for a comfortable fit.</p>
+    <table class="sg-page__table">
+      <thead>
+        <tr>
+          <th>Wrist Measurement</th>
+          <th>Bracelet Length</th>
+          <th>Fit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>13.5 – 14.5 cm</td><td>15.5 cm</td><td>Snug</td></tr>
+        <tr><td>14.5 – 15.5 cm</td><td>16.5 cm</td><td>Standard</td></tr>
+        <tr><td class="sg-highlight">15.5 – 17.0 cm</td><td class="sg-highlight">18.0 cm</td><td class="sg-highlight">Standard (Most Popular)</td></tr>
+        <tr><td>17.0 – 18.0 cm</td><td>19.0 cm</td><td>Relaxed</td></tr>
+        <tr><td>18.0 – 19.5 cm</td><td>20.5 cm</td><td>Relaxed</td></tr>
+        <tr><td>19.5 – 20.5 cm</td><td>21.5 cm</td><td>Loose</td></tr>
+      </tbody>
+    </table>
+    <div class="sg-page__tip">
+      <span class="sg-page__tip-label">Tip</span>
+      <span class="sg-page__tip-text">For tennis bracelets, a slightly snug fit keeps the bracelet from sliding around and shows the stones to their best advantage. If between sizes, size down.</span>
+    </div>
+  </div>
+
+  <!-- Necklaces -->
+  <div class="sg-page__category reveal">
+    <div class="sg-page__cat-label">Necklaces</div>
+    <h2 class="sg-page__cat-heading">Necklace Sizing</h2>
+    <p class="sg-page__cat-intro">All of our necklaces include a 5cm extension chain so you can adjust the drop to your preference.</p>
+    <table class="sg-page__table">
+      <thead>
+        <tr>
+          <th>Chain Length</th>
+          <th>Where It Sits</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>40 cm</td><td>Base of neck</td><td>Choker style, low necklines</td></tr>
+        <tr><td class="sg-highlight">45 cm</td><td class="sg-highlight">Collarbone</td><td class="sg-highlight">Everyday wear (Most Popular)</td></tr>
+        <tr><td>50 cm</td><td>Below collarbone</td><td>Layering, high necklines</td></tr>
+      </tbody>
+    </table>
+    <div class="sg-page__tip">
+      <span class="sg-page__tip-label">Tip</span>
+      <span class="sg-page__tip-text">Our pendants sit most elegantly at collarbone length (45cm). For the tennis chain, a slightly shorter length creates the most dramatic cascade of light.</span>
+    </div>
+  </div>
+
+  <!-- Earrings -->
+  <div class="sg-page__category reveal">
+    <div class="sg-page__cat-label">Earrings</div>
+    <h2 class="sg-page__cat-heading">Earring Sizing</h2>
+    <p class="sg-page__cat-intro">All of our earrings are designed for standard lobe piercings.</p>
+    <table class="sg-page__table">
+      <thead>
+        <tr>
+          <th>Style</th>
+          <th>Size</th>
+          <th>Character</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Solitaire Studs</td><td>One size</td><td>Classic, understated elegance</td></tr>
+        <tr><td>Cluster Studs</td><td>One size</td><td>Modern, bold sparkle</td></tr>
+        <tr><td>Hoops — 2cm</td><td>2cm diameter</td><td>Subtle, everyday statement</td></tr>
+        <tr><td>Hoops — 3cm</td><td>3cm diameter</td><td>Bold, occasion-ready</td></tr>
+      </tbody>
+    </table>
+    <div class="sg-page__tip">
+      <span class="sg-page__tip-label">Tip</span>
+      <span class="sg-page__tip-text">Not sure between 2cm and 3cm hoops? The 2cm sits close to the earlobe for everyday wear. The 3cm offers more movement and visual impact — perfect for evenings and events.</span>
+    </div>
+  </div>
+
+  <div class="sg-page__cta reveal">
+    <h2 class="sg-page__cta-heading">Need Help Finding Your Size?</h2>
+    <p class="sg-page__cta-text">Email us at <a href="mailto:hello@theclearcut.au">hello@theclearcut.au</a> and our team will help you find the perfect fit.</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Size Guide Page",
+  "settings": []
+}
+{% endschema %}

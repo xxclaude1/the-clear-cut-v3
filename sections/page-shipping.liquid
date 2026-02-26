@@ -1,0 +1,75 @@
+<style>
+  .info-page { max-width: 720px; margin: 0 auto; padding: 0 var(--page-padding); }
+  .info-page__hero { text-align: center; padding: var(--space-2xl) 0 var(--space-xl); }
+  .info-page__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
+  .info-page__heading { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .info-page__sub { font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; }
+  .info-page__body { padding-bottom: var(--space-2xl); }
+  .info-page__section { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; }
+  .info-page__section:last-child { border-bottom: 1px solid var(--color-border); }
+  .info-page__section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 6px; }
+  .info-page__section-heading { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .info-page__text { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+  .info-page__text + .info-page__text { margin-top: var(--space-sm); }
+  .info-page__text strong { color: var(--color-text); font-weight: 500; }
+  .info-page__text a { color: var(--color-text); text-decoration: underline; text-underline-offset: 3px; }
+  .info-page__highlight { display: flex; gap: var(--space-md); padding: var(--space-md); background-color: var(--color-bg-warm); margin-top: var(--space-md); }
+  .info-page__highlight-item { flex: 1; text-align: center; }
+  .info-page__highlight-value { font-family: var(--font-display); font-size: 24px; color: var(--color-text); margin-bottom: 4px; }
+  .info-page__highlight-label { font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+  @media (max-width: 768px) { .info-page__highlight { flex-direction: column; gap: var(--space-sm); } }
+</style>
+
+<div class="info-page">
+  <div class="info-page__hero reveal">
+    <div class="info-page__label">Delivery</div>
+    <h1 class="info-page__heading">Shipping & Delivery</h1>
+    <p class="info-page__sub">Every order is carefully packaged and dispatched from Australia.</p>
+  </div>
+
+  <div class="info-page__body">
+    <div class="info-page__highlight reveal">
+      <div class="info-page__highlight-item">
+        <div class="info-page__highlight-value">Free</div>
+        <div class="info-page__highlight-label">Shipping over $200</div>
+      </div>
+      <div class="info-page__highlight-item">
+        <div class="info-page__highlight-value">1–2</div>
+        <div class="info-page__highlight-label">Days Processing</div>
+      </div>
+      <div class="info-page__highlight-item">
+        <div class="info-page__highlight-value">8–14</div>
+        <div class="info-page__highlight-label">Business Days Delivery</div>
+      </div>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Processing</div>
+      <h2 class="info-page__section-heading">Order Processing</h2>
+      <p class="info-page__text">All orders are processed and dispatched within 1–2 business days from our fulfilment centre. Orders placed after 2:00 PM AEST or on weekends will be processed the next business day.</p>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Delivery</div>
+      <h2 class="info-page__section-heading">Shipping Timeframes</h2>
+      <p class="info-page__text"><strong>Standard Shipping (Australia-Wide):</strong> 8–14 business days from dispatch. Free on all orders over $200 AUD.</p>
+      <p class="info-page__text">Once dispatched, you will receive a confirmation email with a tracking number so you can follow your order every step of the way.</p>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Packaging</div>
+      <h2 class="info-page__section-heading">What Arrives</h2>
+      <p class="info-page__text">Every piece arrives in our signature gift box containing your jewelry, a <strong>GRA certificate of authenticity</strong>, a microfibre polishing cloth, and a care guide card. Ready to gift or to keep — no additional wrapping needed.</p>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">International</div>
+      <h2 class="info-page__section-heading">International Shipping</h2>
+      <p class="info-page__text">We currently ship within Australia only. International shipping is coming soon. Follow us on social media to be the first to know when we expand.</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Shipping Page", "settings": [] }
+{% endschema %}

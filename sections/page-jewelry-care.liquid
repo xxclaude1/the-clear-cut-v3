@@ -1,0 +1,109 @@
+<style>
+  .care-page { max-width: 720px; margin: 0 auto; padding: 0 var(--page-padding); }
+  .care-page__hero { text-align: center; padding: var(--space-2xl) 0 var(--space-xl); }
+  .care-page__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
+  .care-page__heading { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .care-page__sub { font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; }
+  .care-page__body { padding-bottom: var(--space-2xl); }
+
+  .care-page__section { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; }
+  .care-page__section:last-child { border-bottom: 1px solid var(--color-border); }
+  .care-page__section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 6px; }
+  .care-page__section-heading { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .care-page__text { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+  .care-page__text + .care-page__text { margin-top: var(--space-sm); }
+  .care-page__text strong { color: var(--color-text); font-weight: 500; }
+
+  .care-page__do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-top: var(--space-md); }
+  .care-page__do, .care-page__dont { padding: var(--space-md); background-color: var(--color-bg-warm); }
+  .care-page__do-title, .care-page__dont-title { font-family: var(--font-body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-sm); }
+  .care-page__do-title { color: var(--color-text); }
+  .care-page__dont-title { color: var(--color-text-secondary); }
+  .care-page__do-list, .care-page__dont-list { list-style: none; padding: 0; margin: 0; }
+  .care-page__do-list li, .care-page__dont-list li { font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; padding: 4px 0 4px 16px; position: relative; }
+  .care-page__do-list li::before { content: "+"; position: absolute; left: 0; color: var(--color-text); font-weight: 500; }
+  .care-page__dont-list li::before { content: "–"; position: absolute; left: 0; color: var(--color-text-muted); font-weight: 500; }
+
+  .care-page__cta { text-align: center; padding: var(--space-xl); background-color: var(--color-bg-warm); margin-top: var(--space-xl); }
+  .care-page__cta-heading { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--color-text); margin-bottom: var(--space-xs); }
+  .care-page__cta-text { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; }
+  .care-page__cta-text a { color: var(--color-text); font-weight: 500; }
+
+  @media (max-width: 768px) { .care-page__do-dont { grid-template-columns: 1fr; } }
+</style>
+
+<div class="care-page">
+  <div class="care-page__hero reveal">
+    <div class="care-page__label">Care Guide</div>
+    <h1 class="care-page__heading">Jewelry Care</h1>
+    <p class="care-page__sub">Your Clear Cut piece is crafted to last a lifetime. A little care ensures it keeps its brilliance for generations.</p>
+  </div>
+
+  <div class="care-page__body">
+    <div class="care-page__section reveal">
+      <div class="care-page__section-label">Daily Wear</div>
+      <h2 class="care-page__section-heading">Everyday Guidelines</h2>
+      <div class="care-page__do-dont">
+        <div class="care-page__do">
+          <div class="care-page__do-title">Do</div>
+          <ul class="care-page__do-list">
+            <li>Put jewelry on last, after perfume and lotion</li>
+            <li>Store each piece separately in its original box</li>
+            <li>Wipe down with a soft cloth after wearing</li>
+            <li>Remove before bed to prevent snagging</li>
+          </ul>
+        </div>
+        <div class="care-page__dont">
+          <div class="care-page__dont-title">Avoid</div>
+          <ul class="care-page__dont-list">
+            <li>Wearing in the shower or pool</li>
+            <li>Contact with perfume, hairspray, or lotions</li>
+            <li>Exposure to household chemicals or bleach</li>
+            <li>Storing multiple pieces together (causes scratches)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="care-page__section reveal">
+      <div class="care-page__section-label">Cleaning</div>
+      <h2 class="care-page__section-heading">How to Clean Your Jewelry</h2>
+      <p class="care-page__text"><strong>Regular clean (weekly):</strong> Wipe your piece with the microfibre polishing cloth included in every order. This removes oils and restores shine instantly.</p>
+      <p class="care-page__text"><strong>Deep clean (monthly):</strong> Soak in warm water with a few drops of mild dish soap for 10–15 minutes. Use a soft-bristle brush (a baby toothbrush is perfect) to gently clean around the stones and settings. Rinse thoroughly under clean water and pat dry with a lint-free cloth.</p>
+      <p class="care-page__text"><strong>Never use:</strong> Ultrasonic cleaners, steam cleaners, toothpaste, baking soda, or abrasive cleaning agents. These can damage the rhodium plating and dull the finish.</p>
+    </div>
+
+    <div class="care-page__section reveal">
+      <div class="care-page__section-label">Earrings</div>
+      <h2 class="care-page__section-heading">Earring Care</h2>
+      <p class="care-page__text">Clean earring posts regularly with rubbing alcohol to maintain hygiene and prevent irritation. For <strong>hoop earrings</strong>, gently wipe the hinge mechanism with a dry cloth to prevent buildup — this keeps the snap-back closure functioning smoothly. <strong>Stud earrings</strong> with push-back butterfly closures should be stored fastened to maintain spring tension over time.</p>
+    </div>
+
+    <div class="care-page__section reveal">
+      <div class="care-page__section-label">Rings</div>
+      <h2 class="care-page__section-heading">Ring Care</h2>
+      <p class="care-page__text">Remove rings before washing your hands, applying hand cream, or doing manual work. For <strong>channel-set bands</strong> like the Eternite, periodically check that stones feel secure by gently pressing each one. If a stone feels loose, stop wearing the ring immediately and <a href="/pages/warranty" style="color:var(--color-text);text-decoration:underline;text-underline-offset:3px">contact us under your lifetime warranty</a> — we will repair it at no cost.</p>
+    </div>
+
+    <div class="care-page__section reveal">
+      <div class="care-page__section-label">Bracelets & Necklaces</div>
+      <h2 class="care-page__section-heading">Chain & Bracelet Care</h2>
+      <p class="care-page__text">Lay chains and bracelets flat when storing — never ball them up or let them tangle. For <strong>tennis-style pieces</strong> (Eclat Bracelet, Riviere Chain), avoid bending the articulated links against their natural direction of movement. Close the clasp before storing to prevent the box clasp from catching on other pieces. Wipe clasp and hinge mechanisms with a dry cloth to keep them operating smoothly.</p>
+    </div>
+
+    <div class="care-page__section reveal">
+      <div class="care-page__section-label">Plating</div>
+      <h2 class="care-page__section-heading">Rhodium & Gold Plating</h2>
+      <p class="care-page__text">All of our sterling silver pieces are rhodium plated for a bright, scratch-resistant finish. Over time and with regular wear, the plating may naturally thin — this is normal and does not affect the structural integrity of the piece. Our <strong>lifetime warranty includes one complimentary rhodium re-plating per year</strong> to restore the like-new finish. For 18ct gold plated pieces, the same care guidelines apply.</p>
+    </div>
+
+    <div class="care-page__cta reveal">
+      <h2 class="care-page__cta-heading">Questions About Care?</h2>
+      <p class="care-page__cta-text">Email us at <a href="mailto:hello@theclearcut.au">hello@theclearcut.au</a> for personalised care advice for your piece.</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Jewelry Care Page", "settings": [] }
+{% endschema %}

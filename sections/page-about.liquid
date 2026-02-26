@@ -1,0 +1,97 @@
+<style>
+  .about-page { max-width: 800px; margin: 0 auto; padding: 0 var(--page-padding); }
+  .about-page__hero { text-align: center; padding: var(--space-2xl) 0 var(--space-xl); }
+  .about-page__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
+  .about-page__heading { font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); font-weight: 400; color: var(--color-text); line-height: 1.15; margin-bottom: var(--space-md); }
+  .about-page__intro { font-family: var(--font-body); font-size: 17px; color: var(--color-text-secondary); line-height: 1.8; max-width: 600px; margin: 0 auto; }
+  .about-page__body { padding-bottom: var(--space-2xl); }
+
+  .about-page__statement { border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: var(--space-xl) 0; text-align: center; margin-bottom: var(--space-xl); }
+  .about-page__quote { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 400; color: var(--color-text); line-height: 1.4; max-width: 600px; margin: 0 auto; }
+
+  .about-page__pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background-color: var(--color-border); margin-bottom: var(--space-xl); }
+  .about-page__pillar { background-color: var(--color-bg); padding: var(--space-lg); }
+  .about-page__pillar-num { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-muted); letter-spacing: 0.1em; margin-bottom: var(--space-sm); }
+  .about-page__pillar-title { font-family: var(--font-display); font-size: 20px; font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-xs); }
+  .about-page__pillar-text { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; }
+
+  .about-page__section { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; }
+  .about-page__section:last-child { border-bottom: 1px solid var(--color-border); }
+  .about-page__section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 6px; }
+  .about-page__section-heading { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .about-page__text { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+  .about-page__text + .about-page__text { margin-top: var(--space-sm); }
+  .about-page__text strong { color: var(--color-text); font-weight: 500; }
+
+  .about-page__cta { text-align: center; padding: var(--space-xl); background-color: var(--color-bg-warm); margin: var(--space-xl) 0 var(--space-2xl); }
+  .about-page__cta-heading { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--color-text); margin-bottom: var(--space-sm); }
+  .about-page__cta-btn { display: inline-block; font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-btn-primary-text); background-color: var(--color-btn-primary-bg); padding: 14px 32px; transition: background-color var(--duration-fast) ease; }
+  .about-page__cta-btn:hover { background-color: var(--color-btn-primary-hover); }
+
+  @media (max-width: 768px) { .about-page__pillars { grid-template-columns: 1fr; } }
+</style>
+
+<div class="about-page">
+  <div class="about-page__hero reveal">
+    <div class="about-page__label">About</div>
+    <h1 class="about-page__heading">Our Mission</h1>
+    <p class="about-page__intro">Fine jewelry should not require compromise. Not on quality. Not on ethics. Not on price. That conviction is why The Clear Cut exists.</p>
+  </div>
+
+  <div class="about-page__body">
+    <div class="about-page__statement reveal">
+      <p class="about-page__quote">We create jewelry that stands on its own merit — backed by science, craftsmanship, and a lifetime guarantee.</p>
+    </div>
+
+    <div class="about-page__pillars reveal">
+      <div class="about-page__pillar">
+        <div class="about-page__pillar-num">01</div>
+        <div class="about-page__pillar-title">Uncompromising Quality</div>
+        <div class="about-page__pillar-text">Every stone is D colour, VVS1 clarity, independently certified by GRA. Every setting is hand-finished by skilled artisans. We do not cut corners at any stage of production.</div>
+      </div>
+      <div class="about-page__pillar">
+        <div class="about-page__pillar-num">02</div>
+        <div class="about-page__pillar-title">Full Transparency</div>
+        <div class="about-page__pillar-text">We publish our materials, our sourcing, and our certifications. Every piece comes with a GRA certificate. No hidden markups, no misleading claims, no fine print.</div>
+      </div>
+      <div class="about-page__pillar">
+        <div class="about-page__pillar-num">03</div>
+        <div class="about-page__pillar-title">Ethical by Design</div>
+        <div class="about-page__pillar-text">Lab-created moissanite. No mining. No conflict. No environmental destruction. Our supply chain is traceable from laboratory to finished piece.</div>
+      </div>
+      <div class="about-page__pillar">
+        <div class="about-page__pillar-num">04</div>
+        <div class="about-page__pillar-title">Australian Owned</div>
+        <div class="about-page__pillar-text">Designed, curated, and shipped from Australia for the Australian market. Local customer service, local shipping, local values.</div>
+      </div>
+    </div>
+
+    <div class="about-page__section reveal">
+      <div class="about-page__section-label">The Stone</div>
+      <h2 class="about-page__section-heading">Why Moissanite</h2>
+      <p class="about-page__text">Moissanite was first discovered in 1893 by Henri Moissan — a Nobel Prize-winning chemist — inside a meteor crater in Arizona. Today, it is grown in advanced laboratories using precision crystal technology. It ranks 9.25 on the Mohs hardness scale, has a refractive index of 2.65 (higher than diamond), and produces more brilliance and fire than any other gemstone on earth.</p>
+      <p class="about-page__text">We do not position moissanite as a diamond alternative. It is not an imitation, a substitute, or a compromise. It is its own category of gemstone — one that happens to be optically superior, ethically sourced, and significantly more accessible.</p>
+    </div>
+
+    <div class="about-page__section reveal">
+      <div class="about-page__section-label">The Craft</div>
+      <h2 class="about-page__section-heading">How We Build</h2>
+      <p class="about-page__text">Every piece begins with stone cultivation in state-of-the-art laboratories. Each crystal is grown over 60–90 days under controlled conditions, then precision-cut by master gemologists to maximise brilliance. Our sterling silver settings are cast, hand-set, and rhodium plated by artisans across three continents. Every finished piece is individually inspected under 10x magnification before earning the Clear Cut hallmark.</p>
+    </div>
+
+    <div class="about-page__section reveal">
+      <div class="about-page__section-label">The Promise</div>
+      <h2 class="about-page__section-heading">What You Get</h2>
+      <p class="about-page__text">Every order arrives with a <strong>GRA certificate of authenticity</strong>, a microfibre polishing cloth, and a care guide — packaged in our signature gift box. Every piece is backed by a <strong>lifetime warranty</strong> covering manufacturing defects and annual rhodium re-plating. Free shipping on orders over $200. 30-day returns. No questions asked.</p>
+    </div>
+
+    <div class="about-page__cta reveal">
+      <h2 class="about-page__cta-heading">See the Collection</h2>
+      <a href="/collections/all-jewelry" class="about-page__cta-btn">Shop All Jewelry</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "About Page", "settings": [] }
+{% endschema %}

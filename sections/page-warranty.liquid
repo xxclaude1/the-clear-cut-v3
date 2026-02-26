@@ -1,0 +1,67 @@
+<style>
+  .info-page { max-width: 720px; margin: 0 auto; padding: 0 var(--page-padding); }
+  .info-page__hero { text-align: center; padding: var(--space-2xl) 0 var(--space-xl); }
+  .info-page__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
+  .info-page__heading { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .info-page__sub { font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; }
+  .info-page__body { padding-bottom: var(--space-2xl); }
+  .info-page__section { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; }
+  .info-page__section:last-child { border-bottom: 1px solid var(--color-border); }
+  .info-page__section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 6px; }
+  .info-page__section-heading { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .info-page__text { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+  .info-page__text + .info-page__text { margin-top: var(--space-sm); }
+  .info-page__text strong { color: var(--color-text); font-weight: 500; }
+  .info-page__list { list-style: none; padding: 0; margin: var(--space-sm) 0 0; }
+  .info-page__list li { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; padding: 6px 0; padding-left: 20px; position: relative; }
+  .info-page__list li::before { content: ""; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; border-radius: 50%; }
+  .info-page__list--covered li::before { background-color: var(--color-text); }
+  .info-page__list--excluded li::before { background-color: var(--color-border); }
+</style>
+
+<div class="info-page">
+  <div class="info-page__hero reveal">
+    <div class="info-page__label">Guarantee</div>
+    <h1 class="info-page__heading">Lifetime Warranty</h1>
+    <p class="info-page__sub">Every piece is built to last. We stand behind our craftsmanship — for life.</p>
+  </div>
+
+  <div class="info-page__body">
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Covered</div>
+      <h2 class="info-page__section-heading">What Is Covered</h2>
+      <p class="info-page__text">Our lifetime warranty covers defects in materials and workmanship for as long as you own the piece.</p>
+      <ul class="info-page__list info-page__list--covered">
+        <li>Manufacturing defects in materials or workmanship</li>
+        <li>Stone loosening or loss from the setting under normal wear</li>
+        <li>Clasp, closure, or hinge mechanism failure</li>
+        <li>Chain breakage at solder points</li>
+        <li>Rhodium plating refresh — one complimentary re-plating per year</li>
+      </ul>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Not Covered</div>
+      <h2 class="info-page__section-heading">What Is Not Covered</h2>
+      <p class="info-page__text">The warranty does not cover damage resulting from the following.</p>
+      <ul class="info-page__list info-page__list--excluded">
+        <li>Normal wear and tear over time</li>
+        <li>Damage caused by misuse, accidents, or impact</li>
+        <li>Exposure to chemicals, chlorine, or harsh cleaning agents</li>
+        <li>Unauthorised modifications, resizing, or repairs by third parties</li>
+        <li>Loss or theft of the piece</li>
+      </ul>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Process</div>
+      <h2 class="info-page__section-heading">How to Make a Claim</h2>
+      <p class="info-page__text">Email <strong>hello@theclearcut.au</strong> with your order number, clear photos of the issue, and a brief description. Our team will assess and respond within 48 hours. If approved, we will repair or replace the piece at no cost to you.</p>
+      <p class="info-page__text"><strong>Please retain your GRA certificate of authenticity</strong> — it may be required to process your warranty claim and confirm the piece is authentic.</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Warranty Page", "settings": [] }
+{% endschema %}

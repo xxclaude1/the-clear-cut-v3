@@ -1,0 +1,90 @@
+<style>
+  .sust-page { max-width: 720px; margin: 0 auto; padding: 0 var(--page-padding); }
+  .sust-page__hero { text-align: center; padding: var(--space-2xl) 0 var(--space-xl); }
+  .sust-page__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
+  .sust-page__heading { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .sust-page__sub { font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; max-width: 540px; margin: 0 auto; }
+  .sust-page__body { padding-bottom: var(--space-2xl); }
+
+  .sust-page__statement { border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: var(--space-xl) 0; text-align: center; }
+  .sust-page__quote { font-family: var(--font-display); font-size: clamp(20px, 3vw, 26px); font-weight: 400; color: var(--color-text); line-height: 1.4; max-width: 560px; margin: 0 auto; }
+
+  .sust-page__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); padding: var(--space-xl) 0; }
+  .sust-page__stat { text-align: center; padding: var(--space-md); background-color: var(--color-bg-warm); }
+  .sust-page__stat-value { font-family: var(--font-display); font-size: 32px; color: var(--color-text); margin-bottom: 4px; }
+  .sust-page__stat-label { font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.4; }
+
+  .sust-page__section { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; }
+  .sust-page__section:last-child { border-bottom: 1px solid var(--color-border); }
+  .sust-page__section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 6px; }
+  .sust-page__section-heading { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .sust-page__text { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+  .sust-page__text + .sust-page__text { margin-top: var(--space-sm); }
+  .sust-page__text strong { color: var(--color-text); font-weight: 500; }
+
+  @media (max-width: 768px) { .sust-page__grid { grid-template-columns: 1fr; } }
+</style>
+
+<div class="sust-page">
+  <div class="sust-page__hero reveal">
+    <div class="sust-page__label">Responsibility</div>
+    <h1 class="sust-page__heading">Sustainability</h1>
+    <p class="sust-page__sub">Sustainability is not a marketing angle. It is the foundation everything else is built on.</p>
+  </div>
+
+  <div class="sust-page__body">
+    <div class="sust-page__statement reveal">
+      <p class="sust-page__quote">The most sustainable product is one you never have to replace.</p>
+    </div>
+
+    <div class="sust-page__grid reveal">
+      <div class="sust-page__stat">
+        <div class="sust-page__stat-value">0</div>
+        <div class="sust-page__stat-label">Mining Required</div>
+      </div>
+      <div class="sust-page__stat">
+        <div class="sust-page__stat-value">100%</div>
+        <div class="sust-page__stat-label">Conflict Free</div>
+      </div>
+      <div class="sust-page__stat">
+        <div class="sust-page__stat-value">9.25</div>
+        <div class="sust-page__stat-label">Mohs Hardness</div>
+      </div>
+    </div>
+
+    <div class="sust-page__section reveal">
+      <div class="sust-page__section-label">Sourcing</div>
+      <h2 class="sust-page__section-heading">Lab-Created, Not Mined</h2>
+      <p class="sust-page__text">Every moissanite stone in our collection is grown in a controlled laboratory environment using advanced crystal growth technology. This eliminates the need for mining entirely — and with it, the deforestation, water pollution, habitat destruction, and human exploitation that have plagued the traditional gemstone industry for centuries.</p>
+      <p class="sust-page__text">There is no ambiguity in our supply chain. Every stone can be traced from laboratory to finished piece.</p>
+    </div>
+
+    <div class="sust-page__section reveal">
+      <div class="sust-page__section-label">Ethics</div>
+      <h2 class="sust-page__section-heading">Conflict-Free Guarantee</h2>
+      <p class="sust-page__text">Our stones are created in laboratories, not extracted from conflict zones. There are no intermediaries, no brokers, no opaque supply chains. We know exactly where every stone comes from, how it was made, and who made it. This is the standard we believe the entire industry should meet.</p>
+    </div>
+
+    <div class="sust-page__section reveal">
+      <div class="sust-page__section-label">Impact</div>
+      <h2 class="sust-page__section-heading">Lower Carbon Footprint</h2>
+      <p class="sust-page__text">Lab-grown gemstones require a fraction of the energy and resources of mined stones. No explosives. No diesel-powered earth movers. No toxic runoff into waterways. No displacement of communities. Just precision science in a controlled, efficient environment.</p>
+    </div>
+
+    <div class="sust-page__section reveal">
+      <div class="sust-page__section-label">Durability</div>
+      <h2 class="sust-page__section-heading">Built to Last Generations</h2>
+      <p class="sust-page__text">Moissanite ranks 9.25 on the Mohs hardness scale — it will not scratch, cloud, or degrade over time. Our 925 sterling silver settings are rhodium plated for lasting brightness. Our lifetime warranty covers manufacturing defects and includes annual re-plating. We design every piece to be worn daily, passed down, and never replaced. That is sustainability at its most fundamental.</p>
+    </div>
+
+    <div class="sust-page__section reveal">
+      <div class="sust-page__section-label">Packaging</div>
+      <h2 class="sust-page__section-heading">Minimal Packaging</h2>
+      <p class="sust-page__text">Our packaging is designed to be beautiful and functional without excess. We use recyclable materials wherever possible and avoid unnecessary plastic, tissue paper, and oversized boxes. Every element in the box serves a purpose — the gift box, the GRA certificate, the polishing cloth, and the care card. Nothing more.</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Sustainability Page", "settings": [] }
+{% endschema %}

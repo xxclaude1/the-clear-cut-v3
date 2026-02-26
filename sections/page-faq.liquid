@@ -1,0 +1,316 @@
+<style>
+  .faq-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 var(--page-padding);
+  }
+
+  .faq-page__hero {
+    text-align: center;
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .faq-page__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .faq-page__heading {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+  }
+
+  .faq-page__sub {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .faq-page__list {
+    padding-bottom: var(--space-2xl);
+  }
+
+  .faq-page__item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-page__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    gap: 16px;
+  }
+
+  .faq-page__question {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .faq-page__icon {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) ease;
+    line-height: 1;
+  }
+
+  .faq-page__item.is-open .faq-page__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-page__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease;
+  }
+
+  .faq-page__answer-inner {
+    padding: 0 0 24px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+  }
+
+  .faq-page__answer-inner a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .faq-page__contact {
+    text-align: center;
+    padding: var(--space-xl);
+    background-color: var(--color-bg-warm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .faq-page__contact-heading {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .faq-page__contact-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .faq-page__contact-text a {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+</style>
+
+<div class="faq-page">
+  <div class="faq-page__hero reveal">
+    <div class="faq-page__label">Support</div>
+    <h1 class="faq-page__heading">Frequently Asked Questions</h1>
+    <p class="faq-page__sub">Everything you need to know about our jewelry, materials, and process.</p>
+  </div>
+
+  <div class="faq-page__list">
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">What is moissanite?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          Moissanite is a lab-created gemstone composed of silicon carbide. It ranks 9.25 on the Mohs hardness scale — second only to diamond — making it one of the hardest known substances. With a refractive index of 2.65 (compared to diamond's 2.42), moissanite actually produces more brilliance and fire than diamond. It was first discovered in 1893 by Nobel Prize-winning chemist Henri Moissan inside a meteor crater in Arizona.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">Is moissanite a fake diamond?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          No. Moissanite is its own gemstone with its own unique chemical composition, crystal structure, and optical properties. It is not cubic zirconia, glass, or a diamond simulant. We position moissanite as fine jewelry in its own category — valued for its exceptional brilliance, ethical sourcing, and remarkable durability. We never misrepresent it as diamond.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">Are your stones certified?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          Yes. Every piece ships with a GRA (Gemological Research Association) certificate of authenticity. The certificate verifies the colour grade (D — colourless), clarity (VVS1 — virtually flawless), cut grade, carat weight, and shape of each stone. Each certificate includes a unique identification number. The certificate arrives in the box with your piece.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">What metals do you use?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          All of our pieces are crafted in 925 sterling silver — 92.5% pure silver alloyed with 7.5% copper for strength. Every piece is rhodium plated for a bright, tarnish-resistant white finish. Select pieces are also available in 18ct gold plating (white, yellow, and rose gold). Visit our <a href="/pages/materials">Materials</a> page for full details on every material we use.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">Do you offer free shipping?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          Yes. We offer free shipping on all orders over $200 AUD within Australia. All orders are processed and dispatched within 1-2 business days and delivered within 8-14 business days. You will receive a tracking number via email once your order has been dispatched.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">What is your returns policy?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          We offer a 30-day return policy from the date of delivery. Items must be unworn, in their original condition, and returned in the original packaging along with your GRA certificate. Email hello@theclearcut.au with your order number and we will send you a return label within 24 hours. See our <a href="/pages/returns">Returns & Exchanges</a> page for full details.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">Do you have a warranty?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          Yes. Every piece comes with a comprehensive lifetime warranty covering manufacturing defects, stone loosening, clasp failure, and annual rhodium re-plating. Please retain your GRA certificate as it may be required for warranty claims. See our <a href="/pages/warranty">Warranty</a> page for what is and is not covered.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">Will moissanite lose its sparkle over time?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          No. Unlike cubic zirconia, which can cloud and dull with wear, moissanite is chemically and optically stable. Its brilliance, fire, and clarity will not degrade, fade, or change over time. It is a permanent gemstone designed to last generations. The only maintenance needed is occasional cleaning — warm soapy water and a soft brush.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">How do I find my size?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          We have a comprehensive <a href="/pages/size-guide">Size Guide</a> covering rings, bracelets, necklaces, and earrings with measurement instructions and sizing charts. If you are still unsure, email hello@theclearcut.au and our team will help you find the perfect fit.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">How should I care for my jewelry?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          Moissanite is extremely durable and low-maintenance. We recommend removing jewelry before showering, swimming, or exercising. Clean with warm soapy water and a soft brush, then pat dry with a lint-free cloth. Store pieces individually in their original box or a soft pouch. See our <a href="/pages/jewelry-care">Jewelry Care</a> page for detailed instructions by product type.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">Do you ship internationally?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          We currently ship within Australia only. International shipping is coming soon. Sign up to our newsletter to be the first to know when we expand.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-page__item">
+      <button class="faq-page__trigger accordion__trigger">
+        <span class="faq-page__question">What packaging does my order arrive in?</span>
+        <span class="faq-page__icon">+</span>
+      </button>
+      <div class="faq-page__answer accordion__content">
+        <div class="faq-page__answer-inner">
+          Every order arrives in our signature gift box containing your piece, a GRA certificate of authenticity, a microfibre polishing cloth, and a care guide card. Everything is ready to gift or to keep — no additional wrapping needed.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-page__contact reveal">
+    <h2 class="faq-page__contact-heading">Still Have Questions?</h2>
+    <p class="faq-page__contact-text">Email us at <a href="mailto:hello@theclearcut.au">hello@theclearcut.au</a> and we will get back to you within 24 hours.</p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-page__item').forEach(function(item) {
+    item.querySelector('.faq-page__trigger').addEventListener('click', function() {
+      var content = item.querySelector('.faq-page__answer');
+      var isOpen = item.classList.contains('is-open');
+      // Close all others
+      document.querySelectorAll('.faq-page__item.is-open').forEach(function(open) {
+        if (open !== item) {
+          open.classList.remove('is-open');
+          open.querySelector('.faq-page__answer').style.maxHeight = null;
+        }
+      });
+      if (isOpen) {
+        item.classList.remove('is-open');
+        content.style.maxHeight = null;
+      } else {
+        item.classList.add('is-open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Page",
+  "settings": []
+}
+{% endschema %}

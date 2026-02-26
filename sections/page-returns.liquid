@@ -1,0 +1,90 @@
+<style>
+  .info-page { max-width: 720px; margin: 0 auto; padding: 0 var(--page-padding); }
+  .info-page__hero { text-align: center; padding: var(--space-2xl) 0 var(--space-xl); }
+  .info-page__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
+  .info-page__heading { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .info-page__sub { font-family: var(--font-body); font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; }
+  .info-page__body { padding-bottom: var(--space-2xl); }
+  .info-page__section { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; }
+  .info-page__section:last-child { border-bottom: 1px solid var(--color-border); }
+  .info-page__section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 6px; }
+  .info-page__section-heading { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--color-text); line-height: 1.2; margin-bottom: var(--space-sm); }
+  .info-page__text { font-family: var(--font-body); font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+  .info-page__text + .info-page__text { margin-top: var(--space-sm); }
+  .info-page__text strong { color: var(--color-text); font-weight: 500; }
+  .info-page__text a { color: var(--color-text); text-decoration: underline; text-underline-offset: 3px; }
+  .info-page__steps { display: flex; flex-direction: column; gap: 0; margin-top: var(--space-md); }
+  .info-page__step { display: flex; gap: var(--space-sm); padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border); }
+  .info-page__step:last-child { border-bottom: none; }
+  .info-page__step-num { font-family: var(--font-display); font-size: 24px; color: var(--color-text); flex-shrink: 0; width: 32px; }
+  .info-page__step-content { flex: 1; }
+  .info-page__step-title { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--color-text); margin-bottom: 4px; }
+  .info-page__step-text { font-family: var(--font-body); font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+</style>
+
+<div class="info-page">
+  <div class="info-page__hero reveal">
+    <div class="info-page__label">Policy</div>
+    <h1 class="info-page__heading">Returns & Exchanges</h1>
+    <p class="info-page__sub">We want you to love your piece. If it is not right, we will make it right.</p>
+  </div>
+
+  <div class="info-page__body">
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Returns</div>
+      <h2 class="info-page__section-heading">30-Day Return Policy</h2>
+      <p class="info-page__text">We offer a full 30-day return policy from the date of delivery. Items must be unworn, undamaged, in their original condition, and returned in the original packaging along with the GRA certificate of authenticity.</p>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Process</div>
+      <h2 class="info-page__section-heading">How It Works</h2>
+      <div class="info-page__steps">
+        <div class="info-page__step">
+          <div class="info-page__step-num">1</div>
+          <div class="info-page__step-content">
+            <div class="info-page__step-title">Email Us</div>
+            <div class="info-page__step-text">Send an email to hello@theclearcut.au with your order number and reason for return.</div>
+          </div>
+        </div>
+        <div class="info-page__step">
+          <div class="info-page__step-num">2</div>
+          <div class="info-page__step-content">
+            <div class="info-page__step-title">Receive Your Label</div>
+            <div class="info-page__step-text">We will respond within 24 hours with a prepaid return shipping label and instructions.</div>
+          </div>
+        </div>
+        <div class="info-page__step">
+          <div class="info-page__step-num">3</div>
+          <div class="info-page__step-content">
+            <div class="info-page__step-title">Ship It Back</div>
+            <div class="info-page__step-text">Pack the item securely in its original packaging with the GRA certificate and drop it off at any post office.</div>
+          </div>
+        </div>
+        <div class="info-page__step">
+          <div class="info-page__step-num">4</div>
+          <div class="info-page__step-content">
+            <div class="info-page__step-title">Get Your Refund</div>
+            <div class="info-page__step-text">Once received, refunds are processed within 3–5 business days to your original payment method.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Exchanges</div>
+      <h2 class="info-page__section-heading">Need a Different Size?</h2>
+      <p class="info-page__text">We are happy to exchange your piece for a different size or variant at no additional cost (subject to availability). Email us and we will arrange the swap — you will receive your new piece as soon as we receive the original.</p>
+    </div>
+
+    <div class="info-page__section reveal">
+      <div class="info-page__section-label">Exceptions</div>
+      <h2 class="info-page__section-heading">Not Eligible for Return</h2>
+      <p class="info-page__text">Items that have been worn, resized, altered, or damaged after delivery are not eligible for return. Custom or personalised pieces are final sale. Items returned without the original packaging and GRA certificate may be subject to a restocking fee.</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Returns Page", "settings": [] }
+{% endschema %}
