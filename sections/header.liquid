@@ -226,7 +226,7 @@
      ============================================ */
   .mega-menu {
     position: fixed;
-    top: 0;
+    top: calc(var(--announcement-height) + var(--header-height));
     left: 0;
     bottom: 0;
     width: 56%;
@@ -251,7 +251,7 @@
   }
 
   .mega-menu__inner {
-    padding: 72px var(--page-padding) 60px;
+    padding: 40px var(--page-padding) 60px;
     display: flex;
     gap: 60px;
     min-height: 100%;
@@ -262,14 +262,14 @@
     .mega-menu__inner {
       flex-direction: column;
       gap: 24px;
-      padding: 64px 24px 40px;
+      padding: 32px 24px 40px;
     }
   }
 
   .mega-menu__left {
     flex-shrink: 0;
     min-width: 160px;
-    padding-top: 4px;
+    padding-top: 0;
   }
 
   .mega-menu__heading {
@@ -279,6 +279,7 @@
     text-transform: uppercase;
     letter-spacing: 0.03em;
     margin-bottom: 0;
+    line-height: 2.4;
     /* Stagger animation */
     opacity: 0;
     transform: translateY(12px);
@@ -356,7 +357,7 @@
   /* Close button */
   .mega-menu__close {
     position: absolute;
-    top: 24px;
+    top: 40px;
     right: var(--page-padding);
     width: 32px;
     height: 32px;
@@ -385,14 +386,14 @@
     opacity: 0.6;
   }
 
-  /* Overlay behind mega menu */
+  /* Overlay behind mega menu — white/transparent */
   .mega-menu-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(255, 255, 255, 0.6);
     z-index: 199;
     opacity: 0;
     pointer-events: none;
