@@ -70,6 +70,46 @@
     height: 20px;
   }
 
+  /* Free shipping bar */
+  .cart-shipping-bar {
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cart-shipping-bar__text {
+    font-family: var(--font-body);
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+  }
+
+  .cart-shipping-bar__text strong {
+    font-weight: 700;
+  }
+
+  .cart-shipping-bar__track {
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .cart-shipping-bar__fill {
+    height: 100%;
+    background-color: var(--color-text);
+    border-radius: 2px;
+    transition: width 400ms ease;
+    max-width: 100%;
+  }
+
+  .cart-shipping-bar--complete .cart-shipping-bar__text {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
   .cart-drawer__body {
     flex: 1;
     overflow-y: auto;
@@ -78,12 +118,30 @@
 
   .cart-drawer__empty {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
+    gap: 16px;
     font-family: var(--font-body);
     font-size: 15px;
     color: var(--color-text-secondary);
+  }
+
+  .cart-drawer__shop-link {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .cart-drawer__shop-link:hover {
+    opacity: 0.6;
   }
 
   /* Cart item */
@@ -176,17 +234,126 @@
     color: var(--color-text);
   }
 
+  /* Upsell section */
+  .cart-upsell {
+    padding: 16px 0 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: 8px;
+  }
+
+  .cart-upsell__heading {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .cart-upsell__items {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 4px;
+  }
+
+  .cart-upsell__items::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cart-upsell__card {
+    flex: 0 0 auto;
+    width: 120px;
+    cursor: pointer;
+  }
+
+  .cart-upsell__image {
+    width: 120px;
+    height: 120px;
+    background-color: var(--color-bg-warm);
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+
+  .cart-upsell__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cart-upsell__name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    margin-bottom: 2px;
+    display: block;
+    color: var(--color-text);
+  }
+
+  .cart-upsell__price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+
+  .cart-upsell__add {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    background: none;
+    border: 1px solid var(--color-text);
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease, color var(--duration-fast) ease;
+    width: 100%;
+  }
+
+  .cart-upsell__add:hover {
+    background-color: var(--color-text);
+    color: var(--color-bg);
+  }
+
   /* Footer */
   .cart-drawer__footer {
-    padding: 20px 24px;
+    padding: 16px 24px 20px;
     border-top: 1px solid var(--color-border);
+  }
+
+  .cart-drawer__shop-more {
+    display: block;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: 12px;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .cart-drawer__shop-more:hover {
+    color: var(--color-text);
   }
 
   .cart-drawer__subtotal {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   .cart-drawer__subtotal-label {
@@ -214,7 +381,15 @@
   }
 </style>
 
-<div class="cart-drawer" aria-label="Shopping cart">
+{%- assign free_shipping_threshold = 30000 -%}
+{%- comment -%} $300 AUD in cents {%- endcomment -%}
+{%- assign cart_total = cart.total_price -%}
+{%- assign remaining = free_shipping_threshold | minus: cart_total -%}
+{%- if remaining < 0 -%}{%- assign remaining = 0 -%}{%- endif -%}
+{%- assign progress = cart_total | times: 100 | divided_by: free_shipping_threshold -%}
+{%- if progress > 100 -%}{%- assign progress = 100 -%}{%- endif -%}
+
+<div class="cart-drawer" aria-label="Shopping cart" data-free-shipping-threshold="{{ free_shipping_threshold }}">
   <div class="cart-drawer__overlay" data-cart-close></div>
 
   <div class="cart-drawer__panel" role="dialog">
@@ -228,12 +403,28 @@
       </button>
     </div>
 
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-shipping-bar{% if remaining == 0 %} cart-shipping-bar--complete{% endif %}" id="cart-shipping-bar">
+        {%- if remaining == 0 -%}
+          <p class="cart-shipping-bar__text">You've unlocked <strong>free shipping</strong></p>
+        {%- else -%}
+          <p class="cart-shipping-bar__text">You're <strong>{{ remaining | money }}</strong> away from free shipping</p>
+        {%- endif -%}
+        <div class="cart-shipping-bar__track">
+          <div class="cart-shipping-bar__fill" style="width: {{ progress }}%"></div>
+        </div>
+      </div>
+    {%- endif -%}
+
     <div class="cart-drawer__body">
       {%- if cart.item_count == 0 -%}
-        <div class="cart-drawer__empty">Your cart is empty.</div>
+        <div class="cart-drawer__empty">
+          <span>Your cart is empty.</span>
+          <a href="/collections/all-jewelry" class="cart-drawer__shop-link" data-cart-close>Start Shopping</a>
+        </div>
       {%- else -%}
         {%- for item in cart.items -%}
-          <div class="cart-item">
+          <div class="cart-item" data-line-key="{{ item.key }}">
             <div class="cart-item__image">
               {%- if item.image -%}
                 <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" loading="lazy">
@@ -243,27 +434,58 @@
               <a href="{{ item.url }}" class="cart-item__name">{{ item.product.title }}</a>
               <span class="cart-item__variant">{{ item.variant.title }}</span>
               <div class="cart-item__quantity">
-                <button class="cart-item__qty-btn" aria-label="Decrease quantity">−</button>
+                <button class="cart-item__qty-btn" data-action="decrease" aria-label="Decrease quantity">−</button>
                 <span class="cart-item__qty-value">{{ item.quantity }}</span>
-                <button class="cart-item__qty-btn" aria-label="Increase quantity">+</button>
+                <button class="cart-item__qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
               </div>
             </div>
             <div>
               <div class="cart-item__price">{{ item.final_line_price | money }}</div>
+              <button class="cart-item__remove" data-action="remove" aria-label="Remove item">Remove</button>
             </div>
           </div>
         {%- endfor -%}
+
+        <!-- Upsell section -->
+        <div class="cart-upsell" id="cart-upsell">
+          <p class="cart-upsell__heading">Complete Your Look</p>
+          <div class="cart-upsell__items">
+            {%- assign upsell_collection = collections['earrings'] -%}
+            {%- if upsell_collection != blank -%}
+              {%- assign cart_product_ids = '' -%}
+              {%- for item in cart.items -%}
+                {%- assign cart_product_ids = cart_product_ids | append: item.product.id | append: ',' -%}
+              {%- endfor -%}
+              {%- for product in upsell_collection.products limit: 4 -%}
+                {%- assign pid_string = product.id | append: '' -%}
+                {%- unless cart_product_ids contains pid_string -%}
+                  <div class="cart-upsell__card">
+                    <div class="cart-upsell__image">
+                      {%- if product.featured_image -%}
+                        <img src="{{ product.featured_image | image_url: width: 240 }}" alt="{{ product.title | escape }}" loading="lazy">
+                      {%- endif -%}
+                    </div>
+                    <span class="cart-upsell__name">{{ product.title }}</span>
+                    <div class="cart-upsell__price">{{ product.price | money }}</div>
+                    <button class="cart-upsell__add" data-variant-id="{{ product.selected_or_first_available_variant.id }}">Add +</button>
+                  </div>
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </div>
       {%- endif -%}
     </div>
 
     {%- if cart.item_count > 0 -%}
       <div class="cart-drawer__footer">
+        <a href="/collections/all-jewelry" class="cart-drawer__shop-more" data-cart-close>Continue Shopping</a>
         <div class="cart-drawer__subtotal">
           <span class="cart-drawer__subtotal-label">Subtotal</span>
           <span class="cart-drawer__subtotal-price">{{ cart.total_price | money }}</span>
         </div>
         <a href="/checkout" class="btn-primary btn-primary--full cart-drawer__checkout">Check Out</a>
-        <p class="cart-drawer__shipping-note">Shipping calculated at checkout.</p>
+        <p class="cart-drawer__shipping-note">Free shipping on orders over $300</p>
       </div>
     {%- endif -%}
   </div>

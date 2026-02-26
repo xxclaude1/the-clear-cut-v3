@@ -108,6 +108,51 @@
         const subtotalEl = footer.querySelector('.cart-drawer__subtotal-price');
         if (subtotalEl) subtotalEl.textContent = this.formatMoney(cart.total_price);
       }
+
+      // Update free shipping bar
+      this.updateShippingBar(cart);
+    },
+
+    updateShippingBar(cart) {
+      const bar = document.getElementById('cart-shipping-bar');
+      const drawer = document.querySelector('.cart-drawer');
+      if (!drawer) return;
+
+      const threshold = parseInt(drawer.dataset.freeShippingThreshold || '30000', 10);
+      const total = cart.total_price;
+      const remaining = Math.max(0, threshold - total);
+      const progress = Math.min(100, (total / threshold) * 100);
+
+      if (cart.item_count === 0) {
+        if (bar) bar.style.display = 'none';
+        return;
+      }
+
+      if (!bar) {
+        // Re-create bar if it was removed (empty cart -> items added)
+        const header = drawer.querySelector('.cart-drawer__header');
+        if (header) {
+          const barHtml = '<div class="cart-shipping-bar' + (remaining === 0 ? ' cart-shipping-bar--complete' : '') + '" id="cart-shipping-bar">' +
+            '<p class="cart-shipping-bar__text">' + (remaining === 0 ? "You've unlocked <strong>free shipping</strong>" : "You're <strong>" + this.formatMoney(remaining) + "</strong> away from free shipping") + '</p>' +
+            '<div class="cart-shipping-bar__track"><div class="cart-shipping-bar__fill" style="width: ' + progress + '%"></div></div></div>';
+          header.insertAdjacentHTML('afterend', barHtml);
+        }
+        return;
+      }
+
+      bar.style.display = '';
+      const textEl = bar.querySelector('.cart-shipping-bar__text');
+      const fillEl = bar.querySelector('.cart-shipping-bar__fill');
+
+      if (remaining === 0) {
+        bar.classList.add('cart-shipping-bar--complete');
+        if (textEl) textEl.innerHTML = "You've unlocked <strong>free shipping</strong>";
+      } else {
+        bar.classList.remove('cart-shipping-bar--complete');
+        if (textEl) textEl.innerHTML = "You're <strong>" + this.formatMoney(remaining) + "</strong> away from free shipping";
+      }
+
+      if (fillEl) fillEl.style.width = progress + '%';
     },
 
     /* ---------- Drawer Controls ---------- */
@@ -156,7 +201,7 @@
     },
 
     handleQuickAdd(e) {
-      const btn = e.target.closest('.btn-quick-add, .product-card__quick-add');
+      const btn = e.target.closest('.btn-quick-add, .product-card__quick-add, .cart-upsell__add');
       if (!btn) return;
 
       e.preventDefault();
@@ -240,9 +285,9 @@
         drawerBody.addEventListener('click', (e) => this.handleCartClick(e));
       }
 
-      // Quick-add buttons (product cards)
+      // Quick-add buttons (product cards + upsell cards)
       document.addEventListener('click', (e) => {
-        if (e.target.closest('.btn-quick-add, .product-card__quick-add')) {
+        if (e.target.closest('.btn-quick-add, .product-card__quick-add, .cart-upsell__add')) {
           this.handleQuickAdd(e);
         }
       });
