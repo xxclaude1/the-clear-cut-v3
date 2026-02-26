@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "editorial-banner": {
+      "type": "editorial-banner",
+      "settings": {}
+    },
+    "trending-products": {
+      "type": "trending-products",
+      "settings": {}
+    },
+    "stores-services": {
+      "type": "stores-services",
+      "settings": {}
+    },
+    "sustainability": {
+      "type": "sustainability",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "editorial-banner",
+    "trending-products",
+    "stores-services",
+    "sustainability",
+    "newsletter"
+  ]
+}

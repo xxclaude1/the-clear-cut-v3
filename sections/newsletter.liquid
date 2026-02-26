@@ -1,0 +1,58 @@
+<style>
+  .newsletter {
+    background-color: var(--color-bg-cream);
+    border-top: 1px solid var(--color-border);
+    padding: 48px var(--page-padding);
+  }
+
+  .newsletter__inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .newsletter__text {
+    max-width: 600px;
+  }
+
+  .newsletter__badge {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .newsletter__body {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+</style>
+
+<section class="newsletter">
+  <div class="newsletter__inner">
+    <div class="newsletter__text">
+      <div class="newsletter__badge">{{ section.settings.badge | default: 'THE CLEAR CUT+' }} &nbsp;BECOME A MEMBER</div>
+      <p class="newsletter__body">{{ section.settings.body | default: 'Join The Clear Cut+ for free and discover exclusive access to our biggest drops, promotions, members-only products, and more.' }}</p>
+    </div>
+    <a href="{{ section.settings.cta_url | default: '#' }}" class="btn-outline">{{ section.settings.cta_text | default: 'Join Now For Free' }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge text", "default": "THE CLEAR CUT+" },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "Join The Clear Cut+ for free and discover exclusive access to our biggest drops, promotions, members-only products, and more." },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Join Now For Free" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

@@ -1,0 +1,189 @@
+<style>
+  .cart-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--page-padding);
+  }
+
+  .cart-page__title {
+    margin-bottom: var(--space-lg);
+  }
+
+  .cart-page__header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-md);
+  }
+
+  .cart-page__header span {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.03em;
+  }
+
+  .cart-page__header span:last-child {
+    text-align: right;
+  }
+
+  .cart-page__item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cart-page__item-info {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .cart-page__item-image {
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-bg-warm);
+    flex-shrink: 0;
+  }
+
+  .cart-page__item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .cart-page__item-name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .cart-page__item-variant {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+  }
+
+  .cart-page__item-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    text-align: right;
+  }
+
+  .cart-page__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    margin-top: var(--space-lg);
+  }
+
+  .cart-page__subtotal {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .cart-page__subtotal-label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .cart-page__subtotal-price {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .cart-page__checkout-btn {
+    width: 320px;
+  }
+
+  @media (max-width: 768px) {
+    .cart-page__checkout-btn {
+      width: 100%;
+    }
+  }
+
+  .cart-page__shipping-note {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .cart-page__empty {
+    text-align: center;
+    padding: var(--space-3xl) 0;
+  }
+
+  .cart-page__empty p {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+</style>
+
+<div class="cart-page">
+  <h1 class="heading-1 cart-page__title">Your Cart</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-page__empty">
+      <p>Your cart is empty.</p>
+      <a href="/collections/all" class="btn-outline">Continue Shopping</a>
+    </div>
+  {%- else -%}
+    <div class="cart-page__header desktop-only">
+      <span>Product</span>
+      <span>Quantity</span>
+      <span>Total</span>
+    </div>
+
+    {%- for item in cart.items -%}
+      <div class="cart-page__item">
+        <div class="cart-page__item-info">
+          <div class="cart-page__item-image">
+            {%- if item.image -%}
+              <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}">
+            {%- endif -%}
+          </div>
+          <div>
+            <a href="{{ item.url }}" class="cart-page__item-name">{{ item.product.title }}</a>
+            <div class="cart-page__item-variant">{{ item.variant.title }}</div>
+          </div>
+        </div>
+        <div class="cart-item__quantity">
+          <button class="cart-item__qty-btn">−</button>
+          <span class="cart-item__qty-value">{{ item.quantity }}</span>
+          <button class="cart-item__qty-btn">+</button>
+        </div>
+        <div class="cart-page__item-price">{{ item.final_line_price | money }}</div>
+      </div>
+    {%- endfor -%}
+
+    <div class="cart-page__footer">
+      <div class="cart-page__subtotal">
+        <span class="cart-page__subtotal-label">Subtotal</span>
+        <span class="cart-page__subtotal-price">{{ cart.total_price | money }}</span>
+      </div>
+      <a href="/checkout" class="btn-primary cart-page__checkout-btn">Check Out</a>
+      <span class="cart-page__shipping-note">Shipping calculated at checkout.</span>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": []
+}
+{% endschema %}

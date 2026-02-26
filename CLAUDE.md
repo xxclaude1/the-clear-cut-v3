@@ -6,11 +6,22 @@ Premium moissanite jewelry e-commerce store on Shopify. Australian market. Desig
 **V3 is a complete fresh build. No code, design, or copy from V2.**
 
 ## Store Details
-- **Store URL:** *(to be set up — new Shopify store)*
+- **Store URL:** the-clear-cut-2.myshopify.com
 - **Brand Name:** The Clear Cut
 - **Currency:** AUD
 - **Country:** Australia
-- **GitHub Repo:** the-clear-cut-v3
+- **GitHub Repo:** xxclaude1/the-clear-cut-v3
+
+## Shopify API Access
+```
+Store: the-clear-cut-2.myshopify.com
+Client ID: fcad569de4ca7d86a7fbe87ed7dcfd82
+Secret: (stored locally — do not commit to git)
+Token endpoint: POST /admin/oauth/access_token with grant_type=client_credentials
+Token expires: 24 hours
+API version: 2024-10
+Theme ID: 152507187388 (Horizon — current published theme)
+```
 
 ## Design Direction (Mejuri 2026 Adaptation)
 

@@ -1,0 +1,204 @@
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer__content {
+    padding: 64px var(--page-padding);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+  }
+
+  @media (max-width: 768px) {
+    .footer__content {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 40px var(--page-padding);
+      gap: var(--space-md);
+    }
+  }
+
+  .footer__column-heading {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+    line-height: 1;
+  }
+
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .footer__link {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .footer__link:hover {
+    opacity: 0.6;
+  }
+
+  /* Bottom bar */
+  .footer__bar {
+    background-color: var(--color-footer-bar-bg);
+    color: var(--color-footer-bar-text);
+    padding: 24px var(--page-padding);
+  }
+
+  .footer__bar-inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer__bar-locale {
+    font-family: var(--font-body);
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  .footer__bar-legal {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer__bar-legal a,
+  .footer__bar-copyright {
+    font-family: var(--font-body);
+    font-size: 12px;
+    opacity: 0.8;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .footer__bar-legal a:hover {
+    opacity: 1;
+  }
+
+  .footer__bar-social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer__bar-social a {
+    opacity: 0.8;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .footer__bar-social a:hover {
+    opacity: 1;
+  }
+
+  .footer__bar-social svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .footer__bar-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__content">
+    <!-- Help -->
+    <div class="footer__column">
+      <h4 class="footer__column-heading">Help</h4>
+      <div class="footer__links">
+        <a href="/pages/faq" class="footer__link">FAQs</a>
+        <a href="/pages/shipping" class="footer__link">Shipping & Delivery</a>
+        <a href="/pages/returns" class="footer__link">Returns & Exchanges</a>
+        <a href="/pages/warranty" class="footer__link">Warranty</a>
+        <a href="/pages/contact" class="footer__link">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- Stores & Services -->
+    <div class="footer__column">
+      <h4 class="footer__column-heading">Stores & Services</h4>
+      <div class="footer__links">
+        <a href="/pages/stores" class="footer__link">Our Stores</a>
+        <a href="/pages/styling" class="footer__link">Styling Appointments</a>
+        <a href="/pages/gifting" class="footer__link">Corporate Events & Gifting</a>
+      </div>
+    </div>
+
+    <!-- Resources -->
+    <div class="footer__column">
+      <h4 class="footer__column-heading">Resources</h4>
+      <div class="footer__links">
+        <a href="/pages/jewelry-care" class="footer__link">Jewelry Care</a>
+        <a href="/pages/size-guides" class="footer__link">Size Guides</a>
+        <a href="/blogs/journal" class="footer__link">Blog</a>
+        <a href="/pages/materials" class="footer__link">Our Materials</a>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="footer__column">
+      <h4 class="footer__column-heading">About The Clear Cut</h4>
+      <div class="footer__links">
+        <a href="/pages/about" class="footer__link">Our Mission</a>
+        <a href="/pages/sustainability" class="footer__link">Sustainability</a>
+        <a href="/pages/careers" class="footer__link">Careers</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer__bar">
+    <div class="footer__bar-inner">
+      <span class="footer__bar-locale">Country & Language: 🌐 Australia (AUD) | English</span>
+
+      <div class="footer__bar-legal">
+        <a href="/policies/privacy-policy">Privacy Policy</a>
+        <a href="/policies/terms-of-service">Terms And Conditions</a>
+        <span class="footer__bar-copyright">&copy; {{ 'now' | date: '%Y' }} The Clear Cut</span>
+      </div>
+
+      <div class="footer__bar-social">
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.44c2.136 0 2.389.009 3.233.047.78.036 1.203.166 1.485.276.374.145.64.318.92.598s.453.546.598.92c.11.282.24.706.276 1.485.038.844.047 1.097.047 3.233s-.009 2.389-.047 3.233c-.036.78-.166 1.203-.276 1.485a2.47 2.47 0 01-.598.92c-.28.28-.546.453-.92.598-.282.11-.706.24-1.485.276-.844.038-1.097.047-3.233.047s-2.389-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.47 2.47 0 01-.92-.598 2.47 2.47 0 01-.598-.92c-.11-.282-.24-.706-.276-1.485C1.45 10.389 1.44 10.136 1.44 8s.009-2.389.047-3.233c.036-.78.166-1.203.276-1.485.145-.374.318-.64.598-.92s.546-.453.92-.598c.282-.11.706-.24 1.485-.276C5.61 1.45 5.864 1.44 8 1.44M8 0C5.827 0 5.555.01 4.702.048 3.85.087 3.27.222 2.76.42a3.908 3.908 0 00-1.417.922A3.908 3.908 0 00.42 2.76c-.198.51-.333 1.09-.372 1.942C.01 5.555 0 5.827 0 8s.01 2.445.048 3.298c.039.852.174 1.433.372 1.942.205.526.478.973.922 1.417.444.444.89.717 1.417.922.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.445-.01 3.298-.048c.852-.039 1.433-.174 1.942-.372a3.908 3.908 0 001.417-.922c.444-.444.717-.89.922-1.417.198-.51.333-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.298c-.039-.852-.174-1.433-.372-1.942a3.908 3.908 0 00-.922-1.417A3.908 3.908 0 0013.24.42c-.51-.198-1.09-.333-1.942-.372C10.445.01 10.173 0 8 0zm0 3.892a4.108 4.108 0 100 8.216 4.108 4.108 0 000-8.216zM8 10.667a2.667 2.667 0 110-5.334 2.667 2.667 0 010 5.334zm5.23-6.95a.96.96 0 11-1.92 0 .96.96 0 011.92 0z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_pinterest != blank -%}
+          <a href="{{ settings.social_pinterest }}" target="_blank" rel="noopener" aria-label="Pinterest">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.582 0 0 3.582 0 8c0 3.39 2.108 6.285 5.084 7.45-.07-.633-.134-1.608.028-2.3.146-.625.944-4.003.944-4.003s-.24-.482-.24-1.194c0-1.118.648-1.953 1.456-1.953.687 0 1.018.515 1.018 1.133 0 .69-.44 1.722-.666 2.678-.19.8.4 1.452 1.188 1.452 1.426 0 2.522-1.503 2.522-3.672 0-1.919-1.38-3.26-3.35-3.26-2.282 0-3.621 1.713-3.621 3.483 0 .69.265 1.428.596 1.83a.24.24 0 01.056.23c-.061.252-.196.8-.222.912-.035.147-.115.178-.266.107-.99-.46-1.61-1.908-1.61-3.07 0-2.5 1.815-4.795 5.232-4.795 2.747 0 4.883 1.957 4.883 4.573 0 2.73-1.72 4.928-4.109 4.928-.803 0-1.557-.417-1.814-.91l-.493 1.882c-.179.688-.662 1.55-.986 2.075C6.375 15.844 7.17 16 8 16c4.418 0 8-3.582 8-8s-3.582-8-8-8z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_twitter != blank -%}
+          <a href="{{ settings.social_twitter }}" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M12.6.75h2.454l-5.36 6.126L16 15.25h-4.937l-3.867-5.056-4.425 5.056H.316l5.733-6.554L0 .75h5.063l3.495 4.622L12.6.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

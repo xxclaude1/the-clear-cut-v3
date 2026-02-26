@@ -1,0 +1,72 @@
+<style>
+  .sustainability {
+    background-color: var(--color-text);
+    color: var(--color-btn-primary-text);
+    padding: 64px var(--page-padding);
+  }
+
+  .sustainability__inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .sustainability__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+  }
+
+  .sustainability__heading {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+
+  .sustainability__cta {
+    color: var(--color-btn-primary-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sustainability__body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    opacity: 0.85;
+  }
+</style>
+
+<section class="sustainability reveal">
+  <div class="sustainability__inner">
+    <div>
+      <h2 class="sustainability__heading">{{ section.settings.heading | default: 'Our Commitment' }}</h2>
+      {%- if section.settings.cta_text != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="editorial-cta sustainability__cta">{{ section.settings.cta_text }}</a>
+      {%- endif -%}
+    </div>
+    <div>
+      <p class="sustainability__body">{{ section.settings.body | default: "Our journey mirrors that of the jewelry we create — crafted through collaboration and constant evolution. We're here to transform fine jewelry into everyday moments, empower our community, and drive meaningful change." }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sustainability",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Commitment" },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "Our journey mirrors that of the jewelry we create — crafted through collaboration and constant evolution. We're here to transform fine jewelry into everyday moments, empower our community, and drive meaningful change." },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Learn More" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Sustainability" }]
+}
+{% endschema %}

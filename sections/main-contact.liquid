@@ -1,0 +1,75 @@
+<style>
+  .contact-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--page-padding);
+  }
+
+  .contact-page__title {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .contact-page__subtitle {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-page__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .contact-page__footer {
+    text-align: center;
+    margin-top: var(--space-lg);
+  }
+
+  .contact-page__email {
+    font-family: var(--font-body);
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .contact-page__note {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+</style>
+
+<div class="contact-page">
+  <h1 class="heading-1 contact-page__title">Contact Us</h1>
+  <p class="contact-page__subtitle">We'd love to hear from you.</p>
+
+  <form class="contact-page__form" method="post" action="/contact#contact_form">
+    <input type="hidden" name="form_type" value="contact">
+    <input type="hidden" name="utf8" value="✓">
+
+    <input class="input" type="text" name="contact[name]" placeholder="Name" required>
+    <input class="input" type="email" name="contact[email]" placeholder="Email" required>
+    <input class="input" type="text" name="contact[subject]" placeholder="Subject">
+    <textarea class="input" name="contact[body]" placeholder="Message" rows="6" required></textarea>
+
+    <button type="submit" class="btn-primary btn-primary--full">Send Message</button>
+  </form>
+
+  <div class="contact-page__footer">
+    <a href="mailto:hello@theclearcut.com.au" class="contact-page__email">hello@theclearcut.com.au</a>
+    <p class="contact-page__note">We typically respond within 24 hours.</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Page",
+  "settings": []
+}
+{% endschema %}

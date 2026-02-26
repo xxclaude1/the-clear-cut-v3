@@ -1,0 +1,332 @@
+<style>
+  .product-page {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: var(--space-md) var(--page-padding) var(--space-2xl);
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 0;
+  }
+
+  @media (max-width: 768px) {
+    .product-page {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Gallery */
+  .product-page__gallery {
+    position: relative;
+  }
+
+  .product-page__main-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background-color: var(--color-bg-warm);
+    padding: 5%;
+  }
+
+  .product-page__thumbnails {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .product-page__thumb {
+    width: 72px;
+    height: 72px;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    background-color: var(--color-bg-warm);
+    padding: 4px;
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .product-page__thumb.is-active {
+    border: 2px solid var(--color-text);
+  }
+
+  .product-page__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Info */
+  .product-page__info {
+    padding: 0 0 0 48px;
+  }
+
+  @media (max-width: 768px) {
+    .product-page__info {
+      padding: var(--space-md) 0 0;
+    }
+  }
+
+  .product-page__title {
+    margin-bottom: 12px;
+  }
+
+  .product-page__price {
+    margin-bottom: 20px;
+  }
+
+  .product-page__description {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  /* Variants */
+  .product-page__variant-group {
+    margin-bottom: 20px;
+  }
+
+  .product-page__variant-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .product-page__variant-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .product-page__variant-btn {
+    font-family: var(--font-body);
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) ease;
+    line-height: 1;
+  }
+
+  .product-page__variant-btn:hover {
+    border-color: var(--color-text);
+  }
+
+  .product-page__variant-btn.is-selected {
+    border: 2px solid var(--color-text);
+  }
+
+  /* Add to cart */
+  .product-page__add-btn {
+    width: 100%;
+    height: 52px;
+    margin-bottom: 12px;
+  }
+
+  /* Trust */
+  .product-page__trust {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 32px;
+  }
+
+  /* Accordions */
+  .accordion__item {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .accordion__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+  }
+
+  .accordion__icon {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform var(--duration-fast) ease;
+  }
+
+  .accordion__item.is-open .accordion__icon {
+    transform: rotate(45deg);
+  }
+
+  .accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease;
+  }
+
+  .accordion__content-inner {
+    padding: 0 0 20px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Specs table */
+  .specs-table {
+    width: 100%;
+  }
+
+  .specs-table__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-body);
+    font-size: 13px;
+  }
+
+  .specs-table__label {
+    color: var(--color-text-secondary);
+  }
+</style>
+
+<div class="product-page">
+  <!-- Gallery -->
+  <div class="product-page__gallery">
+    {%- if product.featured_image -%}
+      <img class="product-page__main-image" id="main-product-image"
+        src="{{ product.featured_image | image_url: width: 1200 }}"
+        alt="{{ product.title | escape }}">
+    {%- else -%}
+      <div class="product-page__main-image" style="background:var(--color-bg-warm);"></div>
+    {%- endif -%}
+
+    {%- if product.images.size > 1 -%}
+      <div class="product-page__thumbnails">
+        {%- for image in product.images limit: 6 -%}
+          <button class="product-page__thumb{% if forloop.first %} is-active{% endif %}"
+            onclick="document.getElementById('main-product-image').src='{{ image | image_url: width: 1200 }}'; document.querySelectorAll('.product-page__thumb').forEach(t=>t.classList.remove('is-active')); this.classList.add('is-active');">
+            <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title | escape }}" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Info -->
+  <div class="product-page__info">
+    <h1 class="product-name-lg product-page__title">{{ product.title }}</h1>
+
+    <div class="product-price-lg product-page__price">
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-price-strike">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+      {{ product.price | money }}
+    </div>
+
+    <div class="product-page__description">
+      {{ product.description }}
+    </div>
+
+    {%- for option in product.options_with_values -%}
+      <div class="product-page__variant-group">
+        <div class="product-page__variant-label">{{ option.name }}</div>
+        <div class="product-page__variant-options">
+          {%- for value in option.values -%}
+            <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}">
+              {{ value }}
+            </button>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+
+    <form action="/cart/add" method="post">
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="btn-primary product-page__add-btn">
+        {%- if product.available -%}
+          Add To Cart
+        {%- else -%}
+          Sold Out
+        {%- endif -%}
+      </button>
+    </form>
+
+    <p class="product-page__trust">Free shipping · 30-day returns · Lifetime warranty</p>
+
+    <!-- Accordions -->
+    <div class="product-page__accordions">
+      <div class="accordion__item">
+        <button class="accordion__trigger">
+          <span>Description</span>
+          <span class="accordion__icon">+</span>
+        </button>
+        <div class="accordion__content">
+          <div class="accordion__content-inner">
+            A statement of quiet luxury. Our Tennis Bracelet features 40 round brilliant-cut VVS moissanite stones, each hand-set in a classic four-prong setting. The stones are mounted on a S925 sterling silver base with a thick 18-karat gold plating for lasting warmth and durability. Secured with a box clasp and double safety catch.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger">
+          <span>Technical Details</span>
+          <span class="accordion__icon">+</span>
+        </button>
+        <div class="accordion__content">
+          <div class="accordion__content-inner">
+            <div class="specs-table">
+              <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>VVS Moissanite</span></div>
+              <div class="specs-table__row"><span class="specs-table__label">Cut</span><span>Round Brilliant</span></div>
+              <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
+              <div class="specs-table__row"><span class="specs-table__label">Fire</span><span>0.104 (2.4x Diamond)</span></div>
+              <div class="specs-table__row"><span class="specs-table__label">Refractive Index</span><span>2.65</span></div>
+              <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>S925 Sterling Silver, 18K Gold Plated</span></div>
+              <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Secure Box Clasp</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger">
+          <span>Shipping & Returns</span>
+          <span class="accordion__icon">+</span>
+        </button>
+        <div class="accordion__content">
+          <div class="accordion__content-inner">
+            Free express shipping on all Australian orders via Australia Post. Typical delivery: 2-5 business days with full tracking. International shipping available at checkout. 30-day return window from date of delivery. Items must be unworn and in original packaging.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger">
+          <span>Care Guide</span>
+          <span class="accordion__icon">+</span>
+        </button>
+        <div class="accordion__content">
+          <div class="accordion__content-inner">
+            Clean with warm soapy water and a soft brush. Avoid harsh chemicals, chlorine, and abrasive surfaces. Store in the provided jewelry box when not wearing. Polish gently with the included microfiber cloth.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": []
+}
+{% endschema %}

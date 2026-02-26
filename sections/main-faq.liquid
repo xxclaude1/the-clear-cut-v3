@@ -1,0 +1,59 @@
+<style>
+  .faq-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--page-padding);
+  }
+
+  .faq-page__title {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+</style>
+
+<div class="faq-page">
+  <h1 class="heading-1 faq-page__title">Frequently Asked Questions</h1>
+
+  <div class="product-page__accordions">
+    {%- for block in section.blocks -%}
+      <div class="accordion__item" {{ block.shopify_attributes }}>
+        <button class="accordion__trigger">
+          <span>{{ block.settings.question }}</span>
+          <span class="accordion__icon">+</span>
+        </button>
+        <div class="accordion__content">
+          <div class="accordion__content-inner">{{ block.settings.answer }}</div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ Page",
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Page",
+      "blocks": [
+        { "type": "question", "settings": { "question": "What is moissanite?", "answer": "<p>Moissanite is a lab-created gemstone composed of silicon carbide. Originally discovered in a meteor crater by Nobel Prize-winning chemist Dr. Henri Moissan, it is now expertly crafted in laboratories to produce stones of exceptional brilliance and clarity.</p>" } },
+        { "type": "question", "settings": { "question": "How does moissanite compare to diamond?", "answer": "<p>Moissanite scores 9.25 on the Mohs hardness scale (diamond is 10), has 2.4 times more fire (rainbow flashes), and a higher refractive index (2.65 vs 2.42). To the naked eye, they are virtually indistinguishable.</p>" } },
+        { "type": "question", "settings": { "question": "Will moissanite lose its sparkle over time?", "answer": "<p>No. Moissanite's optical properties are permanent. It will not cloud, fade, or change colour over time. Its brilliance and fire are inherent to the stone's crystalline structure.</p>" } },
+        { "type": "question", "settings": { "question": "What does VVS clarity mean?", "answer": "<p>VVS stands for Very Very Slightly Included. Inclusions are invisible to the naked eye and can only be detected under 10x magnification. Our stones are completely eye-clean.</p>" } },
+        { "type": "question", "settings": { "question": "Do you offer free shipping?", "answer": "<p>Yes. All Australian orders include free express shipping via Australia Post. Typical delivery is 2-5 business days with full tracking.</p>" } },
+        { "type": "question", "settings": { "question": "What is your return policy?", "answer": "<p>30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia. Full refunds within 5-7 business days.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

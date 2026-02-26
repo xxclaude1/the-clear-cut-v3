@@ -1,0 +1,137 @@
+<style>
+  .editorial-banner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 60vh;
+  }
+
+  @media (max-width: 768px) {
+    .editorial-banner {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+  }
+
+  .editorial-banner__column {
+    position: relative;
+    overflow: hidden;
+    min-height: 40vh;
+  }
+
+  .editorial-banner__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .editorial-banner__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 32px;
+    max-width: 420px;
+  }
+
+  .editorial-banner__heading {
+    margin-bottom: 10px;
+  }
+
+  .editorial-banner__body {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+</style>
+
+<section class="editorial-banner reveal">
+  {%- for block in section.blocks -%}
+    <div class="editorial-banner__column" {{ block.shopify_attributes }}>
+      {%- if block.settings.image != blank -%}
+        <img class="editorial-banner__image" src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
+      {%- else -%}
+        <div style="width:100%;height:100%;background:var(--color-bg-warm);"></div>
+      {%- endif -%}
+      <div class="editorial-banner__overlay">
+        <h2 class="editorial-heading editorial-banner__heading" style="color: {{ block.settings.text_color }}">{{ block.settings.heading }}</h2>
+        <p class="editorial-banner__body" style="color: {{ block.settings.text_color }}">{{ block.settings.body }}</p>
+        {%- if block.settings.cta_text != blank -%}
+          <a href="{{ block.settings.cta_url }}" class="editorial-cta" style="color: {{ block.settings.text_color }}">{{ block.settings.cta_text }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Editorial Banner",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "The Moissanite Difference"
+        },
+        {
+          "type": "text",
+          "id": "body",
+          "label": "Body text",
+          "default": "See the brilliance up close."
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "CTA link"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Banner",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "heading": "The Moissanite Difference",
+            "body": "See the brilliance up close.",
+            "cta_text": "Learn More"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Everyday Elegance",
+            "body": "Fine jewelry designed for real life.",
+            "cta_text": "Shop All"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,198 @@
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-bg);
+    transition: box-shadow var(--duration-fast) ease;
+  }
+
+  .header--scrolled {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 var(--page-padding);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+  }
+
+  /* Left — Logo */
+  .header__logo a {
+    display: block;
+  }
+
+  /* Center — Nav */
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .header__nav-link {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    transition: opacity var(--duration-fast) ease;
+    line-height: 1;
+  }
+
+  .header__nav-link:hover {
+    opacity: 0.6;
+  }
+
+  /* Right — Icons */
+  .header__icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .header__icon-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text);
+    transition: opacity var(--duration-fast) ease;
+    padding: 0;
+  }
+
+  .header__icon-btn:hover {
+    opacity: 0.6;
+  }
+
+  .header__icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header__search-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* Cart count badge */
+  .header__cart-btn {
+    position: relative;
+  }
+
+  .header__cart-count {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-text);
+    color: var(--color-btn-primary-text);
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 600;
+    border-radius: 50%;
+    padding: 0 4px;
+    line-height: 1;
+  }
+
+  .header__cart-count:empty {
+    display: none;
+  }
+
+  /* Hamburger */
+  .header__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .header__hamburger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--color-text);
+  }
+</style>
+
+<header class="header" role="banner">
+  <div class="header__inner">
+    <!-- Left: Logo -->
+    <div class="header__logo">
+      <a href="/" class="brand-wordmark" aria-label="{{ shop.name }}">
+        THE CLEAR CUT
+      </a>
+    </div>
+
+    <!-- Center: Nav (desktop) -->
+    <nav class="header__nav desktop-only" role="navigation" aria-label="Main navigation">
+      <a href="/collections/all" class="header__nav-link">All Jewelry</a>
+      <a href="/collections/new-in" class="header__nav-link">New In</a>
+      <a href="/collections/best-sellers" class="header__nav-link">Best Sellers</a>
+      <a href="/collections" class="header__nav-link">Collections</a>
+      <a href="/pages/materials" class="header__nav-link">Materials</a>
+    </nav>
+
+    <!-- Right: Icons -->
+    <div class="header__icons">
+      <!-- Search (desktop) -->
+      <a href="/search" class="header__icon-btn desktop-only" aria-label="Search">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="9" r="6"></circle>
+          <line x1="13.5" y1="13.5" x2="18" y2="18"></line>
+        </svg>
+        <span class="header__search-label">Search</span>
+      </a>
+
+      <!-- Account (desktop) -->
+      <a href="/account" class="header__icon-btn desktop-only" aria-label="Account">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="10" cy="7" r="4"></circle>
+          <path d="M3 19c0-4 3.5-7 7-7s7 3 7 7"></path>
+        </svg>
+      </a>
+
+      <!-- Hamburger (mobile) -->
+      <button class="header__hamburger mobile-only" data-menu-open aria-label="Open menu">
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Cart -->
+      <button class="header__icon-btn header__cart-btn" data-cart-open aria-label="Open cart">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 7h10l-1 9H6L5 7z"></path>
+          <path d="M8 7V5a2 2 0 0 1 4 0v2"></path>
+        </svg>
+        <span class="header__cart-count">{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}

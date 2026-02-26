@@ -1,0 +1,121 @@
+<style>
+  .stores-services {
+    padding: var(--space-2xl) var(--page-padding);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+  }
+
+  .stores-services__heading {
+    margin-bottom: 8px;
+  }
+
+  .stores-services__subheading {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+    line-height: 1.7;
+  }
+
+  .stores-services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .stores-services__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .stores-services__card-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background-color: var(--color-bg-warm);
+    margin-bottom: 16px;
+  }
+
+  .stores-services__card-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .stores-services__card-body {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+</style>
+
+<section class="stores-services reveal">
+  <h2 class="heading-2 stores-services__heading">{{ section.settings.heading | default: 'Stores & Services' }}</h2>
+  <p class="stores-services__subheading">{{ section.settings.subheading | default: 'Discover our thoughtfully designed stores across Australia.' }}</p>
+
+  <div class="stores-services__grid reveal-stagger">
+    {%- for block in section.blocks -%}
+      <div class="stores-services__card" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <img class="stores-services__card-image" src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+        {%- else -%}
+          <div class="stores-services__card-image"></div>
+        {%- endif -%}
+        <h3 class="stores-services__card-title">{{ block.settings.title }}</h3>
+        <p class="stores-services__card-body">{{ block.settings.body }}</p>
+        {%- if block.settings.cta_text != blank -%}
+          <a href="{{ block.settings.cta_url }}" class="editorial-cta">{{ block.settings.cta_text }}</a>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stores & Services",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stores & Services"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Discover our thoughtfully designed stores across Australia."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Service Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Our Stores" },
+        { "type": "text", "id": "body", "label": "Body", "default": "Your new favourite place to shop and stay a while." },
+        { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Visit Our Stores" },
+        { "type": "url", "id": "cta_url", "label": "CTA link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stores & Services",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Our Stores", "body": "Your new favourite place to shop and stay a while.", "cta_text": "Visit Our Stores" } },
+        { "type": "card", "settings": { "title": "Styling Guide", "body": "Expert one-on-one stacking and styling advice.", "cta_text": "Book An Appointment" } },
+        { "type": "card", "settings": { "title": "Gift Concierge", "body": "Find the perfect piece for every occasion.", "cta_text": "Learn More" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,60 @@
+{%- comment -%}
+  Product card snippet — used in grids and carousels.
+  Requires: product (Shopify product object)
+{%- endcomment -%}
+
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__image-wrapper">
+    {%- if product.featured_image -%}
+      <img
+        class="product-card__image"
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.title | escape }}"
+        loading="lazy"
+        width="600"
+        height="600"
+      >
+    {%- endif -%}
+
+    {%- if product.available == false -%}
+      <span class="product-card__badge">Sold Out</span>
+    {%- elsif product.tags contains 'new' -%}
+      <span class="product-card__badge">New</span>
+    {%- elsif product.tags contains 'back-in-stock' -%}
+      <span class="product-card__badge">Back In Stock</span>
+    {%- elsif product.variants.first.inventory_quantity <= 5 and product.variants.first.inventory_quantity > 0 -%}
+      <span class="product-card__badge">Only A Few Left</span>
+    {%- endif -%}
+  </a>
+
+  <button class="btn-quick-add" data-product-id="{{ product.id }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+    ADD +
+  </button>
+
+  <div class="product-card__info">
+    <a href="{{ product.url }}" class="product-name product-card__name">{{ product.title }}</a>
+
+    <div class="product-price product-card__price">
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-price-strike">{{ product.compare_at_price | money }}</span>
+        {{ product.price | money }}
+      {%- else -%}
+        {{ product.price | money }}
+      {%- endif -%}
+    </div>
+
+    {%- if product.variants.size > 1 -%}
+      <div class="product-card__swatches">
+        {%- for variant in product.variants limit: 4 -%}
+          <span class="product-card__swatch" title="{{ variant.title }}"></span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if product.metafields.custom.material != blank -%}
+      <div class="product-material">{{ product.metafields.custom.material }}</div>
+    {%- elsif product.type != blank -%}
+      <div class="product-material">{{ product.type }}</div>
+    {%- endif -%}
+  </div>
+</div>

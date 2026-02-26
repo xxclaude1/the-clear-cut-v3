@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>
+    {%- if page_title -%}
+      {{ page_title }} — {{ shop.name }}
+    {%- else -%}
+      {{ shop.name }} — Fine Moissanite Jewelry Australia
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
+  {%- endif -%}
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ page_title | default: shop.name }}">
+  {%- if page_description -%}
+    <meta property="og:description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <!-- Google Fonts: DM Serif Display + Inter + IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Base CSS -->
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+
+  <!-- Shopify required -->
+  {{ content_for_header }}
+
+  {%- if template.name == 'product' -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": {{ product.title | json }},
+        "description": {{ product.description | strip_html | json }},
+        "url": "{{ shop.url }}{{ product.url }}",
+        "brand": {
+          "@type": "Brand",
+          "name": {{ shop.name | json }}
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": {{ cart.currency.iso_code | json }},
+          "price": {{ product.price | money_without_currency | json }},
+          "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+        }
+      }
+    </script>
+  {%- endif -%}
+</head>
+
+<body class="template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">
+  <a class="visually-hidden" href="#main-content">Skip to content</a>
+
+  {% comment %} Announcement Bar {% endcomment %}
+  {% section 'announcement-bar' %}
+
+  {% comment %} Header {% endcomment %}
+  {% section 'header' %}
+
+  {% comment %} Mobile Menu {% endcomment %}
+  {% section 'mobile-menu' %}
+
+  {% comment %} Cart Drawer {% endcomment %}
+  {% section 'cart-drawer' %}
+
+  <main id="main-content" class="page-content" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% comment %} Footer {% endcomment %}
+  {% section 'footer' %}
+
+  <!-- Global JS -->
+  <script src="{{ 'global.js' | asset_url }}" defer></script>
+</body>
+</html>
