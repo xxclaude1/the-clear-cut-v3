@@ -1,8 +1,7 @@
 <style>
   .newsletter {
-    background-color: var(--color-bg-cream);
-    border-top: 1px solid var(--color-border);
-    padding: 48px var(--page-padding);
+    background-color: #D5CEC6;
+    padding: 24px var(--page-padding);
   }
 
   .newsletter__inner {
@@ -11,36 +10,88 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-lg);
+    gap: var(--space-md);
     flex-wrap: wrap;
   }
 
   .newsletter__text {
-    max-width: 600px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
   .newsletter__badge {
     font-family: var(--font-body);
     font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #3D3630;
+    white-space: nowrap;
+  }
+
+  .newsletter__separator {
+    color: #9A9189;
+    font-weight: 300;
     font-size: 14px;
-    margin-bottom: 4px;
+  }
+
+  .newsletter__label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #5C544C;
+    white-space: nowrap;
   }
 
   .newsletter__body {
     font-family: var(--font-body);
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
+    font-size: 12px;
+    color: #6B6360;
+    line-height: 1.5;
+    max-width: 480px;
+  }
+
+  .newsletter__cta {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #3D3630;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter {
+      padding: 20px var(--page-padding);
+    }
+
+    .newsletter__inner {
+      gap: 12px;
+    }
+
+    .newsletter__body {
+      display: none;
+    }
   }
 </style>
 
 <section class="newsletter">
   <div class="newsletter__inner">
     <div class="newsletter__text">
-      <div class="newsletter__badge">{{ section.settings.badge | default: 'THE CLEAR CUT+' }} &nbsp;BECOME A MEMBER</div>
-      <p class="newsletter__body">{{ section.settings.body | default: 'Join The Clear Cut+ for free and discover exclusive access to our biggest drops, promotions, members-only products, and more.' }}</p>
+      <span class="newsletter__badge">{{ section.settings.badge | default: 'THE CLEAR CUT+' }}</span>
+      <span class="newsletter__separator">|</span>
+      <span class="newsletter__label">Become a Member</span>
     </div>
-    <a href="{{ section.settings.cta_url | default: '#' }}" class="btn-outline">{{ section.settings.cta_text | default: 'Join Now For Free' }}</a>
+    <a href="{{ section.settings.cta_url | default: '#' }}" class="newsletter__cta">{{ section.settings.cta_text | default: 'Join Now For Free' }}</a>
   </div>
 </section>
 
