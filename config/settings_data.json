@@ -19,6 +19,34 @@
     "social_pinterest": "",
     "social_tiktok": "",
     "social_twitter": "",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {}
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_width": 240
+        }
+      },
+      "mobile-menu": {
+        "type": "mobile-menu",
+        "settings": {}
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      },
+      "search-overlay": {
+        "type": "search-overlay",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      }
+    },
     "content_for_index": [],
     "blocks": {
       "855628211100114053": {
