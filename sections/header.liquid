@@ -32,6 +32,19 @@
     display: block;
   }
 
+  .header__logo-img {
+    width: auto;
+    height: auto;
+    display: block;
+    max-height: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .header__logo-img {
+      max-height: 18px;
+    }
+  }
+
   /* Center — Nav */
   .header__nav {
     display: flex;
@@ -419,8 +432,12 @@
 
     <!-- Logo (left on desktop, center on mobile) -->
     <div class="header__logo">
-      <a href="/" class="brand-wordmark" aria-label="{{ shop.name }}">
-        THE CLEAR CUT
+      <a href="/" aria-label="{{ shop.name }}"{% unless section.settings.logo %} class="brand-wordmark"{% endunless %}>
+        {%- if section.settings.logo -%}
+          <img src="{{ section.settings.logo | image_url: width: section.settings.logo_width | times: 2 }}" alt="{{ shop.name }}" class="header__logo-img" style="max-width: {{ section.settings.logo_width }}px;">
+        {%- else -%}
+          THE CLEAR CUT
+        {%- endif -%}
       </a>
     </div>
 
@@ -532,10 +549,9 @@
     </div>
     <div class="mega-menu__right">
       <div class="mega-menu__links">
-        <a href="/collections/tennis-jewelry" class="mega-menu__link">Tennis Jewelry</a>
-        <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
-        <a href="/collections/bracelets" class="mega-menu__link">Bracelets</a>
-        <a href="/collections/necklaces" class="mega-menu__link">Necklaces</a>
+        <a href="/collections/the-essentials" class="mega-menu__link">The Essentials</a>
+        <a href="/collections/the-statement-edit" class="mega-menu__link">The Statement Edit</a>
+        <a href="/collections/the-gift-guide" class="mega-menu__link">The Gift Guide</a>
       </div>
     </div>
   </div>
@@ -599,6 +615,22 @@
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width (px)",
+      "min": 60,
+      "max": 300,
+      "step": 10,
+      "default": 140,
+      "unit": "px"
+    }
+  ]
 }
 {% endschema %}

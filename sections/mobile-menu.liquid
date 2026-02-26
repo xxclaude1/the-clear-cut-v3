@@ -9,11 +9,10 @@
     z-index: 300;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 350ms cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    overflow-y: auto;
   }
 
   .mobile-menu.is-open {
@@ -21,10 +20,16 @@
     pointer-events: auto;
   }
 
+  .mobile-menu__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: var(--header-height);
+    padding: 0 var(--page-padding);
+    flex-shrink: 0;
+  }
+
   .mobile-menu__close {
-    position: absolute;
-    top: 18px;
-    right: var(--page-padding);
     background: none;
     border: none;
     cursor: pointer;
@@ -32,8 +37,7 @@
     color: var(--color-text);
     opacity: 0;
     transform: scale(0.9);
-    transition: opacity 300ms ease 200ms, transform 300ms ease 200ms;
-    z-index: 1;
+    transition: opacity 300ms ease 150ms, transform 300ms ease 150ms;
   }
 
   .mobile-menu.is-open .mobile-menu__close {
@@ -47,50 +51,113 @@
   }
 
   .mobile-menu__nav {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 32px;
+    padding: 8px 0;
   }
 
-  .mobile-menu__link {
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 22px;
-    text-transform: uppercase;
-    color: var(--color-text);
-    letter-spacing: 0.06em;
-    text-decoration: none;
+  /* Main nav items */
+  .mobile-menu__item {
+    border-bottom: 1px solid var(--color-border);
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
-                transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(12px);
+    transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .mobile-menu__link:active {
-    opacity: 0.5;
-  }
-
-  .mobile-menu.is-open .mobile-menu__link {
+  .mobile-menu.is-open .mobile-menu__item {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .mobile-menu.is-open .mobile-menu__link:nth-child(1) { transition-delay: 100ms; }
-  .mobile-menu.is-open .mobile-menu__link:nth-child(2) { transition-delay: 160ms; }
-  .mobile-menu.is-open .mobile-menu__link:nth-child(3) { transition-delay: 220ms; }
-  .mobile-menu.is-open .mobile-menu__link:nth-child(4) { transition-delay: 280ms; }
+  .mobile-menu.is-open .mobile-menu__item:nth-child(1) { transition-delay: 80ms; }
+  .mobile-menu.is-open .mobile-menu__item:nth-child(2) { transition-delay: 140ms; }
+  .mobile-menu.is-open .mobile-menu__item:nth-child(3) { transition-delay: 200ms; }
+  .mobile-menu.is-open .mobile-menu__item:nth-child(4) { transition-delay: 260ms; }
 
-  .mobile-menu__bottom {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    right: 0;
+  .mobile-menu__trigger {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px var(--page-padding);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    text-align: left;
+  }
+
+  .mobile-menu__trigger svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 300ms ease;
+    flex-shrink: 0;
+  }
+
+  .mobile-menu__item.is-open .mobile-menu__trigger svg {
+    transform: rotate(180deg);
+  }
+
+  /* Direct link (no sub-menu) */
+  .mobile-menu__link {
+    display: block;
+    padding: 18px var(--page-padding);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  /* Sub-menu */
+  .mobile-menu__sub {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: var(--color-bg);
+  }
+
+  .mobile-menu__item.is-open .mobile-menu__sub {
+    max-height: 400px;
+  }
+
+  .mobile-menu__sub-link {
+    display: block;
+    padding: 12px var(--page-padding) 12px 40px;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .mobile-menu__sub-link:last-child {
+    padding-bottom: 18px;
+  }
+
+  .mobile-menu__sub-link:active {
+    opacity: 0.5;
+  }
+
+  /* Bottom links */
+  .mobile-menu__bottom {
+    padding: var(--space-md) var(--page-padding);
+    border-top: 1px solid var(--color-border);
+    display: flex;
     gap: 24px;
+    flex-shrink: 0;
     opacity: 0;
-    transition: opacity 400ms ease 350ms;
+    transition: opacity 400ms ease 300ms;
   }
 
   .mobile-menu.is-open .mobile-menu__bottom {
@@ -103,7 +170,6 @@
     font-size: 13px;
     color: var(--color-text-secondary);
     text-decoration: none;
-    letter-spacing: 0.02em;
     transition: color var(--duration-fast) ease;
   }
 
@@ -113,18 +179,64 @@
 </style>
 
 <div class="mobile-menu" role="dialog" aria-label="Navigation menu">
-  <button class="mobile-menu__close" data-menu-close aria-label="Close menu">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-      <line x1="4" y1="4" x2="16" y2="16"></line>
-      <line x1="16" y1="4" x2="4" y2="16"></line>
-    </svg>
-  </button>
+  <div class="mobile-menu__header">
+    <button class="mobile-menu__close" data-menu-close aria-label="Close menu">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="4" y1="4" x2="16" y2="16"></line>
+        <line x1="16" y1="4" x2="4" y2="16"></line>
+      </svg>
+    </button>
+  </div>
 
   <nav class="mobile-menu__nav" role="navigation">
-    <a href="/collections/all-jewelry" class="mobile-menu__link">All Jewelry</a>
-    <a href="/collections/new-in" class="mobile-menu__link">New In</a>
-    <a href="/collections" class="mobile-menu__link">Collections</a>
-    <a href="/pages/materials" class="mobile-menu__link">Materials</a>
+    <!-- All Jewelry -->
+    <div class="mobile-menu__item" data-mobile-accordion>
+      <button class="mobile-menu__trigger">
+        All Jewelry
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="3,5 7,9 11,5"></polyline></svg>
+      </button>
+      <div class="mobile-menu__sub">
+        <a href="/collections/all-jewelry" class="mobile-menu__sub-link">Shop All</a>
+        <a href="/collections/earrings" class="mobile-menu__sub-link">Earrings</a>
+        <a href="/collections/rings" class="mobile-menu__sub-link">Rings</a>
+        <a href="/collections/bracelets" class="mobile-menu__sub-link">Bracelets</a>
+        <a href="/collections/necklaces" class="mobile-menu__sub-link">Necklaces</a>
+        <a href="/collections/tennis-jewelry" class="mobile-menu__sub-link">Tennis Jewelry</a>
+      </div>
+    </div>
+
+    <!-- New In -->
+    <div class="mobile-menu__item" data-mobile-accordion>
+      <button class="mobile-menu__trigger">
+        New In
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="3,5 7,9 11,5"></polyline></svg>
+      </button>
+      <div class="mobile-menu__sub">
+        <a href="/collections/new-in" class="mobile-menu__sub-link">All New Arrivals</a>
+        <a href="/collections/earrings" class="mobile-menu__sub-link">Earrings</a>
+        <a href="/collections/rings" class="mobile-menu__sub-link">Rings</a>
+        <a href="/collections/bracelets" class="mobile-menu__sub-link">Bracelets</a>
+        <a href="/collections/necklaces" class="mobile-menu__sub-link">Necklaces</a>
+      </div>
+    </div>
+
+    <!-- Collections -->
+    <div class="mobile-menu__item" data-mobile-accordion>
+      <button class="mobile-menu__trigger">
+        Collections
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="3,5 7,9 11,5"></polyline></svg>
+      </button>
+      <div class="mobile-menu__sub">
+        <a href="/collections/the-essentials" class="mobile-menu__sub-link">The Essentials</a>
+        <a href="/collections/the-statement-edit" class="mobile-menu__sub-link">The Statement Edit</a>
+        <a href="/collections/the-gift-guide" class="mobile-menu__sub-link">The Gift Guide</a>
+      </div>
+    </div>
+
+    <!-- Materials (direct link) -->
+    <div class="mobile-menu__item">
+      <a href="/pages/materials" class="mobile-menu__link">Materials</a>
+    </div>
   </nav>
 
   <div class="mobile-menu__bottom">
@@ -132,6 +244,40 @@
     <a href="/account" class="mobile-menu__bottom-link">Account</a>
   </div>
 </div>
+
+<script>
+  (function() {
+    document.querySelectorAll('[data-mobile-accordion] .mobile-menu__trigger').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = this.closest('.mobile-menu__item');
+        var wasOpen = item.classList.contains('is-open');
+
+        // Close all siblings
+        item.parentElement.querySelectorAll('.mobile-menu__item.is-open').forEach(function(openItem) {
+          if (openItem !== item) openItem.classList.remove('is-open');
+        });
+
+        // Toggle current
+        if (wasOpen) {
+          item.classList.remove('is-open');
+        } else {
+          item.classList.add('is-open');
+        }
+      });
+    });
+
+    // Close menu on sub-link click
+    document.querySelectorAll('.mobile-menu__sub-link, .mobile-menu__link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        var menu = document.querySelector('.mobile-menu');
+        if (menu) {
+          menu.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
