@@ -641,8 +641,8 @@
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            <p>Free express shipping on all Australian orders via Australia Post. Typical delivery: 2-5 business days with full tracking.</p>
-            <p style="margin-top:12px;">30-day return window from date of delivery. Items must be unworn and in original packaging. Free return shipping within Australia.</p>
+            <p>Free shipping on all Australian orders over $200. Standard delivery: 8-14 business days with full tracking provided via Australia Post.</p>
+            <p style="margin-top:12px;">30-day return window from date of delivery. Items must be unworn, undamaged, and in original packaging. Free return shipping within Australia. Refunds are processed within 5 business days of receiving the returned item.</p>
           </div>
         </div>
       </div>
@@ -654,7 +654,18 @@
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            Clean with warm soapy water and a soft brush. Avoid harsh chemicals, chlorine, and abrasive surfaces. Store in the provided jewelry box when not wearing.
+            {%- assign handle_down = product.handle -%}
+            {%- if handle_down contains 'earring' or handle_down contains 'hoop' or handle_down contains 'lumiere' or handle_down contains 'picasso' -%}
+              <p>Remove earrings before showering, swimming, or exercising. Clean gently with warm soapy water and a soft cloth — avoid submerging the posts. Pat dry thoroughly. Store in the provided jewelry box with earring backs secured to prevent loss. Avoid contact with perfume, hairspray, and cosmetics.</p>
+            {%- elsif handle_down contains 'band' or handle_down contains 'eternite' -%}
+              <p>Remove your ring before washing hands, showering, or applying lotions. Clean with warm soapy water and a soft-bristled brush to reach between the stones. Dry with a lint-free cloth. Avoid wearing during heavy lifting or manual work to protect the channel setting. Store separately in the provided ring slot to avoid scratching other pieces.</p>
+            {%- elsif handle_down contains 'bracelet' or handle_down contains 'eclat' -%}
+              <p>Remove your bracelet before sleeping, showering, or exercising. Clean with warm soapy water and a soft brush, paying attention to the links and clasp mechanism. Dry thoroughly with a soft cloth. Store laid flat in the provided jewelry box to prevent kinking. Avoid contact with harsh chemicals, chlorine, and abrasive surfaces.</p>
+            {%- elsif handle_down contains 'pendant' or handle_down contains 'necklace' or handle_down contains 'chain' or handle_down contains 'solaire' or handle_down contains 'trefle' or handle_down contains 'riviere' -%}
+              <p>Remove your necklace before sleeping, showering, or applying perfume. Clean the chain and pendant separately using warm soapy water and a soft cloth. Dry thoroughly before storing. Hang or lay flat in the provided jewelry box to prevent tangling. For tennis chains, avoid folding or bending the links — always store laid straight.</p>
+            {%- else -%}
+              <p>Clean with warm soapy water and a soft brush. Avoid harsh chemicals, chlorine, and abrasive surfaces. Store in the provided jewelry box when not wearing. Remove before showering, swimming, or exercising to maintain the finish.</p>
+            {%- endif -%}
           </div>
         </div>
       </div>
