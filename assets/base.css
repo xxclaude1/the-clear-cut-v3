@@ -741,28 +741,12 @@ textarea.input {
   gap: 8px;
 }
 
-.product-card__swatches {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.product-card__swatch {
-  width: 10px;
-  height: 10px;
-  border: 1px solid var(--color-border);
-}
-
-.product-card__swatch--silver {
-  background-color: #C0C0C0;
-}
-
-.product-card__swatch--gold {
-  background-color: #D4A853;
-}
-
-.product-card__swatch--rose {
-  background-color: #B76E79;
+.product-card__finish {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
 }
 
 .product-card__material {

@@ -70,20 +70,7 @@
       {%- endfor -%}
 
       {%- if color_option and color_option.values.size > 0 -%}
-        <div class="product-card__swatches">
-          {%- for value in color_option.values limit: 4 -%}
-            {%- assign value_down = value | downcase -%}
-            {%- if value_down contains 'silver' or value_down contains 'white' -%}
-              <span class="product-card__swatch product-card__swatch--silver" title="{{ value }}"></span>
-            {%- elsif value_down contains 'gold' or value_down contains 'yellow' -%}
-              <span class="product-card__swatch product-card__swatch--gold" title="{{ value }}"></span>
-            {%- elsif value_down contains 'rose' -%}
-              <span class="product-card__swatch product-card__swatch--rose" title="{{ value }}"></span>
-            {%- else -%}
-              <span class="product-card__swatch" title="{{ value }}"></span>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
+        <span class="product-card__finish">{{ color_option.values | join: ' · ' }}</span>
       {%- endif -%}
 
       <span class="product-card__material">
