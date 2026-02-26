@@ -32,18 +32,6 @@
     display: block;
   }
 
-  .header__logo-img {
-    height: 18px;
-    width: auto;
-    display: block;
-  }
-
-  @media (max-width: 768px) {
-    .header__logo-img {
-      height: 14px;
-    }
-  }
-
   /* Center — Nav */
   .header__nav {
     display: flex;
@@ -427,8 +415,8 @@
 
     <!-- Logo (left on desktop, center on mobile) -->
     <div class="header__logo">
-      <a href="/" aria-label="{{ shop.name }}">
-        <img src="{{ 'logo-v2.png' | asset_url }}" alt="{{ shop.name }}" class="header__logo-img">
+      <a href="/" class="brand-wordmark" aria-label="{{ shop.name }}">
+        THE CLEAR CUT
       </a>
     </div>
 
