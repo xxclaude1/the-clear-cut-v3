@@ -20,7 +20,9 @@ Secret: (stored locally — do not commit to git)
 Token endpoint: POST /admin/oauth/access_token with grant_type=client_credentials
 Token expires: 24 hours
 API version: 2024-10
-Theme ID: 152507187388 (Horizon — current published theme)
+V3 Theme ID: 152531009724 (the-clear-cut-v3 — unpublished)
+V2 Theme ID: 152510628028 (currently published)
+Horizon Theme ID: 152507187388
 ```
 
 ## Design Direction (Mejuri 2026 Adaptation)
