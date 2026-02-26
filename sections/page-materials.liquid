@@ -1,0 +1,407 @@
+<style>
+  .materials {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: 0 var(--page-padding);
+  }
+
+  /* Hero */
+  .materials__hero {
+    text-align: center;
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .materials__hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .materials__hero-heading {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.15;
+    margin-bottom: var(--space-md);
+  }
+
+  .materials__hero-sub {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* Material row */
+  .materials__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .materials__row:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .materials__row--reverse .materials__image {
+    order: 2;
+  }
+
+  .materials__row--reverse .materials__info {
+    order: 1;
+  }
+
+  .materials__image {
+    background-color: var(--color-bg-warm);
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .materials__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .materials__image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .materials__image-placeholder svg {
+    width: 64px;
+    height: 64px;
+    opacity: 0.15;
+  }
+
+  .materials__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-xl);
+  }
+
+  .materials__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .materials__name {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+  }
+
+  .materials__description {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+  }
+
+  .materials__specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .materials__spec {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-body);
+    font-size: 12px;
+  }
+
+  .materials__spec:last-child {
+    border-bottom: none;
+  }
+
+  .materials__spec-label {
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .materials__spec-value {
+    color: var(--color-text);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  /* Certification banner */
+  .materials__banner {
+    background-color: var(--color-bg-warm);
+    padding: var(--space-xl);
+    text-align: center;
+    margin: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .materials__banner-heading {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+  }
+
+  .materials__banner-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto var(--space-md);
+  }
+
+  .materials__banner-cta {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-btn-primary-text);
+    background-color: var(--color-btn-primary-bg);
+    padding: 14px 32px;
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .materials__banner-cta:hover {
+    background-color: var(--color-btn-primary-hover);
+  }
+
+  @media (max-width: 768px) {
+    .materials__row {
+      grid-template-columns: 1fr;
+    }
+
+    .materials__row--reverse .materials__image {
+      order: 1;
+    }
+
+    .materials__row--reverse .materials__info {
+      order: 2;
+    }
+
+    .materials__info {
+      padding: var(--space-lg) 0;
+    }
+
+    .materials__image {
+      aspect-ratio: 16 / 10;
+    }
+
+    .materials__banner {
+      padding: var(--space-lg) var(--space-md);
+    }
+  }
+</style>
+
+<div class="materials">
+  <!-- Hero -->
+  <div class="materials__hero reveal">
+    <div class="materials__hero-label">Craftsmanship</div>
+    <h1 class="materials__hero-heading">Our Materials</h1>
+    <p class="materials__hero-sub">Every material is selected for quality, durability, and ethical sourcing. No shortcuts. No compromises.</p>
+  </div>
+
+  <!-- Moissanite -->
+  <div class="materials__row reveal">
+    <div class="materials__image">
+      {%- if section.settings.moissanite_image != blank -%}
+        <img src="{{ section.settings.moissanite_image | image_url: width: 800 }}" alt="Moissanite" loading="lazy">
+      {%- else -%}
+        <div class="materials__image-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"></polygon><line x1="12" y1="2" x2="12" y2="22"></line><line x1="22" y1="8.5" x2="2" y2="15.5"></line><line x1="2" y1="8.5" x2="22" y2="15.5"></line></svg>
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="materials__info">
+      <div class="materials__label">The Stone</div>
+      <h2 class="materials__name">Moissanite</h2>
+      <p class="materials__description">Lab-created using advanced crystal growth technology. Moissanite produces more brilliance and fire than any other gemstone — with a refractive index of 2.65, surpassing even diamond. Every stone is independently graded and certified.</p>
+      <div class="materials__specs">
+        <div class="materials__spec">
+          <span class="materials__spec-label">Colour</span>
+          <span class="materials__spec-value">D (Colourless)</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Clarity</span>
+          <span class="materials__spec-value">VVS1</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Hardness</span>
+          <span class="materials__spec-value">9.25 Mohs</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Refractive Index</span>
+          <span class="materials__spec-value">2.65</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Certification</span>
+          <span class="materials__spec-value">GRA Certified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sterling Silver -->
+  <div class="materials__row materials__row--reverse reveal">
+    <div class="materials__image">
+      {%- if section.settings.silver_image != blank -%}
+        <img src="{{ section.settings.silver_image | image_url: width: 800 }}" alt="Sterling Silver" loading="lazy">
+      {%- else -%}
+        <div class="materials__image-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v12M6 12h12"></path></svg>
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="materials__info">
+      <div class="materials__label">The Metal</div>
+      <h2 class="materials__name">925 Sterling Silver</h2>
+      <p class="materials__description">An alloy of 92.5% pure silver and 7.5% copper, prized for its bright lustre, hypoallergenic properties, and excellent durability. All pieces are rhodium plated for enhanced scratch resistance and a brilliant white finish.</p>
+      <div class="materials__specs">
+        <div class="materials__spec">
+          <span class="materials__spec-label">Purity</span>
+          <span class="materials__spec-value">92.5% Silver</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Plating</span>
+          <span class="materials__spec-value">Rhodium</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Hypoallergenic</span>
+          <span class="materials__spec-value">Yes</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Tarnish Resistant</span>
+          <span class="materials__spec-value">Yes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rhodium -->
+  <div class="materials__row reveal">
+    <div class="materials__image">
+      {%- if section.settings.rhodium_image != blank -%}
+        <img src="{{ section.settings.rhodium_image | image_url: width: 800 }}" alt="Rhodium Plating" loading="lazy">
+      {%- else -%}
+        <div class="materials__image-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="12" x2="21" y2="12"></line><line x1="12" y1="3" x2="12" y2="21"></line></svg>
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="materials__info">
+      <div class="materials__label">The Finish</div>
+      <h2 class="materials__name">Rhodium Plating</h2>
+      <p class="materials__description">A precious metal in the platinum family. Rhodium provides a mirror-bright finish, exceptional tarnish resistance, and added surface hardness. Our lifetime warranty includes one complimentary re-plating per year.</p>
+      <div class="materials__specs">
+        <div class="materials__spec">
+          <span class="materials__spec-label">Metal Family</span>
+          <span class="materials__spec-value">Platinum Group</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Finish</span>
+          <span class="materials__spec-value">Mirror Bright</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Re-plating</span>
+          <span class="materials__spec-value">1x Per Year (Free)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 18ct Gold Plating -->
+  <div class="materials__row materials__row--reverse reveal">
+    <div class="materials__image">
+      {%- if section.settings.gold_image != blank -%}
+        <img src="{{ section.settings.gold_image | image_url: width: 800 }}" alt="18ct Gold Plating" loading="lazy">
+      {%- else -%}
+        <div class="materials__image-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="materials__info">
+      <div class="materials__label">The Option</div>
+      <h2 class="materials__name">18ct Gold Plating</h2>
+      <p class="materials__description">Select pieces are available in 18ct gold plating — a generous layer of real gold bonded to the sterling silver base. Available in white gold, yellow gold, and rose gold. Thicker than industry standard for lasting wear.</p>
+      <div class="materials__specs">
+        <div class="materials__spec">
+          <span class="materials__spec-label">Gold Purity</span>
+          <span class="materials__spec-value">18ct (75% Gold)</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Options</span>
+          <span class="materials__spec-value">White / Yellow / Rose</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Base</span>
+          <span class="materials__spec-value">925 Sterling Silver</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRA Certification Banner -->
+  <div class="materials__banner reveal">
+    <h2 class="materials__banner-heading">GRA Certified. Every Stone.</h2>
+    <p class="materials__banner-text">Every piece ships with a GRA certificate of authenticity confirming colour grade, clarity, cut, and carat weight. Your guarantee that every stone meets our exacting standards.</p>
+    <a href="/collections/all-jewelry" class="materials__banner-cta">Shop All Jewelry</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Materials Page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "moissanite_image",
+      "label": "Moissanite Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "silver_image",
+      "label": "Sterling Silver Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "rhodium_image",
+      "label": "Rhodium Plating Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "gold_image",
+      "label": "18ct Gold Plating Image"
+    }
+  ]
+}
+{% endschema %}
