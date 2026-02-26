@@ -286,15 +286,11 @@
 
   .dropdown-menu__inner {
     display: flex;
-    justify-content: center;
-    gap: 80px;
-    padding: 48px var(--page-padding);
+    flex-direction: column;
+    align-items: center;
+    padding: 40px var(--page-padding) 48px;
     max-width: var(--page-max-width);
     margin: 0 auto;
-  }
-
-  .dropdown-menu__column {
-    min-width: 140px;
   }
 
   .dropdown-menu__heading {
@@ -305,6 +301,7 @@
     letter-spacing: 0.04em;
     margin-bottom: 20px;
     color: var(--color-text);
+    text-align: center;
     /* Stagger animation */
     opacity: 0;
     transform: translateY(8px);
@@ -318,7 +315,7 @@
   }
 
   .dropdown-menu__heading a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
     transition: opacity var(--duration-fast) ease;
@@ -340,6 +337,7 @@
   .dropdown-menu__links {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0;
   }
 
@@ -350,6 +348,7 @@
     color: var(--color-text-secondary);
     line-height: 2.4;
     transition: color var(--duration-fast) ease;
+    text-align: center;
     /* Stagger animation */
     opacity: 0;
     transform: translateY(8px);
@@ -589,56 +588,44 @@
     <!-- Desktop dropdown menus — inside header so they position relative to it -->
     <div class="dropdown-menu" id="dropdown-all-jewelry">
       <div class="dropdown-menu__inner">
-        <div class="dropdown-menu__column">
-          <div class="dropdown-menu__heading">
-            <a href="/collections/all-jewelry">All Jewelry <span class="dropdown-menu__heading-arrow">&rarr;</span></a>
-          </div>
+        <div class="dropdown-menu__heading">
+          <a href="/collections/all-jewelry">All Jewelry <span class="dropdown-menu__heading-arrow">&rarr;</span></a>
         </div>
-        <div class="dropdown-menu__column">
-          <div class="dropdown-menu__links">
-            <a href="/collections/all-jewelry" class="dropdown-menu__link">Shop All</a>
-            <a href="/collections/earrings" class="dropdown-menu__link">Earrings</a>
-            <a href="/collections/rings" class="dropdown-menu__link">Rings</a>
-            <a href="/collections/bracelets" class="dropdown-menu__link">Bracelets</a>
-            <a href="/collections/necklaces" class="dropdown-menu__link">Necklaces</a>
-            <a href="/collections/tennis-jewelry" class="dropdown-menu__link">Tennis Jewelry</a>
-          </div>
+        <div class="dropdown-menu__links">
+          <a href="/collections/all-jewelry" class="dropdown-menu__link">Shop All</a>
+          <a href="/collections/earrings" class="dropdown-menu__link">Earrings</a>
+          <a href="/collections/rings" class="dropdown-menu__link">Rings</a>
+          <a href="/collections/bracelets" class="dropdown-menu__link">Bracelets</a>
+          <a href="/collections/necklaces" class="dropdown-menu__link">Necklaces</a>
+          <a href="/collections/tennis-jewelry" class="dropdown-menu__link">Tennis Jewelry</a>
         </div>
       </div>
     </div>
 
     <div class="dropdown-menu" id="dropdown-new-in">
       <div class="dropdown-menu__inner">
-        <div class="dropdown-menu__column">
-          <div class="dropdown-menu__heading">
-            <a href="/collections/new-in">New In <span class="dropdown-menu__heading-arrow">&rarr;</span></a>
-          </div>
+        <div class="dropdown-menu__heading">
+          <a href="/collections/new-in">New In <span class="dropdown-menu__heading-arrow">&rarr;</span></a>
         </div>
-        <div class="dropdown-menu__column">
-          <div class="dropdown-menu__links">
-            <a href="/collections/new-in" class="dropdown-menu__link">All New Arrivals</a>
-            <a href="/collections/earrings" class="dropdown-menu__link">Earrings</a>
-            <a href="/collections/rings" class="dropdown-menu__link">Rings</a>
-            <a href="/collections/bracelets" class="dropdown-menu__link">Bracelets</a>
-            <a href="/collections/necklaces" class="dropdown-menu__link">Necklaces</a>
-          </div>
+        <div class="dropdown-menu__links">
+          <a href="/collections/new-in" class="dropdown-menu__link">All New Arrivals</a>
+          <a href="/collections/earrings" class="dropdown-menu__link">Earrings</a>
+          <a href="/collections/rings" class="dropdown-menu__link">Rings</a>
+          <a href="/collections/bracelets" class="dropdown-menu__link">Bracelets</a>
+          <a href="/collections/necklaces" class="dropdown-menu__link">Necklaces</a>
         </div>
       </div>
     </div>
 
     <div class="dropdown-menu" id="dropdown-collections">
       <div class="dropdown-menu__inner">
-        <div class="dropdown-menu__column">
-          <div class="dropdown-menu__heading">
-            <a href="/collections">Collections <span class="dropdown-menu__heading-arrow">&rarr;</span></a>
-          </div>
+        <div class="dropdown-menu__heading">
+          <a href="/collections">Collections <span class="dropdown-menu__heading-arrow">&rarr;</span></a>
         </div>
-        <div class="dropdown-menu__column">
-          <div class="dropdown-menu__links">
-            <a href="/collections/the-essentials" class="dropdown-menu__link">The Essentials</a>
-            <a href="/collections/the-statement-edit" class="dropdown-menu__link">The Statement Edit</a>
-            <a href="/collections/the-gift-guide" class="dropdown-menu__link">The Gift Guide</a>
-          </div>
+        <div class="dropdown-menu__links">
+          <a href="/collections/the-essentials" class="dropdown-menu__link">The Essentials</a>
+          <a href="/collections/the-statement-edit" class="dropdown-menu__link">The Statement Edit</a>
+          <a href="/collections/the-gift-guide" class="dropdown-menu__link">The Gift Guide</a>
         </div>
       </div>
     </div>
