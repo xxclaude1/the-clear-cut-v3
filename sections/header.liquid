@@ -177,40 +177,44 @@
     background-color: var(--color-text);
   }
 
-  /* ---- Mega Menu / Sliding Dropdown ---- */
+  /* ---- Mega Menu / Slide-in from Left ---- */
   .mega-menu {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
-    right: 0;
+    bottom: 0;
+    width: 56%;
+    max-width: 720px;
     background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-    z-index: 99;
-    display: none;
-    animation: megaSlideDown 250ms var(--ease-out) forwards;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 350ms var(--ease-out);
+    overflow-y: auto;
+    border-right: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 768px) {
+    .mega-menu {
+      width: 85%;
+    }
   }
 
   .mega-menu.is-open {
-    display: block;
-  }
-
-  @keyframes megaSlideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    transform: translateX(0);
   }
 
   .mega-menu__inner {
-    max-width: var(--page-max-width);
-    margin: 0 auto;
-    padding: 32px var(--page-padding) 48px;
+    padding: 72px var(--page-padding) 60px;
     display: flex;
-    gap: 80px;
+    gap: 60px;
+    min-height: 100%;
+    align-items: flex-start;
+  }
+
+  .mega-menu__left {
+    flex-shrink: 0;
+    min-width: 160px;
+    padding-top: 4px;
   }
 
   .mega-menu__heading {
@@ -219,17 +223,22 @@
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    margin-bottom: 4px;
+    margin-bottom: 0;
   }
 
   .mega-menu__heading a {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .mega-menu__heading a:hover {
+    opacity: 0.6;
   }
 
   .mega-menu__heading-arrow {
-    font-size: 16px;
+    font-size: 18px;
     transition: transform var(--duration-fast) ease;
   }
 
@@ -237,19 +246,22 @@
     transform: translateX(4px);
   }
 
+  .mega-menu__right {
+    padding-top: 0;
+  }
+
   .mega-menu__links {
     display: flex;
     flex-direction: column;
     gap: 0;
-    margin-top: 16px;
   }
 
   .mega-menu__link {
     font-family: var(--font-body);
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-text);
-    line-height: 2.2;
+    line-height: 2.4;
     transition: opacity var(--duration-fast) ease;
   }
 
@@ -259,7 +271,7 @@
 
   .mega-menu__close {
     position: absolute;
-    top: 32px;
+    top: 40px;
     right: var(--page-padding);
     width: 32px;
     height: 32px;
@@ -269,6 +281,7 @@
     cursor: pointer;
     background: none;
     border: none;
+    z-index: 1;
   }
 
   .mega-menu__close svg {
@@ -288,12 +301,15 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.15);
-    z-index: 98;
+    background: rgba(0,0,0,0.25);
+    z-index: 199;
+    opacity: 0;
+    transition: opacity 350ms ease;
   }
 
   .mega-menu-overlay.is-open {
     display: block;
+    opacity: 1;
   }
 </style>
 
@@ -368,11 +384,16 @@
 
   <!-- Mega Menu: All Jewelry -->
   <div class="mega-menu" id="mega-all-jewelry">
+    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
+    </button>
     <div class="mega-menu__inner">
-      <div>
+      <div class="mega-menu__left">
         <div class="mega-menu__heading">
           <a href="/collections/all">ALL JEWELRY <span class="mega-menu__heading-arrow">&rarr;</span></a>
         </div>
+      </div>
+      <div class="mega-menu__right">
         <div class="mega-menu__links">
           <a href="/collections/all" class="mega-menu__link">Shop All</a>
           <a href="/collections/earrings" class="mega-menu__link">Earrings</a>
@@ -383,18 +404,20 @@
         </div>
       </div>
     </div>
-    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
-    </button>
   </div>
 
   <!-- Mega Menu: New In -->
   <div class="mega-menu" id="mega-new-in">
+    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
+    </button>
     <div class="mega-menu__inner">
-      <div>
+      <div class="mega-menu__left">
         <div class="mega-menu__heading">
           <a href="/collections/new-in">NEW IN <span class="mega-menu__heading-arrow">&rarr;</span></a>
         </div>
+      </div>
+      <div class="mega-menu__right">
         <div class="mega-menu__links">
           <a href="/collections/new-in" class="mega-menu__link">All New Arrivals</a>
           <a href="/collections/new-earrings" class="mega-menu__link">New Earrings</a>
@@ -404,18 +427,20 @@
         </div>
       </div>
     </div>
-    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
-    </button>
   </div>
 
   <!-- Mega Menu: Best Sellers -->
   <div class="mega-menu" id="mega-best-sellers">
+    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
+    </button>
     <div class="mega-menu__inner">
-      <div>
+      <div class="mega-menu__left">
         <div class="mega-menu__heading">
           <a href="/collections/best-sellers">BEST SELLERS <span class="mega-menu__heading-arrow">&rarr;</span></a>
         </div>
+      </div>
+      <div class="mega-menu__right">
         <div class="mega-menu__links">
           <a href="/collections/best-sellers" class="mega-menu__link">All Best Sellers</a>
           <a href="/collections/best-selling-earrings" class="mega-menu__link">Best Selling Earrings</a>
@@ -425,18 +450,20 @@
         </div>
       </div>
     </div>
-    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
-    </button>
   </div>
 
   <!-- Mega Menu: Collections -->
   <div class="mega-menu" id="mega-collections">
+    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
+    </button>
     <div class="mega-menu__inner">
-      <div>
+      <div class="mega-menu__left">
         <div class="mega-menu__heading">
           <a href="/collections">COLLECTIONS <span class="mega-menu__heading-arrow">&rarr;</span></a>
         </div>
+      </div>
+      <div class="mega-menu__right">
         <div class="mega-menu__links">
           <a href="/collections/tennis-jewelry" class="mega-menu__link">Tennis Jewelry</a>
           <a href="/collections/everyday-essentials" class="mega-menu__link">Everyday Essentials</a>
@@ -445,9 +472,6 @@
         </div>
       </div>
     </div>
-    <button class="mega-menu__close" data-mega-close aria-label="Close menu">
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="16" y2="16"></line><line x1="16" y1="2" x2="2" y2="16"></line></svg>
-    </button>
   </div>
 </header>
 
@@ -466,6 +490,7 @@
       menus.forEach(function(m) { m.classList.remove('is-open'); });
       overlay.classList.remove('is-open');
       triggers.forEach(function(t) { t.classList.remove('is-active'); });
+      document.body.style.overflow = '';
       currentOpen = null;
     }
 
@@ -485,6 +510,7 @@
         menu.classList.add('is-open');
         overlay.classList.add('is-open');
         this.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
         currentOpen = id;
       });
     });
