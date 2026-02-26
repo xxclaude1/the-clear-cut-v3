@@ -1,20 +1,67 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "image_1": "shopify://shop_images/Screenshot2026-02-26at3.20.43AM.png",
+        "heading_1": "Start Your Collection",
+        "body_1": "Our Tennis Bracelets are waiting.",
+        "cta_text_1": "Shop Tennis Bracelets",
+        "cta_url_1": "",
+        "text_color_1": "#ffffff",
+        "image_2": "shopify://shop_images/Screenshot_2026-02-26_at_7.05.26_PM.png",
+        "heading_2": "",
+        "body_2": "",
+        "cta_text_2": "",
+        "cta_url_2": "",
+        "text_color_2": "#ffffff",
+        "image_3": "shopify://shop_images/Screenshot_2026-02-26_at_7.11.53_PM.png",
+        "heading_3": "",
+        "body_3": "",
+        "cta_text_3": "",
+        "cta_url_3": "",
+        "text_color_3": "#ffffff",
+        "heading_4": "",
+        "body_4": "",
+        "cta_text_4": "",
+        "cta_url_4": "",
+        "text_color_4": "#ffffff"
+      }
     },
     "trending-products": {
       "type": "trending-products",
-      "settings": {}
+      "settings": {
+        "heading": "Top 15 Trending Products",
+        "collection": "",
+        "limit": 15
+      }
     },
     "sustainability": {
       "type": "sustainability",
-      "settings": {}
+      "settings": {
+        "heading": "Our Commitment",
+        "body": "Our journey mirrors that of the jewelry we create — crafted through collaboration and constant evolution. We're here to transform fine jewelry into everyday moments, empower our community, and drive meaningful change.",
+        "cta_text": "Learn More",
+        "cta_url": ""
+      }
     },
     "newsletter": {
       "type": "newsletter",
-      "settings": {}
+      "settings": {
+        "badge": "THE CLEAR CUT+",
+        "body": "Join The Clear Cut+ for free and discover exclusive access to our biggest drops, promotions, members-only products, and more.",
+        "cta_text": "Join Now For Free",
+        "cta_url": ""
+      }
     }
   },
   "order": [
