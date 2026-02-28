@@ -370,6 +370,38 @@
     </div>
   </div>
 
+  <!-- Premium Packaging -->
+  <div class="materials__row reveal">
+    <div class="materials__image">
+      {%- if section.settings.packaging_image != blank -%}
+        <img src="{{ section.settings.packaging_image | image_url: width: 800 }}" alt="Premium Packaging" loading="lazy">
+      {%- else -%}
+        <div class="materials__image-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="materials__info">
+      <div class="materials__label">The Experience</div>
+      <h2 class="materials__name">Premium Packaging</h2>
+      <p class="materials__description">Every piece arrives in a hand-finished leather jewelry case with soft-touch interior lining. Designed to feel like a gift — whether it's for someone else or yourself. Magnetic closure. Compact enough to travel with you.</p>
+      <div class="materials__specs">
+        <div class="materials__spec">
+          <span class="materials__spec-label">Exterior</span>
+          <span class="materials__spec-value">Hand-Finished Leather</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Interior</span>
+          <span class="materials__spec-value">Soft-Touch Suede Lining</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Closure</span>
+          <span class="materials__spec-value">Magnetic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- GRA Certification Banner -->
   <div class="materials__banner reveal">
     <h2 class="materials__banner-heading">GRA Certified. Every Stone.</h2>
@@ -401,6 +433,11 @@
       "type": "image_picker",
       "id": "gold_image",
       "label": "18ct Gold Plating Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "packaging_image",
+      "label": "Premium Packaging Image"
     }
   ]
 }
