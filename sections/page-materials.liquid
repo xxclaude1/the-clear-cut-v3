@@ -338,38 +338,6 @@
     </div>
   </div>
 
-  <!-- 18ct Gold Plating -->
-  <div class="materials__row materials__row--reverse reveal">
-    <div class="materials__image">
-      {%- if section.settings.gold_image != blank -%}
-        <img src="{{ section.settings.gold_image | image_url: width: 800 }}" alt="18ct Gold Plating" loading="lazy">
-      {%- else -%}
-        <div class="materials__image-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
-        </div>
-      {%- endif -%}
-    </div>
-    <div class="materials__info">
-      <div class="materials__label">The Option</div>
-      <h2 class="materials__name">18ct Gold Plating</h2>
-      <p class="materials__description">Select pieces are available in 18ct gold plating — a generous layer of real gold bonded to the sterling silver base. Available in white gold, yellow gold, and rose gold. Thicker than industry standard for lasting wear.</p>
-      <div class="materials__specs">
-        <div class="materials__spec">
-          <span class="materials__spec-label">Gold Purity</span>
-          <span class="materials__spec-value">18ct (75% Gold)</span>
-        </div>
-        <div class="materials__spec">
-          <span class="materials__spec-label">Options</span>
-          <span class="materials__spec-value">White / Yellow / Rose</span>
-        </div>
-        <div class="materials__spec">
-          <span class="materials__spec-label">Base</span>
-          <span class="materials__spec-value">925 Sterling Silver</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Premium Packaging -->
   <div class="materials__row reveal">
     <div class="materials__image">
@@ -428,11 +396,6 @@
       "type": "image_picker",
       "id": "rhodium_image",
       "label": "Rhodium Plating Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "gold_image",
-      "label": "18ct Gold Plating Image"
     },
     {
       "type": "image_picker",
