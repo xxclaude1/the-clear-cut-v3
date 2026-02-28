@@ -11,8 +11,12 @@
   "sections": {
     "main": {
       "type": "page-materials",
-      "settings": {}
+      "settings": {
+        "moissanite_image": "shopify://shop_images/Round_800x800_3cb424a1-247d-47d6-8595-81e86030b363.jpg"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
