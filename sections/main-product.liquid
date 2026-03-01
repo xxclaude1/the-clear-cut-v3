@@ -392,7 +392,7 @@
   }
 
   .accordion__item.is-open .accordion__icon {
-    transform: rotate(45deg);
+    transform: none;
   }
 
   .accordion__content {
@@ -1159,13 +1159,20 @@
     margin-bottom: 20px;
   }
 
-  /* You May Also Like */
+  /* You May Also Like — horizontal slider */
   .product-page__related {
     grid-column: 1 / -1;
     padding: 60px var(--page-padding);
     max-width: var(--page-max-width);
     margin: 0 auto;
     width: 100%;
+    overflow: hidden;
+  }
+  .related__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
   }
   .related__title {
     font-family: var(--font-body);
@@ -1173,33 +1180,53 @@
     font-size: 22px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-bottom: 32px;
+    margin-bottom: 0;
+  }
+  .related__nav {
+    display: flex;
+    gap: 8px;
+  }
+  .related__nav-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color var(--duration-fast) ease;
+  }
+  .related__nav-btn:hover {
+    border-color: var(--color-text);
+  }
+  .related__nav-btn svg {
+    width: 10px;
+    height: 10px;
   }
   .related__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     gap: 2px;
+    scroll-behavior: smooth;
   }
-  @media (max-width: 768px) {
-    .related__grid {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      gap: 2px;
-    }
-    .related__grid::-webkit-scrollbar { display: none; }
-    .related__card {
-      flex: 0 0 70%;
-      scroll-snap-align: start;
-    }
-  }
+  .related__grid::-webkit-scrollbar { display: none; }
   .related__card {
+    flex: 0 0 calc(25% - 1.5px);
+    scroll-snap-align: start;
     background: var(--color-bg-warm);
     text-decoration: none;
     color: var(--color-text);
     display: block;
+  }
+  @media (max-width: 768px) {
+    .related__card {
+      flex: 0 0 70%;
+    }
   }
   .related__card-img {
     width: 100%;
@@ -1400,11 +1427,25 @@
       </div>
     </form>
 
-    {%- comment -%} Description {%- endcomment -%}
+    {%- comment -%} Description — strip spec lines (Stone:, Setting:, Metal:, Length:, Clasp:, Certification:) {%- endcomment -%}
     {%- if product.description != blank -%}
-      <div class="product-page__description">
-        {{ product.description }}
-      </div>
+      {%- assign desc_raw = product.description | strip_html -%}
+      {%- assign desc_lines = desc_raw | split: '
+' -%}
+      {%- capture clean_desc -%}
+        {%- for line in desc_lines -%}
+          {%- assign trimmed = line | strip -%}
+          {%- unless trimmed contains 'Stone:' or trimmed contains 'Setting:' or trimmed contains 'Metal:' or trimmed contains 'Length:' or trimmed contains 'Clasp:' or trimmed contains 'Certification:' or trimmed == '' -%}
+            {{ trimmed }}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- assign clean_desc = clean_desc | strip -%}
+      {%- if clean_desc != blank -%}
+        <div class="product-page__description">{{ clean_desc }}</div>
+      {%- else -%}
+        <div class="product-page__description">Handcrafted in sterling silver featuring lab grown moissanite. These gemstones have the same chemical and physical properties as natural ones — and sparkle just as beautifully.</div>
+      {%- endif -%}
     {%- else -%}
       <div class="product-page__description">
         Handcrafted in sterling silver featuring lab grown moissanite. These gemstones have the same chemical and physical properties as natural ones — and sparkle just as beautifully.
@@ -1442,28 +1483,17 @@
     {%- comment -%} Accordions — Mejuri style {%- endcomment -%}
     {%- assign handle_down = product.handle -%}
     <div class="product-page__accordions">
-      <div class="accordion__item">
+      <div class="accordion__item is-open">
         <button class="accordion__trigger">
           <span>Materials</span>
-          <span class="accordion__icon">+</span>
+          <span class="accordion__icon">&minus;</span>
         </button>
-        <div class="accordion__content">
+        <div class="accordion__content" style="max-height:500px;">
           <div class="accordion__content-inner">
-            {%- if handle_down contains 'riviere' -%}
-              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Lobster clasp closure.</p>
-            {%- elsif handle_down contains 'eclat' -%}
-              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Box clasp with safety latch.</p>
-            {%- elsif handle_down contains 'lumiere' or handle_down contains 'quatre' -%}
-              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Butterfly back closure.</p>
-            {%- elsif handle_down contains 'picasso' -%}
-              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Hinge clasp closure.</p>
-            {%- elsif handle_down contains 'eternite' -%}
-              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Channel set, full eternity design.</p>
-            {%- elsif handle_down contains 'solaire' or handle_down contains 'trefle' -%}
-              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Spring ring clasp.</p>
-            {%- else -%}
-              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity.</p>
-            {%- endif -%}
+            <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Lab Grown Gemstones</p>
+            <p style="margin-bottom:20px;">Our lab grown gemstones share the same physical and chemical properties as natural gemstones. They are valued for their beauty and longevity.</p>
+            <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Sterling Silver</p>
+            <p>925 Sterling Silver is a lightweight metal made of 92.5% pure silver. It's highly durable and designed for everyday wear. All of our sterling silver product is made from 95% recycled material.</p>
           </div>
         </div>
       </div>
@@ -1475,35 +1505,73 @@
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            <div class="specs-table">
-              {%- if handle_down contains 'riviere' -%}
-                <div class="specs-table__row"><span class="specs-table__label">Stone Size</span><span>3mm Round Brilliant</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Stone Type</span><span>Lab Grown Moissanite</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Colour</span><span>D (Colourless)</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Clarity</span><span>VVS</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Sterling Silver, Rhodium Plated</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Lengths Available</span><span>38cm, 45cm, 56cm</span></div>
-              {%- elsif handle_down contains 'eclat' -%}
-                <div class="specs-table__row"><span class="specs-table__label">Stone Size</span><span>3mm Round Brilliant</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Total Carat Weight</span><span>~4.5ct</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Sterling Silver, Rhodium Plated</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Box Clasp with Safety Latch</span></div>
-              {%- elsif handle_down contains 'lumiere' -%}
-                <div class="specs-table__row"><span class="specs-table__label">Stone Cut</span><span>Round Brilliant</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>4-Prong Solitaire</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Sterling Silver, Rhodium Plated</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Butterfly Back</span></div>
-              {%- else -%}
-                <div class="specs-table__row"><span class="specs-table__label">Stone Type</span><span>Lab Grown Moissanite</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Colour</span><span>D (Colourless)</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Clarity</span><span>VVS</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
-                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Sterling Silver, Rhodium Plated</span></div>
-              {%- endif -%}
-            </div>
+            {%- comment -%} Pull spec lines from product description if present {%- endcomment -%}
+            {%- assign desc_plain = product.description | strip_html -%}
+            {%- assign has_desc_specs = false -%}
+            {%- if desc_plain contains 'Stone:' or desc_plain contains 'Setting:' or desc_plain contains 'Metal:' or desc_plain contains 'Clasp:' or desc_plain contains 'Certification:' -%}
+              {%- assign has_desc_specs = true -%}
+            {%- endif -%}
+            {%- if has_desc_specs -%}
+              <div class="specs-list" id="specs-from-desc">
+                {%- assign spec_lines = desc_plain | split: '
+' -%}
+                {%- for line in spec_lines -%}
+                  {%- assign tl = line | strip -%}
+                  {%- if tl contains 'Stone:' or tl contains 'Setting:' or tl contains 'Metal:' or tl contains 'Length:' or tl contains 'Clasp:' or tl contains 'Certification:' -%}
+                    <p style="margin-bottom:6px;font-size:14px;line-height:1.6;">- {{ tl }}</p>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- else -%}
+              <div class="specs-table">
+                {%- if handle_down contains 'riviere' -%}
+                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite (40+ stones)</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Four-prong tennis link</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Lengths</span><span>38cm, 45cm, 56cm</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+                {%- elsif handle_down contains 'eclat' -%}
+                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Four-prong tennis link</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Box clasp with safety latch</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+                {%- elsif handle_down contains 'lumiere' -%}
+                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>4-Prong Solitaire</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Butterfly back</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+                {%- elsif handle_down contains 'eternite' -%}
+                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Channel set, full eternity</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+                {%- elsif handle_down contains 'solaire' or handle_down contains 'trefle' -%}
+                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Prong set solitaire</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Spring ring clasp</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+                {%- elsif handle_down contains 'picasso' -%}
+                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Inside-out hoop</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Hinge clasp</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+                {%- elsif handle_down contains 'quatre' -%}
+                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Prong set cluster</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Butterfly back</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+                {%- else -%}
+                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Lab Grown Moissanite</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           </div>
         </div>
       </div>
@@ -1528,15 +1596,34 @@
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            <p>Free express shipping Australia-wide on orders over $200. Standard delivery: 8-14 business days with full tracking via Australia Post.</p>
-            <p style="margin-top:12px;">30-day return window. Items must be unworn, undamaged, and in original packaging. Free return shipping within Australia.</p>
-            <p style="margin-top:12px;">Lifetime warranty covering manufacturing defects. Complimentary annual rhodium re-plating service.</p>
+            <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Free Shipping</p>
+            <p style="margin-bottom:20px;">Free Shipping for Orders A$150+. For more information on shipping, see <a href="/pages/shipping" style="text-decoration:underline;color:var(--color-text);">FAQ</a>.</p>
+            <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Returns & Exchanges</p>
+            <p style="margin-bottom:20px;">We offer 30-day returns & exchanges starting from the day the shipment is delivered or picked up in-store. Some exclusions apply, see <a href="/pages/returns" style="text-decoration:underline;color:var(--color-text);">FAQ</a>.</p>
+            <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Warranty</p>
+            <p>We're confident in the quality of our products, which is why we offer a two-year warranty from the date you receive your order for defects or issues resulting from the workmanship of the jewelry.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- You May Also Like — Slider -->
+<section class="product-page__related">
+  <div class="related__header">
+    <h2 class="related__title">You May Also Like</h2>
+    <div class="related__nav">
+      <button class="related__nav-btn" aria-label="Previous" id="related-prev">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="8,2 4,6 8,10"></polyline></svg>
+      </button>
+      <button class="related__nav-btn" aria-label="Next" id="related-next">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4,2 8,6 4,10"></polyline></svg>
+      </button>
+    </div>
+  </div>
+  <div class="related__grid" id="related-products"></div>
+</section>
 
 <!-- Reviews Section -->
 <section class="product-page__reviews reveal" id="reviews-section" data-handle="{{ product.handle }}">
@@ -1625,12 +1712,6 @@
   <button class="review-lightbox__close" id="review-lightbox-close">&times;</button>
   <img class="review-lightbox__img" id="review-lightbox-img" src="" alt="Review photo">
 </div>
-
-<!-- You May Also Like -->
-<section class="product-page__related">
-  <h2 class="related__title">You May Also Like</h2>
-  <div class="related__grid" id="related-products"></div>
-</section>
 
 <!-- Quote Banner -->
 <section class="product-page__quote">
@@ -1731,12 +1812,25 @@ window.__relatedProducts = [
     });
   });
 
-  /* Color swatch selection — Gold is sold out */
+  /* Color swatch selection — Gold is sold out + 1.3x price */
+  var silverPriceText = document.querySelector('.product-page__price-amount');
+  var silverPriceOriginal = silverPriceText ? silverPriceText.textContent.trim() : '';
+  var goldPriceText = '';
+  if (silverPriceOriginal) {
+    var numMatch = silverPriceOriginal.match(/([\d,.]+)/);
+    if (numMatch) {
+      var silverNum = parseFloat(numMatch[1].replace(/,/g, ''));
+      var goldNum = Math.round(silverNum * 1.3);
+      goldPriceText = silverPriceOriginal.replace(numMatch[1], goldNum.toLocaleString('en-AU', {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+    }
+  }
+
   document.querySelectorAll('.product-page__swatch').forEach(function(swatch) {
     swatch.addEventListener('click', function() {
       var container = this.closest('.product-page__swatches');
       var addBtn = document.getElementById('add-to-cart-btn');
       var stockEl = document.querySelector('.product-page__stock');
+      var priceEl = document.querySelector('.product-page__price-amount');
 
       container.querySelectorAll('.product-page__swatch').forEach(function(s) {
         s.classList.remove('is-selected');
@@ -1747,10 +1841,12 @@ window.__relatedProducts = [
         addBtn.disabled = true;
         addBtn.textContent = 'Sold Out';
         if (stockEl) stockEl.style.display = 'none';
+        if (priceEl && goldPriceText) priceEl.textContent = goldPriceText;
       } else {
         addBtn.disabled = false;
         addBtn.textContent = 'Add To Bag';
         if (stockEl) stockEl.style.display = '';
+        if (priceEl) priceEl.textContent = silverPriceOriginal;
       }
     });
   });
@@ -2213,7 +2309,7 @@ window.__relatedProducts = [
     });
   });
 
-  /* ============ YOU MAY ALSO LIKE ============ */
+  /* ============ YOU MAY ALSO LIKE — SLIDER ============ */
   var relatedEl = document.getElementById('related-products');
   if (relatedEl && window.__relatedProducts && window.__relatedProducts.length > 0) {
     relatedEl.innerHTML = window.__relatedProducts.map(function(p) {
@@ -2225,7 +2321,28 @@ window.__relatedProducts = [
           '<div class="related__card-material">Sterling Silver, Lab Grown Moissanite</div>' +
         '</div></a>';
     }).join('');
+
+    var prevBtn = document.getElementById('related-prev');
+    var nextBtn = document.getElementById('related-next');
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+      relatedEl.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+      relatedEl.scrollBy({ left: 300, behavior: 'smooth' });
+    });
   }
+
+  /* ============ ACCORDION ICON TOGGLE ============ */
+  document.querySelectorAll('.accordion__trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      setTimeout(function() {
+        document.querySelectorAll('.accordion__item').forEach(function(item) {
+          var icon = item.querySelector('.accordion__icon');
+          if (icon) icon.innerHTML = item.classList.contains('is-open') ? '&minus;' : '+';
+        });
+      }, 10);
+    });
+  });
 
   /* ============ INIT ============ */
   renderSummary();
