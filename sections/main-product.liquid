@@ -1,4 +1,9 @@
 <style>
+  /* Prevent horizontal page scroll on mobile */
+  html, body {
+    overflow-x: hidden;
+  }
+
   .product-page {
     max-width: var(--page-max-width);
     margin: 0 auto;
@@ -163,6 +168,22 @@
   .product-page__swatch--silver { background-color: #C0C0C0; }
   .product-page__swatch--gold { background-color: #D4A853; }
   .product-page__swatch--rose { background-color: #B76E79; }
+
+  .product-page__swatch.is-unavailable {
+    opacity: 0.35;
+    cursor: not-allowed;
+    position: relative;
+  }
+  .product-page__swatch.is-unavailable::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    right: -2px;
+    height: 1px;
+    background: var(--color-text-secondary);
+    transform: rotate(-45deg);
+  }
 
   /* Variant selector — Length */
   .product-page__variant-group {
@@ -1027,7 +1048,21 @@
     z-index: 1;
   }
   @media (max-width: 768px) {
-    .size-guide-modal__content { max-width: 100%; margin: 0 16px; padding: 24px 20px; }
+    .size-guide-modal {
+      align-items: flex-end;
+    }
+    .size-guide-modal__content {
+      max-width: 100%;
+      margin: 0;
+      padding: 24px 20px 32px;
+      border-radius: 16px 16px 0 0;
+      max-height: 85vh;
+      animation: slideUp 300ms ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
   }
   .size-guide-modal__close {
     position: absolute;
@@ -1142,7 +1177,19 @@
     gap: 2px;
   }
   @media (max-width: 768px) {
-    .related__grid { grid-template-columns: repeat(2, 1fr); }
+    .related__grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 2px;
+    }
+    .related__grid::-webkit-scrollbar { display: none; }
+    .related__card {
+      flex: 0 0 70%;
+      scroll-snap-align: start;
+    }
   }
   .related__card {
     background: var(--color-bg-warm);
@@ -1297,26 +1344,11 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%} Color/finish swatches {%- endcomment -%}
-    {%- for option in product.options_with_values -%}
-      {%- assign opt_down = option.name | downcase -%}
-      {%- if opt_down == 'color' or opt_down == 'colour' or opt_down == 'metal' or opt_down == 'finish' or opt_down == 'metal color' or opt_down == 'metal colour' -%}
-        <div class="product-page__swatches">
-          {%- for value in option.values -%}
-            {%- assign val_down = value | downcase -%}
-            {%- if val_down contains 'silver' or val_down contains 'white' -%}
-              <span class="product-page__swatch product-page__swatch--silver{% if option.selected_value == value %} is-selected{% endif %}" title="{{ value }}" data-value="{{ value }}"></span>
-            {%- elsif val_down contains 'gold' or val_down contains 'yellow' -%}
-              <span class="product-page__swatch product-page__swatch--gold{% if option.selected_value == value %} is-selected{% endif %}" title="{{ value }}" data-value="{{ value }}"></span>
-            {%- elsif val_down contains 'rose' -%}
-              <span class="product-page__swatch product-page__swatch--rose{% if option.selected_value == value %} is-selected{% endif %}" title="{{ value }}" data-value="{{ value }}"></span>
-            {%- else -%}
-              <span class="product-page__swatch{% if option.selected_value == value %} is-selected{% endif %}" title="{{ value }}" data-value="{{ value }}"></span>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
+    {%- comment -%} Color swatches — Silver active, Gold sold out {%- endcomment -%}
+    <div class="product-page__swatches">
+      <span class="product-page__swatch product-page__swatch--silver is-selected" title="Sterling Silver"></span>
+      <span class="product-page__swatch product-page__swatch--gold is-unavailable" title="18ct Gold — Coming Soon"></span>
+    </div>
 
     {%- comment -%} Size/Length variants {%- endcomment -%}
     {%- for option in product.options_with_values -%}
@@ -1621,6 +1653,12 @@
   <div class="size-guide-modal__content">
     <button class="size-guide-modal__close" id="size-guide-close">&times;</button>
     <div class="size-guide-modal__title" id="size-guide-title">Size Guide</div>
+    {%- comment -%} Size guide image — add via Shopify metafield or hardcode below {%- endcomment -%}
+    <div class="size-guide-modal__image" id="sg-image">
+      {%- if product.metafields.custom.size_guide_image != blank -%}
+        <img src="{{ product.metafields.custom.size_guide_image | image_url: width: 800 }}" alt="Size guide" style="width:100%;display:block;margin-bottom:20px;">
+      {%- endif -%}
+    </div>
     <div class="size-guide-modal__tabs">
       <button class="size-guide-modal__tab is-active" data-tab="chart">Size Chart</button>
       <button class="size-guide-modal__tab" data-tab="style">How to Style</button>
@@ -1646,17 +1684,18 @@
 {%- assign review_photo_14 = 'review-photo-14.avif' | asset_url -%}
 
 {%- comment -%} Related products data for "You May Also Like" {%- endcomment -%}
+{%- assign related_products = product.collections.first.products | default: collections.all.products -%}
 <script>
 window.__relatedProducts = [
-  {%- for p in collections.all.products -%}
-    {%- if p.handle != product.handle -%}
+  {%- for p in related_products limit: 8 -%}
+    {%- unless p.handle == product.handle -%}
       {
         title: {{ p.title | json }},
-        url: {{ p.url | json }},
-        img: {{ p.featured_image | image_url: width: 600 | json }},
-        price: {{ p.price | money | prepend: 'A' | json }}
+        url: "{{ p.url }}",
+        img: "{{ p.featured_image | image_url: width: 600 }}",
+        price: "A{{ p.price | money }}"
       },
-    {%- endif -%}
+    {%- endunless -%}
   {%- endfor -%}
 ];
 </script>
