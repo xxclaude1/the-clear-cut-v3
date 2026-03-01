@@ -321,41 +321,14 @@
     margin-bottom: 32px;
   }
 
-  /* Feature list */
-  .product-page__features {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-
-  .product-page__feature {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .product-page__feature-icon {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .product-page__feature-icon svg {
-    width: 24px;
-    height: 24px;
-    stroke: var(--color-text);
-    fill: none;
-    stroke-width: 1.2;
-  }
-
-  .product-page__feature-text {
+  /* Product gift text under Add to Bag */
+  .product-page__gift-text {
     font-family: var(--font-body);
     font-size: 14px;
-    color: var(--color-text);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 32px;
+    font-style: italic;
   }
 
   /* Accordions */
@@ -1480,32 +1453,28 @@
       </div>
     {%- endif -%}
 
-    {%- comment -%} Feature icons {%- endcomment -%}
-    <div class="product-page__features">
-      <div class="product-page__feature">
-        <div class="product-page__feature-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
-        </div>
-        <span class="product-page__feature-text">Hypoallergenic</span>
-      </div>
-      <div class="product-page__feature">
-        <div class="product-page__feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        </div>
-        <span class="product-page__feature-text">Strong & Highly Durable</span>
-      </div>
-      <div class="product-page__feature">
-        <div class="product-page__feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-        </div>
-        <span class="product-page__feature-text">95% Recycled Sterling Silver</span>
-      </div>
-      <div class="product-page__feature">
-        <div class="product-page__feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-        </div>
-        <span class="product-page__feature-text">Ethically Sourced & Conflict-Free</span>
-      </div>
+    {%- comment -%} Product-specific gift text {%- endcomment -%}
+    {%- assign h = product.handle -%}
+    <div class="product-page__gift-text">
+      {%- if h contains 'riviere' -%}
+        The perfect gift. A fresh, clear-cut statement piece that goes with everything they own. Layer it, wear it solo — it turns heads either way.
+      {%- elsif h contains 'eclat' -%}
+        The everyday bracelet they'll never want to take off. A timeless tennis bracelet that elevates any outfit from casual to occasion-ready.
+      {%- elsif h contains 'lumiere' -%}
+        The studs they'll reach for every single morning. Effortless sparkle that works from the boardroom to the bar — no outfit planning required.
+      {%- elsif h contains 'eternite' -%}
+        A symbol of forever. Whether it's a wedding band, anniversary gift, or a promise to yourself — this one means something.
+      {%- elsif h contains 'solaire' -%}
+        The necklace that completes the look. A single stone on a delicate chain — understated elegance they'll wear on repeat.
+      {%- elsif h contains 'trefle' -%}
+        A little luck, a lot of sparkle. The kind of pendant that becomes their signature piece — meaningful, personal, and endlessly versatile.
+      {%- elsif h contains 'picasso' -%}
+        The hoops that do the talking. Bold enough to make a statement, refined enough for every day. The earrings they didn't know they needed.
+      {%- elsif h contains 'quatre' -%}
+        Four stones, infinite sparkle. A modern take on the classic stud — eye-catching without trying too hard. The perfect everyday upgrade.
+      {%- else -%}
+        The perfect gift. A fresh, clear-cut statement piece crafted from precious materials — designed to be worn every single day.
+      {%- endif -%}
     </div>
 
     {%- comment -%} Accordions — Mejuri style {%- endcomment -%}
@@ -1521,7 +1490,9 @@
             <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Lab Grown Gemstones</p>
             <p style="margin-bottom:20px;">Our lab grown gemstones share the same physical and chemical properties as natural gemstones. They are valued for their beauty and longevity.</p>
             <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Sterling Silver</p>
-            <p>925 Sterling Silver is a lightweight metal made of 92.5% pure silver. It's highly durable and designed for everyday wear. All of our sterling silver product is made from 95% recycled material.</p>
+            <p style="margin-bottom:20px;">925 Sterling Silver is a lightweight metal made of 92.5% pure silver. It's highly durable and designed for everyday wear. All of our sterling silver product is made from 95% recycled material.</p>
+            <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">18ct Gold</p>
+            <p>A luxurious layer of 18-carat gold over sterling silver, delivering the rich warmth and lustre of solid gold. Our gold plating is applied using a precision electroplating process for a durable, long-lasting finish designed for everyday wear.</p>
           </div>
         </div>
       </div>
@@ -1830,7 +1801,22 @@ window.__relatedProducts = [
   var RP13 = {{ review_photo_13 | json }};
   var RP14 = {{ review_photo_14 | json }};
 
-  /* Variant selection */
+  /* Variant selection — also enforce gold sold-out state */
+  function isGoldSelected() {
+    var goldSwatch = document.querySelector('.product-page__swatch--gold');
+    return goldSwatch && goldSwatch.classList.contains('is-selected');
+  }
+
+  function enforceGoldSoldOut() {
+    if (isGoldSelected()) {
+      var addBtn = document.getElementById('add-to-cart-btn');
+      var stockEl = document.querySelector('.product-page__stock');
+      addBtn.disabled = true;
+      addBtn.textContent = 'Sold Out';
+      if (stockEl) stockEl.style.display = 'none';
+    }
+  }
+
   document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var group = this.closest('.product-page__variant-options');
@@ -1838,6 +1824,7 @@ window.__relatedProducts = [
         b.classList.remove('is-selected');
       });
       this.classList.add('is-selected');
+      enforceGoldSoldOut();
     });
   });
 
@@ -1879,6 +1866,17 @@ window.__relatedProducts = [
       }
     });
   });
+
+  /* Block form submission when gold is selected */
+  var productForm = document.getElementById('product-form');
+  if (productForm) {
+    productForm.addEventListener('submit', function(e) {
+      if (isGoldSelected()) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  }
 
   /* ============ REVIEW DATA ============ */
   var reviewData = {
