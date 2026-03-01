@@ -20,7 +20,8 @@ Secret: (stored locally — do not commit to git)
 Token endpoint: POST /admin/oauth/access_token with grant_type=client_credentials
 Token expires: 24 hours
 API version: 2024-10
-V3 Theme ID: 152531009724 (the-clear-cut-v3 — PUBLISHED / LIVE)
+V3 Theme ID (Git-synced, LIVE): 152531108028 (the-clear-cut-v3/main — PUBLISHED)
+V3 Theme ID (standalone): 152531009724 (the-clear-cut-v3 — unpublished)
 V2 Theme ID: 152510628028 (unpublished)
 Horizon Theme ID: 152507187388
 ```
