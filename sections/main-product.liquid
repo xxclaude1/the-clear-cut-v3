@@ -170,9 +170,13 @@
   .product-page__swatch--rose { background-color: #B76E79; }
 
   .product-page__swatch.is-unavailable {
-    opacity: 0.35;
-    cursor: not-allowed;
+    opacity: 0.45;
+    cursor: pointer;
     position: relative;
+  }
+  .product-page__swatch.is-unavailable.is-selected {
+    border-color: var(--color-text);
+    opacity: 0.6;
   }
   .product-page__swatch.is-unavailable::after {
     content: '';
@@ -1724,6 +1728,30 @@ window.__relatedProducts = [
         b.classList.remove('is-selected');
       });
       this.classList.add('is-selected');
+    });
+  });
+
+  /* Color swatch selection — Gold is sold out */
+  document.querySelectorAll('.product-page__swatch').forEach(function(swatch) {
+    swatch.addEventListener('click', function() {
+      var container = this.closest('.product-page__swatches');
+      var addBtn = document.getElementById('add-to-cart-btn');
+      var stockEl = document.querySelector('.product-page__stock');
+
+      container.querySelectorAll('.product-page__swatch').forEach(function(s) {
+        s.classList.remove('is-selected');
+      });
+      this.classList.add('is-selected');
+
+      if (this.classList.contains('is-unavailable')) {
+        addBtn.disabled = true;
+        addBtn.textContent = 'Sold Out';
+        if (stockEl) stockEl.style.display = 'none';
+      } else {
+        addBtn.disabled = false;
+        addBtn.textContent = 'Add To Bag';
+        if (stockEl) stockEl.style.display = '';
+      }
     });
   });
 
