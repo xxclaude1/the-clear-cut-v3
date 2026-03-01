@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-analytics",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

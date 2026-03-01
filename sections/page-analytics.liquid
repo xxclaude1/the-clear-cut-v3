@@ -1,0 +1,1031 @@
+<style>
+  .analytics {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px var(--page-padding);
+    font-family: var(--font-body);
+  }
+
+  .analytics__title {
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+  }
+
+  /* Stats cards row */
+  .analytics__stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .analytics__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .stat-card {
+    background: var(--color-bg);
+    padding: 24px;
+    text-align: center;
+  }
+
+  .stat-card__value {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-card__label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+  }
+
+  /* Funnel */
+  .analytics__funnel {
+    margin-bottom: 40px;
+  }
+
+  .analytics__section-title {
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
+  .funnel {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border: 1px solid var(--color-border);
+  }
+
+  .funnel__step {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    border-right: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  .funnel__step:last-child {
+    border-right: none;
+  }
+
+  .funnel__step-value {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .funnel__step-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .funnel__step-pct {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .funnel {
+      flex-direction: column;
+    }
+    .funnel__step {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .funnel__step:last-child {
+      border-bottom: none;
+    }
+  }
+
+  /* Top pages */
+  .analytics__top-pages {
+    margin-bottom: 40px;
+  }
+
+  .top-pages__table {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-collapse: collapse;
+  }
+
+  .top-pages__table th,
+  .top-pages__table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 13px;
+  }
+
+  .top-pages__table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-warm);
+  }
+
+  .top-pages__bar {
+    height: 4px;
+    background: var(--color-border);
+    margin-top: 4px;
+  }
+
+  .top-pages__bar-fill {
+    height: 100%;
+    background: var(--color-text);
+  }
+
+  /* Session list */
+  .analytics__sessions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .analytics__filter-btns {
+    display: flex;
+    gap: 8px;
+  }
+
+  .analytics__filter-btn {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .analytics__filter-btn.is-active {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
+  }
+
+  .session-list {
+    border: 1px solid var(--color-border);
+    margin-bottom: 32px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  .session-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: background var(--duration-fast) ease;
+  }
+
+  .session-item:last-child {
+    border-bottom: none;
+  }
+
+  .session-item:hover {
+    background: var(--color-bg-warm);
+  }
+
+  .session-item.is-selected {
+    background: var(--color-bg-warm);
+    border-left: 3px solid var(--color-text);
+  }
+
+  .session-item__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .session-item__date {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .session-item__meta {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .session-item__badges {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .session-badge {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border: 1px solid;
+  }
+
+  .session-badge--cart {
+    color: #B45309;
+    border-color: #B45309;
+  }
+
+  .session-badge--checkout {
+    color: #DC2626;
+    border-color: #DC2626;
+  }
+
+  .session-badge--pages {
+    color: var(--color-text-secondary);
+    border-color: var(--color-border);
+  }
+
+  /* Replay player */
+  .replay {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    display: none;
+  }
+
+  .replay.is-active {
+    display: block;
+  }
+
+  .replay__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-warm);
+  }
+
+  .replay__session-info {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .replay__session-info strong {
+    color: var(--color-text);
+  }
+
+  .replay__close {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 6px 16px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    cursor: pointer;
+  }
+
+  /* Page tabs in replay */
+  .replay__pages {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--color-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .replay__pages::-webkit-scrollbar { display: none; }
+
+  .replay__page-tab {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 12px 16px;
+    border: none;
+    border-right: 1px solid var(--color-border);
+    background: var(--color-bg);
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+    transition: all var(--duration-fast) ease;
+  }
+
+  .replay__page-tab.is-active {
+    background: var(--color-bg-warm);
+    color: var(--color-text);
+  }
+
+  /* Viewport area */
+  .replay__viewport {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    background: #f8f8f6;
+  }
+
+  .replay__iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none;
+    transform-origin: top left;
+  }
+
+  .replay__cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(26, 26, 26, 0.3);
+    border: 2px solid rgba(26, 26, 26, 0.7);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: left 80ms linear, top 80ms linear;
+    z-index: 10;
+    display: none;
+  }
+
+  .replay__cursor.is-visible {
+    display: block;
+  }
+
+  .replay__click-ring {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--color-text);
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+    z-index: 11;
+    animation: clickRing 0.5s ease-out forwards;
+  }
+
+  @keyframes clickRing {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+  }
+
+  /* Controls bar */
+  .replay__controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .replay__play-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-text);
+    background: var(--color-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .replay__play-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--color-text);
+  }
+
+  .replay__play-btn:hover {
+    background: var(--color-text);
+  }
+
+  .replay__play-btn:hover svg {
+    fill: var(--color-bg);
+  }
+
+  .replay__slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: var(--color-border);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .replay__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--color-text);
+    cursor: pointer;
+  }
+
+  .replay__slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--color-text);
+    border: none;
+    cursor: pointer;
+  }
+
+  .replay__time {
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--color-text-secondary);
+    min-width: 80px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .replay__speed {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    cursor: pointer;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Event log */
+  .replay__events {
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: 1px solid var(--color-border);
+    padding: 12px 20px;
+  }
+
+  .replay__event-item {
+    font-size: 12px;
+    padding: 4px 0;
+    color: var(--color-text-secondary);
+    font-family: 'IBM Plex Mono', monospace;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .replay__event-item:last-child {
+    border-bottom: none;
+  }
+
+  .replay__event-time {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .replay__event-action {
+    color: var(--color-text);
+  }
+
+  /* Empty state */
+  .analytics__empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--color-text-secondary);
+  }
+
+  .analytics__empty-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--color-text);
+  }
+
+  .analytics__empty-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Clear data button */
+  .analytics__clear {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+  }
+
+  .analytics__clear:hover {
+    border-color: #DC2626;
+    color: #DC2626;
+  }
+</style>
+
+<div class="analytics">
+  <h1 class="analytics__title">Session Analytics</h1>
+
+  <!-- Stats Overview -->
+  <div class="analytics__stats" id="analytics-stats"></div>
+
+  <!-- Conversion Funnel -->
+  <div class="analytics__funnel">
+    <div class="analytics__section-title">Conversion Funnel</div>
+    <div class="funnel" id="analytics-funnel"></div>
+  </div>
+
+  <!-- Top Pages -->
+  <div class="analytics__top-pages">
+    <div class="analytics__section-title">Top Pages</div>
+    <table class="top-pages__table" id="analytics-top-pages">
+      <thead>
+        <tr><th>Page</th><th>Views</th><th>Avg. Time</th><th>Avg. Scroll Depth</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Session List -->
+  <div class="analytics__sessions-header">
+    <div class="analytics__section-title" style="margin-bottom:0">Recorded Sessions</div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <div class="analytics__filter-btns" id="session-filters">
+        <button class="analytics__filter-btn is-active" data-filter="all">All</button>
+        <button class="analytics__filter-btn" data-filter="cart">Abandoned Cart</button>
+        <button class="analytics__filter-btn" data-filter="checkout">Abandoned Checkout</button>
+      </div>
+      <button class="analytics__clear" id="clear-sessions-btn">Clear All</button>
+    </div>
+  </div>
+
+  <div class="session-list" id="session-list"></div>
+
+  <!-- Replay Player -->
+  <div class="replay" id="replay-player">
+    <div class="replay__header">
+      <div class="replay__session-info" id="replay-info"></div>
+      <button class="replay__close" id="replay-close">Close Replay</button>
+    </div>
+    <div class="replay__pages" id="replay-pages"></div>
+    <div class="replay__viewport" id="replay-viewport">
+      <iframe class="replay__iframe" id="replay-iframe" sandbox="allow-same-origin"></iframe>
+      <div class="replay__cursor" id="replay-cursor"></div>
+    </div>
+    <div class="replay__controls">
+      <button class="replay__play-btn" id="replay-play">
+        <svg viewBox="0 0 14 14" id="replay-play-icon"><polygon points="3,1 12,7 3,13"></polygon></svg>
+      </button>
+      <input type="range" class="replay__slider" id="replay-slider" min="0" max="1000" value="0">
+      <div class="replay__time" id="replay-time">0:00 / 0:00</div>
+      <button class="replay__speed" id="replay-speed">1x</button>
+    </div>
+    <div class="replay__events" id="replay-events"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var STORAGE_KEY = 'tcc_sessions';
+  var sessions = [];
+  var currentFilter = 'all';
+  var activeReplay = null;
+  var playTimer = null;
+  var playTime = 0;
+  var playing = false;
+  var playSpeed = 1;
+  var speeds = [1, 2, 4, 8];
+  var speedIdx = 0;
+  var currentPageIdx = 0;
+
+  function load() {
+    try { sessions = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch(e) { sessions = []; }
+    sessions.sort(function(a, b) { return (b.start || 0) - (a.start || 0); });
+  }
+
+  function fmt(ms) {
+    var s = Math.floor((ms || 0) / 1000);
+    var m = Math.floor(s / 60);
+    s = s % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function fmtDate(ts) {
+    var d = new Date(ts);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + ' ' +
+      d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+  }
+
+  function pageName(url) {
+    if (!url || url === '/') return 'Home';
+    return url.replace(/^\//, '').replace(/\?.*$/, '').replace(/-/g, ' ').replace(/\//g, ' > ');
+  }
+
+  // --- Stats ---
+  function renderStats() {
+    var totalSessions = sessions.length;
+    var totalPageViews = 0;
+    var cartAbandoned = 0;
+    var checkoutAbandoned = 0;
+    var totalDuration = 0;
+
+    sessions.forEach(function(s) {
+      totalPageViews += (s.pageCount || s.pages.length || 0);
+      totalDuration += (s.duration || 0);
+      if (s.abandoned === 'cart') cartAbandoned++;
+      if (s.abandoned === 'checkout') checkoutAbandoned++;
+    });
+
+    var avgDuration = totalSessions > 0 ? totalDuration / totalSessions : 0;
+
+    document.getElementById('analytics-stats').innerHTML =
+      '<div class="stat-card"><div class="stat-card__value">' + totalSessions + '</div><div class="stat-card__label">Total Sessions</div></div>' +
+      '<div class="stat-card"><div class="stat-card__value">' + totalPageViews + '</div><div class="stat-card__label">Page Views</div></div>' +
+      '<div class="stat-card"><div class="stat-card__value">' + fmt(avgDuration) + '</div><div class="stat-card__label">Avg. Session</div></div>' +
+      '<div class="stat-card"><div class="stat-card__value">' + cartAbandoned + '</div><div class="stat-card__label">Cart Abandoned</div></div>' +
+      '<div class="stat-card"><div class="stat-card__value">' + checkoutAbandoned + '</div><div class="stat-card__label">Checkout Abandoned</div></div>';
+  }
+
+  // --- Funnel ---
+  function renderFunnel() {
+    var visited = sessions.length;
+    var viewedProduct = 0;
+    var addedToCart = 0;
+    var reachedCheckout = 0;
+
+    sessions.forEach(function(s) {
+      var hasProduct = false;
+      (s.pages || []).forEach(function(p) {
+        if (p.url && p.url.indexOf('/products/') !== -1) hasProduct = true;
+      });
+      if (hasProduct) viewedProduct++;
+      if (s.hasCart || (s.cartEvents && s.cartEvents.length > 0)) addedToCart++;
+      if (s.reachedCheckout) reachedCheckout++;
+    });
+
+    function pct(n) { return visited > 0 ? Math.round((n / visited) * 100) + '%' : '0%'; }
+
+    document.getElementById('analytics-funnel').innerHTML =
+      '<div class="funnel__step"><div class="funnel__step-value">' + visited + '</div><div class="funnel__step-label">Visited Site</div><div class="funnel__step-pct">100%</div></div>' +
+      '<div class="funnel__step"><div class="funnel__step-value">' + viewedProduct + '</div><div class="funnel__step-label">Viewed Product</div><div class="funnel__step-pct">' + pct(viewedProduct) + '</div></div>' +
+      '<div class="funnel__step"><div class="funnel__step-value">' + addedToCart + '</div><div class="funnel__step-label">Added to Cart</div><div class="funnel__step-pct">' + pct(addedToCart) + '</div></div>' +
+      '<div class="funnel__step"><div class="funnel__step-value">' + reachedCheckout + '</div><div class="funnel__step-label">Reached Checkout</div><div class="funnel__step-pct">' + pct(reachedCheckout) + '</div></div>';
+  }
+
+  // --- Top Pages ---
+  function renderTopPages() {
+    var pageMap = {};
+    sessions.forEach(function(s) {
+      (s.pages || []).forEach(function(p) {
+        var key = p.url || '/';
+        if (!pageMap[key]) pageMap[key] = {views: 0, totalTime: 0, totalScroll: 0};
+        pageMap[key].views++;
+        pageMap[key].totalTime += (p.duration || 0);
+        pageMap[key].totalScroll += (p.scrollDepth || 0);
+      });
+    });
+
+    var pages = Object.keys(pageMap).map(function(k) {
+      var d = pageMap[k];
+      return {url: k, views: d.views, avgTime: d.totalTime / d.views, avgScroll: Math.round(d.totalScroll / d.views)};
+    }).sort(function(a, b) { return b.views - a.views; }).slice(0, 10);
+
+    var maxViews = pages.length > 0 ? pages[0].views : 1;
+    var tbody = document.querySelector('#analytics-top-pages tbody');
+    tbody.innerHTML = pages.map(function(p) {
+      var pct = Math.round((p.views / maxViews) * 100);
+      return '<tr><td>' + pageName(p.url) + '<div class="top-pages__bar"><div class="top-pages__bar-fill" style="width:' + pct + '%"></div></div></td>' +
+        '<td>' + p.views + '</td><td>' + fmt(p.avgTime) + '</td><td>' + p.avgScroll + '%</td></tr>';
+    }).join('');
+  }
+
+  // --- Session List ---
+  function renderSessionList() {
+    var filtered = sessions.filter(function(s) {
+      if (currentFilter === 'all') return true;
+      return s.abandoned === currentFilter;
+    });
+
+    var listEl = document.getElementById('session-list');
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div class="analytics__empty"><div class="analytics__empty-title">No sessions recorded</div><div class="analytics__empty-text">Browse the store to start recording sessions. Sessions with cart or checkout abandonment will be flagged automatically.</div></div>';
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(function(s) {
+      var badges = '';
+      if (s.abandoned === 'cart') badges += '<span class="session-badge session-badge--cart">Cart Abandoned</span>';
+      if (s.abandoned === 'checkout') badges += '<span class="session-badge session-badge--checkout">Checkout Abandoned</span>';
+      badges += '<span class="session-badge session-badge--pages">' + (s.pageCount || s.pages.length) + ' pages</span>';
+
+      var device = s.device ? (s.device.touch ? 'Mobile' : 'Desktop') + ' ' + s.device.w + 'x' + s.device.h : '';
+
+      return '<div class="session-item" data-session-id="' + s.id + '">' +
+        '<div class="session-item__info">' +
+          '<div class="session-item__date">' + fmtDate(s.start) + '</div>' +
+          '<div class="session-item__meta">' + fmt(s.duration) + ' &middot; ' + device + ' &middot; ' + (s.referrer || '(direct)').substring(0, 40) + '</div>' +
+        '</div>' +
+        '<div class="session-item__badges">' + badges + '</div></div>';
+    }).join('');
+
+    // Click handlers
+    listEl.querySelectorAll('.session-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var id = this.dataset.sessionId;
+        var s = sessions.find(function(x) { return x.id === id; });
+        if (s) startReplay(s);
+        listEl.querySelectorAll('.session-item').forEach(function(el) { el.classList.remove('is-selected'); });
+        this.classList.add('is-selected');
+      });
+    });
+  }
+
+  // --- Filter Buttons ---
+  document.querySelectorAll('.analytics__filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      currentFilter = this.dataset.filter;
+      document.querySelectorAll('.analytics__filter-btn').forEach(function(b) { b.classList.remove('is-active'); });
+      this.classList.add('is-active');
+      renderSessionList();
+    });
+  });
+
+  // --- Clear Sessions ---
+  document.getElementById('clear-sessions-btn').addEventListener('click', function() {
+    if (confirm('Clear all recorded sessions? This cannot be undone.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      sessions = [];
+      renderStats();
+      renderFunnel();
+      renderTopPages();
+      renderSessionList();
+      stopReplay();
+    }
+  });
+
+  // --- Replay Engine ---
+  function startReplay(session) {
+    stopReplay();
+    activeReplay = session;
+    currentPageIdx = 0;
+    playTime = 0;
+    playing = false;
+    speedIdx = 0;
+    playSpeed = 1;
+
+    var player = document.getElementById('replay-player');
+    player.classList.add('is-active');
+    player.scrollIntoView({behavior: 'smooth'});
+
+    // Session info
+    var device = session.device ? (session.device.touch ? 'Mobile' : 'Desktop') + ' (' + session.device.w + 'x' + session.device.h + ')' : 'Unknown';
+    document.getElementById('replay-info').innerHTML =
+      '<strong>' + fmtDate(session.start) + '</strong> &middot; ' + fmt(session.duration) + ' &middot; ' + device +
+      (session.abandoned ? ' &middot; <strong style="color:#DC2626">' + session.abandoned.toUpperCase() + ' ABANDONED</strong>' : '');
+
+    // Page tabs
+    renderPageTabs();
+    loadPageReplay(0);
+
+    document.getElementById('replay-speed').textContent = '1x';
+    updatePlayIcon();
+  }
+
+  function renderPageTabs() {
+    var pages = activeReplay.pages || [];
+    document.getElementById('replay-pages').innerHTML = pages.map(function(p, i) {
+      return '<button class="replay__page-tab' + (i === currentPageIdx ? ' is-active' : '') + '" data-page-idx="' + i + '">' +
+        pageName(p.url) + ' (' + fmt(p.duration) + ')</button>';
+    }).join('');
+
+    document.querySelectorAll('.replay__page-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        loadPageReplay(parseInt(this.dataset.pageIdx));
+      });
+    });
+  }
+
+  function loadPageReplay(idx) {
+    stopTimer();
+    currentPageIdx = idx;
+    playTime = 0;
+    playing = false;
+    updatePlayIcon();
+
+    var page = activeReplay.pages[idx];
+    if (!page) return;
+
+    // Update active tab
+    document.querySelectorAll('.replay__page-tab').forEach(function(t, i) {
+      t.classList.toggle('is-active', i === idx);
+    });
+
+    // Load page in iframe
+    var iframe = document.getElementById('replay-iframe');
+    iframe.src = page.url;
+
+    // Scale iframe to fit viewport
+    var viewport = document.getElementById('replay-viewport');
+    var sessionW = activeReplay.device ? activeReplay.device.w : 1440;
+    var viewportW = viewport.offsetWidth;
+    var scale = viewportW / sessionW;
+    iframe.style.transform = 'scale(' + scale + ')';
+    iframe.style.width = sessionW + 'px';
+    iframe.style.height = (500 / scale) + 'px';
+
+    // Setup slider
+    var totalDuration = page.duration || 1;
+    var slider = document.getElementById('replay-slider');
+    slider.max = totalDuration;
+    slider.value = 0;
+    updateTimeDisplay(0, totalDuration);
+
+    // Render event log
+    renderEventLog(page);
+
+    // Hide cursor
+    document.getElementById('replay-cursor').classList.remove('is-visible');
+  }
+
+  function renderEventLog(page) {
+    var events = (page.events || []).filter(function(e) { return e.e === 'c'; });
+    var logEl = document.getElementById('replay-events');
+    if (events.length === 0) {
+      logEl.innerHTML = '<div class="replay__event-item" style="color:var(--color-text-secondary)">No click events on this page</div>';
+      return;
+    }
+    logEl.innerHTML = events.map(function(ev) {
+      return '<div class="replay__event-item"><span class="replay__event-time">' + fmt(ev.t) + '</span> &mdash; ' +
+        '<span class="replay__event-action">Click on &lt;' + (ev.tag || '?') + '&gt;</span>' +
+        (ev.text ? ' "' + ev.text.substring(0, 30) + '"' : '') + '</div>';
+    }).join('');
+  }
+
+  // Play/Pause
+  document.getElementById('replay-play').addEventListener('click', function() {
+    if (!activeReplay) return;
+    playing = !playing;
+    updatePlayIcon();
+    if (playing) startTimer();
+    else stopTimer();
+  });
+
+  function updatePlayIcon() {
+    var icon = document.getElementById('replay-play-icon');
+    if (playing) {
+      icon.innerHTML = '<rect x="3" y="2" width="3" height="10"></rect><rect x="8" y="2" width="3" height="10"></rect>';
+    } else {
+      icon.innerHTML = '<polygon points="3,1 12,7 3,13"></polygon>';
+    }
+  }
+
+  function startTimer() {
+    stopTimer();
+    var page = activeReplay.pages[currentPageIdx];
+    if (!page) return;
+    var totalDuration = page.duration || 1;
+
+    playTimer = setInterval(function() {
+      playTime += 50 * playSpeed;
+      if (playTime >= totalDuration) {
+        playTime = totalDuration;
+        // Auto-advance to next page
+        if (currentPageIdx < activeReplay.pages.length - 1) {
+          loadPageReplay(currentPageIdx + 1);
+          playing = true;
+          updatePlayIcon();
+          startTimer();
+          return;
+        } else {
+          playing = false;
+          updatePlayIcon();
+          stopTimer();
+        }
+      }
+      updateReplayPosition(playTime, page, totalDuration);
+    }, 50);
+  }
+
+  function stopTimer() {
+    if (playTimer) { clearInterval(playTimer); playTimer = null; }
+  }
+
+  function updateReplayPosition(time, page, totalDuration) {
+    var slider = document.getElementById('replay-slider');
+    slider.value = time;
+    updateTimeDisplay(time, totalDuration);
+
+    var events = page.events || [];
+    var cursor = document.getElementById('replay-cursor');
+    var viewport = document.getElementById('replay-viewport');
+    var sessionW = activeReplay.device ? activeReplay.device.w : 1440;
+    var scale = viewport.offsetWidth / sessionW;
+
+    // Find the most recent mouse position
+    var lastMouse = null;
+    for (var i = events.length - 1; i >= 0; i--) {
+      if (events[i].e === 'm' && events[i].t <= time) {
+        lastMouse = events[i];
+        break;
+      }
+    }
+
+    if (lastMouse) {
+      cursor.classList.add('is-visible');
+      cursor.style.left = (lastMouse.x * scale) + 'px';
+      cursor.style.top = (lastMouse.y * scale) + 'px';
+    }
+
+    // Find the most recent scroll position and apply to iframe
+    var lastScroll = null;
+    for (var j = events.length - 1; j >= 0; j--) {
+      if (events[j].e === 's' && events[j].t <= time) {
+        lastScroll = events[j];
+        break;
+      }
+    }
+
+    if (lastScroll) {
+      try {
+        var iframeDoc = document.getElementById('replay-iframe').contentWindow;
+        if (iframeDoc) iframeDoc.scrollTo(0, lastScroll.y);
+      } catch(e) {}
+    }
+
+    // Show click rings
+    events.forEach(function(ev) {
+      if (ev.e === 'c' && Math.abs(ev.t - time) < 100 && !ev._shown) {
+        ev._shown = true;
+        var ring = document.createElement('div');
+        ring.className = 'replay__click-ring';
+        ring.style.left = (ev.x * scale) + 'px';
+        ring.style.top = (ev.y * scale) + 'px';
+        viewport.appendChild(ring);
+        setTimeout(function() { ring.remove(); }, 600);
+      }
+    });
+  }
+
+  // Slider scrub
+  document.getElementById('replay-slider').addEventListener('input', function() {
+    if (!activeReplay) return;
+    playTime = parseInt(this.value);
+    var page = activeReplay.pages[currentPageIdx];
+    if (page) updateReplayPosition(playTime, page, page.duration || 1);
+  });
+
+  // Speed button
+  document.getElementById('replay-speed').addEventListener('click', function() {
+    speedIdx = (speedIdx + 1) % speeds.length;
+    playSpeed = speeds[speedIdx];
+    this.textContent = playSpeed + 'x';
+  });
+
+  // Close replay
+  document.getElementById('replay-close').addEventListener('click', function() {
+    stopReplay();
+  });
+
+  function stopReplay() {
+    stopTimer();
+    playing = false;
+    activeReplay = null;
+    document.getElementById('replay-player').classList.remove('is-active');
+    document.getElementById('replay-iframe').src = 'about:blank';
+    document.querySelectorAll('.session-item').forEach(function(el) { el.classList.remove('is-selected'); });
+  }
+
+  function updateTimeDisplay(current, total) {
+    document.getElementById('replay-time').textContent = fmt(current) + ' / ' + fmt(total);
+  }
+
+  // --- Init ---
+  load();
+  renderStats();
+  renderFunnel();
+  renderTopPages();
+  renderSessionList();
+})();
+</script>
+
+{% schema %}
+{ "name": "Analytics Page", "settings": [] }
+{% endschema %}
