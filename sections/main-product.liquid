@@ -1468,8 +1468,10 @@
             <p style="margin-bottom:20px;">925 Sterling Silver is a lightweight metal made of 92.5% pure silver. It's highly durable and designed for everyday wear. All of our sterling silver product is made from 95% recycled material.</p>
             <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">18ct Gold</p>
             <p style="margin-bottom:20px;">A luxurious layer of 18-carat gold over sterling silver, delivering the rich warmth and lustre of solid gold. Our gold plating is applied using a precision electroplating process for a durable, long-lasting finish designed for everyday wear.</p>
-            <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Rose Gold</p>
-            <p>A delicate blend of gold and copper alloys plated over sterling silver, producing a soft pink hue with a warm, romantic undertone. Rose gold complements all skin tones beautifully and adds a feminine touch to any piece. Applied with the same precision electroplating process for lasting durability.</p>
+            {%- if product.handle contains 'trefle' -%}
+              <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Rose Gold</p>
+              <p>A delicate blend of gold and copper alloys plated over sterling silver, producing a soft pink hue with a warm, romantic undertone. Rose gold complements all skin tones beautifully and adds a feminine touch to any piece. Applied with the same precision electroplating process for lasting durability.</p>
+            {%- endif -%}
           </div>
         </div>
       </div>
