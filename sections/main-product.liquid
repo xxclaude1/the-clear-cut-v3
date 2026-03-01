@@ -321,15 +321,7 @@
     margin-bottom: 32px;
   }
 
-  /* Product gift text under Add to Bag */
-  .product-page__gift-text {
-    font-family: var(--font-body);
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-    margin-bottom: 32px;
-    font-style: italic;
-  }
+  /* Description is now gift/occasion text */
 
   /* Accordions */
   .product-page__accordions {
@@ -1428,34 +1420,9 @@
       </div>
     </form>
 
-    {%- comment -%} Description — strip spec lines (Stone:, Setting:, Metal:, Length:, Clasp:, Certification:) {%- endcomment -%}
-    {%- if product.description != blank -%}
-      {%- assign desc_raw = product.description | strip_html -%}
-      {%- assign desc_lines = desc_raw | split: '
-' -%}
-      {%- capture clean_desc -%}
-        {%- for line in desc_lines -%}
-          {%- assign trimmed = line | strip -%}
-          {%- unless trimmed contains 'Stone:' or trimmed contains 'Setting:' or trimmed contains 'Metal:' or trimmed contains 'Length:' or trimmed contains 'Clasp:' or trimmed contains 'Certification:' or trimmed == '' -%}
-            {{ trimmed }}
-          {%- endunless -%}
-        {%- endfor -%}
-      {%- endcapture -%}
-      {%- assign clean_desc = clean_desc | strip -%}
-      {%- if clean_desc != blank -%}
-        <div class="product-page__description">{{ clean_desc }}</div>
-      {%- else -%}
-        <div class="product-page__description">Handcrafted in sterling silver featuring lab grown moissanite. These gemstones have the same chemical and physical properties as natural ones — and sparkle just as beautifully.</div>
-      {%- endif -%}
-    {%- else -%}
-      <div class="product-page__description">
-        Handcrafted in sterling silver featuring lab grown moissanite. These gemstones have the same chemical and physical properties as natural ones — and sparkle just as beautifully.
-      </div>
-    {%- endif -%}
-
-    {%- comment -%} Product-specific gift text {%- endcomment -%}
+    {%- comment -%} Product-specific gift text (replaces description) {%- endcomment -%}
     {%- assign h = product.handle -%}
-    <div class="product-page__gift-text">
+    <div class="product-page__description">
       {%- if h contains 'riviere' -%}
         The perfect gift. A fresh, clear-cut statement piece that goes with everything they own. Layer it, wear it solo — it turns heads either way.
       {%- elsif h contains 'eclat' -%}
@@ -1504,74 +1471,94 @@
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            {%- comment -%} Pull spec lines from product description if present {%- endcomment -%}
-            {%- assign desc_plain = product.description | strip_html -%}
-            {%- assign has_desc_specs = false -%}
-            {%- if desc_plain contains 'Stone:' or desc_plain contains 'Setting:' or desc_plain contains 'Metal:' or desc_plain contains 'Clasp:' or desc_plain contains 'Certification:' -%}
-              {%- assign has_desc_specs = true -%}
-            {%- endif -%}
-            {%- if has_desc_specs -%}
-              <div class="specs-list" id="specs-from-desc">
-                {%- assign spec_lines = desc_plain | split: '
-' -%}
-                {%- for line in spec_lines -%}
-                  {%- assign tl = line | strip -%}
-                  {%- if tl contains 'Stone:' or tl contains 'Setting:' or tl contains 'Metal:' or tl contains 'Length:' or tl contains 'Clasp:' or tl contains 'Certification:' -%}
-                    <p style="margin-bottom:6px;font-size:14px;line-height:1.6;">- {{ tl }}</p>
-                  {%- endif -%}
-                {%- endfor -%}
-              </div>
+            {%- comment -%} Product description prose {%- endcomment -%}
+            {%- if handle_down contains 'riviere' -%}
+              <p style="margin-bottom:20px;">A continuous river of brilliant-cut moissanite stones set in an articulated tennis necklace. Each stone is D colour, VVS1 clarity — optically flawless and ethically crafted.</p>
+            {%- elsif handle_down contains 'eclat' -%}
+              <p style="margin-bottom:20px;">A classic tennis bracelet featuring a continuous line of round brilliant moissanite stones. Each stone is individually set in a four-prong link for maximum light performance and security.</p>
+            {%- elsif handle_down contains 'lumiere' -%}
+              <p style="margin-bottom:20px;">A timeless solitaire stud earring featuring a single round brilliant moissanite stone. Clean, minimal, and endlessly versatile — the earring you'll reach for every day.</p>
+            {%- elsif handle_down contains 'eternite' -%}
+              <p style="margin-bottom:20px;">A full eternity band set with channel-set moissanite stones around the entire circumference. Each stone is D colour, VVS1 clarity — a symbol of forever.</p>
+            {%- elsif handle_down contains 'solaire' -%}
+              <p style="margin-bottom:20px;">A single round brilliant moissanite stone on a delicate chain. The solitaire pendant that works with everything — understated elegance at its finest.</p>
+            {%- elsif handle_down contains 'trefle' -%}
+              <p style="margin-bottom:20px;">A four-leaf clover pendant set with brilliant moissanite stones. Each petal catches light from a different angle — a piece that carries meaning and sparkle in equal measure.</p>
+            {%- elsif handle_down contains 'picasso' -%}
+              <p style="margin-bottom:20px;">Inside-out hoop earrings lined with round brilliant moissanite stones. Bold enough to make a statement, refined enough for every day.</p>
+            {%- elsif handle_down contains 'quatre' -%}
+              <p style="margin-bottom:20px;">A cluster stud earring featuring four round brilliant moissanite stones in a square formation. A modern take on the classic solitaire stud with four times the sparkle.</p>
             {%- else -%}
-              <div class="specs-table">
-                {%- if handle_down contains 'riviere' -%}
-                  <div class="specs-table__row"><span class="specs-table__label">Stone Size</span><span>3 mm</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite (40+ stones)</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Four-prong tennis link</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Lengths</span><span>38cm, 45cm, 56cm</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
-                {%- elsif handle_down contains 'eclat' -%}
-                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Four-prong tennis link</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Box clasp with safety latch</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
-                {%- elsif handle_down contains 'lumiere' -%}
-                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>4-Prong Solitaire</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Butterfly back</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
-                {%- elsif handle_down contains 'eternite' -%}
-                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Channel set, full eternity</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
-                {%- elsif handle_down contains 'solaire' or handle_down contains 'trefle' -%}
-                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Prong set solitaire</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Spring ring clasp</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
-                {%- elsif handle_down contains 'picasso' -%}
-                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Inside-out hoop</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Hinge clasp</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
-                {%- elsif handle_down contains 'quatre' -%}
-                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Prong set cluster</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Butterfly back</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
-                {%- else -%}
-                  <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Lab Grown Moissanite</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
-                  <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- if product.description != blank -%}
+                {%- assign desc_raw = product.description | strip_html -%}
+                {%- assign desc_lines = desc_raw | split: '
+' -%}
+                {%- capture clean_desc -%}
+                  {%- for line in desc_lines -%}
+                    {%- assign trimmed = line | strip -%}
+                    {%- unless trimmed contains 'Stone:' or trimmed contains 'Setting:' or trimmed contains 'Metal:' or trimmed contains 'Length:' or trimmed contains 'Clasp:' or trimmed contains 'Certification:' or trimmed contains 'Stone Size:' or trimmed == '' -%}
+                      {{ trimmed }}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                {%- endcapture -%}
+                {%- assign clean_desc = clean_desc | strip -%}
+                {%- if clean_desc != blank -%}
+                  <p style="margin-bottom:20px;">{{ clean_desc }}</p>
                 {%- endif -%}
-              </div>
+              {%- endif -%}
             {%- endif -%}
+
+            {%- comment -%} Specs table {%- endcomment -%}
+            <div class="specs-table">
+              {%- if handle_down contains 'riviere' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone Size</span><span>3 mm</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite (40+ stones)</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Four-prong tennis link</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Lengths</span><span>38cm, 45cm, 56cm</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- elsif handle_down contains 'eclat' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone Size</span><span>3 mm</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Four-prong tennis link</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Box clasp with safety latch</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- elsif handle_down contains 'lumiere' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>4-Prong Solitaire</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Butterfly back</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- elsif handle_down contains 'eternite' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Channel set, full eternity</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- elsif handle_down contains 'solaire' or handle_down contains 'trefle' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Prong set solitaire</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Spring ring clasp</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- elsif handle_down contains 'picasso' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Inside-out hoop</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Hinge clasp</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- elsif handle_down contains 'quatre' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Prong set cluster</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Butterfly back</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- else -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Lab Grown Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- endif -%}
+            </div>
           </div>
         </div>
       </div>
