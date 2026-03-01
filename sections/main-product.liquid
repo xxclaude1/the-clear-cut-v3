@@ -287,14 +287,6 @@
     stroke-width: 1.5;
   }
 
-  /* Afterpay / BNPL */
-  .product-page__bnpl {
-    font-family: var(--font-body);
-    font-size: 13px;
-    color: var(--color-text-secondary);
-    margin-bottom: 32px;
-  }
-
   /* Description */
   .product-page__description {
     font-family: var(--font-body);
@@ -408,54 +400,294 @@
   /* Reviews section */
   .product-page__reviews {
     grid-column: 1 / -1;
-    padding: var(--space-2xl) var(--page-padding) 0;
+    padding: 80px var(--page-padding) 60px;
     max-width: var(--page-max-width);
     margin: 0 auto;
     width: 100%;
   }
 
-  .product-page__reviews-heading {
-    margin-bottom: var(--space-lg);
+  .reviews__header {
     text-align: center;
+    margin-bottom: 48px;
   }
 
-  .product-page__reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-md);
+  .reviews__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text);
+    margin-bottom: 16px;
   }
 
-  @media (max-width: 1024px) {
-    .product-page__reviews-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .reviews__summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 8px;
+  }
+
+  .reviews__average {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  .reviews__summary-right {
+    text-align: left;
+  }
+
+  .reviews__summary-stars {
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .reviews__summary-count {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  /* Star breakdown bars */
+  .reviews__breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 320px;
+    margin: 24px auto 0;
+  }
+
+  .reviews__breakdown-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .reviews__breakdown-label {
+    width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .reviews__breakdown-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--color-border);
+    position: relative;
+  }
+
+  .reviews__breakdown-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--color-text);
+    transition: width 600ms ease;
+  }
+
+  .reviews__breakdown-count {
+    width: 28px;
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  /* Photo gallery strip */
+  .reviews__photos {
+    margin-bottom: 40px;
+  }
+
+  .reviews__photos-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    margin-bottom: 12px;
+  }
+
+  .reviews__photos-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .reviews__photos-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reviews__photo-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .reviews__photo-thumb:hover {
+    border-color: var(--color-text);
+  }
+
+  /* Sort & controls bar */
+  .reviews__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .reviews__sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .reviews__sort-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+  }
+
+  .reviews__sort-select {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    padding: 8px 32px 8px 12px;
+    background: var(--color-bg);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231A1A1A' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+  }
+
+  .reviews__write-btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 24px;
+    border: 1px solid var(--color-text);
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .reviews__write-btn:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
   }
 
   @media (max-width: 768px) {
-    .product-page__reviews-grid {
+    .reviews__controls {
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .reviews__sort {
+      justify-content: space-between;
+    }
+    .reviews__write-btn {
+      text-align: center;
+    }
+  }
+
+  /* Review cards grid */
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 768px) {
+    .reviews__grid {
       grid-template-columns: 1fr;
     }
   }
 
   .review-card {
-    border: 1px solid var(--color-border);
-    padding: 24px;
+    background: var(--color-bg);
+    padding: 28px;
+  }
+
+  .review-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
   }
 
   .review-card__stars {
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 2px;
-    margin-bottom: 12px;
     color: var(--color-text);
+  }
+
+  .review-card__date {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
   }
 
   .review-card__text {
     font-family: var(--font-body);
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--color-text);
     margin-bottom: 16px;
-    font-style: italic;
+  }
+
+  .review-card__photo {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .review-card__photo:hover {
+    border-color: var(--color-text);
+  }
+
+  .review-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .review-card__author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .review-card__author {
@@ -464,13 +696,309 @@
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+    color: var(--color-text);
   }
 
   .review-card__location {
     font-family: var(--font-body);
     font-size: 12px;
     color: var(--color-text-secondary);
-    margin-top: 2px;
+  }
+
+  .review-card__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .review-card__verified {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .review-card__verified svg {
+    width: 12px;
+    height: 12px;
+    stroke: var(--color-text);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .review-card__variant {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+  }
+
+  /* Show more button */
+  .reviews__show-more {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .reviews__show-more-btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 14px 48px;
+    border: 1px solid var(--color-text);
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .reviews__show-more-btn:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  /* Write a Review Modal */
+  .review-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .review-modal.is-open {
+    display: flex;
+  }
+
+  .review-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .review-modal__content {
+    position: relative;
+    background: var(--color-bg);
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .review-modal__content {
+      max-width: 100%;
+      margin: 0 16px;
+      padding: 28px 20px;
+    }
+  }
+
+  .review-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-text);
+    line-height: 1;
+    padding: 4px;
+  }
+
+  .review-modal__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 28px;
+  }
+
+  .review-modal__field {
+    margin-bottom: 20px;
+  }
+
+  .review-modal__label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+
+  .review-modal__input,
+  .review-modal__textarea {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .review-modal__input:focus,
+  .review-modal__textarea:focus {
+    outline: none;
+    border-color: var(--color-text);
+  }
+
+  .review-modal__textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .review-modal__stars-input {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .review-modal__star {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-border);
+    transition: color var(--duration-fast) ease;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .review-modal__star.is-active {
+    color: var(--color-text);
+  }
+
+  .review-modal__drop-zone {
+    border: 2px dashed var(--color-border);
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .review-modal__drop-zone:hover,
+  .review-modal__drop-zone.is-dragover {
+    border-color: var(--color-text);
+  }
+
+  .review-modal__drop-text {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .review-modal__drop-text span {
+    text-decoration: underline;
+    color: var(--color-text);
+  }
+
+  .review-modal__file-input {
+    display: none;
+  }
+
+  .review-modal__preview {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .review-modal__preview-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+  }
+
+  .review-modal__submit {
+    width: 100%;
+    height: 48px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--color-btn-primary-bg);
+    color: var(--color-btn-primary-text);
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease;
+    margin-top: 8px;
+  }
+
+  .review-modal__submit:hover {
+    background: var(--color-btn-primary-hover);
+  }
+
+  .review-modal__success {
+    display: none;
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .review-modal__success.is-visible {
+    display: block;
+  }
+
+  .review-modal__success-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+
+  .review-modal__success-text {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  /* Lightbox */
+  .review-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .review-lightbox.is-open {
+    display: flex;
+  }
+
+  .review-lightbox__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .review-lightbox__img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
   }
 </style>
 
@@ -580,12 +1108,6 @@
         </button>
       </div>
     </form>
-
-    {%- comment -%} Afterpay / BNPL {%- endcomment -%}
-    {%- assign installment_price = product.price | divided_by: 4 -%}
-    <div class="product-page__bnpl">
-      4 payments of {{ installment_price | money }} at 0% interest with Afterpay
-    </div>
 
     {%- comment -%} Description {%- endcomment -%}
     {%- if product.description != blank -%}
@@ -699,442 +1221,95 @@
 </div>
 
 <!-- Reviews Section -->
-<section class="product-page__reviews reveal">
-  <h2 class="heading-2 product-page__reviews-heading">What Our Customers Say</h2>
-  <div class="product-page__reviews-grid">
-    {%- case product.handle -%}
-
-      {%- when 'the-eclat-tennis-bracelet' -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I've received more compliments on this bracelet than any piece of jewelry I own. The sparkle is unreal."</p>
-          <div class="review-card__author">Sarah M.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"My partner thought it was a diamond tennis bracelet. The box clasp is really secure too — I wear it every day without worry."</p>
-          <div class="review-card__author">Emma L.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought this for my mum's birthday. She cried. The quality is genuinely indistinguishable from the real thing."</p>
-          <div class="review-card__author">Jessica K.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I was skeptical about moissanite but this completely changed my mind. The fire in these stones is even better than diamond."</p>
-          <div class="review-card__author">Lauren T.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Stacks beautifully with my watch. I've been wearing it non-stop for three months and it still looks brand new."</p>
-          <div class="review-card__author">Olivia R.</div>
-          <div class="review-card__location">Adelaide</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The weight feels substantial, not cheap at all. Arrived beautifully packaged with a certificate. Truly premium experience."</p>
-          <div class="review-card__author">Mia C.</div>
-          <div class="review-card__location">Gold Coast</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Third purchase from The Clear Cut. This tennis bracelet is by far my favourite piece. The craftsmanship is next level."</p>
-          <div class="review-card__author">Hannah W.</div>
-          <div class="review-card__location">Hobart</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"My jeweller friend couldn't believe the price when she saw it on my wrist. Absolutely stunning brilliance."</p>
-          <div class="review-card__author">Zara N.</div>
-          <div class="review-card__location">Canberra</div>
-        </div>
-
-      {%- when 'the-lumiere-stud-earrings' -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"These are my everyday earrings now. The 6mm size is perfect — noticeable without being over the top."</p>
-          <div class="review-card__author">Chloe D.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought the 4mm for work and the 7mm for going out. Both are incredible. The sparkle catches light from every angle."</p>
-          <div class="review-card__author">Amelie F.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I have sensitive ears and these have been completely fine. No irritation at all. And they're gorgeous."</p>
-          <div class="review-card__author">Sophie B.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"My girlfriend wears these every single day. She says they're the best gift I've ever given her. Worth every cent."</p>
-          <div class="review-card__author">James P.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The 8mm studs are show-stoppers. I wore them to a wedding and multiple people asked where I got them."</p>
-          <div class="review-card__author">Priya S.</div>
-          <div class="review-card__location">Adelaide</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Replaced my diamond studs with these and honestly can't tell the difference. The butterfly backs are really secure too."</p>
-          <div class="review-card__author">Lily G.</div>
-          <div class="review-card__location">Hobart</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Simple, elegant, and the quality is insane for the price. These look like they cost ten times more than they did."</p>
-          <div class="review-card__author">Rachel H.</div>
-          <div class="review-card__location">Gold Coast</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought these on a whim and now I'm obsessed with The Clear Cut. Already eyeing the tennis bracelet."</p>
-          <div class="review-card__author">Nina V.</div>
-          <div class="review-card__location">Darwin</div>
-        </div>
-
-      {%- when 'the-eternite-band' -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Using this as my wedding band. It's exactly what I wanted — elegant, sparkly, and ethically made. No regrets."</p>
-          <div class="review-card__author">Kate A.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Stacks perfectly with my engagement ring. The channel setting means it sits flush without catching on anything."</p>
-          <div class="review-card__author">Grace L.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I bought two — one for each hand. At this price point, why not? The quality is remarkable."</p>
-          <div class="review-card__author">Ella T.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"My fiance and I both have Eternite bands. They look incredible together. Love the eternity concept."</p>
-          <div class="review-card__author">Michael R.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The size guide was accurate and the ring fits perfectly. Comfortable enough to wear all day, every day."</p>
-          <div class="review-card__author">Isabelle C.</div>
-          <div class="review-card__location">Adelaide</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought this as an anniversary gift. She said it's the most beautiful ring she's ever owned. Mission accomplished."</p>
-          <div class="review-card__author">David W.</div>
-          <div class="review-card__location">Gold Coast</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The stones go all the way around which means it sparkles from every angle. Absolutely love this band."</p>
-          <div class="review-card__author">Megan J.</div>
-          <div class="review-card__location">Canberra</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Third piece from The Clear Cut and the quality is consistently outstanding. This band is my new daily wear."</p>
-          <div class="review-card__author">Tessa K.</div>
-          <div class="review-card__location">Hobart</div>
-        </div>
-
-      {%- when 'the-solaire-pendant' -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The 2ct Solaire is the perfect size. It sits right at the collarbone and catches light beautifully."</p>
-          <div class="review-card__author">Natasha M.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I layer this with other necklaces and it always stands out. The chain quality is excellent — no tangling."</p>
-          <div class="review-card__author">Alexandra B.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought the 1ct for everyday and the 3ct for special occasions. Both are stunning. The fire is incredible."</p>
-          <div class="review-card__author">Ruby P.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"This was a birthday gift from my husband. I haven't taken it off since. The solitaire design is timeless."</p>
-          <div class="review-card__author">Gemma F.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Simple, elegant, and the stone has incredible depth. It looks like a real diamond pendant — nobody can tell."</p>
-          <div class="review-card__author">Jade R.</div>
-          <div class="review-card__location">Adelaide</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The packaging alone made it feel like a luxury purchase. Then I opened it and the pendant exceeded expectations."</p>
-          <div class="review-card__author">Sienna D.</div>
-          <div class="review-card__location">Gold Coast</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I wear this to work every day. It's professional enough for the office but sparkly enough for after-work drinks."</p>
-          <div class="review-card__author">Anika L.</div>
-          <div class="review-card__location">Canberra</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Already ordered the matching earrings. The Clear Cut has completely converted me to moissanite."</p>
-          <div class="review-card__author">Phoebe W.</div>
-          <div class="review-card__location">Darwin</div>
-        </div>
-
-      {%- when 'the-trefle-pendant' -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The clover design is so unique. I get compliments every time I wear it. It's become my signature piece."</p>
-          <div class="review-card__author">Charlotte H.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Reminds me of Van Cleef at a fraction of the price. The detail in the clover setting is impeccable."</p>
-          <div class="review-card__author">Victoria N.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought this as a lucky charm for my new job. It's delicate but feels really well made. Love it."</p>
-          <div class="review-card__author">Madeleine T.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The satin finish gives it such a luxurious feel. It doesn't look mass-produced at all — truly artisanal."</p>
-          <div class="review-card__author">Stella G.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Perfect gift for my sister. She's obsessed with clover motifs and this exceeded her expectations completely."</p>
-          <div class="review-card__author">Liam K.</div>
-          <div class="review-card__location">Adelaide</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I layer this with the Solaire pendant and they complement each other perfectly. Such thoughtful designs."</p>
-          <div class="review-card__author">Freya C.</div>
-          <div class="review-card__location">Gold Coast</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The attention to detail on the four petals is incredible. Each one catches light differently. A work of art."</p>
-          <div class="review-card__author">Poppy J.</div>
-          <div class="review-card__location">Hobart</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Third necklace from The Clear Cut. The Trefle is my favourite — there's something magical about the clover shape."</p>
-          <div class="review-card__author">Eva S.</div>
-          <div class="review-card__location">Canberra</div>
-        </div>
-
-      {%- when 'the-riviere-tennis-chain' -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"This necklace is absolutely breathtaking. The way it drapes around the neck is pure elegance. Worth every dollar."</p>
-          <div class="review-card__author">Diana M.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought the 46cm length and it sits perfectly. The sparkle is absolutely insane — like wearing a river of diamonds."</p>
-          <div class="review-card__author">Claudia V.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I paired this with the Eclat bracelet for a formal event. Together they're unstoppable. So many compliments."</p>
-          <div class="review-card__author">Rebecca A.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The clasp is really well designed — easy to put on yourself but super secure. I've worn it swimming with no issues."</p>
-          <div class="review-card__author">Samantha B.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"My most expensive Clear Cut purchase but absolutely my favourite. This is a statement piece that speaks for itself."</p>
-          <div class="review-card__author">Bianca P.</div>
-          <div class="review-card__location">Adelaide</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Wore this to my daughter's graduation. Three different women asked me where I got it. Sharing the secret now."</p>
-          <div class="review-card__author">Karen L.</div>
-          <div class="review-card__location">Gold Coast</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The 56cm choker length is stunning for layering. It has serious weight to it — feels incredibly luxurious."</p>
-          <div class="review-card__author">Jasmine Y.</div>
-          <div class="review-card__location">Hobart</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I've owned real diamond tennis necklaces before. This honestly outshines them. The fire in moissanite is unmatched."</p>
-          <div class="review-card__author">Olivia T.</div>
-          <div class="review-card__location">Darwin</div>
-        </div>
-
-      {%- when 'the-picasso-hoop-earrings' -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"These hoops are my new go-to. The 2cm size is perfect for everyday — elegant without being too much."</p>
-          <div class="review-card__author">Mia J.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The sparkle on these is absolutely insane. Every time I turn my head they catch the light. So many compliments."</p>
-          <div class="review-card__author">Ava P.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought the 3cm hoops for a night out and they are stunning. Substantial but not heavy. Could wear them all day."</p>
-          <div class="review-card__author">Isla R.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"These replaced my plain gold hoops permanently. The moissanite adds just the right amount of drama."</p>
-          <div class="review-card__author">Zoe K.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"My mum borrowed them once and immediately ordered her own pair. That says everything about the quality."</p>
-          <div class="review-card__author">Harper D.</div>
-          <div class="review-card__location">Adelaide</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I own the Lumiere studs and now these. The Clear Cut hoops are even more impressive. The hinge closure is so secure."</p>
-          <div class="review-card__author">Willow S.</div>
-          <div class="review-card__location">Gold Coast</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Wore these to a wedding and the bride asked me where they were from. Upstaged the bridal jewelry apparently."</p>
-          <div class="review-card__author">Scarlett A.</div>
-          <div class="review-card__location">Hobart</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The 2cm hoops are the perfect 'throw on and go' earrings. They elevate literally any outfit instantly."</p>
-          <div class="review-card__author">Ellie N.</div>
-          <div class="review-card__location">Canberra</div>
-        </div>
-
-      {%- when 'the-quatre-stud-earrings' -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Four stones per earring means four times the sparkle. These catch light from every angle. Obsessed."</p>
-          <div class="review-card__author">Mia C.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I wanted something more interesting than a single solitaire stud. These are the perfect upgrade — elegant but with character."</p>
-          <div class="review-card__author">Olivia T.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"My go-to everyday earrings now. They're surprisingly lightweight and the cluster design gets so many compliments at work."</p>
-          <div class="review-card__author">Sophie R.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Bought these as a gift for my sister's birthday. She hasn't taken them off since. The packaging was beautiful too."</p>
-          <div class="review-card__author">Grace H.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"At this price point, the quality is genuinely shocking. Each stone is perfectly set. You'd think these cost ten times more."</p>
-          <div class="review-card__author">Chloe W.</div>
-          <div class="review-card__location">Adelaide</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I own the Lumiere studs and now the Quatré. The cluster design gives them a completely different vibe — more modern, bolder."</p>
-          <div class="review-card__author">Ella M.</div>
-          <div class="review-card__location">Gold Coast</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The butterfly backs are secure and comfortable. I can sleep in them without any issues. Absolute daily staple."</p>
-          <div class="review-card__author">Ruby J.</div>
-          <div class="review-card__location">Hobart</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"These studs punch way above their weight. The four-stone cluster makes them look much larger than a single stone would. Clever design."</p>
-          <div class="review-card__author">Lily F.</div>
-          <div class="review-card__location">Canberra</div>
-        </div>
-
-      {%- else -%}
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"The quality is incredible. You genuinely cannot tell these aren't mined diamonds. Absolutely love it."</p>
-          <div class="review-card__author">Sarah M.</div>
-          <div class="review-card__location">Sydney</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Arrived beautifully packaged with a certificate of authenticity. Truly premium experience from start to finish."</p>
-          <div class="review-card__author">Emma L.</div>
-          <div class="review-card__location">Melbourne</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"I was skeptical about moissanite but this completely changed my mind. The craftsmanship is exceptional."</p>
-          <div class="review-card__author">Jessica K.</div>
-          <div class="review-card__location">Brisbane</div>
-        </div>
-        <div class="review-card">
-          <div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-card__text">"Free shipping, lifetime warranty, and the piece itself is gorgeous. Can't ask for more than that."</p>
-          <div class="review-card__author">Lauren T.</div>
-          <div class="review-card__location">Perth</div>
-        </div>
-
-    {%- endcase -%}
+<section class="product-page__reviews reveal" id="reviews-section" data-handle="{{ product.handle }}">
+  <div class="reviews__header">
+    <div class="reviews__title">Customer Reviews</div>
+    <div class="reviews__summary">
+      <div class="reviews__average" id="reviews-average"></div>
+      <div class="reviews__summary-right">
+        <div class="reviews__summary-stars" id="reviews-summary-stars"></div>
+        <div class="reviews__summary-count" id="reviews-summary-count"></div>
+      </div>
+    </div>
+    <div class="reviews__breakdown" id="reviews-breakdown"></div>
+  </div>
+  <div class="reviews__photos" id="reviews-photos" style="display:none;">
+    <div class="reviews__photos-label">Customer Photos</div>
+    <div class="reviews__photos-scroll" id="reviews-photos-scroll"></div>
+  </div>
+  <div class="reviews__controls">
+    <div class="reviews__sort">
+      <span class="reviews__sort-label">Sort by</span>
+      <select class="reviews__sort-select" id="reviews-sort">
+        <option value="recent">Most Recent</option>
+        <option value="highest">Highest Rated</option>
+        <option value="photos">Photos First</option>
+      </select>
+    </div>
+    <button class="reviews__write-btn" id="reviews-write-btn">Write a Review</button>
+  </div>
+  <div class="reviews__grid" id="reviews-grid"></div>
+  <div class="reviews__show-more" id="reviews-show-more" style="display:none;">
+    <button class="reviews__show-more-btn" id="reviews-show-more-btn">Show More Reviews</button>
   </div>
 </section>
 
+<!-- Write a Review Modal -->
+<div class="review-modal" id="review-modal">
+  <div class="review-modal__overlay" id="review-modal-overlay"></div>
+  <div class="review-modal__content">
+    <button class="review-modal__close" id="review-modal-close">&times;</button>
+    <div id="review-form-wrapper">
+      <div class="review-modal__title">Write a Review</div>
+      <form id="review-form">
+        <div class="review-modal__field">
+          <label class="review-modal__label">Rating</label>
+          <div class="review-modal__stars-input" id="review-stars-input">
+            <button type="button" class="review-modal__star" data-star="1">&#9733;</button>
+            <button type="button" class="review-modal__star" data-star="2">&#9733;</button>
+            <button type="button" class="review-modal__star" data-star="3">&#9733;</button>
+            <button type="button" class="review-modal__star" data-star="4">&#9733;</button>
+            <button type="button" class="review-modal__star" data-star="5">&#9733;</button>
+          </div>
+        </div>
+        <div class="review-modal__field">
+          <label class="review-modal__label" for="review-name">Name</label>
+          <input class="review-modal__input" type="text" id="review-name" placeholder="Your name" required>
+        </div>
+        <div class="review-modal__field">
+          <label class="review-modal__label" for="review-location">Location</label>
+          <input class="review-modal__input" type="text" id="review-location" placeholder="City, State">
+        </div>
+        <div class="review-modal__field">
+          <label class="review-modal__label" for="review-text">Review</label>
+          <textarea class="review-modal__textarea" id="review-text" placeholder="Share your experience with this piece..." required></textarea>
+        </div>
+        <div class="review-modal__field">
+          <label class="review-modal__label">Photo (Optional)</label>
+          <div class="review-modal__drop-zone" id="review-drop-zone">
+            <div class="review-modal__drop-text">Drag & drop your photo here or <span>browse</span></div>
+            <input type="file" class="review-modal__file-input" id="review-file-input" accept="image/*">
+          </div>
+          <div class="review-modal__preview" id="review-preview"></div>
+        </div>
+        <button type="submit" class="review-modal__submit">Submit Review</button>
+      </form>
+    </div>
+    <div class="review-modal__success" id="review-success">
+      <div class="review-modal__success-icon">&#10003;</div>
+      <div class="review-modal__success-text">Thank you for your review! It will appear after approval.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Photo Lightbox -->
+<div class="review-lightbox" id="review-lightbox">
+  <button class="review-lightbox__close" id="review-lightbox-close">&times;</button>
+  <img class="review-lightbox__img" id="review-lightbox-img" src="" alt="Review photo">
+</div>
+
 <script>
+(function() {
   /* Variant selection */
   document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -1145,6 +1320,405 @@
       this.classList.add('is-selected');
     });
   });
+
+  /* ============ REVIEW DATA ============ */
+  var reviewData = {
+    "the-eclat-tennis-bracelet": [
+      {n:"Sarah M.",l:"Sydney",r:5,d:"2025-08-12",t:"I've received more compliments on this bracelet than any piece of jewelry I own. The sparkle is unreal.",v:true},
+      {n:"Emma L.",l:"Melbourne",r:5,d:"2025-08-28",t:"My partner thought it was a diamond tennis bracelet. The box clasp is really secure too \u2014 I wear it every day without worry.",v:true},
+      {n:"Jessica K.",l:"Brisbane",r:5,d:"2025-09-10",t:"Bought this for my mum's birthday. She cried. The quality is genuinely indistinguishable from the real thing.",v:true},
+      {n:"Lauren T.",l:"Perth",r:5,d:"2025-09-25",t:"I was skeptical about moissanite but this completely changed my mind. The fire in these stones is even better than diamond.",v:true},
+      {n:"Olivia R.",l:"Adelaide",r:5,d:"2025-10-08",t:"Stacks beautifully with my watch. I've been wearing it non-stop for three months and it still looks brand new.",v:true},
+      {n:"Mia C.",l:"Gold Coast",r:5,d:"2025-10-22",t:"The weight feels substantial, not cheap at all. Arrived beautifully packaged with a certificate. Truly premium experience.",v:true},
+      {n:"Hannah W.",l:"Hobart",r:5,d:"2025-11-15",t:"Third purchase from The Clear Cut. This tennis bracelet is by far my favourite piece. The craftsmanship is next level.",v:true},
+      {n:"Zara N.",l:"Canberra",r:5,d:"2025-12-03",t:"My jeweller friend couldn't believe the price when she saw it on my wrist. Absolutely stunning brilliance.",v:true}
+    ],
+    "the-lumiere-stud-earrings": [
+      {n:"Chloe D.",l:"Sydney",r:5,d:"2025-08-15",t:"These are my everyday earrings now. The 6mm size is perfect \u2014 noticeable without being over the top.",v:true},
+      {n:"Amelie F.",l:"Melbourne",r:5,d:"2025-09-02",t:"Bought the 4mm for work and the 7mm for going out. Both are incredible. The sparkle catches light from every angle.",v:true},
+      {n:"Sophie B.",l:"Perth",r:5,d:"2025-09-18",t:"I have sensitive ears and these have been completely fine. No irritation at all. And they're gorgeous.",v:true},
+      {n:"James P.",l:"Brisbane",r:5,d:"2025-10-05",t:"My girlfriend wears these every single day. She says they're the best gift I've ever given her. Worth every cent.",v:true},
+      {n:"Priya S.",l:"Adelaide",r:5,d:"2025-10-20",t:"The 8mm studs are show-stoppers. I wore them to a wedding and multiple people asked where I got them.",v:true},
+      {n:"Lily G.",l:"Hobart",r:5,d:"2025-11-08",t:"Replaced my diamond studs with these and honestly can't tell the difference. The butterfly backs are really secure too.",v:true},
+      {n:"Rachel H.",l:"Gold Coast",r:5,d:"2025-11-25",t:"Simple, elegant, and the quality is insane for the price. These look like they cost ten times more than they did.",v:true},
+      {n:"Nina V.",l:"Darwin",r:5,d:"2025-12-12",t:"Bought these on a whim and now I'm obsessed with The Clear Cut. Already eyeing the tennis bracelet.",v:true}
+    ],
+    "the-eternite-band": [
+      {n:"Kate A.",l:"Sydney",r:5,d:"2025-08-20",t:"Using this as my wedding band. It's exactly what I wanted \u2014 elegant, sparkly, and ethically made. No regrets.",v:true},
+      {n:"Grace L.",l:"Melbourne",r:5,d:"2025-09-06",t:"Stacks perfectly with my engagement ring. The channel setting means it sits flush without catching on anything.",v:true},
+      {n:"Ella T.",l:"Brisbane",r:5,d:"2025-09-22",t:"I bought two \u2014 one for each hand. At this price point, why not? The quality is remarkable.",v:true},
+      {n:"Michael R.",l:"Perth",r:5,d:"2025-10-10",t:"My fiance and I both have Eternite bands. They look incredible together. Love the eternity concept.",v:true},
+      {n:"Isabelle C.",l:"Adelaide",r:5,d:"2025-10-28",t:"The size guide was accurate and the ring fits perfectly. Comfortable enough to wear all day, every day.",v:true},
+      {n:"David W.",l:"Gold Coast",r:5,d:"2025-11-14",t:"Bought this as an anniversary gift. She said it's the most beautiful ring she's ever owned. Mission accomplished.",v:true},
+      {n:"Megan J.",l:"Canberra",r:5,d:"2025-12-01",t:"The stones go all the way around which means it sparkles from every angle. Absolutely love this band.",v:true},
+      {n:"Tessa K.",l:"Hobart",r:5,d:"2025-12-18",t:"Third piece from The Clear Cut and the quality is consistently outstanding. This band is my new daily wear.",v:true}
+    ],
+    "the-solaire-pendant": [
+      {n:"Natasha M.",l:"Sydney",r:5,d:"2025-08-18",t:"The 2ct Solaire is the perfect size. It sits right at the collarbone and catches light beautifully.",v:true},
+      {n:"Alexandra B.",l:"Melbourne",r:5,d:"2025-09-04",t:"I layer this with other necklaces and it always stands out. The chain quality is excellent \u2014 no tangling.",v:true},
+      {n:"Ruby P.",l:"Perth",r:5,d:"2025-09-20",t:"Bought the 1ct for everyday and the 3ct for special occasions. Both are stunning. The fire is incredible.",v:true},
+      {n:"Gemma F.",l:"Brisbane",r:5,d:"2025-10-08",t:"This was a birthday gift from my husband. I haven't taken it off since. The solitaire design is timeless.",v:true},
+      {n:"Jade R.",l:"Adelaide",r:5,d:"2025-10-25",t:"Simple, elegant, and the stone has incredible depth. It looks like a real diamond pendant \u2014 nobody can tell.",v:true},
+      {n:"Sienna D.",l:"Gold Coast",r:5,d:"2025-11-12",t:"The packaging alone made it feel like a luxury purchase. Then I opened it and the pendant exceeded expectations.",v:true},
+      {n:"Anika L.",l:"Canberra",r:5,d:"2025-11-28",t:"I wear this to work every day. It's professional enough for the office but sparkly enough for after-work drinks.",v:true},
+      {n:"Phoebe W.",l:"Darwin",r:5,d:"2025-12-15",t:"Already ordered the matching earrings. The Clear Cut has completely converted me to moissanite.",v:true}
+    ],
+    "the-trefle-pendant": [
+      {n:"Charlotte H.",l:"Sydney",r:5,d:"2025-08-22",t:"The clover design is so unique. I get compliments every time I wear it. It's become my signature piece.",v:true},
+      {n:"Victoria N.",l:"Melbourne",r:5,d:"2025-09-08",t:"Reminds me of Van Cleef at a fraction of the price. The detail in the clover setting is impeccable.",v:true},
+      {n:"Madeleine T.",l:"Brisbane",r:5,d:"2025-09-24",t:"Bought this as a lucky charm for my new job. It's delicate but feels really well made. Love it.",v:true},
+      {n:"Stella G.",l:"Perth",r:5,d:"2025-10-12",t:"The satin finish gives it such a luxurious feel. It doesn't look mass-produced at all \u2014 truly artisanal.",v:true},
+      {n:"Liam K.",l:"Adelaide",r:5,d:"2025-10-30",t:"Perfect gift for my sister. She's obsessed with clover motifs and this exceeded her expectations completely.",v:true},
+      {n:"Freya C.",l:"Gold Coast",r:5,d:"2025-11-16",t:"I layer this with the Solaire pendant and they complement each other perfectly. Such thoughtful designs.",v:true},
+      {n:"Poppy J.",l:"Hobart",r:5,d:"2025-12-04",t:"The attention to detail on the four petals is incredible. Each one catches light differently. A work of art.",v:true},
+      {n:"Eva S.",l:"Canberra",r:5,d:"2025-12-20",t:"Third necklace from The Clear Cut. The Trefle is my favourite \u2014 there's something magical about the clover shape.",v:true}
+    ],
+    "the-riviere-tennis-chain": [
+{n:"Liam Chen",l:"Sydney",r:5,d:"2025-09-02",t:"Absolutely stunning piece. Wore it to my sister\u2019s wedding and got so many compliments \u2014 everyone wanted to know where it was from.",s:"45cm (18\")",v:true},
+{n:"Sophie Williams",l:"Melbourne",r:5,d:"2025-09-04",t:"Bought this for my anniversary and I\u2019m obsessed. The quality is unreal for the price.",s:"51cm (20\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Priya Sharma",l:"Brisbane",r:5,d:"2025-09-06",t:"Heaps good. Paired it with my Eclat bracelet and the combo is chef\u2019s kiss.",s:"45cm (18\")",v:true},
+{n:"James O\u2019Brien",l:"Perth",r:4,d:"2025-09-08",t:"Really nice chain, looks great on. Took me a bit to decide on the size but happy I went with the 41cm \u2014 sits perfectly.",s:"41cm (16\")",v:true},
+{n:"Minh Nguyen",l:"Adelaide",r:5,d:"2025-09-10",t:"Got this as a birthday gift for my girlfriend and she hasn\u2019t taken it off since. Absolutely love the sparkle on it.",s:"41cm (16\")",v:true},
+{n:"Charlotte Davis",l:"Gold Coast",r:5,d:"2025-09-12",t:"I reckon this is the best piece of jewellery I own. It catches the light beautifully and feels so luxe.",s:"51cm (20\")",v:true},
+{n:"Tariq Hassan",l:"Sydney",r:5,d:"2025-09-14",t:"Unreal quality. Wearing it every day.",s:"45cm (18\")",v:true},
+{n:"Emily Watson",l:"Hobart",r:5,d:"2025-09-16",t:"Bought this to treat myself after a big promotion and no regrets. It\u2019s elegant without being over the top. Goes with literally everything.",s:"45cm (18\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Daniel Kim",l:"Melbourne",r:5,d:"2025-09-18",t:"The tennis chain look without the insane price tag. Looks absolutely mint.",s:"56cm (22\")",v:true},
+{n:"Aisha Abdi",l:"Darwin",r:5,d:"2025-09-20",t:"Stunning piece. I wore it to a graduation dinner and it elevated the whole outfit. Already eyeing the Lumiere studs to match.",s:"51cm (20\")",v:true},
+{n:"Tom Murphy",l:"Canberra",r:4,d:"2025-09-22",t:"Solid chain, really well made. Only reason for 4 stars is I wish there were more length options \u2014 something between 51 and 56 would be perfect for me.",s:"51cm (20\")",v:true},
+{n:"Jade Thornton",l:"Newcastle",r:5,d:"2025-09-24",t:"This is gorgeous. Bought it for my mum\u2019s birthday and she was in tears. So beautiful in person.",s:"41cm (16\")",v:true},
+{n:"Ryan Patel",l:"Sydney",r:5,d:"2025-09-25",t:"Heaps better than expected. The stones are so clear and the clasp is really secure.",s:"45cm (18\")",v:true},
+{n:"Olivia Hart",l:"Brisbane",r:5,d:"2025-09-27",t:"Absolutely love it. Perfect everyday necklace that still looks dressy enough for a night out.",s:"45cm (18\")",v:true},
+{n:"Marco Rossi",l:"Melbourne",r:5,d:"2025-09-29",t:"Got this for my wife\u2019s Christmas present early because I couldn\u2019t wait. She loves it. Pairs beautifully with her Picasso hoops from Clear Cut.",s:"41cm (16\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Sarah Nguyen",l:"Cairns",r:5,d:"2025-10-01",t:"Wow. Just wow. Looks incredible on.",s:"51cm (20\")",v:true},
+{n:"Ben Taylor",l:"Perth",r:5,d:"2025-10-03",t:"Bought the Riviere for our anniversary and my partner absolutely lost it. The craftsmanship is next level. Already planning to get the Eclat bracelet to go with it.",s:"45cm (18\")",v:true},
+{n:"Hannah Lee",l:"Wollongong",r:4,d:"2025-10-05",t:"Beautiful necklace, really happy with it overall. Delivery took a little longer than expected but the product itself is flawless.",s:"51cm (20\")",v:true},
+{n:"Oscar Campbell",l:"Geelong",r:5,d:"2025-10-07",t:"Stunner. Gets compliments every time I wear it.",s:"56cm (22\")",v:true},
+{n:"Zara Ali",l:"Sydney",r:5,d:"2025-10-09",t:"I\u2019ve been eyeing this for months and finally pulled the trigger. No regrets whatsoever \u2014 the sparkle is insane and it sits so nicely. Wore it to a friend\u2019s wedding last weekend and everyone asked about it.",s:"45cm (18\")",v:true},
+{n:"Ethan Brooks",l:"Sunshine Coast",r:5,d:"2025-10-11",t:"This chain is the real deal. Looks way more expensive than it is.",s:"51cm (20\")",v:true},
+{n:"Mei Lin Wong",l:"Melbourne",r:5,d:"2025-10-13",t:"Purchased for my daughter\u2019s 21st birthday. She was absolutely stoked. The quality is brilliant and it came in such lovely packaging too.",s:"41cm (16\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Jack Sullivan",l:"Townsville",r:5,d:"2025-10-15",t:"Clean, classy, and heaps versatile. Reckon it\u2019s the best purchase I\u2019ve made this year.",s:"56cm (22\")",v:true},
+{n:"Amara Okafor",l:"Adelaide",r:5,d:"2025-10-17",t:"Absolutely beautiful. I stack it with my Solaire pendant and the look is incredible.",s:"45cm (18\")",v:true},
+{n:"Chloe Martin",l:"Toowoomba",r:4,d:"2025-10-19",t:"Lovely piece and great quality. I just took a while deciding between sizes \u2014 ended up exchanging for a longer one which was easy enough but added some time.",s:"51cm (20\")",v:true},
+{n:"Sam Kaur",l:"Sydney",r:5,d:"2025-10-21",t:"Fire. That\u2019s all I need to say.",s:"45cm (18\")",v:true},
+{n:"Isabella Romano",l:"Brisbane",r:5,d:"2025-10-23",t:"Got this as a Christmas gift for myself and I\u2019m so glad I did. The Riviere tennis chain is stunning \u2014 subtle enough for work but sparkly enough for a night out. Absolutely recommend.",s:"41cm (16\")",v:true},
+{n:"Luke Fitzgerald",l:"Ballarat",r:5,d:"2025-10-25",t:"Unreal chain. My mates keep asking where I got it.",s:"56cm (22\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Natasha Petrov",l:"Perth",r:5,d:"2025-10-27",t:"So elegant and well-made. I wore it layered with a simple gold chain and it looked absolutely incredible. Clear Cut has nailed it with this one.",s:"45cm (18\")",v:true},
+{n:"David Tran",l:"Melbourne",r:5,d:"2025-10-29",t:"Quality is top notch. Bought it for my mum and she reckons it\u2019s the nicest piece she owns now.",s:"41cm (16\")",v:true},
+{n:"Freya Johansson",l:"Manly",r:5,d:"2025-10-31",t:"Obsessed with this necklace. It goes with everything.",s:"45cm (18\")",v:true},
+{n:"Ali Mahmoud",l:"Sydney",r:4,d:"2025-11-02",t:"Really happy with the chain itself \u2014 it\u2019s gorgeous and well made. Just wish delivery was a touch faster, but the product makes up for it.",s:"51cm (20\")",v:true},
+{n:"Grace Thompson",l:"Bondi",r:5,d:"2025-11-04",t:"Bought this to wear to a friend\u2019s engagement party and I felt like a million bucks. The sparkle is heaps impressive in person. Already looking at the Lumiere studs to complete the set.",s:"45cm (18\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Ravi Desai",l:"Canberra",r:5,d:"2025-11-06",t:"Super clean design. Love how it sits.",s:"56cm (22\")",v:true},
+{n:"Mia Jackson",l:"Gold Coast",r:5,d:"2025-11-08",t:"My new go-to necklace. Seriously beautiful and the quality for the price is amazing.",s:"51cm (20\")",v:true},
+{n:"Patrick O\u2019Connor",l:"Newcastle",r:5,d:"2025-11-10",t:"Gifted this to my wife for her birthday and she absolutely loves it. She wears it with her Eclat bracelet and the pairing is perfect. Couldn\u2019t be happier.",s:"41cm (16\")",v:true},
+{n:"Yuki Tanaka",l:"Melbourne",r:5,d:"2025-11-12",t:"So so pretty. Gets compliments literally every time I wear it out.",s:"45cm (18\")",v:true},
+{n:"Lachlan Reid",l:"Brisbane",r:5,d:"2025-11-14",t:"Reckon this is the best tennis chain you can get at this price point. Looks absolutely class.",s:"51cm (20\")",v:true},
+{n:"Anita Singh",l:"Sydney",r:4,d:"2025-11-16",t:"Beautiful necklace and well-crafted. The 41cm is a bit shorter than I expected \u2014 not a fault of the product, just my own preference. Still looks lovely though.",s:"41cm (16\")",v:true},
+{n:"William Cooper",l:"Perth",r:5,d:"2025-11-18",t:"Christmas shopping sorted. Got this for my girlfriend and I already know she\u2019s going to freak out. The packaging is premium too.",s:"45cm (18\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Jasmine Bakri",l:"Adelaide",r:5,d:"2025-11-20",t:"I can\u2019t stop wearing this. Literally goes with every outfit.",s:"51cm (20\")",v:true},
+{n:"Noah Zhang",l:"Hobart",r:5,d:"2025-11-22",t:"Bought this on impulse and it\u2019s one of the best decisions I\u2019ve made. The stones catch the light beautifully and it feels really well made. Heaps impressed.",s:"56cm (22\")",v:true},
+{n:"Ruby McAllister",l:"Geelong",r:5,d:"2025-11-24",t:"Absolutely stunning. Wore it to my graduation ceremony and it was the perfect finishing touch.",s:"45cm (18\")",v:true},
+{n:"Hassan Youssef",l:"Sydney",r:5,d:"2025-11-26",t:"Clean and classy. Exactly what I was looking for.",s:"51cm (20\")",v:true},
+{n:"Ella Morrison",l:"Melbourne",r:4,d:"2025-11-28",t:"Gorgeous chain, really well made. My only minor gripe is I went back and forth on sizing \u2014 would love a size guide with model photos for reference. Ended up with 45cm and it\u2019s great.",s:"45cm (18\")",v:true},
+{n:"Chris Papadopoulos",l:"Darwin",r:5,d:"2025-11-30",t:"This chain is mint. Paired it with the Solaire pendant for a layered look and it\u2019s unreal. So many compliments.",s:"51cm (20\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Tessa Burke",l:"Cairns",r:5,d:"2025-12-02",t:"Bought it as a treat for finishing my degree. No regrets \u2014 it\u2019s beautiful.",s:"41cm (16\")",v:true},
+{n:"Jordan Leigh",l:"Wollongong",r:5,d:"2025-12-04",t:"Heaps good quality and looks incredible on. I\u2019ve recommended Clear Cut to all my mates now.",s:"56cm (22\")",v:true},
+{n:"Sana Malik",l:"Brisbane",r:5,d:"2025-12-06",t:"This was my Christmas present to myself and honestly best money I\u2019ve spent all year. The Riviere sits so elegantly and catches the light in the most beautiful way. I\u2019ve already ordered the Picasso hoops to match.",s:"45cm (18\")",v:true},
+{n:"Max Henderson",l:"Sunshine Coast",r:5,d:"2025-12-08",t:"Absolutely love this chain. Looks premium.",s:"51cm (20\")",v:true},
+{n:"Lily Andersen",l:"Perth",r:5,d:"2025-12-10",t:"Wore this to a Christmas party and honestly felt like the main character. So sparkly and elegant without being too much. Best purchase I\u2019ve made in ages.",s:"45cm (18\")",v:true},
+{n:"Arjun Nair",l:"Melbourne",r:4,d:"2025-12-12",t:"Great chain overall. Delivery took a little while during the Christmas rush but the quality is excellent. Would definitely buy from Clear Cut again.",s:"56cm (22\")",v:true},
+{n:"Courtney Walsh",l:"Townsville",r:5,d:"2025-12-14",t:"Got this for my anniversary and my partner was stoked. Looks way more expensive than it is.",s:"41cm (16\")",v:true},
+{n:"Dani Alvarez",l:"Sydney",r:5,d:"2025-12-16",t:"The sparkle on this thing is heaps impressive. So glad I went for it.",s:"45cm (18\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Brooke Stevenson",l:"Gold Coast",r:5,d:"2025-12-18",t:"Absolutely beautiful piece. I layered it with a shorter chain and it looked incredible for our work Christmas party. The quality is outstanding.",s:"51cm (20\")",v:true},
+{n:"Nathan Gray",l:"Canberra",r:5,d:"2025-12-20",t:"Bought this as a Christmas gift and nailed it. She loves it.",s:"45cm (18\")",v:true},
+{n:"Anika Devi",l:"Adelaide",r:5,d:"2025-12-22",t:"I reckon this is the most versatile necklace I own. Dressed up, dressed down \u2014 it works with everything. The craftsmanship is really impressive for the price.",s:"41cm (16\")",v:true},
+{n:"Hugo Lefebvre",l:"Melbourne",r:4,d:"2025-12-24",t:"Love the chain, it\u2019s really well made and looks great. Slightly longer delivery time than expected over the holidays but totally understandable. Product is five stars for sure.",s:"51cm (20\")",v:true},
+{n:"Tahlia Green",l:"Bondi",r:5,d:"2025-12-26",t:"Christmas present from my husband and honestly the best gift he\u2019s ever given me. The Riviere is absolutely gorgeous.",s:"45cm (18\")",v:true},
+{n:"Kai Watanabe",l:"Brisbane",r:5,d:"2025-12-28",t:"Super impressed with the quality. Looks unreal on.",s:"56cm (22\")",v:true},
+{n:"Emma Richardson",l:"Manly",r:5,d:"2025-12-30",t:"Stunning necklace. I\u2019ve been wearing it non-stop since Christmas Day. Pairs perfectly with my Lumiere studs \u2014 the whole set together is just incredible.",s:"45cm (18\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Tyler Jenkins",l:"Perth",r:5,d:"2026-01-02",t:"Got this for New Year\u2019s and it was the perfect accessory. So much sparkle.",s:"51cm (20\")",v:true},
+{n:"Samira El-Amin",l:"Sydney",r:5,d:"2026-01-04",t:"Absolutely love my Riviere. I wear it to work every day and it\u2019s still as sparkly as the day I got it. Quality is seriously impressive.",s:"41cm (16\")",v:true},
+{n:"Blake Murray",l:"Toowoomba",r:4,d:"2026-01-06",t:"Really nice piece. Took me a while to decide between sizes and I reckon a virtual try-on feature would be heaps helpful. Ended up with 51cm and it\u2019s great though.",s:"51cm (20\")",v:true},
+{n:"Nina Popov",l:"Melbourne",r:5,d:"2026-01-08",t:"The Riviere is everything. Elegant, sparkly, and so well made.",s:"45cm (18\")",v:true},
+{n:"Josh Clarke",l:"Newcastle",r:5,d:"2026-01-10",t:"Bought this for my mum\u2019s birthday and she reckons it\u2019s the best present she\u2019s ever received. Heaps happy with the purchase. The clasp is really sturdy too which was important to her.",s:"41cm (16\")",v:true},
+{n:"Layla Ibrahim",l:"Darwin",r:5,d:"2026-01-12",t:"So beautiful in person. Photos don\u2019t do it justice honestly.",s:"51cm (20\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Connor Walsh",l:"Brisbane",r:5,d:"2026-01-14",t:"Absolutely class. This tennis chain is unreal value for the quality you get. Already looking at getting the Eclat bracelet to match.",s:"56cm (22\")",v:true},
+{n:"Sienna Park",l:"Gold Coast",r:5,d:"2026-01-16",t:"I\u2019m obsessed. Wore it to a wedding on the weekend and got stopped by so many people asking about it. The stones are so clear and sparkly.",s:"45cm (18\")",v:true},
+{n:"Adam Fletcher",l:"Sydney",r:4,d:"2026-01-18",t:"Lovely chain and well crafted. I\u2019m between sizes so went with the 45cm \u2014 fits well but I wouldn\u2019t have minded a 48cm option. Still really happy with it.",s:"45cm (18\")",v:true},
+{n:"Phoebe Stewart",l:"Ballarat",r:5,d:"2026-01-20",t:"This necklace is absolutely gorgeous. I bought it as a birthday treat for myself and I couldn\u2019t be happier.",s:"41cm (16\")",v:true},
+{n:"Darcy Reeves",l:"Melbourne",r:5,d:"2026-01-22",t:"Heaps impressed with the Riviere. Quality is brilliant and it looks stunning with everything. Wore it layered with the Solaire pendant to a friend\u2019s engagement and it was the perfect combo.",s:"45cm (18\")",v:true},
+{n:"Fatima Al-Rashid",l:"Perth",r:5,d:"2026-01-24",t:"Absolutely love it. Simple, elegant, and eye-catching.",s:"51cm (20\")",v:true},
+{n:"Riley Cooper",l:"Adelaide",r:5,d:"2026-01-26",t:"This was a Christmas gift from my partner and it\u2019s become my favourite piece. The tennis chain design is timeless and the quality is amazing.",s:"45cm (18\")",v:true},
+{n:"Matilda Byrne",l:"Hobart",r:4,d:"2026-01-28",t:"Beautiful necklace, really well made. I gave it 4 stars only because the delivery was a little slower than I hoped \u2014 product itself is absolutely perfect.",s:"51cm (20\")",v:true},
+{n:"Vincent Lao",l:"Sydney",r:5,d:"2026-01-30",t:"Mint chain. Wear it every single day and still get compliments.",s:"56cm (22\")",v:true},
+{n:"Zoe Hamilton",l:"Geelong",r:5,d:"2026-02-01",t:"Bought this for my graduation and it made the whole outfit. I felt so elegant. Already telling all my friends about Clear Cut.",s:"41cm (16\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Isaac Moreno",l:"Brisbane",r:5,d:"2026-02-03",t:"The Riviere is heaps impressive in person. The stones have this incredible sparkle that you just don\u2019t get from cheaper chains. Reckon it\u2019s worth every cent.",s:"51cm (20\")",v:true},
+{n:"Hannah Christensen",l:"Sunshine Coast",r:5,d:"2026-02-05",t:"So pretty! Goes perfectly with my Picasso hoops.",s:"45cm (18\")",v:true},
+{n:"Owen McCarthy",l:"Melbourne",r:4,d:"2026-02-07",t:"Great quality tennis chain. Only minor thing is I wasn\u2019t 100% sure which length to get \u2014 went with the 56cm and it\u2019s a good fit but took a bit of deliberation. Love the piece itself.",s:"56cm (22\")",v:true},
+{n:"Aria Nakamura",l:"Cairns",r:5,d:"2026-02-09",t:"This necklace is stunning. I\u2019ve never had so many compliments on a single piece of jewellery. Wore it to my cousin\u2019s wedding and absolutely loved how it looked with my dress.",s:"45cm (18\")",v:true},
+{n:"Sean Doyle",l:"Perth",r:5,d:"2026-02-10",t:"Class act of a chain. Looks unreal.",s:"51cm (20\")",v:true},
+{n:"Isabelle Fontaine",l:"Sydney",r:5,d:"2026-02-11",t:"Absolutely in love with the Riviere. It\u2019s my third Clear Cut piece and the quality is consistently amazing. Wearing it with the Eclat bracelet daily.",s:"41cm (16\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Callum Wright",l:"Wollongong",r:5,d:"2026-02-12",t:"Got this for my girlfriend\u2019s birthday and she was over the moon. Heaps sparkly and the packaging was beautiful too. Would definitely recommend.",s:"45cm (18\")",v:true},
+{n:"Nadia Santos",l:"Melbourne",r:5,d:"2026-02-13",t:"Honestly one of the prettiest necklaces I\u2019ve ever seen. Simple but so elegant.",s:"51cm (20\")",v:true},
+{n:"Luca De Luca",l:"Gold Coast",r:4,d:"2026-02-14",t:"Really lovely chain, looks great on my partner. Would have liked one more size option in between but overall heaps happy with the quality and look.",s:"45cm (18\")",v:true},
+{n:"Ellie Bradshaw",l:"Canberra",r:5,d:"2026-02-15",t:"The Riviere is perfection. Wore it on Valentine\u2019s Day and felt absolutely stunning. The way it catches the light is incredible.",s:"45cm (18\")",v:true},
+{n:"Ahmad Kazemi",l:"Adelaide",r:5,d:"2026-02-16",t:"Bought this as a Valentine\u2019s gift and it went down an absolute treat. Premium quality and looks stunning.",s:"41cm (16\")",v:true},
+{n:"Gemma Lawson",l:"Sydney",r:5,d:"2026-02-17",t:"Reckon this is the best investment piece I\u2019ve bought. Timeless design that goes with everything from jeans to a cocktail dress. The Lumiere studs are next on my list.",s:"51cm (20\")",v:true},
+{n:"Xavier Huang",l:"Brisbane",r:5,d:"2026-02-18",t:"Super clean chain. Quality is outstanding.",s:"56cm (22\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Monica Taylor-Singh",l:"Bendigo",r:5,d:"2026-02-19",t:"Absolutely gorgeous. Got it for our wedding anniversary and my wife was in tears. The craftsmanship on the Riviere is seriously impressive. Already eyeing the Solaire pendant for her birthday.",s:"41cm (16\")",v:true},
+{n:"Dylan Foster",l:"Melbourne",r:4,d:"2026-02-20",t:"Nice chain, great quality. I just reckon the product photos could show it on different neck sizes to help with choosing. Went with 51cm and it works well.",s:"51cm (20\")",v:true},
+{n:"Tara Whitfield",l:"Manly",r:5,d:"2026-02-21",t:"I am so in love with this chain. It\u2019s delicate but has serious sparkle. Heaps of my friends have asked me about it.",s:"45cm (18\")",v:true},
+{n:"Raj Kapoor",l:"Perth",r:5,d:"2026-02-22",t:"Exceptional quality. Bought it for my partner and she wears it every day. The Riviere is truly a standout piece.",s:"51cm (20\")",v:true},
+{n:"Scarlett O\u2019Neill",l:"Sydney",r:5,d:"2026-02-23",t:"Dreamy. Absolutely dreamy. This is the necklace I didn\u2019t know I needed.",s:"45cm (18\")",v:true},
+{n:"Marcus Webb",l:"Townsville",r:4,d:"2026-02-24",t:"Great tennis chain, really well made and looks premium. Only took off a star because delivery to regional QLD took a bit \u2014 but the product itself is flawless.",s:"56cm (22\")",v:true},
+{n:"Ava Chen-Williams",l:"Melbourne",r:5,d:"2026-02-25",t:"My second Clear Cut purchase and once again they\u2019ve blown me away. The Riviere paired with my Picasso hoops is my go-to combo now. Heaps of sparkle without being too much.",s:"45cm (18\")",v:true,p:"PHOTO_PLACEHOLDER"},
+{n:"Finn Gallagher",l:"Newcastle",r:5,d:"2026-02-26",t:"Absolute stunner of a chain. Got it for my wife and she hasn\u2019t stopped smiling.",s:"41cm (16\")",v:true},
+{n:"Leah Sanderson",l:"Gold Coast",r:5,d:"2026-02-27",t:"Stunning quality, beautiful design. I wear it every day and still catch myself admiring it. The Riviere is genuinely one of the nicest pieces I own.",s:"51cm (20\")",v:true},
+{n:"Hamish Douglas",l:"Bondi",r:5,d:"2026-02-28",t:"Heaps good. Clean, classic, and the quality is mint. Reckon everyone needs one of these.",s:"56cm (22\")",v:true}
+    ],
+    "the-picasso-hoop-earrings": [
+      {n:"Mia J.",l:"Sydney",r:5,d:"2025-08-16",t:"These hoops are my new go-to. The 2cm size is perfect for everyday \u2014 elegant without being too much.",v:true},
+      {n:"Ava P.",l:"Melbourne",r:5,d:"2025-09-01",t:"The sparkle on these is absolutely insane. Every time I turn my head they catch the light. So many compliments.",v:true},
+      {n:"Isla R.",l:"Brisbane",r:5,d:"2025-09-17",t:"Bought the 3cm hoops for a night out and they are stunning. Substantial but not heavy. Could wear them all day.",v:true},
+      {n:"Zoe K.",l:"Perth",r:5,d:"2025-10-04",t:"These replaced my plain gold hoops permanently. The moissanite adds just the right amount of drama.",v:true},
+      {n:"Harper D.",l:"Adelaide",r:5,d:"2025-10-20",t:"My mum borrowed them once and immediately ordered her own pair. That says everything about the quality.",v:true},
+      {n:"Willow S.",l:"Gold Coast",r:5,d:"2025-11-06",t:"I own the Lumiere studs and now these. The Clear Cut hoops are even more impressive. The hinge closure is so secure.",v:true},
+      {n:"Scarlett A.",l:"Hobart",r:5,d:"2025-11-22",t:"Wore these to a wedding and the bride asked me where they were from. Upstaged the bridal jewelry apparently.",v:true},
+      {n:"Ellie N.",l:"Canberra",r:5,d:"2025-12-10",t:"The 2cm hoops are the perfect throw on and go earrings. They elevate literally any outfit instantly.",v:true}
+    ],
+    "the-quatre-stud-earrings": [
+      {n:"Mia C.",l:"Sydney",r:5,d:"2025-08-14",t:"Four stones per earring means four times the sparkle. These catch light from every angle. Obsessed.",v:true},
+      {n:"Olivia T.",l:"Melbourne",r:5,d:"2025-08-30",t:"I wanted something more interesting than a single solitaire stud. These are the perfect upgrade \u2014 elegant but with character.",v:true},
+      {n:"Sophie R.",l:"Brisbane",r:5,d:"2025-09-15",t:"My go-to everyday earrings now. They're surprisingly lightweight and the cluster design gets so many compliments at work.",v:true},
+      {n:"Grace H.",l:"Perth",r:5,d:"2025-10-02",t:"Bought these as a gift for my sister\u2019s birthday. She hasn\u2019t taken them off since. The packaging was beautiful too.",v:true},
+      {n:"Chloe W.",l:"Adelaide",r:5,d:"2025-10-18",t:"At this price point, the quality is genuinely shocking. Each stone is perfectly set. You'd think these cost ten times more.",v:true},
+      {n:"Ella M.",l:"Gold Coast",r:5,d:"2025-11-04",t:"I own the Lumiere studs and now the Quatre. The cluster design gives them a completely different vibe \u2014 more modern, bolder.",v:true},
+      {n:"Ruby J.",l:"Hobart",r:5,d:"2025-11-20",t:"The butterfly backs are secure and comfortable. I can sleep in them without any issues. Absolute daily staple.",v:true},
+      {n:"Lily F.",l:"Canberra",r:5,d:"2025-12-08",t:"These studs punch way above their weight. The four-stone cluster makes them look much larger than a single stone would. Clever design.",v:true}
+    ],
+    "_default": [
+      {n:"Sarah M.",l:"Sydney",r:5,d:"2025-09-05",t:"The quality is incredible. You genuinely cannot tell these aren't mined diamonds. Absolutely love it.",v:true},
+      {n:"Emma L.",l:"Melbourne",r:5,d:"2025-10-12",t:"Arrived beautifully packaged with a certificate of authenticity. Truly premium experience from start to finish.",v:true},
+      {n:"Jessica K.",l:"Brisbane",r:5,d:"2025-11-18",t:"I was skeptical about moissanite but this completely changed my mind. The craftsmanship is exceptional.",v:true},
+      {n:"Lauren T.",l:"Perth",r:5,d:"2025-12-22",t:"Free shipping, lifetime warranty, and the piece itself is gorgeous. Can't ask for more than that.",v:true}
+    ]
+  };
+
+  /* ============ REVIEW ENGINE ============ */
+  var handle = document.getElementById('reviews-section').dataset.handle;
+  var reviews = reviewData[handle] || reviewData['_default'];
+  var perPage = 8;
+  var currentPage = 1;
+  var currentSort = 'recent';
+
+  function getStars(count) {
+    var s = '';
+    for (var i = 0; i < 5; i++) s += i < count ? '\u2605' : '\u2606';
+    return s;
+  }
+
+  function formatDate(ds) {
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var parts = ds.split('-');
+    return months[parseInt(parts[1], 10) - 1] + ' ' + parseInt(parts[2], 10) + ', ' + parts[0];
+  }
+
+  function computeStats() {
+    var total = reviews.length;
+    var sum = 0;
+    var counts = {5:0, 4:0, 3:0, 2:0, 1:0};
+    reviews.forEach(function(r) { sum += r.r; counts[r.r]++; });
+    var avg = total > 0 ? (sum / total).toFixed(1) : '0.0';
+    return {total: total, avg: avg, counts: counts};
+  }
+
+  function renderSummary() {
+    var stats = computeStats();
+    document.getElementById('reviews-average').textContent = stats.avg;
+    document.getElementById('reviews-summary-stars').innerHTML = getStars(Math.round(parseFloat(stats.avg)));
+    document.getElementById('reviews-summary-count').textContent = 'Based on ' + stats.total + ' review' + (stats.total !== 1 ? 's' : '');
+    var breakdownEl = document.getElementById('reviews-breakdown');
+    var html = '';
+    for (var i = 5; i >= 1; i--) {
+      var pct = stats.total > 0 ? ((stats.counts[i] / stats.total) * 100).toFixed(0) : 0;
+      html += '<div class="reviews__breakdown-row">' +
+        '<span class="reviews__breakdown-label">' + i + ' \u2605</span>' +
+        '<div class="reviews__breakdown-bar"><div class="reviews__breakdown-fill" style="width:' + pct + '%"></div></div>' +
+        '<span class="reviews__breakdown-count">' + stats.counts[i] + '</span></div>';
+    }
+    breakdownEl.innerHTML = html;
+  }
+
+  function renderPhotos() {
+    var photoReviews = reviews.filter(function(r) { return r.p; });
+    if (photoReviews.length === 0) return;
+    document.getElementById('reviews-photos').style.display = 'block';
+    var scrollEl = document.getElementById('reviews-photos-scroll');
+    scrollEl.innerHTML = photoReviews.map(function(r) {
+      return '<img class="reviews__photo-thumb" src="' + r.p + '" alt="Customer photo by ' + r.n + '" loading="lazy" onclick="openLightbox(this.src)">';
+    }).join('');
+  }
+
+  function getSortedReviews() {
+    var sorted = reviews.slice();
+    if (currentSort === 'recent') {
+      sorted.sort(function(a, b) { return b.d.localeCompare(a.d); });
+    } else if (currentSort === 'highest') {
+      sorted.sort(function(a, b) { return b.r - a.r || b.d.localeCompare(a.d); });
+    } else if (currentSort === 'photos') {
+      sorted.sort(function(a, b) { return (b.p ? 1 : 0) - (a.p ? 1 : 0) || b.d.localeCompare(a.d); });
+    }
+    return sorted;
+  }
+
+  function renderReviews() {
+    var sorted = getSortedReviews();
+    var visible = sorted.slice(0, currentPage * perPage);
+    var gridEl = document.getElementById('reviews-grid');
+    gridEl.innerHTML = visible.map(function(r) {
+      var card = '<div class="review-card">' +
+        '<div class="review-card__top">' +
+          '<div class="review-card__stars">' + getStars(r.r) + '</div>' +
+          '<div class="review-card__date">' + formatDate(r.d) + '</div>' +
+        '</div>' +
+        '<div class="review-card__text">' + r.t + '</div>';
+      if (r.p) {
+        card += '<img class="review-card__photo" src="' + r.p + '" alt="Review photo" loading="lazy" onclick="openLightbox(this.src)">';
+      }
+      card += '<div class="review-card__footer">' +
+        '<div class="review-card__author-info">' +
+          '<div class="review-card__author">' + r.n + '</div>' +
+          '<div class="review-card__location">' + r.l + '</div>' +
+        '</div>' +
+        '<div class="review-card__meta">';
+      if (r.v) {
+        card += '<div class="review-card__verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Verified</div>';
+      }
+      if (r.s) {
+        card += '<div class="review-card__variant">Purchased: ' + r.s + '</div>';
+      }
+      card += '</div></div></div>';
+      return card;
+    }).join('');
+
+    var showMoreEl = document.getElementById('reviews-show-more');
+    if (visible.length < sorted.length) {
+      showMoreEl.style.display = 'flex';
+    } else {
+      showMoreEl.style.display = 'none';
+    }
+  }
+
+  /* Sort handler */
+  document.getElementById('reviews-sort').addEventListener('change', function() {
+    currentSort = this.value;
+    currentPage = 1;
+    renderReviews();
+  });
+
+  /* Show more handler */
+  document.getElementById('reviews-show-more-btn').addEventListener('click', function() {
+    currentPage++;
+    renderReviews();
+  });
+
+  /* ============ MODAL ============ */
+  var modal = document.getElementById('review-modal');
+  var formRating = 0;
+
+  document.getElementById('reviews-write-btn').addEventListener('click', function() {
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('review-modal-close').addEventListener('click', closeModal);
+  document.getElementById('review-modal-overlay').addEventListener('click', closeModal);
+
+  /* Star rating input */
+  document.querySelectorAll('.review-modal__star').forEach(function(star) {
+    star.addEventListener('click', function() {
+      formRating = parseInt(this.dataset.star);
+      document.querySelectorAll('.review-modal__star').forEach(function(s) {
+        s.classList.toggle('is-active', parseInt(s.dataset.star) <= formRating);
+      });
+    });
+  });
+
+  /* Drag & drop */
+  var dropZone = document.getElementById('review-drop-zone');
+  var fileInput = document.getElementById('review-file-input');
+  var previewEl = document.getElementById('review-preview');
+
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  dropZone.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('is-dragover'); });
+  dropZone.addEventListener('dragleave', function() { this.classList.remove('is-dragover'); });
+  dropZone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    this.classList.remove('is-dragover');
+    handleFiles(e.dataTransfer.files);
+  });
+  fileInput.addEventListener('change', function() { handleFiles(this.files); });
+
+  function handleFiles(files) {
+    previewEl.innerHTML = '';
+    Array.from(files).forEach(function(file) {
+      if (!file.type.startsWith('image/')) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = document.createElement('img');
+        img.className = 'review-modal__preview-img';
+        img.src = e.target.result;
+        previewEl.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* Form submit */
+  document.getElementById('review-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('review-form-wrapper').style.display = 'none';
+    document.getElementById('review-success').classList.add('is-visible');
+    setTimeout(function() {
+      closeModal();
+      document.getElementById('review-form-wrapper').style.display = '';
+      document.getElementById('review-success').classList.remove('is-visible');
+      e.target.reset();
+      previewEl.innerHTML = '';
+      formRating = 0;
+      document.querySelectorAll('.review-modal__star').forEach(function(s) { s.classList.remove('is-active'); });
+    }, 3000);
+  });
+
+  /* ============ LIGHTBOX ============ */
+  window.openLightbox = function(src) {
+    var lb = document.getElementById('review-lightbox');
+    document.getElementById('review-lightbox-img').src = src;
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  document.getElementById('review-lightbox-close').addEventListener('click', function() {
+    document.getElementById('review-lightbox').classList.remove('is-open');
+    document.body.style.overflow = '';
+  });
+
+  document.getElementById('review-lightbox').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  /* ============ INIT ============ */
+  renderSummary();
+  renderPhotos();
+  renderReviews();
+})();
 </script>
 
 {% schema %}
