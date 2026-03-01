@@ -1819,20 +1819,22 @@ window.__variantAvailability = {
     }
   });
 
-  /* Variant selection — also enforce unavailable swatch sold-out state */
+  /* Variant selection — enforce unavailable swatch sold-out state */
   function isUnavailableSwatchSelected() {
     var selected = document.querySelector('.product-page__swatch.is-selected');
     return selected && selected.classList.contains('is-unavailable');
   }
 
   function enforceSwatchSoldOut() {
+    var addBtn = document.getElementById('add-to-cart-btn');
+    var stockEl = document.querySelector('.product-page__stock');
     if (isUnavailableSwatchSelected()) {
-      var addBtn = document.getElementById('add-to-cart-btn');
-      var stockEl = document.querySelector('.product-page__stock');
       addBtn.disabled = true;
       addBtn.textContent = 'Sold Out';
       if (stockEl) stockEl.style.display = 'none';
+      return true;
     }
+    return false;
   }
 
   document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
@@ -1845,17 +1847,21 @@ window.__variantAvailability = {
       });
       this.classList.add('is-selected');
 
-      /* Check if this variant is sold out */
+      /* If an unavailable swatch (gold/silver) is selected, ALWAYS show Sold Out — no matter what size is picked */
+      if (enforceSwatchSoldOut()) {
+        return;
+      }
+
+      /* Otherwise check if this specific variant button is sold out */
       if (this.classList.contains('is-unavailable')) {
         addBtn.disabled = true;
         addBtn.textContent = 'Sold Out';
         if (stockEl) stockEl.style.display = 'none';
-      } else if (!isUnavailableSwatchSelected()) {
+      } else {
         addBtn.disabled = false;
         addBtn.textContent = 'Add To Bag';
         if (stockEl) stockEl.style.display = '';
       }
-      enforceSwatchSoldOut();
     });
   });
 
@@ -1885,6 +1891,7 @@ window.__variantAvailability = {
       this.classList.add('is-selected');
 
       if (this.classList.contains('is-unavailable')) {
+        /* Unavailable swatch selected — always Sold Out regardless of size */
         addBtn.disabled = true;
         addBtn.textContent = 'Sold Out';
         if (stockEl) stockEl.style.display = 'none';
@@ -1894,10 +1901,18 @@ window.__variantAvailability = {
           priceEl.textContent = silverPriceOriginal;
         }
       } else {
-        addBtn.disabled = false;
-        addBtn.textContent = 'Add To Bag';
-        if (stockEl) stockEl.style.display = '';
+        /* Available swatch selected — check if the currently selected variant btn is sold out */
         if (priceEl) priceEl.textContent = silverPriceOriginal;
+        var selectedVariantBtn = document.querySelector('.product-page__variant-btn.is-selected');
+        if (selectedVariantBtn && selectedVariantBtn.classList.contains('is-unavailable')) {
+          addBtn.disabled = true;
+          addBtn.textContent = 'Sold Out';
+          if (stockEl) stockEl.style.display = 'none';
+        } else {
+          addBtn.disabled = false;
+          addBtn.textContent = 'Add To Bag';
+          if (stockEl) stockEl.style.display = '';
+        }
       }
     });
   });
