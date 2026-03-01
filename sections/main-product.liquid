@@ -430,6 +430,11 @@
     margin: 0 auto;
     width: 100%;
   }
+  @media (max-width: 768px) {
+    .product-page__reviews {
+      padding: 40px var(--page-padding) 32px;
+    }
+  }
 
   .reviews__header {
     text-align: center;
@@ -1174,6 +1179,11 @@
     width: 100%;
     overflow: hidden;
   }
+  @media (max-width: 768px) {
+    .product-page__related {
+      padding: 32px var(--page-padding);
+    }
+  }
   .related__header {
     display: flex;
     align-items: center;
@@ -1273,6 +1283,11 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 64px var(--page-padding);
+  }
+  @media (max-width: 768px) {
+    .product-page__quote {
+      padding: 32px var(--page-padding);
+    }
   }
   .product-page__quote-text {
     font-family: var(--font-heading);
@@ -2049,7 +2064,7 @@ window.__relatedProducts = [
   /* ============ REVIEW ENGINE ============ */
   var handle = document.getElementById('reviews-section').dataset.handle;
   var reviews = reviewData[handle] || reviewData['_default'];
-  var perPage = 8;
+  var perPage = window.innerWidth <= 768 ? 3 : 8;
   var currentPage = 1;
   var currentSort = 'recent';
 
