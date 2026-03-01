@@ -1787,11 +1787,18 @@ window.__relatedProducts = [
     {%- endunless -%}
   {%- endfor -%}
 ];
-window.__variantAvailability = {
+window.__variants = [
   {%- for variant in product.variants -%}
-    {{ variant.title | json }}: {{ variant.available | json }}{% unless forloop.last %},{% endunless %}
+    {
+      id: {{ variant.id }},
+      title: {{ variant.title | json }},
+      option1: {{ variant.option1 | json }},
+      option2: {{ variant.option2 | json }},
+      price: {{ variant.price }},
+      available: {{ variant.available | json }}
+    }{% unless forloop.last %},{% endunless %}
   {%- endfor -%}
-};
+];
 </script>
 <script>
 (function() {
@@ -1810,123 +1817,129 @@ window.__variantAvailability = {
   var RP13 = {{ review_photo_13 | json }};
   var RP14 = {{ review_photo_14 | json }};
 
-  /* Mark sold-out variant buttons */
-  var variantAvail = window.__variantAvailability || {};
-  document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
-    var val = btn.dataset.value;
-    if (variantAvail.hasOwnProperty(val) && !variantAvail[val]) {
-      btn.classList.add('is-unavailable');
-    }
-  });
+  /* ============ VARIANT SYSTEM ============ */
+  var variants = window.__variants || [];
+  var variantIdInput = document.getElementById('variant-id');
+  var addBtn = document.getElementById('add-to-cart-btn');
+  var stockEl = document.querySelector('.product-page__stock');
+  var priceEl = document.querySelector('.product-page__price-amount');
 
-  /* Variant selection — enforce unavailable swatch sold-out state */
-  function isUnavailableSwatchSelected() {
-    var selected = document.querySelector('.product-page__swatch.is-selected');
-    return selected && selected.classList.contains('is-unavailable');
+  /* Map swatch class to Finish option value */
+  var swatchFinishMap = {
+    'product-page__swatch--silver': 'Sterling Silver',
+    'product-page__swatch--gold': '18ct Gold',
+    'product-page__swatch--rose': 'Rose Gold'
+  };
+
+  function getSelectedFinish() {
+    var sel = document.querySelector('.product-page__swatch.is-selected');
+    if (!sel) return 'Sterling Silver';
+    for (var cls in swatchFinishMap) {
+      if (sel.classList.contains(cls)) return swatchFinishMap[cls];
+    }
+    return 'Sterling Silver';
   }
 
-  function enforceSwatchSoldOut() {
-    var addBtn = document.getElementById('add-to-cart-btn');
-    var stockEl = document.querySelector('.product-page__stock');
-    if (isUnavailableSwatchSelected()) {
-      addBtn.disabled = true;
-      addBtn.textContent = 'Sold Out';
-      if (stockEl) stockEl.style.display = 'none';
-      return true;
-    }
-    return false;
+  function getSelectedSize() {
+    var sel = document.querySelector('.product-page__variant-btn.is-selected');
+    return sel ? sel.dataset.value : null;
   }
 
-  document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var group = this.closest('.product-page__variant-options');
-      var addBtn = document.getElementById('add-to-cart-btn');
-      var stockEl = document.querySelector('.product-page__stock');
-      group.querySelectorAll('.product-page__variant-btn').forEach(function(b) {
-        b.classList.remove('is-selected');
-      });
-      this.classList.add('is-selected');
-
-      /* If an unavailable swatch (gold/silver) is selected, ALWAYS show Sold Out — no matter what size is picked */
-      if (enforceSwatchSoldOut()) {
-        return;
+  function findVariant(size, finish) {
+    for (var i = 0; i < variants.length; i++) {
+      if (variants[i].option1 === size && variants[i].option2 === finish) return variants[i];
+    }
+    /* Fallback: try matching option1 only (for earrings with no size buttons) */
+    if (!size) {
+      for (var j = 0; j < variants.length; j++) {
+        if (variants[j].option2 === finish) return variants[j];
       }
+    }
+    return null;
+  }
 
-      /* Otherwise check if this specific variant button is sold out */
-      if (this.classList.contains('is-unavailable')) {
-        addBtn.disabled = true;
-        addBtn.textContent = 'Sold Out';
-        if (stockEl) stockEl.style.display = 'none';
-      } else {
+  function updateVariantState() {
+    var finish = getSelectedFinish();
+    var size = getSelectedSize();
+    var variant = findVariant(size, finish);
+
+    if (variant) {
+      variantIdInput.value = variant.id;
+      /* Update price */
+      if (priceEl) {
+        var cents = parseInt(variant.price);
+        var dollars = (cents / 100).toFixed(2);
+        priceEl.textContent = 'A$' + parseFloat(dollars).toLocaleString('en-AU', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      }
+      /* Update sold out state */
+      if (variant.available) {
         addBtn.disabled = false;
         addBtn.textContent = 'Add To Bag';
         if (stockEl) stockEl.style.display = '';
+      } else {
+        addBtn.disabled = true;
+        addBtn.textContent = 'Sold Out';
+        if (stockEl) stockEl.style.display = 'none';
+      }
+    } else {
+      /* No matching variant found — sold out */
+      addBtn.disabled = true;
+      addBtn.textContent = 'Sold Out';
+      if (stockEl) stockEl.style.display = 'none';
+    }
+
+    /* Update variant button sold-out indicators based on current finish */
+    document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
+      var val = btn.dataset.value;
+      var v = findVariant(val, finish);
+      if (v && v.available) {
+        btn.classList.remove('is-unavailable');
+      } else {
+        btn.classList.add('is-unavailable');
       }
     });
-  });
-
-  /* Color swatch selection — Gold is sold out + 1.3x price */
-  var silverPriceText = document.querySelector('.product-page__price-amount');
-  var silverPriceOriginal = silverPriceText ? silverPriceText.textContent.trim() : '';
-  var goldPriceText = '';
-  if (silverPriceOriginal) {
-    var numMatch = silverPriceOriginal.match(/([\d,.]+)/);
-    if (numMatch) {
-      var silverNum = parseFloat(numMatch[1].replace(/,/g, ''));
-      var goldNum = Math.round(silverNum * 1.3);
-      goldPriceText = silverPriceOriginal.replace(numMatch[1], goldNum.toLocaleString('en-AU', {minimumFractionDigits: 2, maximumFractionDigits: 2}));
-    }
   }
 
+  /* Swatch click handler */
   document.querySelectorAll('.product-page__swatch').forEach(function(swatch) {
     swatch.addEventListener('click', function() {
       var container = this.closest('.product-page__swatches');
-      var addBtn = document.getElementById('add-to-cart-btn');
-      var stockEl = document.querySelector('.product-page__stock');
-      var priceEl = document.querySelector('.product-page__price-amount');
-
       container.querySelectorAll('.product-page__swatch').forEach(function(s) {
         s.classList.remove('is-selected');
       });
       this.classList.add('is-selected');
-
-      if (this.classList.contains('is-unavailable')) {
-        /* Unavailable swatch selected — always Sold Out regardless of size */
-        addBtn.disabled = true;
-        addBtn.textContent = 'Sold Out';
-        if (stockEl) stockEl.style.display = 'none';
-        if (this.classList.contains('product-page__swatch--gold') && priceEl && goldPriceText) {
-          priceEl.textContent = goldPriceText;
-        } else if (priceEl) {
-          priceEl.textContent = silverPriceOriginal;
-        }
-      } else {
-        /* Available swatch selected — check if the currently selected variant btn is sold out */
-        if (priceEl) priceEl.textContent = silverPriceOriginal;
-        var selectedVariantBtn = document.querySelector('.product-page__variant-btn.is-selected');
-        if (selectedVariantBtn && selectedVariantBtn.classList.contains('is-unavailable')) {
-          addBtn.disabled = true;
-          addBtn.textContent = 'Sold Out';
-          if (stockEl) stockEl.style.display = 'none';
-        } else {
-          addBtn.disabled = false;
-          addBtn.textContent = 'Add To Bag';
-          if (stockEl) stockEl.style.display = '';
-        }
-      }
+      updateVariantState();
     });
   });
 
-  /* Block form submission when an unavailable swatch is selected */
+  /* Variant button click handler */
+  document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var group = this.closest('.product-page__variant-options');
+      group.querySelectorAll('.product-page__variant-btn').forEach(function(b) {
+        b.classList.remove('is-selected');
+      });
+      this.classList.add('is-selected');
+      updateVariantState();
+    });
+  });
+
+  /* Block form submission for sold-out variants */
   var productForm = document.getElementById('product-form');
   if (productForm) {
     productForm.addEventListener('submit', function(e) {
-      if (isUnavailableSwatchSelected()) {
+      var finish = getSelectedFinish();
+      var size = getSelectedSize();
+      var variant = findVariant(size, finish);
+      if (!variant || !variant.available) {
         e.preventDefault();
         return false;
       }
     });
   }
+
+  /* Initial state — mark sold-out buttons for default finish */
+  updateVariantState();
 
   /* ============ REVIEW DATA ============ */
   var reviewData = {
