@@ -251,7 +251,9 @@
 
   .product-page__variant-btn.is-unavailable {
     opacity: 0.4;
-    cursor: not-allowed;
+    cursor: pointer;
+    position: relative;
+    text-decoration: line-through;
   }
 
   /* Add to bag row */
@@ -1361,10 +1363,16 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%} Color swatches — Silver active, Gold sold out {%- endcomment -%}
+    {%- comment -%} Color swatches — product specific {%- endcomment -%}
     <div class="product-page__swatches">
-      <span class="product-page__swatch product-page__swatch--silver is-selected" title="Sterling Silver"></span>
-      <span class="product-page__swatch product-page__swatch--gold is-unavailable" title="18ct Gold — Coming Soon"></span>
+      {%- if product.handle contains 'trefle' -%}
+        <span class="product-page__swatch product-page__swatch--silver is-unavailable" title="Sterling Silver — Sold Out"></span>
+        <span class="product-page__swatch product-page__swatch--gold is-unavailable" title="18ct Gold — Sold Out"></span>
+        <span class="product-page__swatch product-page__swatch--rose is-selected" title="Rose Gold"></span>
+      {%- else -%}
+        <span class="product-page__swatch product-page__swatch--silver is-selected" title="Sterling Silver"></span>
+        <span class="product-page__swatch product-page__swatch--gold is-unavailable" title="18ct Gold — Coming Soon"></span>
+      {%- endif -%}
     </div>
 
     {%- comment -%} Size/Length variants — hidden for earrings (no sizing needed) {%- endcomment -%}
@@ -1459,7 +1467,9 @@
             <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Sterling Silver</p>
             <p style="margin-bottom:20px;">925 Sterling Silver is a lightweight metal made of 92.5% pure silver. It's highly durable and designed for everyday wear. All of our sterling silver product is made from 95% recycled material.</p>
             <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">18ct Gold</p>
-            <p>A luxurious layer of 18-carat gold over sterling silver, delivering the rich warmth and lustre of solid gold. Our gold plating is applied using a precision electroplating process for a durable, long-lasting finish designed for everyday wear.</p>
+            <p style="margin-bottom:20px;">A luxurious layer of 18-carat gold over sterling silver, delivering the rich warmth and lustre of solid gold. Our gold plating is applied using a precision electroplating process for a durable, long-lasting finish designed for everyday wear.</p>
+            <p style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.04em;margin-bottom:8px;">Rose Gold</p>
+            <p>A delicate blend of gold and copper alloys plated over sterling silver, producing a soft pink hue with a warm, romantic undertone. Rose gold complements all skin tones beautifully and adds a feminine touch to any piece. Applied with the same precision electroplating process for lasting durability.</p>
           </div>
         </div>
       </div>
@@ -1535,7 +1545,14 @@
                 <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Channel set, full eternity</span></div>
                 <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
                 <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
-              {%- elsif handle_down contains 'solaire' or handle_down contains 'trefle' -%}
+              {%- elsif handle_down contains 'trefle' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Prong set clover</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Rose Gold plated 925 Sterling Silver</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Lengths</span><span>35cm, 45cm, 55cm</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Clasp</span><span>Spring ring clasp</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Certification</span><span>GRA certified — certificate of authenticity included</span></div>
+              {%- elsif handle_down contains 'solaire' -%}
                 <div class="specs-table__row"><span class="specs-table__label">Stone</span><span>D Colour VVS1 Moissanite</span></div>
                 <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>Prong set solitaire</span></div>
                 <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>925 Sterling Silver, rhodium plated</span></div>
@@ -1770,6 +1787,11 @@ window.__relatedProducts = [
     {%- endunless -%}
   {%- endfor -%}
 ];
+window.__variantAvailability = {
+  {%- for variant in product.variants -%}
+    {{ variant.title | json }}: {{ variant.available | json }}{% unless forloop.last %},{% endunless %}
+  {%- endfor -%}
+};
 </script>
 <script>
 (function() {
@@ -1788,14 +1810,23 @@ window.__relatedProducts = [
   var RP13 = {{ review_photo_13 | json }};
   var RP14 = {{ review_photo_14 | json }};
 
-  /* Variant selection — also enforce gold sold-out state */
-  function isGoldSelected() {
-    var goldSwatch = document.querySelector('.product-page__swatch--gold');
-    return goldSwatch && goldSwatch.classList.contains('is-selected');
+  /* Mark sold-out variant buttons */
+  var variantAvail = window.__variantAvailability || {};
+  document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
+    var val = btn.dataset.value;
+    if (variantAvail.hasOwnProperty(val) && !variantAvail[val]) {
+      btn.classList.add('is-unavailable');
+    }
+  });
+
+  /* Variant selection — also enforce unavailable swatch sold-out state */
+  function isUnavailableSwatchSelected() {
+    var selected = document.querySelector('.product-page__swatch.is-selected');
+    return selected && selected.classList.contains('is-unavailable');
   }
 
-  function enforceGoldSoldOut() {
-    if (isGoldSelected()) {
+  function enforceSwatchSoldOut() {
+    if (isUnavailableSwatchSelected()) {
       var addBtn = document.getElementById('add-to-cart-btn');
       var stockEl = document.querySelector('.product-page__stock');
       addBtn.disabled = true;
@@ -1807,11 +1838,24 @@ window.__relatedProducts = [
   document.querySelectorAll('.product-page__variant-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var group = this.closest('.product-page__variant-options');
+      var addBtn = document.getElementById('add-to-cart-btn');
+      var stockEl = document.querySelector('.product-page__stock');
       group.querySelectorAll('.product-page__variant-btn').forEach(function(b) {
         b.classList.remove('is-selected');
       });
       this.classList.add('is-selected');
-      enforceGoldSoldOut();
+
+      /* Check if this variant is sold out */
+      if (this.classList.contains('is-unavailable')) {
+        addBtn.disabled = true;
+        addBtn.textContent = 'Sold Out';
+        if (stockEl) stockEl.style.display = 'none';
+      } else if (!isUnavailableSwatchSelected()) {
+        addBtn.disabled = false;
+        addBtn.textContent = 'Add To Bag';
+        if (stockEl) stockEl.style.display = '';
+      }
+      enforceSwatchSoldOut();
     });
   });
 
@@ -1844,7 +1888,11 @@ window.__relatedProducts = [
         addBtn.disabled = true;
         addBtn.textContent = 'Sold Out';
         if (stockEl) stockEl.style.display = 'none';
-        if (priceEl && goldPriceText) priceEl.textContent = goldPriceText;
+        if (this.classList.contains('product-page__swatch--gold') && priceEl && goldPriceText) {
+          priceEl.textContent = goldPriceText;
+        } else if (priceEl) {
+          priceEl.textContent = silverPriceOriginal;
+        }
       } else {
         addBtn.disabled = false;
         addBtn.textContent = 'Add To Bag';
@@ -1854,11 +1902,11 @@ window.__relatedProducts = [
     });
   });
 
-  /* Block form submission when gold is selected */
+  /* Block form submission when an unavailable swatch is selected */
   var productForm = document.getElementById('product-form');
   if (productForm) {
     productForm.addEventListener('submit', function(e) {
-      if (isGoldSelected()) {
+      if (isUnavailableSwatchSelected()) {
         e.preventDefault();
         return false;
       }
