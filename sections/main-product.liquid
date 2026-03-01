@@ -1395,7 +1395,7 @@
             <div class="product-page__variant-options" data-option-index="{{ forloop.index0 }}">
               {%- for value in option.values -%}
                 <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}"
-                  data-value='{{ value }}'>
+                  data-value="{{ value | remove: '"' }}">
                   {{ value }}
                 </button>
               {%- endfor -%}
@@ -1845,11 +1845,17 @@ window.__variants = [
     return sel ? sel.dataset.value : null;
   }
 
+  /* Strip quotes for comparison — Shopify HTML normalizer truncates data-value at " characters */
+  function stripQuotes(str) {
+    return str ? str.replace(/"/g, '') : str;
+  }
+
   function findVariant(size, finish) {
+    var cleanSize = stripQuotes(size);
     for (var i = 0; i < variants.length; i++) {
-      if (variants[i].option1 === size && variants[i].option2 === finish) return variants[i];
+      if (stripQuotes(variants[i].option1) === cleanSize && variants[i].option2 === finish) return variants[i];
     }
-    /* Fallback: try matching option1 only (for earrings with no size buttons) */
+    /* Fallback: try matching option2 only (for earrings with no size buttons) */
     if (!size) {
       for (var j = 0; j < variants.length; j++) {
         if (variants[j].option2 === finish) return variants[j];
