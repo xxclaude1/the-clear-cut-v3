@@ -1395,7 +1395,7 @@
             <div class="product-page__variant-options" data-option-index="{{ forloop.index0 }}">
               {%- for value in option.values -%}
                 <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}"
-                  data-value="{{ value }}">
+                  data-value="{{ value | escape }}">
                   {{ value }}
                 </button>
               {%- endfor -%}
