@@ -1000,6 +1000,259 @@
     max-height: 85vh;
     object-fit: contain;
   }
+
+  /* Size Guide Modal */
+  .size-guide-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    align-items: center;
+    justify-content: center;
+  }
+  .size-guide-modal.is-open { display: flex; }
+  .size-guide-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+  }
+  .size-guide-modal__content {
+    position: relative;
+    background: var(--color-bg);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px;
+    z-index: 1;
+  }
+  @media (max-width: 768px) {
+    .size-guide-modal__content { max-width: 100%; margin: 0 16px; padding: 24px 20px; }
+  }
+  .size-guide-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-text);
+    line-height: 1;
+  }
+  .size-guide-modal__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+  .size-guide-modal__tabs {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .size-guide-modal__tab {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0 0 12px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    transition: all var(--duration-fast) ease;
+  }
+  .size-guide-modal__tab.is-active {
+    color: var(--color-text);
+    border-bottom-color: var(--color-text);
+  }
+  .size-guide-modal__panel { display: none; }
+  .size-guide-modal__panel.is-active { display: block; }
+  .size-guide-modal__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .size-guide-modal__table th,
+  .size-guide-modal__table td {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+  }
+  .size-guide-modal__table th {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--color-text);
+  }
+  .size-guide-modal__table td {
+    color: var(--color-text-secondary);
+  }
+  .size-guide-modal__style-item {
+    margin-bottom: 24px;
+  }
+  .size-guide-modal__style-size {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+  .size-guide-modal__style-desc {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  /* In Stock badge */
+  .product-page__stock {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text);
+    margin-bottom: 20px;
+  }
+
+  /* You May Also Like */
+  .product-page__related {
+    grid-column: 1 / -1;
+    padding: 60px var(--page-padding);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    width: 100%;
+  }
+  .related__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+  }
+  .related__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  @media (max-width: 768px) {
+    .related__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .related__card {
+    background: var(--color-bg-warm);
+    text-decoration: none;
+    color: var(--color-text);
+    display: block;
+  }
+  .related__card-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+    background: var(--color-bg-warm);
+  }
+  .related__card-info {
+    padding: 16px;
+    background: var(--color-bg);
+  }
+  .related__card-name {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .related__card-price {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+  .related__card-material {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+  }
+
+  /* Quote banner */
+  .product-page__quote {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 64px var(--page-padding);
+  }
+  .product-page__quote-text {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--color-text);
+    max-width: 640px;
+    margin: 0 auto 16px;
+  }
+  @media (max-width: 768px) {
+    .product-page__quote-text { font-size: 22px; }
+  }
+  .product-page__quote-sub {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* Sustainability banner on product page */
+  .product-page__sustainability {
+    grid-column: 1 / -1;
+    background-color: #E0DBD5;
+    padding: 56px var(--page-padding);
+  }
+  .product-page__sustainability-inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .product-page__sustainability-inner { grid-template-columns: 1fr; gap: 20px; }
+  }
+  .product-page__sustainability-heading {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4A443E;
+    margin-bottom: 14px;
+  }
+  .product-page__sustainability-cta {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #4A443E;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .product-page__sustainability-body {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.75;
+    color: #5C554F;
+  }
 </style>
 
 <div class="product-page">
@@ -1044,9 +1297,6 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%} Size Guide link {%- endcomment -%}
-    <a href="/pages/size-guide" class="product-page__size-guide-standalone">Size Guide</a>
-
     {%- comment -%} Color/finish swatches {%- endcomment -%}
     {%- for option in product.options_with_values -%}
       {%- assign opt_down = option.name | downcase -%}
@@ -1076,7 +1326,7 @@
           <div class="product-page__variant-header">
             <div class="product-page__variant-label">{{ option.name }}</div>
             {%- if opt_down == 'length' or opt_down == 'size' -%}
-              <a href="/pages/size-guide" class="product-page__size-guide">Size Guide</a>
+              <button type="button" class="product-page__size-guide" id="size-guide-trigger">Size Guide</button>
             {%- endif -%}
           </div>
           <div class="product-page__variant-options" data-option-index="{{ forloop.index0 }}">
@@ -1090,6 +1340,11 @@
         </div>
       {%- endunless -%}
     {%- endfor -%}
+
+    {%- comment -%} In Stock {%- endcomment -%}
+    {%- if product.available -%}
+      <div class="product-page__stock">In Stock &amp; Available to Ship</div>
+    {%- endif -%}
 
     {%- comment -%} Add to bag + wishlist {%- endcomment -%}
     <form action="/cart/add" method="post" id="product-form">
@@ -1138,7 +1393,7 @@
         <div class="product-page__feature-icon">
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         </div>
-        <span class="product-page__feature-text">Lifetime Warranty Included</span>
+        <span class="product-page__feature-text">95% Recycled Sterling Silver</span>
       </div>
       <div class="product-page__feature">
         <div class="product-page__feature-icon">
@@ -1148,71 +1403,98 @@
       </div>
     </div>
 
-    {%- comment -%} Accordions {%- endcomment -%}
+    {%- comment -%} Accordions — Mejuri style {%- endcomment -%}
+    {%- assign handle_down = product.handle -%}
     <div class="product-page__accordions">
       <div class="accordion__item">
         <button class="accordion__trigger">
-          <span>The Story</span>
+          <span>Materials</span>
           <span class="accordion__icon">+</span>
         </button>
         <div class="accordion__content">
           <div class="accordion__content-inner">
-            {%- case product.handle -%}
-              {%- when 'the-eclat-tennis-bracelet' -%}
-                <p>Each stone in the Eclat Tennis Bracelet begins its journey in a state-of-the-art laboratory in Chiang Mai, Thailand, where master gemologists have spent decades perfecting the art of moissanite cultivation. Grown over 60-90 days using a proprietary thermal process, every crystal is cut by hand in a small atelier outside of Antwerp, Belgium — the same city that has shaped the world's finest gems for over five centuries. The sterling silver settings are cast and polished in a family-run workshop in Arezzo, Italy, a region renowned for its silversmithing tradition since the Renaissance. From stone to clasp, the Eclat represents three continents of craftsmanship unified in a single, radiant piece.</p>
-              {%- when 'the-lumiere-stud-earrings' -%}
-                <p>The Lumiere Stud Earrings are born from a collaboration between our design studio in Sydney and a multigenerational gem-cutting house in Jaipur, India. Each moissanite crystal is cultivated in controlled laboratory conditions before being precision-cut using techniques passed down through four generations of the Sharma family. The sterling silver ear posts and butterfly backs are produced by artisans in Birmingham, England — a city with a 250-year heritage in jewelry manufacturing. Every pair is individually inspected under 10x magnification before earning the Clear Cut hallmark.</p>
-              {%- when 'the-eternite-band' -%}
-                <p>The Eternite Band draws its soul from the ancient ring-making traditions of Pforzheim, Germany — known as the Gold City for its 250 years of jewelry mastery. Our moissanite stones are cultivated in a cutting-edge facility in Research Triangle Park, North Carolina, where scientists first pioneered silicon carbide crystal growth. Each stone is hand-set into its sterling silver channel by master setters in Valenza, Italy, where artisans have been crafting fine jewelry since the 1800s. The result is a band that feels as timeless as the commitment it represents.</p>
-              {%- when 'the-solaire-pendant' -%}
-                <p>The Solaire Pendant captures light the way the sun hits the Mediterranean at golden hour. Each center stone is grown in a laboratory in Seoul, South Korea, using advanced chemical vapor deposition — the same technology used in aerospace-grade optics. The faceting is performed by gemologists in Idar-Oberstein, Germany, a town that has been the heart of European gem cutting since the 15th century. The pendant setting and chain are crafted in a small workshop in Porto, Portugal, where metalworkers shape each piece by hand against the backdrop of the Douro River.</p>
-              {%- when 'the-trefle-pendant' -%}
-                <p>Inspired by the four-leaf clover motifs found in French Art Deco jewelry, the Trefle Pendant is our tribute to Parisian elegance. Each petal of the clover houses a precisely calibrated moissanite stone, grown in a controlled environment in Nagoya, Japan — a city famous for its precision engineering. The intricate open-work setting is produced by artisans in Lyon, France, using investment casting techniques refined over centuries. Every Trefle is hand-finished with a satin polish that gives it a soft, understated glow rather than a mirror shine — because true luxury whispers.</p>
-              {%- when 'the-riviere-tennis-chain' -%}
-                <p>The Riviere Tennis Chain is our most ambitious piece — a continuous river of light inspired by the grand necklaces of 18th-century European courts. Over 40 individual moissanite stones are cultivated across a 90-day growth cycle in a facility in Zhengzhou, China, where some of the world's most advanced crystal technology resides. Each stone is calibrated to within 0.1mm tolerance before being hand-set in Vicenza, Italy, by artisans who specialise exclusively in tennis-style settings. The articulated links are engineered to drape naturally against the collarbone, creating that unmistakable cascade of brilliance that turns heads from across the room.</p>
-              {%- when 'the-picasso-hoop-earrings' -%}
-                <p>The Picasso Hoop Earrings are our tribute to bold, artistic expression — because great jewelry, like great art, should make you feel something the moment you see it. Each hoop is set with 2.6 carats of D-colour VVS moissanite, hand-placed by artisans in a family workshop in Arezzo, Italy, where the tradition of circular jewelry design dates back to Etruscan goldsmiths over 2,500 years ago. The stones themselves are cultivated in a precision laboratory in Busan, South Korea, grown slowly over 75 days to achieve flawless clarity. The sterling silver hoops are cast and plated in a small atelier in Taxco, Mexico — a town synonymous with silver craftsmanship since the 1500s.</p>
-              {%- when 'the-quatre-stud-earrings' -%}
-                <p>The Quatré Stud Earrings take their name from the French word for four — a nod to the perfectly symmetrical quartet of stones at their centre. Each moissanite crystal is grown over 60 days in a precision laboratory in Wuxi, China, where engineers have pioneered some of the world's most advanced crystal growth technology. The stones are then sent to a third-generation gem-cutting workshop in Surat, India — a city responsible for shaping over 90% of the world's diamonds — where each is faceted to exacting round-brilliant specifications. The sterling silver cluster settings are cast and hand-finished in a small workshop in Córdoba, Spain, a city whose silversmiths have been practising their craft since the Moorish era. Four stones, three continents, one unmistakable sparkle.</p>
-              {%- else -%}
-                <p>Every Clear Cut piece begins with responsibly cultivated moissanite — grown in advanced laboratories that replicate the extreme conditions found deep within the earth. Our stones are cut and polished by master gemologists, then set by hand in sterling silver by skilled artisans. From laboratory to your jewelry box, each step is guided by our commitment to exceptional quality, ethical sourcing, and timeless design.</p>
-            {%- endcase -%}
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion__item">
-        <button class="accordion__trigger">
-          <span>Shipping & Returns</span>
-          <span class="accordion__icon">+</span>
-        </button>
-        <div class="accordion__content">
-          <div class="accordion__content-inner">
-            <p>Free shipping on all Australian orders over $200. Standard delivery: 8-14 business days with full tracking provided via Australia Post.</p>
-            <p style="margin-top:12px;">30-day return window from date of delivery. Items must be unworn, undamaged, and in original packaging. Free return shipping within Australia. Refunds are processed within 5 business days of receiving the returned item.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion__item">
-        <button class="accordion__trigger">
-          <span>Care Guide</span>
-          <span class="accordion__icon">+</span>
-        </button>
-        <div class="accordion__content">
-          <div class="accordion__content-inner">
-            {%- assign handle_down = product.handle -%}
-            {%- if handle_down contains 'earring' or handle_down contains 'hoop' or handle_down contains 'lumiere' or handle_down contains 'picasso' -%}
-              <p>Remove earrings before showering, swimming, or exercising. Clean gently with warm soapy water and a soft cloth — avoid submerging the posts. Pat dry thoroughly. Store in the provided jewelry box with earring backs secured to prevent loss. Avoid contact with perfume, hairspray, and cosmetics.</p>
-            {%- elsif handle_down contains 'band' or handle_down contains 'eternite' -%}
-              <p>Remove your ring before washing hands, showering, or applying lotions. Clean with warm soapy water and a soft-bristled brush to reach between the stones. Dry with a lint-free cloth. Avoid wearing during heavy lifting or manual work to protect the channel setting. Store separately in the provided ring slot to avoid scratching other pieces.</p>
-            {%- elsif handle_down contains 'bracelet' or handle_down contains 'eclat' -%}
-              <p>Remove your bracelet before sleeping, showering, or exercising. Clean with warm soapy water and a soft brush, paying attention to the links and clasp mechanism. Dry thoroughly with a soft cloth. Store laid flat in the provided jewelry box to prevent kinking. Avoid contact with harsh chemicals, chlorine, and abrasive surfaces.</p>
-            {%- elsif handle_down contains 'pendant' or handle_down contains 'necklace' or handle_down contains 'chain' or handle_down contains 'solaire' or handle_down contains 'trefle' or handle_down contains 'riviere' -%}
-              <p>Remove your necklace before sleeping, showering, or applying perfume. Clean the chain and pendant separately using warm soapy water and a soft cloth. Dry thoroughly before storing. Hang or lay flat in the provided jewelry box to prevent tangling. For tennis chains, avoid folding or bending the links — always store laid straight.</p>
+            {%- if handle_down contains 'riviere' -%}
+              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Lobster clasp closure.</p>
+            {%- elsif handle_down contains 'eclat' -%}
+              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Box clasp with safety latch.</p>
+            {%- elsif handle_down contains 'lumiere' or handle_down contains 'quatre' -%}
+              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Butterfly back closure.</p>
+            {%- elsif handle_down contains 'picasso' -%}
+              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Hinge clasp closure.</p>
+            {%- elsif handle_down contains 'eternite' -%}
+              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Channel set, full eternity design.</p>
+            {%- elsif handle_down contains 'solaire' or handle_down contains 'trefle' -%}
+              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity. Spring ring clasp.</p>
             {%- else -%}
-              <p>Clean with warm soapy water and a soft brush. Avoid harsh chemicals, chlorine, and abrasive surfaces. Store in the provided jewelry box when not wearing. Remove before showering, swimming, or exercising to maintain the finish.</p>
+              <p>Sterling Silver (925), Rhodium Plated. Lab Grown Moissanite, D Colour, VVS Clarity.</p>
             {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger">
+          <span>Specifications</span>
+          <span class="accordion__icon">+</span>
+        </button>
+        <div class="accordion__content">
+          <div class="accordion__content-inner">
+            <div class="specs-table">
+              {%- if handle_down contains 'riviere' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone Size</span><span>3mm Round Brilliant</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Stone Type</span><span>Lab Grown Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Colour</span><span>D (Colourless)</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Clarity</span><span>VVS</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Sterling Silver, Rhodium Plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Lengths Available</span><span>38cm, 45cm, 56cm</span></div>
+              {%- elsif handle_down contains 'eclat' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone Size</span><span>3mm Round Brilliant</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Total Carat Weight</span><span>~4.5ct</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Sterling Silver, Rhodium Plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Box Clasp with Safety Latch</span></div>
+              {%- elsif handle_down contains 'lumiere' -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone Cut</span><span>Round Brilliant</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Setting</span><span>4-Prong Solitaire</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Sterling Silver, Rhodium Plated</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Closure</span><span>Butterfly Back</span></div>
+              {%- else -%}
+                <div class="specs-table__row"><span class="specs-table__label">Stone Type</span><span>Lab Grown Moissanite</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Colour</span><span>D (Colourless)</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Clarity</span><span>VVS</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Hardness</span><span>9.25 Mohs</span></div>
+                <div class="specs-table__row"><span class="specs-table__label">Metal</span><span>Sterling Silver, Rhodium Plated</span></div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger">
+          <span>Sustainability</span>
+          <span class="accordion__icon">+</span>
+        </button>
+        <div class="accordion__content">
+          <div class="accordion__content-inner">
+            <p>Our moissanite is lab-created — zero mining required. Each stone is grown in controlled laboratory conditions, producing a fraction of the carbon emissions compared to mined gemstones. Our sterling silver is recycled where possible, and all packaging is recyclable and plastic-free.</p>
+            <p style="margin-top:12px;"><a href="/pages/sustainability" style="text-decoration:underline;color:var(--color-text);">Learn more about our commitment</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger">
+          <span>Shipping, Returns & Warranty</span>
+          <span class="accordion__icon">+</span>
+        </button>
+        <div class="accordion__content">
+          <div class="accordion__content-inner">
+            <p>Free express shipping Australia-wide on orders over $200. Standard delivery: 8-14 business days with full tracking via Australia Post.</p>
+            <p style="margin-top:12px;">30-day return window. Items must be unworn, undamaged, and in original packaging. Free return shipping within Australia.</p>
+            <p style="margin-top:12px;">Lifetime warranty covering manufacturing defects. Complimentary annual rhodium re-plating service.</p>
           </div>
         </div>
       </div>
@@ -1308,6 +1590,46 @@
   <img class="review-lightbox__img" id="review-lightbox-img" src="" alt="Review photo">
 </div>
 
+<!-- You May Also Like -->
+<section class="product-page__related">
+  <h2 class="related__title">You May Also Like</h2>
+  <div class="related__grid" id="related-products"></div>
+</section>
+
+<!-- Quote Banner -->
+<section class="product-page__quote">
+  <div class="product-page__quote-text">"We believe fine jewelry should be accessible to everyone."</div>
+  <div class="product-page__quote-sub">Our pieces are handcrafted from precious materials like sterling silver and lab grown moissanite — never brass — so you can wear them with confidence.</div>
+</section>
+
+<!-- Sustainability Banner -->
+<section class="product-page__sustainability">
+  <div class="product-page__sustainability-inner">
+    <div>
+      <h2 class="product-page__sustainability-heading">Our Sustainability Progress</h2>
+      <a href="/pages/sustainability" class="product-page__sustainability-cta">View Sustainability Report</a>
+    </div>
+    <div>
+      <p class="product-page__sustainability-body">Our journey mirrors that of the jewelry we create — crafted through collaboration and constant evolution. We're here to transform fine jewelry into everyday moments, empower our community, and drive meaningful change beyond.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Size Guide Modal -->
+<div class="size-guide-modal" id="size-guide-modal">
+  <div class="size-guide-modal__overlay" id="size-guide-overlay"></div>
+  <div class="size-guide-modal__content">
+    <button class="size-guide-modal__close" id="size-guide-close">&times;</button>
+    <div class="size-guide-modal__title" id="size-guide-title">Size Guide</div>
+    <div class="size-guide-modal__tabs">
+      <button class="size-guide-modal__tab is-active" data-tab="chart">Size Chart</button>
+      <button class="size-guide-modal__tab" data-tab="style">How to Style</button>
+    </div>
+    <div class="size-guide-modal__panel is-active" id="sg-panel-chart"></div>
+    <div class="size-guide-modal__panel" id="sg-panel-style"></div>
+  </div>
+</div>
+
 {%- assign review_photo_1 = 'review-photo-1.avif' | asset_url -%}
 {%- assign review_photo_2 = 'review-photo-2.avif' | asset_url -%}
 {%- assign review_photo_3 = 'review-photo-3.avif' | asset_url -%}
@@ -1322,6 +1644,22 @@
 {%- assign review_photo_12 = 'review-photo-12.avif' | asset_url -%}
 {%- assign review_photo_13 = 'review-photo-13.avif' | asset_url -%}
 {%- assign review_photo_14 = 'review-photo-14.avif' | asset_url -%}
+
+{%- comment -%} Related products data for "You May Also Like" {%- endcomment -%}
+<script>
+window.__relatedProducts = [
+  {%- for p in collections.all.products -%}
+    {%- if p.handle != product.handle -%}
+      {
+        title: {{ p.title | json }},
+        url: {{ p.url | json }},
+        img: {{ p.featured_image | image_url: width: 600 | json }},
+        price: {{ p.price | money | prepend: 'A' | json }}
+      },
+    {%- endif -%}
+  {%- endfor -%}
+];
+</script>
 <script>
 (function() {
   var RP1 = {{ review_photo_1 | json }};
@@ -1404,104 +1742,104 @@
     ],
     "the-riviere-tennis-chain": [
 {n:"Liam Chen",l:"Sydney",r:5,d:"2025-09-02",t:"Wore this to my sister\u2019s wedding and got so many compliments. Everyone wanted to know where it was from. The sparkle under the lights was incredible.",s:"45cm (18\")",v:true,p:RP1},
-{n:"Sophie Williams",l:"Melbourne",r:5,d:"2025-09-04",t:"Bought this for my anniversary and I\u2019m obsessed. The quality is unreal for the price.",s:"51cm (20\")",v:true},
+{n:"Sophie Williams",l:"Melbourne",r:5,d:"2025-09-04",t:"Bought this for my anniversary and I\u2019m obsessed. The quality is unreal for the price.",s:"56cm (22\")",v:true},
 {n:"Priya Sharma",l:"Brisbane",r:5,d:"2025-09-06",t:"Paired it with my Eclat bracelet and the combo looks incredible. Really happy with the quality.",s:"45cm (18\")",v:true},
-{n:"James O\u2019Brien",l:"Perth",r:4,d:"2025-09-08",t:"Really nice chain, looks great on. Took me a bit to decide on the size but happy I went with the 41cm \u2014 sits perfectly.",s:"41cm (16\")",v:true},
-{n:"Minh Nguyen",l:"Adelaide",r:5,d:"2025-09-10",t:"Got this as a birthday gift for my girlfriend and she hasn\u2019t taken it off since. Absolutely love the sparkle on it.",s:"41cm (16\")",v:true,p:RP2},
-{n:"Charlotte Davis",l:"Gold Coast",r:5,d:"2025-09-12",t:"I reckon this is the best piece of jewellery I own. It catches the light beautifully and feels so luxe.",s:"51cm (20\")",v:true},
+{n:"James O\u2019Brien",l:"Perth",r:4,d:"2025-09-08",t:"Really nice chain, looks great on. Took me a bit to decide on the size but happy I went with the 38cm \u2014 sits perfectly.",s:"38cm (15\")",v:true},
+{n:"Minh Nguyen",l:"Adelaide",r:5,d:"2025-09-10",t:"Got this as a birthday gift for my girlfriend and she hasn\u2019t taken it off since. Absolutely love the sparkle on it.",s:"38cm (15\")",v:true,p:RP2},
+{n:"Charlotte Davis",l:"Gold Coast",r:5,d:"2025-09-12",t:"I reckon this is the best piece of jewellery I own. It catches the light beautifully and feels so luxe.",s:"56cm (22\")",v:true},
 {n:"Tariq Hassan",l:"Sydney",r:5,d:"2025-09-14",t:"The quality blew me away. I wear it every single day now and it still looks brand new.",s:"45cm (18\")",v:true},
 {n:"Emily Watson",l:"Hobart",r:5,d:"2025-09-16",t:"Bought this to treat myself after a big promotion and no regrets. It\u2019s elegant without being over the top. Goes with literally everything.",s:"45cm (18\")",v:true,p:RP3},
 {n:"Daniel Kim",l:"Melbourne",r:5,d:"2025-09-18",t:"The tennis chain look without the insane price tag. Looks absolutely mint.",s:"56cm (22\")",v:true},
-{n:"Aisha Abdi",l:"Darwin",r:5,d:"2025-09-20",t:"Stunning piece. I wore it to a graduation dinner and it elevated the whole outfit. Already eyeing the Lumiere studs to match.",s:"51cm (20\")",v:true},
-{n:"Tom Murphy",l:"Canberra",r:4,d:"2025-09-22",t:"Solid chain, really well made. Only reason for 4 stars is I wish there were more length options \u2014 something between 51 and 56 would be perfect for me.",s:"51cm (20\")",v:true},
-{n:"Jade Thornton",l:"Newcastle",r:5,d:"2025-09-24",t:"This is gorgeous. Bought it for my mum\u2019s birthday and she was in tears. So beautiful in person.",s:"41cm (16\")",v:true,p:RP4},
+{n:"Aisha Abdi",l:"Darwin",r:5,d:"2025-09-20",t:"Stunning piece. I wore it to a graduation dinner and it elevated the whole outfit. Already eyeing the Lumiere studs to match.",s:"56cm (22\")",v:true},
+{n:"Tom Murphy",l:"Canberra",r:4,d:"2025-09-22",t:"Solid chain, really well made. Only reason for 4 stars is I wish there were more length options \u2014 something between 45 and 56 would be perfect for me.",s:"56cm (22\")",v:true},
+{n:"Jade Thornton",l:"Newcastle",r:5,d:"2025-09-24",t:"This is gorgeous. Bought it for my mum\u2019s birthday and she was in tears. So beautiful in person.",s:"38cm (15\")",v:true,p:RP4},
 {n:"Ryan Patel",l:"Sydney",r:5,d:"2025-09-25",t:"Way better than expected. The stones are so clear and the clasp is really secure.",s:"45cm (18\")",v:true},
 {n:"Olivia Hart",l:"Brisbane",r:5,d:"2025-09-27",t:"Absolutely love it. Perfect everyday necklace that still looks dressy enough for a night out.",s:"45cm (18\")",v:true},
-{n:"Marco Rossi",l:"Melbourne",r:5,d:"2025-09-29",t:"Got this for my wife\u2019s Christmas present early because I couldn\u2019t wait. She loves it. Pairs beautifully with her Picasso hoops from Clear Cut.",s:"41cm (16\")",v:true},
-{n:"Sarah Nguyen",l:"Cairns",r:5,d:"2025-10-01",t:"I\u2019ve been wearing it non-stop since it arrived. The way it catches sunlight is unbelievable.",s:"51cm (20\")",v:true},
+{n:"Marco Rossi",l:"Melbourne",r:5,d:"2025-09-29",t:"Got this for my wife\u2019s Christmas present early because I couldn\u2019t wait. She loves it. Pairs beautifully with her Picasso hoops from Clear Cut.",s:"38cm (15\")",v:true},
+{n:"Sarah Nguyen",l:"Cairns",r:5,d:"2025-10-01",t:"I\u2019ve been wearing it non-stop since it arrived. The way it catches sunlight is unbelievable.",s:"56cm (22\")",v:true},
 {n:"Ben Taylor",l:"Perth",r:5,d:"2025-10-03",t:"Bought the Riviere for our anniversary and my partner absolutely loved it. The craftsmanship is next level. Already planning to get the Eclat bracelet to go with it.",s:"45cm (18\")",v:true,p:RP5},
-{n:"Hannah Lee",l:"Wollongong",r:4,d:"2025-10-05",t:"Beautiful necklace, really happy with it overall. Delivery took a little longer than expected but the product itself is flawless.",s:"51cm (20\")",v:true},
+{n:"Hannah Lee",l:"Wollongong",r:4,d:"2025-10-05",t:"Beautiful necklace, really happy with it overall. Delivery took a little longer than expected but the product itself is flawless.",s:"56cm (22\")",v:true},
 {n:"Oscar Campbell",l:"Geelong",r:5,d:"2025-10-07",t:"Gets compliments every single time I wear it out. The stones are incredibly bright.",s:"56cm (22\")",v:true},
 {n:"Zara Ali",l:"Sydney",r:5,d:"2025-10-09",t:"I\u2019ve been eyeing this for months and finally pulled the trigger. No regrets whatsoever \u2014 the sparkle is insane and it sits so nicely. Wore it to a friend\u2019s wedding last weekend and everyone asked about it.",s:"45cm (18\")",v:true},
-{n:"Ethan Brooks",l:"Sunshine Coast",r:5,d:"2025-10-11",t:"This chain is the real deal. Looks way more expensive than it is.",s:"51cm (20\")",v:true},
-{n:"Mei Lin Wong",l:"Melbourne",r:5,d:"2025-10-13",t:"Purchased for my daughter\u2019s 21st birthday. She was absolutely stoked. The quality is brilliant and it came in such lovely packaging too.",s:"41cm (16\")",v:true,p:RP6},
+{n:"Ethan Brooks",l:"Sunshine Coast",r:5,d:"2025-10-11",t:"This chain is the real deal. Looks way more expensive than it is.",s:"56cm (22\")",v:true},
+{n:"Mei Lin Wong",l:"Melbourne",r:5,d:"2025-10-13",t:"Purchased for my daughter\u2019s 21st birthday. She was absolutely stoked. The quality is brilliant and it came in such lovely packaging too.",s:"38cm (15\")",v:true,p:RP6},
 {n:"Jack Sullivan",l:"Townsville",r:5,d:"2025-10-15",t:"So versatile. I wear it dressed up to dinners and dressed down with a t-shirt. Reckon it\u2019s the best purchase I\u2019ve made this year.",s:"56cm (22\")",v:true},
 {n:"Amara Okafor",l:"Adelaide",r:5,d:"2025-10-17",t:"Absolutely beautiful. I stack it with my Solaire pendant and the look is incredible.",s:"45cm (18\")",v:true},
-{n:"Chloe Martin",l:"Toowoomba",r:4,d:"2025-10-19",t:"Lovely piece and great quality. I just took a while deciding between sizes \u2014 ended up exchanging for a longer one which was easy enough but added some time.",s:"51cm (20\")",v:true},
+{n:"Chloe Martin",l:"Toowoomba",r:4,d:"2025-10-19",t:"Lovely piece and great quality. I just took a while deciding between sizes \u2014 ended up exchanging for a longer one which was easy enough but added some time.",s:"56cm (22\")",v:true},
 {n:"Sam Kaur",l:"Sydney",r:5,d:"2025-10-21",t:"The stones in this are seriously impressive. Every time I catch a glimpse of it in a mirror I\u2019m stoked all over again.",s:"45cm (18\")",v:true},
-{n:"Isabella Romano",l:"Brisbane",r:5,d:"2025-10-23",t:"Got this as a Christmas gift for myself and I\u2019m so glad I did. The Riviere tennis chain is stunning \u2014 subtle enough for work but sparkly enough for a night out. Absolutely recommend.",s:"41cm (16\")",v:true},
+{n:"Isabella Romano",l:"Brisbane",r:5,d:"2025-10-23",t:"Got this as a Christmas gift for myself and I\u2019m so glad I did. The Riviere tennis chain is stunning \u2014 subtle enough for work but sparkly enough for a night out. Absolutely recommend.",s:"38cm (15\")",v:true},
 {n:"Luke Fitzgerald",l:"Ballarat",r:5,d:"2025-10-25",t:"My mates keep asking where I got it. The chain sits perfectly and the weight feels premium.",s:"56cm (22\")",v:true,p:RP7},
 {n:"Natasha Petrov",l:"Perth",r:5,d:"2025-10-27",t:"So elegant and well-made. I wore it layered with a simple gold chain and it looked absolutely incredible. Clear Cut has nailed it with this one.",s:"45cm (18\")",v:true},
-{n:"David Tran",l:"Melbourne",r:5,d:"2025-10-29",t:"Quality is top notch. Bought it for my mum and she reckons it\u2019s the nicest piece she owns now.",s:"41cm (16\")",v:true},
+{n:"David Tran",l:"Melbourne",r:5,d:"2025-10-29",t:"Quality is top notch. Bought it for my mum and she reckons it\u2019s the nicest piece she owns now.",s:"38cm (15\")",v:true},
 {n:"Freya Johansson",l:"Manly",r:5,d:"2025-10-31",t:"I\u2019ve worn this necklace every day for the past month and it still looks flawless. Goes with absolutely everything in my wardrobe.",s:"45cm (18\")",v:true},
-{n:"Ali Mahmoud",l:"Sydney",r:4,d:"2025-11-02",t:"Really happy with the chain itself \u2014 it\u2019s gorgeous and well made. Just wish delivery was a touch faster, but the product makes up for it.",s:"51cm (20\")",v:true},
+{n:"Ali Mahmoud",l:"Sydney",r:4,d:"2025-11-02",t:"Really happy with the chain itself \u2014 it\u2019s gorgeous and well made. Just wish delivery was a touch faster, but the product makes up for it.",s:"56cm (22\")",v:true},
 {n:"Grace Thompson",l:"Bondi",r:5,d:"2025-11-04",t:"Bought this to wear to a friend\u2019s engagement party and I felt like a million bucks. The sparkle is so impressive in person. Already looking at the Lumiere studs to complete the set.",s:"45cm (18\")",v:true,p:RP8},
 {n:"Ravi Desai",l:"Canberra",r:5,d:"2025-11-06",t:"Really elegant design. Sits perfectly on the collarbone with the 45cm length.",s:"45cm (18\")",v:true},
-{n:"Mia Jackson",l:"Gold Coast",r:5,d:"2025-11-08",t:"My new go-to necklace. Seriously beautiful and the quality for the price is amazing.",s:"51cm (20\")",v:true},
-{n:"Patrick O\u2019Connor",l:"Newcastle",r:5,d:"2025-11-10",t:"Gifted this to my wife for her birthday and she absolutely loves it. She wears it with her Eclat bracelet and the pairing is perfect. Couldn\u2019t be happier.",s:"41cm (16\")",v:true},
+{n:"Mia Jackson",l:"Gold Coast",r:5,d:"2025-11-08",t:"My new go-to necklace. Seriously beautiful and the quality for the price is amazing.",s:"56cm (22\")",v:true},
+{n:"Patrick O\u2019Connor",l:"Newcastle",r:5,d:"2025-11-10",t:"Gifted this to my wife for her birthday and she absolutely loves it. She wears it with her Eclat bracelet and the pairing is perfect. Couldn\u2019t be happier.",s:"38cm (15\")",v:true},
 {n:"Yuki Tanaka",l:"Melbourne",r:5,d:"2025-11-12",t:"Gets compliments literally every time I wear it out. The brilliance of the stones is next level.",s:"45cm (18\")",v:true},
-{n:"Lachlan Reid",l:"Brisbane",r:5,d:"2025-11-14",t:"Reckon this is the best tennis chain you can get at this price point. Looks absolutely class.",s:"51cm (20\")",v:true,p:RP9},
-{n:"Anita Singh",l:"Sydney",r:4,d:"2025-11-16",t:"Beautiful necklace and well-crafted. The 41cm is a bit shorter than I expected \u2014 not a fault of the product, just my own preference. Still looks lovely though.",s:"41cm (16\")",v:true},
+{n:"Lachlan Reid",l:"Brisbane",r:5,d:"2025-11-14",t:"Reckon this is the best tennis chain you can get at this price point. Looks absolutely class.",s:"56cm (22\")",v:true,p:RP9},
+{n:"Anita Singh",l:"Sydney",r:4,d:"2025-11-16",t:"Beautiful necklace and well-crafted. The 38cm is a bit shorter than I expected \u2014 not a fault of the product, just my own preference. Still looks lovely though.",s:"38cm (15\")",v:true},
 {n:"William Cooper",l:"Perth",r:5,d:"2025-11-18",t:"Christmas shopping sorted. Got this for my girlfriend and the packaging alone was premium. She\u2019s absolutely in love with it.",s:"45cm (18\")",v:true},
-{n:"Jasmine Bakri",l:"Adelaide",r:5,d:"2025-11-20",t:"I can\u2019t stop wearing this. Literally goes with every outfit.",s:"51cm (20\")",v:true},
+{n:"Jasmine Bakri",l:"Adelaide",r:5,d:"2025-11-20",t:"I can\u2019t stop wearing this. Literally goes with every outfit.",s:"56cm (22\")",v:true},
 {n:"Noah Zhang",l:"Hobart",r:5,d:"2025-11-22",t:"Bought this on impulse and it\u2019s one of the best decisions I\u2019ve made. The stones catch the light beautifully and it feels really well made.",s:"56cm (22\")",v:true,p:RP10},
 {n:"Ruby McAllister",l:"Geelong",r:5,d:"2025-11-24",t:"Absolutely stunning. Wore it to my graduation ceremony and it was the perfect finishing touch.",s:"45cm (18\")",v:true},
-{n:"Hassan Youssef",l:"Sydney",r:5,d:"2025-11-26",t:"I was looking for something with a bit of presence and this is exactly that. Sits really nicely on the chest.",s:"51cm (20\")",v:true},
+{n:"Hassan Youssef",l:"Sydney",r:5,d:"2025-11-26",t:"I was looking for something with a bit of presence and this is exactly that. Sits really nicely on the chest.",s:"56cm (22\")",v:true},
 {n:"Ella Morrison",l:"Melbourne",r:4,d:"2025-11-28",t:"Gorgeous chain, really well made. My only minor gripe is I went back and forth on sizing \u2014 would love a size guide with model photos for reference. Ended up with 45cm and it\u2019s great.",s:"45cm (18\")",v:true},
-{n:"Chris Papadopoulos",l:"Darwin",r:5,d:"2025-11-30",t:"Paired it with the Solaire pendant for a layered look and the combo is unreal. So many compliments wherever I go.",s:"51cm (20\")",v:true,p:RP11},
-{n:"Tessa Burke",l:"Cairns",r:5,d:"2025-12-02",t:"Bought it as a treat for finishing my degree. No regrets \u2014 it\u2019s beautiful.",s:"41cm (16\")",v:true},
+{n:"Chris Papadopoulos",l:"Darwin",r:5,d:"2025-11-30",t:"Paired it with the Solaire pendant for a layered look and the combo is unreal. So many compliments wherever I go.",s:"56cm (22\")",v:true,p:RP11},
+{n:"Tessa Burke",l:"Cairns",r:5,d:"2025-12-02",t:"Bought it as a treat for finishing my degree. No regrets \u2014 it\u2019s beautiful.",s:"38cm (15\")",v:true},
 {n:"Jordan Leigh",l:"Wollongong",r:5,d:"2025-12-04",t:"Really impressive quality and looks incredible on. I\u2019ve recommended Clear Cut to all my mates now.",s:"56cm (22\")",v:true},
 {n:"Sana Malik",l:"Brisbane",r:5,d:"2025-12-06",t:"This was my Christmas present to myself and honestly best money I\u2019ve spent all year. The Riviere sits so elegantly and catches the light in the most beautiful way. I\u2019ve already ordered the Picasso hoops to match.",s:"45cm (18\")",v:true},
-{n:"Max Henderson",l:"Sunshine Coast",r:5,d:"2025-12-08",t:"Absolutely love this chain. Feels and looks premium in every way.",s:"51cm (20\")",v:true},
+{n:"Max Henderson",l:"Sunshine Coast",r:5,d:"2025-12-08",t:"Absolutely love this chain. Feels and looks premium in every way.",s:"56cm (22\")",v:true},
 {n:"Lily Andersen",l:"Perth",r:5,d:"2025-12-10",t:"Wore this to a Christmas party and honestly felt like the main character. So sparkly and elegant without being too much. Best purchase I\u2019ve made in ages.",s:"45cm (18\")",v:true,p:RP12},
 {n:"Arjun Nair",l:"Melbourne",r:4,d:"2025-12-12",t:"Great chain overall. Delivery took a little while during the Christmas rush but the quality is excellent. Would definitely buy from Clear Cut again.",s:"56cm (22\")",v:true},
-{n:"Courtney Walsh",l:"Townsville",r:5,d:"2025-12-14",t:"Got this for my anniversary and my partner was stoked. Looks way more expensive than it is.",s:"41cm (16\")",v:true},
+{n:"Courtney Walsh",l:"Townsville",r:5,d:"2025-12-14",t:"Got this for my anniversary and my partner was stoked. Looks way more expensive than it is.",s:"38cm (15\")",v:true},
 {n:"Dani Alvarez",l:"Sydney",r:5,d:"2025-12-16",t:"The sparkle on this thing is so impressive. Really glad I went for it \u2014 it\u2019s become my everyday piece.",s:"45cm (18\")",v:true},
-{n:"Brooke Stevenson",l:"Gold Coast",r:5,d:"2025-12-18",t:"Absolutely beautiful piece. I layered it with a shorter chain and it looked incredible for our work Christmas party. The quality is outstanding.",s:"51cm (20\")",v:true,p:RP13},
+{n:"Brooke Stevenson",l:"Gold Coast",r:5,d:"2025-12-18",t:"Absolutely beautiful piece. I layered it with a shorter chain and it looked incredible for our work Christmas party. The quality is outstanding.",s:"56cm (22\")",v:true,p:RP13},
 {n:"Nathan Gray",l:"Canberra",r:5,d:"2025-12-20",t:"Bought this as a Christmas gift and absolutely nailed it. She wears it every day now.",s:"45cm (18\")",v:true},
-{n:"Anika Devi",l:"Adelaide",r:5,d:"2025-12-22",t:"I reckon this is the most versatile necklace I own. Dressed up, dressed down \u2014 it works with everything. The craftsmanship is really impressive for the price.",s:"41cm (16\")",v:true},
-{n:"Hugo Lefebvre",l:"Melbourne",r:4,d:"2025-12-24",t:"Love the chain, it\u2019s really well made and looks great. Slightly longer delivery time than expected over the holidays but totally understandable. Product is five stars for sure.",s:"51cm (20\")",v:true},
+{n:"Anika Devi",l:"Adelaide",r:5,d:"2025-12-22",t:"I reckon this is the most versatile necklace I own. Dressed up, dressed down \u2014 it works with everything. The craftsmanship is really impressive for the price.",s:"38cm (15\")",v:true},
+{n:"Hugo Lefebvre",l:"Melbourne",r:4,d:"2025-12-24",t:"Love the chain, it\u2019s really well made and looks great. Slightly longer delivery time than expected over the holidays but totally understandable. Product is five stars for sure.",s:"56cm (22\")",v:true},
 {n:"Tahlia Green",l:"Bondi",r:5,d:"2025-12-26",t:"Christmas present from my husband and honestly the best gift he\u2019s ever given me. The Riviere is absolutely gorgeous.",s:"45cm (18\")",v:true},
 {n:"Kai Watanabe",l:"Brisbane",r:5,d:"2025-12-28",t:"The way the stones are set is really precise. You can tell a lot of care went into making this piece.",s:"56cm (22\")",v:true},
 {n:"Emma Richardson",l:"Manly",r:5,d:"2025-12-30",t:"Stunning necklace. I\u2019ve been wearing it non-stop since Christmas Day. Pairs perfectly with my Lumiere studs \u2014 the whole set together is just incredible.",s:"45cm (18\")",v:true,p:RP14},
-{n:"Tyler Jenkins",l:"Perth",r:5,d:"2026-01-02",t:"Got this for New Year\u2019s and it was the perfect accessory. So much sparkle.",s:"51cm (20\")",v:true},
-{n:"Samira El-Amin",l:"Sydney",r:5,d:"2026-01-04",t:"Absolutely love my Riviere. I wear it to work every day and it\u2019s still as sparkly as the day I got it. Quality is seriously impressive.",s:"41cm (16\")",v:true},
-{n:"Blake Murray",l:"Toowoomba",r:4,d:"2026-01-06",t:"Really nice piece. Took me a while to decide between sizes and I reckon a virtual try-on feature would be helpful. Ended up with 51cm and it\u2019s great though.",s:"51cm (20\")",v:true},
+{n:"Tyler Jenkins",l:"Perth",r:5,d:"2026-01-02",t:"Got this for New Year\u2019s and it was the perfect accessory. So much sparkle.",s:"56cm (22\")",v:true},
+{n:"Samira El-Amin",l:"Sydney",r:5,d:"2026-01-04",t:"Absolutely love my Riviere. I wear it to work every day and it\u2019s still as sparkly as the day I got it. Quality is seriously impressive.",s:"38cm (15\")",v:true},
+{n:"Blake Murray",l:"Toowoomba",r:4,d:"2026-01-06",t:"Really nice piece. Took me a while to decide between sizes and I reckon a virtual try-on feature would be helpful. Ended up with 56cm and it\u2019s great though.",s:"56cm (22\")",v:true},
 {n:"Nina Popov",l:"Melbourne",r:5,d:"2025-01-08",t:"Elegant, sparkly, and so well made. I couldn\u2019t ask for more from a tennis chain at this price.",s:"45cm (18\")",v:true},
-{n:"Josh Clarke",l:"Newcastle",r:5,d:"2026-01-10",t:"Bought this for my mum\u2019s birthday and she reckons it\u2019s the best present she\u2019s ever received. The clasp is really sturdy too which was important to her.",s:"41cm (16\")",v:true},
-{n:"Layla Ibrahim",l:"Darwin",r:5,d:"2026-01-12",t:"So beautiful in person. Photos don\u2019t do it justice honestly.",s:"51cm (20\")",v:true},
+{n:"Josh Clarke",l:"Newcastle",r:5,d:"2026-01-10",t:"Bought this for my mum\u2019s birthday and she reckons it\u2019s the best present she\u2019s ever received. The clasp is really sturdy too which was important to her.",s:"38cm (15\")",v:true},
+{n:"Layla Ibrahim",l:"Darwin",r:5,d:"2026-01-12",t:"So beautiful in person. Photos don\u2019t do it justice honestly.",s:"56cm (22\")",v:true},
 {n:"Connor Walsh",l:"Brisbane",r:5,d:"2026-01-14",t:"This tennis chain is unreal value for the quality you get. Already looking at getting the Eclat bracelet to match.",s:"56cm (22\")",v:true},
 {n:"Sienna Park",l:"Gold Coast",r:5,d:"2026-01-16",t:"Wore it to a wedding on the weekend and got stopped by so many people asking about it. The stones are so clear and sparkly.",s:"45cm (18\")",v:true},
 {n:"Adam Fletcher",l:"Sydney",r:4,d:"2026-01-18",t:"Lovely chain and well crafted. I\u2019m between sizes so went with the 45cm \u2014 fits well but I wouldn\u2019t have minded a 48cm option. Still really happy with it.",s:"45cm (18\")",v:true},
-{n:"Phoebe Stewart",l:"Ballarat",r:5,d:"2026-01-20",t:"This necklace is absolutely gorgeous. I bought it as a birthday treat for myself and I couldn\u2019t be happier.",s:"41cm (16\")",v:true},
+{n:"Phoebe Stewart",l:"Ballarat",r:5,d:"2026-01-20",t:"This necklace is absolutely gorgeous. I bought it as a birthday treat for myself and I couldn\u2019t be happier.",s:"38cm (15\")",v:true},
 {n:"Darcy Reeves",l:"Melbourne",r:5,d:"2026-01-22",t:"Quality is brilliant and it looks stunning with everything. Wore it layered with the Solaire pendant to a friend\u2019s engagement and it was the perfect combo.",s:"45cm (18\")",v:true},
-{n:"Fatima Al-Rashid",l:"Perth",r:5,d:"2026-01-24",t:"Absolutely love it. Simple, elegant, and eye-catching.",s:"51cm (20\")",v:true},
+{n:"Fatima Al-Rashid",l:"Perth",r:5,d:"2026-01-24",t:"Absolutely love it. Simple, elegant, and eye-catching.",s:"56cm (22\")",v:true},
 {n:"Riley Cooper",l:"Adelaide",r:5,d:"2026-01-26",t:"This was a Christmas gift from my partner and it\u2019s become my favourite piece. The tennis chain design is timeless and the quality is amazing.",s:"45cm (18\")",v:true},
-{n:"Matilda Byrne",l:"Hobart",r:4,d:"2026-01-28",t:"Beautiful necklace, really well made. I gave it 4 stars only because the delivery was a little slower than I hoped \u2014 product itself is absolutely perfect.",s:"51cm (20\")",v:true},
+{n:"Matilda Byrne",l:"Hobart",r:4,d:"2026-01-28",t:"Beautiful necklace, really well made. I gave it 4 stars only because the delivery was a little slower than I hoped \u2014 product itself is absolutely perfect.",s:"56cm (22\")",v:true},
 {n:"Vincent Lao",l:"Sydney",r:5,d:"2026-01-30",t:"Wear it every single day and still get compliments. The stones haven\u2019t lost any of their sparkle.",s:"56cm (22\")",v:true},
-{n:"Zoe Hamilton",l:"Geelong",r:5,d:"2026-02-01",t:"Bought this for my graduation and it made the whole outfit. I felt so elegant. Already telling all my friends about Clear Cut.",s:"41cm (16\")",v:true},
-{n:"Isaac Moreno",l:"Brisbane",r:5,d:"2026-02-03",t:"The stones have this incredible sparkle that you just don\u2019t get from cheaper chains. Reckon it\u2019s worth every cent.",s:"51cm (20\")",v:true},
+{n:"Zoe Hamilton",l:"Geelong",r:5,d:"2026-02-01",t:"Bought this for my graduation and it made the whole outfit. I felt so elegant. Already telling all my friends about Clear Cut.",s:"38cm (15\")",v:true},
+{n:"Isaac Moreno",l:"Brisbane",r:5,d:"2026-02-03",t:"The stones have this incredible sparkle that you just don\u2019t get from cheaper chains. Reckon it\u2019s worth every cent.",s:"56cm (22\")",v:true},
 {n:"Hannah Christensen",l:"Sunshine Coast",r:5,d:"2026-02-05",t:"Goes perfectly with my Picasso hoops. I wear them together almost every day now.",s:"45cm (18\")",v:true},
 {n:"Owen McCarthy",l:"Melbourne",r:4,d:"2026-02-07",t:"Great quality tennis chain. Only minor thing is I wasn\u2019t 100% sure which length to get \u2014 went with the 56cm and it\u2019s a good fit but took a bit of deliberation. Love the piece itself.",s:"56cm (22\")",v:true},
 {n:"Aria Nakamura",l:"Cairns",r:5,d:"2026-02-09",t:"This necklace is stunning. I\u2019ve never had so many compliments on a single piece of jewellery. Wore it to my cousin\u2019s wedding and absolutely loved how it looked with my dress.",s:"45cm (18\")",v:true},
-{n:"Sean Doyle",l:"Perth",r:5,d:"2026-02-10",t:"Really impressed with the weight and finish. Looks and feels like a much more expensive piece.",s:"51cm (20\")",v:true},
-{n:"Isabelle Fontaine",l:"Sydney",r:5,d:"2026-02-11",t:"It\u2019s my third Clear Cut piece and the quality is consistently amazing. Wearing it with the Eclat bracelet daily.",s:"41cm (16\")",v:true},
+{n:"Sean Doyle",l:"Perth",r:5,d:"2026-02-10",t:"Really impressed with the weight and finish. Looks and feels like a much more expensive piece.",s:"56cm (22\")",v:true},
+{n:"Isabelle Fontaine",l:"Sydney",r:5,d:"2026-02-11",t:"It\u2019s my third Clear Cut piece and the quality is consistently amazing. Wearing it with the Eclat bracelet daily.",s:"38cm (15\")",v:true},
 {n:"Callum Wright",l:"Wollongong",r:5,d:"2026-02-12",t:"Got this for my girlfriend\u2019s birthday and she was over the moon. The packaging was beautiful too. Would definitely recommend.",s:"45cm (18\")",v:true},
-{n:"Nadia Santos",l:"Melbourne",r:5,d:"2026-02-13",t:"Honestly one of the prettiest necklaces I\u2019ve ever seen. Simple but so elegant.",s:"51cm (20\")",v:true},
+{n:"Nadia Santos",l:"Melbourne",r:5,d:"2026-02-13",t:"Honestly one of the prettiest necklaces I\u2019ve ever seen. Simple but so elegant.",s:"56cm (22\")",v:true},
 {n:"Luca De Luca",l:"Gold Coast",r:4,d:"2026-02-14",t:"Really lovely chain, looks great on my partner. Would have liked one more size option in between but overall really happy with the quality and look.",s:"45cm (18\")",v:true},
 {n:"Ellie Bradshaw",l:"Canberra",r:5,d:"2026-02-15",t:"The Riviere is perfection. Wore it on Valentine\u2019s Day and felt absolutely stunning. The way it catches the light is incredible.",s:"45cm (18\")",v:true},
-{n:"Ahmad Kazemi",l:"Adelaide",r:5,d:"2026-02-16",t:"Bought this as a Valentine\u2019s gift and it went down an absolute treat. Premium quality and looks stunning.",s:"41cm (16\")",v:true},
-{n:"Gemma Lawson",l:"Sydney",r:5,d:"2026-02-17",t:"Reckon this is the best investment piece I\u2019ve bought. Timeless design that goes with everything from jeans to a cocktail dress. The Lumiere studs are next on my list.",s:"51cm (20\")",v:true},
+{n:"Ahmad Kazemi",l:"Adelaide",r:5,d:"2026-02-16",t:"Bought this as a Valentine\u2019s gift and it went down an absolute treat. Premium quality and looks stunning.",s:"38cm (15\")",v:true},
+{n:"Gemma Lawson",l:"Sydney",r:5,d:"2026-02-17",t:"Reckon this is the best investment piece I\u2019ve bought. Timeless design that goes with everything from jeans to a cocktail dress. The Lumiere studs are next on my list.",s:"56cm (22\")",v:true},
 {n:"Xavier Huang",l:"Brisbane",r:5,d:"2026-02-18",t:"The craftsmanship on this is outstanding. You can tell a lot of attention went into every detail.",s:"56cm (22\")",v:true},
-{n:"Monica Taylor-Singh",l:"Bendigo",r:5,d:"2026-02-19",t:"Got it for our wedding anniversary and my wife was in tears. Already eyeing the Solaire pendant for her birthday.",s:"41cm (16\")",v:true},
-{n:"Dylan Foster",l:"Melbourne",r:4,d:"2026-02-20",t:"Nice chain, great quality. I just reckon the product photos could show it on different neck sizes to help with choosing. Went with 51cm and it works well.",s:"51cm (20\")",v:true},
+{n:"Monica Taylor-Singh",l:"Bendigo",r:5,d:"2026-02-19",t:"Got it for our wedding anniversary and my wife was in tears. Already eyeing the Solaire pendant for her birthday.",s:"38cm (15\")",v:true},
+{n:"Dylan Foster",l:"Melbourne",r:4,d:"2026-02-20",t:"Nice chain, great quality. I just reckon the product photos could show it on different neck sizes to help with choosing. Went with 56cm and it works well.",s:"56cm (22\")",v:true},
 {n:"Tara Whitfield",l:"Manly",r:5,d:"2026-02-21",t:"I am so in love with this chain. It\u2019s delicate but has serious sparkle. So many of my friends have asked me about it.",s:"45cm (18\")",v:true},
-{n:"Raj Kapoor",l:"Perth",r:5,d:"2026-02-22",t:"Exceptional quality. Bought it for my partner and she wears it every day. The Riviere is truly a standout piece.",s:"51cm (20\")",v:true},
+{n:"Raj Kapoor",l:"Perth",r:5,d:"2026-02-22",t:"Exceptional quality. Bought it for my partner and she wears it every day. The Riviere is truly a standout piece.",s:"56cm (22\")",v:true},
 {n:"Scarlett O\u2019Neill",l:"Sydney",r:5,d:"2026-02-23",t:"This is the necklace I didn\u2019t know I needed. It\u2019s become my most-worn piece by far.",s:"45cm (18\")",v:true},
 {n:"Marcus Webb",l:"Townsville",r:4,d:"2026-02-24",t:"Great tennis chain, really well made and looks premium. Only took off a star because delivery to regional QLD took a bit \u2014 but the product itself is flawless.",s:"56cm (22\")",v:true},
 {n:"Ava Chen-Williams",l:"Melbourne",r:5,d:"2026-02-25",t:"My second Clear Cut purchase and once again they\u2019ve blown me away. The Riviere paired with my Picasso hoops is my go-to combo now.",s:"45cm (18\")",v:true},
-{n:"Finn Gallagher",l:"Newcastle",r:5,d:"2026-02-26",t:"Got it for my wife and she hasn\u2019t stopped smiling since. The quality really speaks for itself.",s:"41cm (16\")",v:true},
-{n:"Leah Sanderson",l:"Gold Coast",r:5,d:"2026-02-27",t:"Stunning quality, beautiful design. I wear it every day and still catch myself admiring it. Genuinely one of the nicest pieces I own.",s:"51cm (20\")",v:true},
+{n:"Finn Gallagher",l:"Newcastle",r:5,d:"2026-02-26",t:"Got it for my wife and she hasn\u2019t stopped smiling since. The quality really speaks for itself.",s:"38cm (15\")",v:true},
+{n:"Leah Sanderson",l:"Gold Coast",r:5,d:"2026-02-27",t:"Stunning quality, beautiful design. I wear it every day and still catch myself admiring it. Genuinely one of the nicest pieces I own.",s:"56cm (22\")",v:true},
 {n:"Hamish Douglas",l:"Bondi",r:5,d:"2026-02-28",t:"Been wearing this daily for over a month now and it still looks brand new. Really solid construction and the stones have incredible brilliance.",s:"56cm (22\")",v:true}
     ],
     "the-picasso-hoop-earrings": [
@@ -1742,6 +2080,85 @@
       document.body.style.overflow = '';
     }
   });
+
+  /* ============ SIZE GUIDE MODAL ============ */
+  var sgModal = document.getElementById('size-guide-modal');
+  var sgTrigger = document.getElementById('size-guide-trigger');
+  var productHandle = handle;
+
+  var sizeGuideData = {
+    necklace: {
+      title: 'Necklace Size Guide',
+      chart: '<table class="size-guide-modal__table"><tr><th>Inches (in)</th><th>Centimetres (cm)</th></tr><tr><td>15"</td><td>38 cm</td></tr><tr><td>18"</td><td>45 cm</td></tr><tr><td>22"</td><td>56 cm</td></tr></table>',
+      style: '<div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">38cm (15")</div><div class="size-guide-modal__style-desc">Sits high on the neck, often referred to as a choker length. Style solo or layer with longer necklaces for a statement stack.</div></div><div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">45cm (18")</div><div class="size-guide-modal__style-desc">One of the most common necklace lengths, designed to fall on or below the base of the neck. A versatile length perfect for pairing with your favourite charms and pendants.</div></div><div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">56cm (22")</div><div class="size-guide-modal__style-desc">A longer necklace designed to sit just above the chest. Plays perfectly with open necklines, added necklace layers, and personalised pendant stacks.</div></div>'
+    },
+    bracelet: {
+      title: 'Bracelet Size Guide',
+      chart: '<table class="size-guide-modal__table"><tr><th>Size</th><th>Centimetres (cm)</th></tr><tr><td>Small</td><td>15.5 cm</td></tr><tr><td>Medium</td><td>16.5 cm</td></tr><tr><td>Standard</td><td>18 cm</td></tr><tr><td>Large</td><td>19 cm</td></tr><tr><td>X-Large</td><td>20.5 cm</td></tr></table>',
+      style: '<div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">15.5cm - 16.5cm</div><div class="size-guide-modal__style-desc">A snug fit that sits close to the wrist. Best for smaller wrists or those who prefer a tighter bracelet.</div></div><div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">18cm (Standard)</div><div class="size-guide-modal__style-desc">The most popular length. Fits comfortably with a little movement. Works for most wrist sizes.</div></div><div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">19cm - 21.5cm</div><div class="size-guide-modal__style-desc">A relaxed, looser fit. Great for larger wrists or if you prefer your bracelet to drape rather than hug.</div></div>'
+    },
+    ring: {
+      title: 'Ring Size Guide',
+      chart: '<table class="size-guide-modal__table"><tr><th>AU/UK Size</th><th>US Size</th><th>Diameter (mm)</th></tr><tr><td>H</td><td>4</td><td>14.9</td></tr><tr><td>J</td><td>5</td><td>15.7</td></tr><tr><td>L</td><td>6</td><td>16.5</td></tr><tr><td>N</td><td>7</td><td>17.3</td></tr><tr><td>P</td><td>8</td><td>18.1</td></tr><tr><td>R</td><td>9</td><td>18.9</td></tr></table>',
+      style: '<div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">How to Measure</div><div class="size-guide-modal__style-desc">Wrap a thin strip of paper around your finger. Mark where it overlaps and measure the length in mm. Compare to the diameter column above. For a comfortable fit, measure at the end of the day when fingers are at their largest.</div></div>'
+    },
+    earring: {
+      title: 'Earring Size Guide',
+      chart: '<table class="size-guide-modal__table"><tr><th>Style</th><th>Size</th></tr><tr><td>Stud</td><td>4mm - 8mm stone diameter</td></tr><tr><td>Mini Hoop</td><td>12mm diameter</td></tr><tr><td>Small Hoop</td><td>20mm diameter</td></tr><tr><td>Medium Hoop</td><td>30mm diameter</td></tr></table>',
+      style: '<div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">Studs</div><div class="size-guide-modal__style-desc">Classic and versatile. Smaller sizes (4-5mm) are subtle for everyday, while larger sizes (7-8mm) make more of a statement.</div></div><div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">Hoops</div><div class="size-guide-modal__style-desc">Mini hoops (12mm) sit close to the ear for minimal impact. Medium hoops (30mm) are a bolder choice that frames the face beautifully.</div></div>'
+    }
+  };
+
+  function getProductType() {
+    if (productHandle.indexOf('bracelet') !== -1 || productHandle.indexOf('eclat') !== -1) return 'bracelet';
+    if (productHandle.indexOf('band') !== -1 || productHandle.indexOf('eternite') !== -1) return 'ring';
+    if (productHandle.indexOf('earring') !== -1 || productHandle.indexOf('hoop') !== -1 || productHandle.indexOf('lumiere') !== -1 || productHandle.indexOf('picasso') !== -1 || productHandle.indexOf('quatre') !== -1) return 'earring';
+    return 'necklace';
+  }
+
+  function openSizeGuide() {
+    var type = getProductType();
+    var data = sizeGuideData[type];
+    document.getElementById('size-guide-title').textContent = data.title;
+    document.getElementById('sg-panel-chart').innerHTML = data.chart;
+    document.getElementById('sg-panel-style').innerHTML = data.style;
+    sgModal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  if (sgTrigger) sgTrigger.addEventListener('click', openSizeGuide);
+
+  document.getElementById('size-guide-close').addEventListener('click', function() {
+    sgModal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  });
+  document.getElementById('size-guide-overlay').addEventListener('click', function() {
+    sgModal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  });
+
+  document.querySelectorAll('.size-guide-modal__tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.size-guide-modal__tab').forEach(function(t) { t.classList.remove('is-active'); });
+      document.querySelectorAll('.size-guide-modal__panel').forEach(function(p) { p.classList.remove('is-active'); });
+      this.classList.add('is-active');
+      document.getElementById('sg-panel-' + this.dataset.tab).classList.add('is-active');
+    });
+  });
+
+  /* ============ YOU MAY ALSO LIKE ============ */
+  var relatedEl = document.getElementById('related-products');
+  if (relatedEl && window.__relatedProducts && window.__relatedProducts.length > 0) {
+    relatedEl.innerHTML = window.__relatedProducts.map(function(p) {
+      return '<a class="related__card" href="' + p.url + '">' +
+        (p.img ? '<img class="related__card-img" src="' + p.img + '" alt="' + p.title + '" loading="lazy">' : '<div class="related__card-img"></div>') +
+        '<div class="related__card-info">' +
+          '<div class="related__card-name">' + p.title + '</div>' +
+          '<div class="related__card-price">' + p.price + '</div>' +
+          '<div class="related__card-material">Sterling Silver, Lab Grown Moissanite</div>' +
+        '</div></a>';
+    }).join('');
+  }
 
   /* ============ INIT ============ */
   renderSummary();
