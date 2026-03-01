@@ -1087,6 +1087,12 @@
     letter-spacing: 0.04em;
     margin-bottom: 20px;
   }
+  .size-guide-modal__image img {
+    width: 100%;
+    display: block;
+    margin-bottom: 24px;
+    border-radius: 0;
+  }
   .size-guide-modal__tabs {
     display: flex;
     gap: 24px;
@@ -1381,28 +1387,35 @@
       <span class="product-page__swatch product-page__swatch--gold is-unavailable" title="18ct Gold — Coming Soon"></span>
     </div>
 
-    {%- comment -%} Size/Length variants {%- endcomment -%}
-    {%- for option in product.options_with_values -%}
-      {%- assign opt_down = option.name | downcase -%}
-      {%- unless opt_down == 'color' or opt_down == 'colour' or opt_down == 'metal' or opt_down == 'finish' or opt_down == 'metal color' or opt_down == 'metal colour' -%}
-        <div class="product-page__variant-group">
-          <div class="product-page__variant-header">
-            <div class="product-page__variant-label">{{ option.name }}</div>
-            {%- if opt_down == 'length' or opt_down == 'size' -%}
-              <button type="button" class="product-page__size-guide" id="size-guide-trigger">Size Guide</button>
-            {%- endif -%}
+    {%- comment -%} Size/Length variants — hidden for earrings (no sizing needed) {%- endcomment -%}
+    {%- assign is_earring = false -%}
+    {%- assign h_down = product.handle -%}
+    {%- if h_down contains 'earring' or h_down contains 'lumiere' or h_down contains 'picasso' or h_down contains 'quatre' -%}
+      {%- assign is_earring = true -%}
+    {%- endif -%}
+    {%- unless is_earring -%}
+      {%- for option in product.options_with_values -%}
+        {%- assign opt_down = option.name | downcase -%}
+        {%- unless opt_down == 'color' or opt_down == 'colour' or opt_down == 'metal' or opt_down == 'finish' or opt_down == 'metal color' or opt_down == 'metal colour' -%}
+          <div class="product-page__variant-group">
+            <div class="product-page__variant-header">
+              <div class="product-page__variant-label">{{ option.name }}</div>
+              {%- if opt_down == 'length' or opt_down == 'size' -%}
+                <button type="button" class="product-page__size-guide" id="size-guide-trigger">Size Guide</button>
+              {%- endif -%}
+            </div>
+            <div class="product-page__variant-options" data-option-index="{{ forloop.index0 }}">
+              {%- for value in option.values -%}
+                <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}"
+                  data-value="{{ value }}">
+                  {{ value }}
+                </button>
+              {%- endfor -%}
+            </div>
           </div>
-          <div class="product-page__variant-options" data-option-index="{{ forloop.index0 }}">
-            {%- for value in option.values -%}
-              <button class="product-page__variant-btn{% if option.selected_value == value %} is-selected{% endif %}"
-                data-value="{{ value }}">
-                {{ value }}
-              </button>
-            {%- endfor -%}
-          </div>
-        </div>
-      {%- endunless -%}
-    {%- endfor -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endunless -%}
 
     {%- comment -%} In Stock {%- endcomment -%}
     {%- if product.available -%}
@@ -1738,10 +1751,10 @@
   <div class="size-guide-modal__content">
     <button class="size-guide-modal__close" id="size-guide-close">&times;</button>
     <div class="size-guide-modal__title" id="size-guide-title">Size Guide</div>
-    {%- comment -%} Size guide image — add via Shopify metafield or hardcode below {%- endcomment -%}
+    {%- comment -%} Size guide image — add via Shopify metafield (custom.size_guide_image) {%- endcomment -%}
     <div class="size-guide-modal__image" id="sg-image">
       {%- if product.metafields.custom.size_guide_image != blank -%}
-        <img src="{{ product.metafields.custom.size_guide_image | image_url: width: 800 }}" alt="Size guide" style="width:100%;display:block;margin-bottom:20px;">
+        <img src="{{ product.metafields.custom.size_guide_image | image_url: width: 800 }}" alt="Size guide for {{ product.title }}">
       {%- endif -%}
     </div>
     <div class="size-guide-modal__tabs">
@@ -2265,11 +2278,7 @@ window.__relatedProducts = [
       chart: '<table class="size-guide-modal__table"><tr><th>AU/UK Size</th><th>US Size</th><th>Diameter (mm)</th></tr><tr><td>H</td><td>4</td><td>14.9</td></tr><tr><td>J</td><td>5</td><td>15.7</td></tr><tr><td>L</td><td>6</td><td>16.5</td></tr><tr><td>N</td><td>7</td><td>17.3</td></tr><tr><td>P</td><td>8</td><td>18.1</td></tr><tr><td>R</td><td>9</td><td>18.9</td></tr></table>',
       style: '<div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">How to Measure</div><div class="size-guide-modal__style-desc">Wrap a thin strip of paper around your finger. Mark where it overlaps and measure the length in mm. Compare to the diameter column above. For a comfortable fit, measure at the end of the day when fingers are at their largest.</div></div>'
     },
-    earring: {
-      title: 'Earring Size Guide',
-      chart: '<table class="size-guide-modal__table"><tr><th>Style</th><th>Size</th></tr><tr><td>Stud</td><td>4mm - 8mm stone diameter</td></tr><tr><td>Mini Hoop</td><td>12mm diameter</td></tr><tr><td>Small Hoop</td><td>20mm diameter</td></tr><tr><td>Medium Hoop</td><td>30mm diameter</td></tr></table>',
-      style: '<div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">Studs</div><div class="size-guide-modal__style-desc">Classic and versatile. Smaller sizes (4-5mm) are subtle for everyday, while larger sizes (7-8mm) make more of a statement.</div></div><div class="size-guide-modal__style-item"><div class="size-guide-modal__style-size">Hoops</div><div class="size-guide-modal__style-desc">Mini hoops (12mm) sit close to the ear for minimal impact. Medium hoops (30mm) are a bolder choice that frames the face beautifully.</div></div>'
-    }
+    earring: null
   };
 
   function getProductType() {
@@ -2282,6 +2291,7 @@ window.__relatedProducts = [
   function openSizeGuide() {
     var type = getProductType();
     var data = sizeGuideData[type];
+    if (!data) return;
     document.getElementById('size-guide-title').textContent = data.title;
     document.getElementById('sg-panel-chart').innerHTML = data.chart;
     document.getElementById('sg-panel-style').innerHTML = data.style;

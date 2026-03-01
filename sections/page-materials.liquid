@@ -306,11 +306,11 @@
     </div>
   </div>
 
-  <!-- Rhodium -->
+  <!-- 18ct Gold -->
   <div class="materials__row reveal">
     <div class="materials__image">
-      {%- if section.settings.rhodium_image != blank -%}
-        <img src="{{ section.settings.rhodium_image | image_url: width: 800 }}" alt="Rhodium Plating" loading="lazy">
+      {%- if section.settings.gold_image != blank -%}
+        <img src="{{ section.settings.gold_image | image_url: width: 800 }}" alt="18ct Gold Plating" loading="lazy">
       {%- else -%}
         <div class="materials__image-placeholder">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="12" x2="21" y2="12"></line><line x1="12" y1="3" x2="12" y2="21"></line></svg>
@@ -319,20 +319,20 @@
     </div>
     <div class="materials__info">
       <div class="materials__label">The Finish</div>
-      <h2 class="materials__name">Rhodium Plating</h2>
-      <p class="materials__description">A precious metal in the platinum family. Rhodium provides a mirror-bright finish, exceptional tarnish resistance, and added surface hardness. Our lifetime warranty includes one complimentary re-plating per year.</p>
+      <h2 class="materials__name">18ct Gold Plating</h2>
+      <p class="materials__description">A luxurious layer of 18-carat gold over sterling silver, delivering the rich warmth and lustre of solid gold at a fraction of the weight and cost. Our gold plating is applied using an electroplating process for a durable, long-lasting finish that resists everyday wear.</p>
       <div class="materials__specs">
         <div class="materials__spec">
-          <span class="materials__spec-label">Metal Family</span>
-          <span class="materials__spec-value">Platinum Group</span>
+          <span class="materials__spec-label">Purity</span>
+          <span class="materials__spec-value">18ct (75% Gold)</span>
+        </div>
+        <div class="materials__spec">
+          <span class="materials__spec-label">Base Metal</span>
+          <span class="materials__spec-value">925 Sterling Silver</span>
         </div>
         <div class="materials__spec">
           <span class="materials__spec-label">Finish</span>
-          <span class="materials__spec-value">Mirror Bright</span>
-        </div>
-        <div class="materials__spec">
-          <span class="materials__spec-label">Re-plating</span>
-          <span class="materials__spec-value">1x Per Year (Free)</span>
+          <span class="materials__spec-value">Warm Gold Lustre</span>
         </div>
       </div>
     </div>
@@ -394,8 +394,8 @@
     },
     {
       "type": "image_picker",
-      "id": "rhodium_image",
-      "label": "Rhodium Plating Image"
+      "id": "gold_image",
+      "label": "18ct Gold Plating Image"
     },
     {
       "type": "image_picker",
